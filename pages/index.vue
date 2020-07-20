@@ -9,7 +9,7 @@ export default {
   }),
 
   async mounted () {
-    const { data } = await this.$api.showAlbums(1)
+    const { data } = await this.$api.indexUsers()
     console.warn(this.$api)
     this.data = data
   }

@@ -52,8 +52,10 @@ class APIManager {
 
   generateMethods (routes = {}) {
     let data = {}
-    Object.entries(routes).forEach(([path, method]) => {
-      data = { ...data, ...this[method](path) }
+    Object.entries(routes).forEach(([path, methods]) => {
+      Object.entries(methods).forEach(([method, options]) => {
+        data = { ...data, ...this[method](path) }
+      })
     })
     return data
   }
@@ -73,9 +75,16 @@ export default function ({ $axios }, inject) {
   const apiManager = new APIManager(axios)
 
   const routes = {
-    posts: 'resource',
-    users: 'resource',
-    albums: 'show'
+    posts: {
+      resource: {}
+    },
+    users: {
+      resource: {}
+    },
+    albums: {
+      show: {},
+      index: {}
+    }
   }
 
   const api = apiManager.generateMethods(routes)
