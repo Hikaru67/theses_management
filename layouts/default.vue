@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="main-layout">
+  <a-layout class="default-layout">
     <a-layout-sider v-model="collapsed" collapsible>
       <div class="logo" />
 
@@ -9,29 +9,33 @@
           <span>Dashboard</span>
         </a-menu-item>
 
-        <a-sub-menu key="sub2">
+        <a-sub-menu>
           <span slot="title">
             <font-awesome-icon icon="user-friends" class="anticon" />
             <span>Team</span>
           </span>
 
-          <a-menu-item key="6">
+          <a-menu-item>
             Team 1
           </a-menu-item>
 
-          <a-menu-item key="8">
+          <a-menu-item>
             Team 2
           </a-menu-item>
         </a-sub-menu>
 
         <a-menu-item>
-          <font-awesome-icon icon="user-friends" class="anticon" />
-          <span>Users</span>
+          <nuxt-link to="users">
+            <font-awesome-icon icon="user-friends" class="anticon" />
+            <span>Users</span>
+          </nuxt-link>
         </a-menu-item>
 
         <a-menu-item>
-          <font-awesome-icon icon="balance-scale" class="anticon" />
-          <span>Roles</span>
+          <nuxt-link to="roles">
+            <font-awesome-icon icon="balance-scale" class="anticon" />
+            <span>Roles</span>
+          </nuxt-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -45,33 +49,22 @@
         />
       </a-layout-header>
 
-      <a-layout-content
-        :style="{ margin: '24px 16px 0', padding: '24px', background: '#fff', minHeight: '280px' }"
-      >
+      <a-layout-content>
         <transition name="fade">
-          <Nuxt />
+          <div class="container-fluid">
+            <Nuxt />
+          </div>
         </transition>
       </a-layout-content>
 
-      <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer>
+      <Footer />
     </a-layout>
   </a-layout>
 </template>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-.main-layout {
+.default-layout {
   /deep/ {
-    min-height: 100vh;
     .trigger {
       font-size: 18px;
       line-height: 64px;
@@ -90,10 +83,24 @@
     }
   }
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
 
 <script>
+import Footer from '~/components/organisms/Footer'
+
 export default {
+  components: {
+    Footer
+  },
+
   data() {
     return {
       collapsed: false

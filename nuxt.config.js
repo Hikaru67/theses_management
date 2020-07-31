@@ -128,7 +128,8 @@ export default {
       solid: [
         'faTachometerAlt',
         'faUserFriends',
-        'faBalanceScale'
+        'faBalanceScale',
+        'faPlusCircle'
       ]
     }
   }
