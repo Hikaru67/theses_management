@@ -1,5 +1,5 @@
 <template>
-  <div>{{ data }}</div>
+  <pre>{{ data }}</pre>
 </template>
 
 <script>
@@ -8,8 +8,8 @@ export default {
     data: []
   }),
 
-  async mounted () {
-    const { data } = await this.$api.indexUsers()
+  async mounted() {
+    const { data } = await this.$api.indexPosts()
     console.warn(this.$api)
     this.data = data
   }

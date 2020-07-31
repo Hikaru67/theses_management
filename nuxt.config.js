@@ -5,11 +5,13 @@ export default {
   ** See https://nuxtjs.org/api/configuration-mode
   */
   mode: 'universal',
+
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
   target: 'server',
+
   /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
@@ -25,12 +27,25 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
   /*
   ** Global CSS
   */
   css: [
-    'ant-design-vue/dist/antd.css'
+    'ant-design-vue/dist/antd.css',
+    { src: '~/assets/scss/style.scss', lang: 'scss' }
   ],
+
+  /*
+  ** Style resources
+  */
+  styleResources: {
+    scss: [
+      '~/assets/scss/_variables.scss',
+      '~/assets/scss/_mixins.scss'
+    ]
+  },
+
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
@@ -39,11 +54,13 @@ export default {
     '@/plugins/antd-ui',
     '@/plugins/api'
   ],
+
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
   */
   components: true,
+
   /*
   ** Nuxt.js dev-modules
   */
@@ -51,6 +68,7 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
+
   /*
   ** Nuxt.js modules
   */
@@ -61,16 +79,19 @@ export default {
     // Doc: https://github.com/nuxt/content
     '@nuxt/content'
   ],
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
+
   /*
   ** Content module configuration
   ** See https://content.nuxtjs.org/configuration
   */
   content: {},
+
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
