@@ -125,7 +125,11 @@ export default {
   */
   fontawesome: {
     icons: {
-      solid: ['faHome']
+      solid: [
+        'faTachometerAlt',
+        'faUserFriends',
+        'faBalanceScale'
+      ]
     }
   }
 }

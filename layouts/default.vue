@@ -1,19 +1,37 @@
 <template>
   <a-layout class="main-layout">
-    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+    <a-layout-sider v-model="collapsed" collapsible>
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
+
+      <a-menu theme="dark" :default-selected-keys="['1']" mode="inline">
         <a-menu-item key="1">
-          <a-icon type="user" />
-          <span>nav 1</span>
+          <font-awesome-icon icon="tachometer-alt" class="anticon" />
+          <span>Dashboard</span>
         </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="video-camera" />
-          <span>nav 2</span>
+
+        <a-sub-menu key="sub2">
+          <span slot="title">
+            <font-awesome-icon icon="user-friends" class="anticon" />
+            <span>Team</span>
+          </span>
+
+          <a-menu-item key="6">
+            Team 1
+          </a-menu-item>
+
+          <a-menu-item key="8">
+            Team 2
+          </a-menu-item>
+        </a-sub-menu>
+
+        <a-menu-item>
+          <font-awesome-icon icon="user-friends" class="anticon" />
+          <span>Users</span>
         </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="upload" />
-          <span>nav 3</span>
+
+        <a-menu-item>
+          <font-awesome-icon icon="balance-scale" class="anticon" />
+          <span>Roles</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -28,12 +46,16 @@
       </a-layout-header>
 
       <a-layout-content
-        :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+        :style="{ margin: '24px 16px 0', padding: '24px', background: '#fff', minHeight: '280px' }"
       >
         <transition name="fade">
           <Nuxt />
         </transition>
       </a-layout-content>
+
+      <a-layout-footer style="text-align: center">
+        Ant Design ©2018 Created by Ant UED
+      </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -49,6 +71,7 @@
 }
 .main-layout {
   /deep/ {
+    min-height: 100vh;
     .trigger {
       font-size: 18px;
       line-height: 64px;
