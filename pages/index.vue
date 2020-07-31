@@ -1,5 +1,9 @@
 <template>
-  <pre>{{ data }}</pre>
+  <div>
+    <font-awesome-icon icon="home" />
+    <p>{{ $t('welcome') }}</p>
+    <pre>{{ data }}</pre>
+  </div>
 </template>
 
 <script>
@@ -9,7 +13,10 @@ export default {
   }),
 
   async mounted() {
-    const { data } = await this.$api.indexPosts()
+    const { data } = await this.$api.updatePosts({
+      id: 8,
+      name: 'demo'
+    })
     console.warn(this.$api)
     this.data = data
   }

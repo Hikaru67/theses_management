@@ -52,7 +52,8 @@ export default {
   */
   plugins: [
     '@/plugins/antd-ui',
-    '@/plugins/api'
+    '@/plugins/api',
+    '@/plugins/directive'
   ],
 
   /*
@@ -66,7 +67,9 @@ export default {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/moment',
+    '@nuxtjs/fontawesome'
   ],
 
   /*
@@ -77,7 +80,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
-    '@nuxt/content'
+    '@nuxt/content',
+    'nuxt-i18n'
   ],
 
   /*
@@ -97,5 +101,31 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+  },
+
+  /*
+  ** Nuxt i18n
+  ** See https://i18n.nuxtjs.org/
+  */
+  i18n: {
+    locales: ['en', 'vi'],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: require('./locales/en.json'),
+        vi: require('./locales/vi.json')
+      }
+    }
+  },
+
+  /*
+  ** Nuxt Fontawesome
+  ** See https://github.com/nuxt-community/fontawesome-module/
+  */
+  fontawesome: {
+    icons: {
+      solid: ['faHome']
+    }
   }
 }
