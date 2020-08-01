@@ -1,0 +1,136 @@
+<template>
+  <a-form
+    class="search-form"
+    @submit.prevent="onSubmit"
+  >
+    <a-row>
+      <a-col :md="12">
+        <a-form-item
+          :label="`${$t('user.name')}`"
+          :label-col="{ sm: 6 }"
+          :wrapper-col="{ sm: 18 }"
+        >
+          <a-input
+            v-model="name"
+            :placeholder="`${$t('user.name')}`"
+            :disabled="loading"
+          >
+            <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
+          </a-input>
+        </a-form-item>
+      </a-col>
+
+      <a-col :md="12">
+        <a-form-item
+          :label="`${$t('user.email')}`"
+          :label-col="{ sm: 6 }"
+          :wrapper-col="{ sm: 18 }"
+        >
+          <a-input
+            v-model="email"
+            :placeholder="`${$t('user.email')}`"
+            :disabled="loading"
+          >
+            <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />
+          </a-input>
+        </a-form-item>
+      </a-col>
+
+      <a-col :md="24" class="box-form-footer mb-3">
+        <a-button
+          html-type="submit"
+          type="primary"
+          :disabled="loading"
+        >
+          <font-awesome-icon icon="search" class="width-1x mr-1" />
+          {{ $t('common.search') }}
+        </a-button>
+
+        &nbsp;
+        <a-button
+          html-type="button"
+          type="default"
+          :disabled="loading"
+          @click="onClearFormSearch"
+        >
+          <font-awesome-icon icon="eraser" class="width-1x mr-1" />
+          {{ $t('common.clear') }}
+        </a-button>
+      </a-col>
+    </a-row>
+  </a-form>
+</template>
+
+<style lang="scss" scoped>
+.search-form {
+  /deep/ {
+    .box-form-footer {
+      text-align: center;
+      .ant-btn {
+        min-width: 100px;
+      }
+    }
+  }
+}
+</style>
+
+<script>
+const EVENT_SUBMIT = 'submit'
+
+export default {
+  props: {
+    /**
+     * Loading status
+     */
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  data() {
+    return {
+      name: this.$route.query.name || '',
+      email: this.$route.query.email || ''
+    }
+  },
+
+  computed: {
+    /**
+     * Get condition input on form
+     */
+    condition() {
+      const condition = {}
+
+      if (this.name) {
+        condition.name = this.name
+      }
+
+      if (this.email) {
+        condition.email = this.email
+      }
+
+      return condition
+    }
+  },
+
+  methods: {
+    /**
+     * Check validate input
+     * If valid then show error
+     * Else call submit event of page index
+     */
+    onSubmit() {
+      this.$emit(EVENT_SUBMIT, this.condition)
+    },
+
+    /**
+     * On clear form search
+     */
+    onClearFormSearch() {
+      this.name = ''
+      this.email = ''
+    }
+  }
+}
+</script>

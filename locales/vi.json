@@ -1,3 +1,313 @@
 {
-  "welcome": "Xin chào"
+  "common": {
+    "home": "Trang chủ",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "dashboard": "Bảng điều khiển",
+    "create_new": "Tạo mới",
+    "search": "Tìm kiếm",
+    "clear": "Xóa form",
+    "total": "Tổng số",
+    "update": "Cập nhật",
+    "create": "Tạo",
+    "cancel": "Hủy bỏ",
+    "all": "Tất cả",
+    "no_data_in_table": "Không có dự liệu",
+    "download_csv": "Tải xuống CSV",
+    "upload_csv": "Tải lên CSV",
+    "option_please_select": "Vui lòng chọn",
+    "confirm_delete": "Xác nhận xóa",
+    "yes": "Đúng",
+    "no": "Không",
+    "more": "Mở rộng",
+    "less": "Thu gọn",
+    "genders": {
+      "both": "Khác",
+      "male": "Nam",
+      "fermale": "Nữ"
+    },
+    "empty": "Trống",
+    "choose_files_or_drag_and_drop_here": "Chọn tệp hoặc kéo và thả tại đây",
+    "not_available": "Không khả dụng",
+    "action": "Tác vụ"
+  },
+  "messages": {
+    "error": {
+      "failed_to_create": "Tạo {name} thất bại",
+      "failed_to_update": "Cập nhật {name} thất bại",
+      "failed_to_delete": "Xóa {name} thất bại",
+      "failed_to_get": "Lấy {name} thất bại",
+      "failed_to_login": "Đăng nhập thất bại",
+      "failed_to_action": "{name} thất bại",
+      "unmatch_value": "{name1}/{name2} không trùng khớp.",
+      "bad_email_format": "Email không đúng định dạng.",
+      "unmatch_confirmation_email": "{name} không trùng khớp.",
+      "unmatch_password": "Mật khẩu không trùng khớp",
+      "required": "{name} là bắt buộc.",
+      "invalid_format": "Định dạng không đúng.",
+      "numeric": "Trường này yêu cầu kiểu số.",
+      "more_than": "{name} phải lớn hơn hoặc bằng {target}",
+      "less_than": "{name} phải nhỏ hơn hoặc bằng {target}",
+      "date_before": "{name} phải trước {target}",
+      "min_max": "{name} phải nằm giữa: {min}-{max}",
+      "min": "{name} có ít nhất {min} ký tự",
+      "color_hex": "Định dạng không đúng.",
+      "failed_to_sent_mail": "Không thể gửi mail {name}",
+      "decimal": "{name} field must be numeric and decimal",
+      "invalid_url":"Định dạng đường dẫn không đúng",
+      "invalid_image":"Chỉ nhấp nhận file có đuôi là jpg, jpeg , png, gif"
+    },
+    "confirmation": {
+      "delete": "Bạn có chắc muốn xóa {name} không?"
+    },
+    "information": {
+      "created": "Tạo thành công",
+      "updated": "Cập nhật thành công",
+      "deleted": "Xóa thành công",
+      "login": "Đăng nhập thành công",
+      "action": "{name} thành công",
+      "sent_mail_success": "Gửi thư {name} thành công"
+    }
+  },
+  "constants": {
+    "order_statuses": {
+      "all": "Tất cả",
+      "wait_for_pay": "Chờ thanh toán",
+      "waiting_for_goods": "Chờ lấy hàng",
+      "traffering": "Đang giao hàng",
+      "delivered": "Đã giao",
+      "cancelled": "Đã hủy"
+    },
+    "delivery_types": {
+      "customer_address": "Địa chỉ đăng ký thành viên",
+      "working_address": "Nơi làm việc",
+      "friend_address": "Nhà bạn bè, người quen",
+      "home_address": "Nhà riêng",
+      "back_order": "Cửa hàng thực",
+      "other": "Khác"
+    },
+    "delivery_statuses": {
+      "processing": "Đang xử lý",
+      "out_for_delivery": "Sẵn sàng để giao",
+      "shipping": "Đang chuyển hàng",
+      "failed_attempt": "Giao hàng không thành công",
+      "delivered": "Đã giao hàng",
+      "returning": "Đang trả hàng",
+      "returned": "Đã trả hàng"
+    },
+    "delivery_notification_statuses": {
+      "sent": "Đã gửi",
+      "not_sent": "Chưa gửi"
+    },
+    "payment_methods": {
+      "atm": "Thẻ nội địa",
+      "visa": "Thẻ quốc tế",
+      "cod": "Thanh toán khi nhận hàng"
+    },
+    "sale_types": {
+      "normal": "Thông thường",
+      "preorder": "Đặt trước"
+    },
+    "order_types": {
+      "ec": "EC",
+      "ec_store": "Cửa hàng EC",
+      "offline_store": "Cửa hàng ngoại tuyến"
+    },
+    "tax_types": {
+      "included_tax": "Đã bao gồm thuế",
+      "not_included_tax": "Chưa bao gồm thuế",
+      "tax_free": "Miễn thuế"
+    }
+  },
+  "sort": {
+    "name": "Sắp xếp",
+    "please_select": "Chọn",
+    "sort_asc": " tăng dần",
+    "sort_desc": " giảm dần"
+  },
+  "permissions": {
+    "system": "Hệ thống",
+    "module": "Mô-đun",
+    "role": {
+      "module": "Vai trò",
+      "index": "Danh sách vai trò",
+      "store": "Tạo vai trò",
+      "show": "Chi tiết vai trò",
+      "update": "Cập nhật vai trò",
+      "delete": "Xóa vai trò"
+    },
+    "user": {
+      "module": "Người dùng",
+      "index": "Danh sách người dùng",
+      "store": "Tạo người dùng",
+      "show": "Chi tiết người dùng",
+      "update": "Cập nhật người dùng",
+      "delete": "Xóa người dùng"
+    },
+    "category": {
+      "module": "Chủng loại",
+      "index": "Danh sách chủng loại",
+      "store": "Tạo chủng loại",
+      "show": "Chi tiết chủng loại",
+      "update": "Cập nhật chủng loại",
+      "delete": "Xóa chủng loại"
+    },
+    "article": {
+      "module": "Bài viết",
+      "index": "Danh sách bài viết",
+      "store": "Tạo bài viết",
+      "show": "Chi tiết bài viết",
+      "update": "Cập nhật bài viết",
+      "delete": "Xóa bài viết"
+    },
+    "menu": {
+      "module": "Thực đơn",
+      "index": "Danh sách thực đơn",
+      "store": "Tạo thực đơn",
+      "show": "Thực đơn chi tiết",
+      "update": "Cập nhật thực đơn",
+      "delete": "Xóa thực đơn"
+    }
+  },
+  "user": {
+    "id": "ID",
+    "name": "Tên",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "password_confirm": "Mật khẩu (xác nhận)",
+    "roles": "Vai trò",
+    "admin": "Quản trị viên",
+    "user": "Người dùng",
+    "update_status": "Cập nhật trạng thái",
+    "list_user": "Danh sách người dùng",
+    "create_new_user": "Tạo mới người dùng",
+    "edit_user": "Sửa người dùng",
+    "status": "Trạng thái",
+    "statuses": {
+      "active": "Hoạt động",
+      "inactive": "Chưa hoạt động"
+    }
+  },
+  "role": {
+    "role": "Vai trò",
+    "role_list": "Danh sách vai trò",
+    "add_role": "Thêm quyền",
+    "name": "Tên",
+    "select_role_from_list": "Chọn từ danh sách vai trò",
+    "permissions": "Quyền vai trò"
+  },
+  "menu": {
+    "menu": "Thực đơn",
+    "id": "ID",
+    "menu_list": "Danh sách Thực đơn",
+    "title": "Tiêu đề",
+    "link": "Liên kết",
+    "icon": "Biểu tượng",
+    "parent_id": "Id của thực đơn cha",
+    "position": "Vị trí",
+    "create_new_menu": "Tạo thực đơn mới",
+    "edit_menu": "Sửa thực đơn"
+  },
+  "category": {
+    "category": "Danh mục",
+    "category_for_pagination": "danh mục",
+    "id": "ID",
+    "name": "Tên",
+    "created_at": "Ngày tạo",
+    "created_at_from": "Ngày tạo (từ ngày)",
+    "created_at_to": "Ngày tạo (đến ngày)",
+    "status": "Trạng thái",
+    "description": "Mô tả",
+    "category_list": "Danh sách danh mục",
+    "note_for_deletion": "Nếu bạn muốn xóa danh mục cha, trước tiên bạn phải xóa hết danh mục con"
+  },
+  "article-category": {
+    "title": "Thể loại bài viết"
+  },
+  "article": {
+    "index":"Danh sách bài viết",
+    "id": "ID",
+    "title": "Tiêu đề",
+    "image": "Ảnh",
+    "category": "Thể loại",
+    "youtube_id": "YouTube ID",
+    "youtube_url": "YouTube URL",
+    "youtube_info": "Thông tin Youtube",
+    "site": "Trang web",
+    "all": "Tất cả",
+    "type": "Loại",
+    "type_": {
+      "1": "OB/OG Interview",
+      "2": "Contents"
+    },
+    "status": "Trạng thái",
+    "status_": {
+      "hidden": "Ẩn",
+      "watting_classification": "Chờ phân loại",
+      "public": "Công khai"
+    },
+    "created_at_from": "Ngày tạo (từ ngày)",
+    "created_at_to": "Ngày tạo (đến ngày)",
+    "public_start_at": "Hiển thị lúc",
+    "public_start_at_from": "Hiển thị lúc (từ ngày)",
+    "public_start_at_to": "Hiển thị lúc (đến ngày)",
+    "public_end_at": "Kết thúc lúc",
+    "public_end_at_from": "Kết thúc lúc (từ ngày)",
+    "public_end_at_to": "Kết thúc lúc (đến ngày)",
+    "views": "Lượt xem",
+    "youtube_views": "Lượt xem YouTube",
+    "youtube_view_n_views": "Lượt xem YouTube / Lượt xem",
+    "origin_url": "URL trang gốc",
+    "create_origin_at": "Thời gian tạo (trang gốc)",
+    "update_origin_at": "Thời gian cập nhật (trang gốc)",
+    "last_crawl": "Lần cuối crawl lúc",
+    "ai_score": "Điểm AI",
+    "admin_note": "Ghi chú Admin",
+    "short_description": "Mô tả ngắn",
+    "description": "Mô tả",
+    "article":"Bài viết"
+  },
+  "short_date_picker": {
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua",
+    "tomorrow": "Ngày mai"
+  },
+  "breadcrumb": {
+    "users": "Người dùng",
+    "users-new": "Người dùng / Thêm mới",
+    "roles": "Quyền",
+    "roles-new": "Quyền / Thêm mới",
+    "categories": "Thể loại",
+    "categories-new": "Thể loại / Thêm mới",
+    "article":"Bài viết",
+    "article-new":"記事 / 新規作成",
+    "article_category":"Thể loại bài viết",
+    "site": "Trang web"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "login_id": "Email",
+    "password": "Mật khẩu",
+    "return": "Quay lại"
+  },
+  "site": {
+    "list_site": "Danh sách trang web",
+    "create": "Thêm mới trang web",
+    "update": "Cập nhật trang web",
+    "site": "Trang web",
+    "id": "ID",
+    "name": "Tên",
+    "image": "Ảnh",
+    "status": "Trạng thái",
+    "url": "Đường dẫn",
+    "description": "Mô tả",
+    "noneActive": "Không hoạt động",
+    "active": "Hoạt động"
+  },
+  "dashboard": {
+    "total_article": "Tổng số bài viết",
+    "total_site": "Tổng số trang web",
+    "total_view": "Tổng số lượt xem",
+    "total_category": "Tổng số danh mục"
+  }
 }

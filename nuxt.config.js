@@ -53,7 +53,8 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/api',
-    '@/plugins/directive'
+    '@/plugins/directive',
+    '@/plugins/debugger'
   ],
 
   /*
@@ -108,11 +109,12 @@ export default {
   ** See https://i18n.nuxtjs.org/
   */
   i18n: {
-    locales: ['en', 'vi'],
+    locales: ['ja', 'en', 'vi'],
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
       messages: {
+        ja: require('./locales/ja.json'),
         en: require('./locales/en.json'),
         vi: require('./locales/vi.json')
       }
@@ -126,10 +128,51 @@ export default {
   fontawesome: {
     icons: {
       solid: [
-        'faTachometerAlt',
-        'faUserFriends',
+        'faArrowCircleLeft',
+        'faArrowLeft',
         'faBalanceScale',
-        'faPlusCircle'
+        'faBorderAll',
+        'faBoxes',
+        'faCalendarAlt',
+        'faDownload',
+        'faEnvelope',
+        'faEraser',
+        'faFileAlt',
+        'faGlobeAmericas',
+        'faHeading',
+        'faHome',
+        'faInfoCircle',
+        'faLock',
+        'faPencilAlt',
+        'faPlus',
+        'faPlusCircle',
+        'faSave',
+        'faSearch',
+        'faSignOutAlt',
+        'faTachometerAlt',
+        'faThList',
+        'faTimes',
+        'faTimesCircle',
+        'faTrashAlt',
+        'faUser',
+        'faUserAlt',
+        'faUserCircle',
+        'faUserFriends',
+        'faUsers',
+        'faUserTie',
+        'faWineBottle',
+        'faSitemap',
+        'faLink',
+        'faEye',
+        'faBook',
+        'faPager',
+        'faChevronDown',
+        'faChevronUp',
+        'faNetworkWired',
+        'faUserCog',
+        'faIcons',
+        'faListOl',
+        'faStream'
       ]
     }
   }

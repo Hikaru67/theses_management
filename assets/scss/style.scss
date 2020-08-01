@@ -29,9 +29,6 @@ button,
 img {
   max-width: 100%;
 }
-.white-space-nowrap {
-  white-space: nowrap !important;
-}
 .bt-0 {
   border-top: 0 !important;
 }
@@ -68,6 +65,9 @@ img {
     max-width: 100%;
   }
 }
+.white-space-nowrap {
+  white-space: nowrap !important;
+}
 .max-ln-1 {
   white-space: nowrap;
   overflow: hidden;
@@ -87,6 +87,15 @@ img {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+.text-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
 .text-sm-right {
   text-align: left !important;
   @include mq(sm) {
@@ -101,13 +110,10 @@ img {
 }
 
 /* -----------------------------------------------------------
-  Layout common
+  Layout
 ----------------------------------------------------------- */
 .default-layout {
   min-height: 100vh;
-  .ant-layout-content {
-    padding-top: 1.5rem;
-  }
 }
 .container-fluid {
   width: 100%;
@@ -118,5 +124,94 @@ img {
   @include mq(md) {
     padding-right: 30px;
     padding-left: 30px;
+  }
+}
+
+/* -----------------------------------------------------------
+  Main control
+----------------------------------------------------------- */
+.main-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  @include mq(max_sm) {
+    flex-direction: column;
+  }
+  .app-sort {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    @include mq(max_sm) {
+      margin: 0;
+    }
+    .txt-sort {
+      margin-right: 0.5rem;
+    }
+    .sort-select {
+      min-width: 180px;
+    }
+  }
+  .app-pagination {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    .page-total {
+      white-space: nowrap;
+    }
+    .page-size {
+      width: auto;
+      margin-left: 0.5rem;
+    }
+    .nav-pagination {
+      margin-left: 0.5rem;
+    }
+  }
+  .app-sort,
+  .app-pagination {
+    @include mq(max_sm) {
+      margin-right: 0;
+      margin-left: auto;
+    }
+    > * {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+/* -----------------------------------------------------------
+  .main-table
+----------------------------------------------------------- */
+.main-table {
+  table {
+    border-top: 1px solid #e8e8e8;
+  }
+}
+/* -----------------------------------------------------------
+  Spacing
+----------------------------------------------------------- */
+@each $prop, $abbrev in (margin: m, padding: p) {
+  @each $size, $length in $spacers {
+    .#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+    .#{$abbrev}t-#{$size},
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-top: $length !important;
+    }
+    .#{$abbrev}r-#{$size},
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-right: $length !important;
+    }
+    .#{$abbrev}b-#{$size},
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-bottom: $length !important;
+    }
+    .#{$abbrev}l-#{$size},
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-left: $length !important;
+    }
   }
 }

@@ -1,0 +1,313 @@
+{
+  "common": {
+    "home": "ダッシュボード",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "dashboard": "ダッシュボード",
+    "create_new": "新規作成",
+    "search": "検索",
+    "clear": "クリア",
+    "total": "合計",
+    "update": "更新",
+    "create": "新規作成",
+    "cancel": "キャンセル",
+    "all": "すべて",
+    "no_data_in_table": "データがありません。",
+    "download_csv": "CSVダウンロード",
+    "upload_csv": "CSVアップロード",
+    "option_please_select": "選択してください",
+    "confirm_delete": "削除確認",
+    "yes": "はい",
+    "no": "いいえ",
+    "more": "もっと見る",
+    "less": "省略",
+    "genders": {
+      "both": "その他",
+      "male": "男性",
+      "fermale": "女性"
+    },
+    "empty": "空き",
+    "choose_files_or_drag_and_drop_here": "ファイルを選択するか、ここにドラッグ&ドロップしてください",
+    "not_available": "利用不可",
+    "action": "アクション"
+  },
+  "messages": {
+    "error": {
+      "failed_to_create": "{name}を作成できませんでした。",
+      "failed_to_update": "{name}を更新できませんでした。",
+      "failed_to_delete": "{name}を削除できませんでした。",
+      "failed_to_get": "{name}を取得できませんでした。",
+      "failed_to_login": "ログインに失敗しました。",
+      "failed_to_action": "{name}に失敗しました",
+      "unmatch_value": "{name1}/{name2}と一致するデータを見つけません。",
+      "bad_email_format": "無効なメール",
+      "unmatch_confirmation_email": "{name}と一致しません。",
+      "unmatch_password": "パスワードと一致しません。",
+      "required": "{name}は入力必須です。",
+      "invalid_format": "無効な形式",
+      "numeric": "数字で入力してください。",
+      "more_than": "{name}は{target}以上で入力してください。",
+      "less_than": "{name}は{target}以下で入力してください。",
+      "date_before": "{name}は{target}より前の日付を入力してください。",
+      "min_max": "{name}は{min}以上、{max}以内で入力してください。",
+      "min": "{name}は{min}字以上で入力してください。",
+      "color_hex": "無効な形式。",
+      "failed_to_sent_mail": "{name}メールを送信できませんでした。",
+      "decimal": "{name} field must be numeric and decimal",
+      "invalid_url":"無効なURL",
+      "invalid_image":"拡張子がjpg、jpeg、png、gifのファイルのみが受け入れられます"
+    },
+    "confirmation": {
+      "delete": "{name}を削除してもよろしいですか?"
+    },
+    "information": {
+      "created": "正常に作成されました。",
+      "updated": "正常に更新されました。",
+      "deleted": "正常に削除されました。",
+      "login": "正常にログインしました。",
+      "action": "{name}が成功しました",
+      "sent_mail_success": "正常に{name}メールを送るされました。"
+    }
+  },
+  "constants": {
+    "order_statuses": {
+      "all": "すべて",
+      "wait_for_pay": "給料を待つ",
+      "waiting_for_goods": "商品を待っています",
+      "traffering": "人身売買",
+      "delivered": "配達済み",
+      "cancelled": "キャンセル"
+    },
+    "delivery_types": {
+      "customer_address": "お客様の住所",
+      "working_address": "勤務先住所",
+      "friend_address": "友達の住所",
+      "home_address": "自宅の住所",
+      "back_order": "取り寄せ",
+      "other": "その他の"
+    },
+    "delivery_statuses": {
+      "processing": "処理",
+      "out_for_delivery": "配送中",
+      "shipping": "運送",
+      "failed_attempt": "失敗した試み",
+      "delivered": "お届け",
+      "returning": "戻る",
+      "returned": "戻ってきた"
+    },
+    "delivery_notification_statuses": {
+      "sent": "送信しました",
+      "not_sent": "送信されません"
+    },
+    "payment_methods": {
+      "atm": "ATM",
+      "visa": "VISA",
+      "cod": "COD"
+    },
+    "sale_types": {
+      "normal": "正常",
+      "preorder": "予約注文"
+    },
+    "order_types": {
+      "ec": "EC",
+      "ec_store": "ECストア",
+      "offline_store": "オフラインストア"
+    },
+    "tax_types": {
+      "included_tax": "税込",
+      "not_included_tax": "税別",
+      "tax_free": "無税"
+    }
+  },
+  "sort": {
+    "name": "ソート",
+    "please_select": "選択してください",
+    "sort_asc": "の昇順",
+    "sort_desc": "の降順"
+  },
+  "permissions": {
+    "system": "システム",
+    "module": "モジュール",
+    "role": {
+      "module": "ロール",
+      "index": "ロール管理",
+      "store": "新規作成",
+      "show": "詳細",
+      "update": "編集",
+      "delete": "削除"
+    },
+    "user": {
+      "module": "ユーザー",
+      "index": "ユーザー管理",
+      "store": "新規作成",
+      "show": "詳細",
+      "update": "更新",
+      "delete": "削除"
+    },
+    "category": {
+      "module": "カテゴリー",
+      "index": "カテゴリー一覧",
+      "store": "カテゴリを作成",
+      "show": "カテゴリー詳細",
+      "update": "カテゴリを更新",
+      "delete": "カテゴリを削除"
+    },
+    "article": {
+      "module": "論文",
+      "index": "論文管理",
+      "store": "新規作成",
+      "show": "詳細",
+      "update": "更新",
+      "delete": "消除"
+    },
+    "menu": {
+      "module": "メニュー",
+      "index": "メニュー管理",
+      "store": "新規作成",
+      "show": "詳細",
+      "update": "更新",
+      "delete": "消除"
+    }
+  },
+  "user": {
+    "id": "ID",
+    "name": "名前",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "password_confirm": "確認パスワード",
+    "roles": "ロール",
+    "admin": "管理者",
+    "user": "ユーザー",
+    "update_status": "最新状況",
+    "list_user": "管理者管理",
+    "create_new_user": "新規作成",
+    "edit_user": "編集",
+    "status": "ステータス",
+    "statuses": {
+      "active": "有効",
+      "inactive": "無効"
+    }
+  },
+  "role": {
+    "role": "ロール",
+    "role_list": "ロール一覧",
+    "add_role": "新規追加",
+    "name": "名前",
+    "select_role_from_list": "ロール一覧から選択してください。",
+    "permissions": "権限"
+  },
+  "menu": {
+    "menu": "メニュー",
+    "id": "ID",
+    "menu_list": "メニュー一覧",
+    "title": "タイトル",
+    "link": "リンク",
+    "icon": "アイコン",
+    "parent_id": "親のID",
+    "position": "ポジション",
+    "create_new_menu": "新しいメニューを作成する",
+    "edit_menu": "メニューを編集する"
+  },
+  "category": {
+    "category": "カテゴリ",
+    "category_for_pagination": "カテゴリ",
+    "id": "シミュレーターID",
+    "name": "項目",
+    "created_at": "に作成されました",
+    "created_at_from": "（から）に作成",
+    "created_at_to": "（先）に作成",
+    "status": "入札結果",
+    "description": "備考欄",
+    "category_list": "カテゴリー一覧",
+    "note_for_deletion": "親カテゴリを削除する場合は、まずサブカテゴリ全体を削除する必要があります"
+  },
+  "article-category": {
+    "title": "カテゴリー"
+  },
+  "article": {
+    "index":"記事一覧",
+    "id": "ID",
+    "title": "タイトル",
+    "image": "画像",
+    "category": "カテゴリ",
+    "youtube_id": "YouTube ID",
+    "youtube_url": "YouTube URL",
+    "youtube_info": "Youtubeの情報",
+    "site": "サイト名",
+    "all": "すべて",
+    "type": "動画種別",
+    "type_": {
+      "1": "OB/OG インタビュー",
+      "2": "コンテンツ"
+    },
+    "status": "ステータス",
+    "status_": {
+      "hidden": "分類待ち",
+      "watting_classification": "非公開",
+      "public": "公開"
+    },
+    "created_at_from": "作成日（開始日）",
+    "created_at_to": "作成日（終了日）",
+    "public_start_at": "公開開始日時",
+    "public_start_at_from": "公開開始日時（から）",
+    "public_start_at_to": "公開開始日時（まで）",
+    "public_end_at": "公開終了日時",
+    "public_end_at_from": "公開終了日時（から）",
+    "public_end_at_to": "公開終了日時（まで）",
+    "views": "閲覧数",
+    "youtube_views": "Youtubeの閲覧数",
+    "youtube_view_n_views": "Youtubeの閲覧数 / 閲覧数",
+    "origin_url": "収集元",
+    "create_origin_at": "収集元作成日時",
+    "update_origin_at": "収集元更新日時",
+    "last_crawl": "最新更新日時",
+    "ai_score": "AIスコア",
+    "admin_note": "管理者メモ",
+    "short_description": "短縮本文",
+    "description": "本文",
+    "article":"記事"
+  },
+  "short_date_picker": {
+    "today": "今日",
+    "yesterday": "昨日",
+    "tomorrow": "明日"
+  },
+  "breadcrumb": {
+    "users": "ユーザー",
+    "users-new": "ユーザー / 新規作成",
+    "roles": "ロール",
+    "roles-new": "ロール / 新規作成",
+    "categories": "カテゴリー",
+    "categories-new": "カテゴリー / 新規作成",
+    "article":"記事",
+    "article-new":"記事 / 新規作成",
+    "article_category":"カテゴリー",
+    "site": "サイト"
+  },
+  "login": {
+    "title": "ログイン",
+    "login_id": "メールアドレス",
+    "password": "パスワード",
+    "return": "戻る"
+  },
+  "site": {
+    "list_site": "サイト一覧",
+    "create": "新規作成",
+    "update": "編集",
+    "site": "サイト",
+    "id": "ID",
+    "name": "サイト名",
+    "image": "ロゴ",
+    "status": "ステータス",
+    "url": "URL",
+    "description": "備考",
+    "noneActive": "無効",
+    "active": "有効"
+  },
+  "dashboard": {
+    "total_article": "記事",
+    "total_site": "ページ",
+    "total_view": "閲覧数",
+    "total_category": "カテゴリー"
+  }
+}
