@@ -1,13 +1,13 @@
 <template>
   <div class="main-list">
-    <a-card>
+    <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="user-friends" />
         {{ $t('user.list_user') }}
       </template>
 
       <template slot="extra">
-        <a-button type="primary" ghost>
+        <a-button html-type="button" type="primary" ghost>
           <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
           {{ $t('common.create_new') }}
         </a-button>
@@ -62,6 +62,12 @@
         />
       </div>
     </a-card>
+
+    <app-delete-confirm-dialog
+      ref="deleteConfirmDialog"
+      :name="selectedName"
+      @confirm="onDelete"
+    />
   </div>
 </template>
 
@@ -72,6 +78,7 @@ import UserSearchForm from '~/components/organisms/users/UserSearchForm'
 import UserTable from '~/components/organisms/users/UserTable'
 import AppPagination from '~/components/atoms/AppPagination'
 import AppSort from '~/components/atoms/AppSort'
+import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
 import AsyncLoading from '~/mixins/do-async-loading'
 import ConditionHandler from '~/mixins/condition'
@@ -113,23 +120,22 @@ const SORT_LIST = [
 ]
 
 const mock = []
-const roles = [
-  {
-    id: 1,
-    name: 'admin'
-  },
-  {
-    id: 2,
-    name: 'user'
-  }
-]
 
 for (let i = 0; i < 11; i++) {
   mock.push({
     id: i + 1,
     name: `Name ${i + 1}`,
     email: `x${i + 1}@a.com`,
-    roles,
+    roles: [
+      {
+        id: 1,
+        name: 'admin'
+      },
+      {
+        id: 2,
+        name: 'user'
+      }
+    ],
     status: i % 2 ? 0 : 1
   })
 }
@@ -139,7 +145,8 @@ export default {
     UserSearchForm,
     UserTable,
     AppPagination,
-    AppSort
+    AppSort,
+    AppDeleteConfirmDialog
   },
 
   mixins: [

@@ -36,9 +36,9 @@ const SearchFormHandler = {
         .catch(err => {
           console.error(err)
 
-          this.$toast.error(
-            this.$t('messages.error.failed_to_get', { name: this.resourceTypeName })
-          )
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_get', { name: this.resourceTypeName })
+          })
         })
     },
 
@@ -49,18 +49,18 @@ const SearchFormHandler = {
       if (this.selectedId) {
         this.delete(this.selectedId)
           .then(_ => {
-            this.$toast.success(
-              this.$t('messages.information.deleted', { name: this.resourceTypeName })
-            )
+            this.$notification.success({
+              message: this.$t('messages.information.deleted', { name: this.resourceTypeName })
+            })
 
             this.refresh()
           })
           .catch(err => {
             console.error(err)
 
-            this.$toast.error(
-              this.$t('messages.error.failed_to_delete', { name: this.resourceTypeName })
-            )
+            this.$notification.error({
+              message: this.$t('messages.error.failed_to_delete', { name: this.resourceTypeName })
+            })
           })
       }
     },

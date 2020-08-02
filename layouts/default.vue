@@ -221,6 +221,11 @@ export default {
   mounted() {
     // this.currentPath = this.$router.currentRoute.path
     // this.showListButton(this.currentPath)
+
+    // notification config global
+    this.$notification.config({
+      duration: 2
+    })
   },
 
   methods: {

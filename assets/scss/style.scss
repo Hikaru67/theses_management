@@ -21,13 +21,19 @@ ul {
   padding: 0;
   margin: 0;
 }
+img {
+  max-width: 100%;
+}
 a,
 button,
 .btn {
   transition: all 0.4s ease;
 }
-img {
-  max-width: 100%;
+.over {
+  transition: all 0.4s ease;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 .bt-0 {
   border-top: 0 !important;
@@ -108,6 +114,15 @@ img {
     text-align: right !important;
   }
 }
+.text-primary {
+  color: $primary !important;
+}
+.text-warning {
+  color: $warning !important;
+}
+.text-danger {
+  color: $danger !important;
+}
 
 /* -----------------------------------------------------------
   Layout
@@ -127,6 +142,24 @@ img {
   }
 }
 
+/* -----------------------------------------------------------
+  Footer
+----------------------------------------------------------- */
+.main-footer {
+  border-top: 1px solid #d8dbe0;
+  padding: 13px 0;
+  @include mq(max_xs) {
+    text-align: center;
+  }
+  .col-left {
+  }
+  .col-right {
+    text-align: right;
+    @include mq(max_xs) {
+      text-align: center;
+    }
+  }
+}
 /* -----------------------------------------------------------
   Main control
 ----------------------------------------------------------- */
@@ -191,6 +224,7 @@ img {
     border-top: 1px solid #e8e8e8;
   }
 }
+
 /* -----------------------------------------------------------
   Spacing
 ----------------------------------------------------------- */

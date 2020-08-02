@@ -3,8 +3,9 @@
     :columns="FIELDS"
     :data-source="data"
     :row-key="record => record.id"
-    :pagination="false"
+    :locale="tableLocale"
     :loading="tableLoading"
+    :pagination="false"
     class="main-table"
   >
     <template slot="roles" slot-scope="text, record">
@@ -12,13 +13,45 @@
     </template>
 
     <template slot="status" slot-scope="text, record">
-      <a-tag :color="record.status === 1 ? 'green' : ''">
-        {{ record.status === 1 ? 'Active' : 'Inactive' }}
-      </a-tag>
+      <a-badge
+        :count="`${record.status === 1 ? $t('user.statuses.active') : $t('user.statuses.inactive')}`"
+        :number-style="{
+          backgroundColor: record.status === 1 ? '#52c41a' : '#d9d9d9'
+        }"
+        class="btn-status over"
+      />
     </template>
 
     <template slot="action" slot-scope="text, record">
-      {{ record.status === 1 ? 'Active' : 'Inactive' }}
+      <a-button
+        html-type="button"
+        type="primary"
+        size="small"
+        :disabled="loading"
+        @click="goToDetail(record.id)"
+      >
+        <font-awesome-icon icon="eye" class="width-1x" />
+      </a-button>
+
+      <a-button
+        html-type="button"
+        type="primary"
+        size="small"
+        :disabled="loading"
+        @click="onShowDetail(record.id)"
+      >
+        <font-awesome-icon icon="pencil-alt" class="width-1x" />
+      </a-button>
+
+      <a-button
+        html-type="button"
+        type="danger"
+        size="small"
+        :disabled="loading"
+        @click="onDelete(record)"
+      >
+        <font-awesome-icon icon="trash-alt" class="width-1x" />
+      </a-button>
     </template>
   </a-table>
 </template>
@@ -27,38 +60,9 @@
 .main-table {
   /deep/ {
     table {
-      // border-top: 1px solid #e8e8e8;
-      // thead {
-      //   tr {
-      //     th {
-      //       text-align: center;
-      //       &.id {
-      //         width: 60px
-      //       }
-      //       &.name {
-      //         text-align: left;
-      //       }
-      //       &.email {
-      //         text-align: left;
-      //       }
-      //       &.roles {
-      //         text-align: left;
-      //         width: 250px;
-      //       }
-      //       &.update_status {
-      //         width: 140px;
-      //       }
-      //       &.action {
-      //         width: 140px;
-      //       }
-      //     }
-      //     td {
-      //       padding: 0 12px;
-      //       vertical-align: 0;
-      //       text-align: center;
-      //     }
-      //   }
-      // }
+      .btn-status {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -73,7 +77,7 @@ const FIELDS = [
   { dataIndex: 'name', title: 'user.name' },
   { dataIndex: 'email', title: 'user.email' },
   { dataIndex: 'roles', title: 'user.roles', scopedSlots: { customRender: 'roles' } },
-  { dataIndex: 'status', title: 'user.status', scopedSlots: { customRender: 'status' } },
+  { dataIndex: 'status', title: 'user.status', scopedSlots: { customRender: 'status' }, width: 140 },
   { dataIndex: 'action', title: 'common.action', scopedSlots: { customRender: 'action' }, width: 140 }
 ]
 
@@ -120,7 +124,6 @@ export default {
      * @return {array} FIELDS of header table
      */
     FIELDS() {
-      console.log(this.data)
       return FIELDS.map(item => {
         return {
           ...item,
@@ -138,6 +141,17 @@ export default {
       return {
         spinning: this.loading,
         indicator: <a-spin />
+      }
+    },
+
+    /**
+     * Locale for Table
+     *
+     * @return {object} Locale for Table
+     */
+    tableLocale() {
+      return {
+        emptyText: this.$t('common.no_data_in_table')
       }
     }
   },

@@ -45,9 +45,9 @@ const CreateEditForm = {
             console.error(err)
             this.loading = false
 
-            this.$toast.error(
-              this.$t('messages.error.failed_to_get', { name: this.modelType })
-            )
+            this.$notification.error({
+              message: this.$t('messages.error.failed_to_get', { name: this.modelType })
+            })
           })
       } else {
         this.setModel()
@@ -69,12 +69,12 @@ const CreateEditForm = {
 
         this.loading = false
 
-        this.$toast.success(
-          this.$t(
+        this.$notification.success({
+          message: this.$t(
             this.id ? 'messages.information.updated' : 'messages.information.created',
             { name: this.modelType }
           )
-        )
+        })
 
         this.$emit(EVENT_MODIFY)
       } catch (err) {
@@ -85,16 +85,20 @@ const CreateEditForm = {
         const message = get(err, 'response.data.messages', null)
 
         if (errors && errors.email) {
-          this.$toast.error(errors.email[0])
+          this.$notification.error({
+            message: errors.email[0]
+          })
         } if (message) {
-          this.$toast.error(message)
+          this.$notification.error({
+            message
+          })
         } else {
-          this.$toast.error(
-            this.$t(
+          this.$notification.error({
+            message: this.$t(
               this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
               { name: this.modelType }
             )
-          )
+          })
         }
       }
     }
