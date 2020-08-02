@@ -34,14 +34,14 @@
         </a-sub-menu>
 
         <a-menu-item>
-          <nuxt-link to="users">
+          <nuxt-link to="/users">
             <font-awesome-icon icon="user-friends" class="anticon" />
             <span>Users</span>
           </nuxt-link>
         </a-menu-item>
 
         <a-menu-item>
-          <nuxt-link to="roles">
+          <nuxt-link to="/roles">
             <font-awesome-icon icon="balance-scale" class="anticon" />
             <span>Roles</span>
           </nuxt-link>

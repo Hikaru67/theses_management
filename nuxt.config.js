@@ -54,7 +54,10 @@ export default {
   */
   plugins: [
     '@/plugins/antd-ui',
+    // '@/plugins/antd-form-model',
     '@/plugins/api',
+    '@/plugins/dd-api-manager',
+    '@/plugins/validations',
     '@/plugins/directive',
     '@/plugins/debugger'
   ],

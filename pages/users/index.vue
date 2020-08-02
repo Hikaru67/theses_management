@@ -7,7 +7,7 @@
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost>
+        <a-button html-type="button" type="primary" ghost @click="$router.push({ path: '/users/new' })">
           <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
           {{ $t('common.create_new') }}
         </a-button>

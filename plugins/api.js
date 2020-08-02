@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 Digi Dinos JSC. All rights reserved.
+ * Email: tech@digidinos.com.
+ */
+
 import { camelCase } from 'lodash'
 
 export default function({ $axios }, inject) {

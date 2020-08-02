@@ -1,15 +1,13 @@
 <template>
   <a-form
+    :label-col="{ sm: 6 }"
+    :wrapper-col="{ sm: 18 }"
     class="search-form"
     @submit.prevent="onSubmit"
   >
     <a-row>
       <a-col :md="12">
-        <a-form-item
-          :label="`${$t('user.name')}`"
-          :label-col="{ sm: 6 }"
-          :wrapper-col="{ sm: 18 }"
-        >
+        <a-form-item :label="`${$t('user.name')}`">
           <a-input
             v-model="name"
             :placeholder="`${$t('user.name')}`"
@@ -21,11 +19,7 @@
       </a-col>
 
       <a-col :md="12">
-        <a-form-item
-          :label="`${$t('user.email')}`"
-          :label-col="{ sm: 6 }"
-          :wrapper-col="{ sm: 18 }"
-        >
+        <a-form-item :label="`${$t('user.email')}`">
           <a-input
             v-model="email"
             :placeholder="`${$t('user.email')}`"

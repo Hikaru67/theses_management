@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nuxt-link to="profile">
+    <nuxt-link to="/profile">
       Profile
     </nuxt-link>
     <div class="row justify-content-center mt-5">
