@@ -84,7 +84,7 @@ export default function({ $axios }, inject) {
     }
   })
 
-  axios.setBaseURL('https://jsonplaceholder.typicode.com')
+  axios.setBaseURL(process.env.API_BASE_URL)
 
   const apiManager = new APIManager(axios)
 
