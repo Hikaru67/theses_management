@@ -1,10 +1,12 @@
 
+require('dotenv').config()
+
 export default {
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Nuxt target
@@ -67,7 +69,6 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     '@nuxtjs/moment',
     '@nuxtjs/fontawesome'
@@ -77,11 +78,11 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    '@nuxtjs/auth',
+    '@nuxtjs/dotenv',
     'nuxt-i18n'
   ],
 
@@ -89,7 +90,9 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    baseURL: process.env.API_BASE_URL
+  },
 
   /*
   ** Content module configuration
@@ -174,6 +177,28 @@ export default {
         'faListOl',
         'faStream'
       ]
+    }
+  },
+
+  /**
+   * Nuxt Auth
+   * See https://auth.nuxtjs.org/
+   */
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/profile',
+      user: '/profile'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/login', method: 'post', propertyName: 'data.api_token' },
+          user: { url: '/api/me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
     }
   }
 }
