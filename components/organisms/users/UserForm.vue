@@ -123,16 +123,11 @@
 import { USER_STATUS_LIST } from '~/constants'
 
 import User from '~/models/User'
-// import Role from '~/models/Role'
+import Role from '~/models/Role'
 
-// import AppRadioGroup from '~/components/atoms/AppRadioGroup'
 import CreateEditForm from '~/mixins/create-edit-form'
 
 export default {
-  components: {
-    // AppRadioGroup
-  },
-
   mixins: [
     CreateEditForm
   ],
@@ -141,13 +136,6 @@ export default {
     return {
       model: new User(),
       modelType: this.$t('user.user'),
-      // modelForm: {
-      //   name: '',
-      //   email: '',
-      //   password: '',
-      //   password_confirm: ''
-      // },
-
       roleList: []
     }
   },
@@ -272,19 +260,19 @@ export default {
      * Get role list
      */
     getRoleList() {
-      // this.$dam.getRoleList()
-      //   .then(res => {
-      //     if (Array.isArray(res.data)) {
-      //       this.roleList = res.data.map(item => new Role(item))
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.error(err)
+      this.$dam.getRoleList()
+        .then(res => {
+          if (Array.isArray(res.data)) {
+            this.roleList = res.data.map(item => new Role(item))
+          }
+        })
+        .catch(err => {
+          console.error(err)
 
-      //     this.$notification.error({
-      //       message: this.$t('messages.error.failed_to_get', { name: this.$t('role.role_list') })
-      //     })
-      //   })
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_get', { name: this.$t('role.role_list') })
+          })
+        })
     },
 
     /**

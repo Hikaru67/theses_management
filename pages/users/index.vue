@@ -76,8 +76,8 @@ import { SORT_TYPE } from '~/constants'
 
 import UserSearchForm from '~/components/organisms/users/UserSearchForm'
 import UserTable from '~/components/organisms/users/UserTable'
-import AppPagination from '~/components/atoms/AppPagination'
-import AppSort from '~/components/atoms/AppSort'
+import AppPagination from '~/components/molecules/AppPagination'
+import AppSort from '~/components/molecules/AppSort'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
 import AsyncLoading from '~/mixins/do-async-loading'

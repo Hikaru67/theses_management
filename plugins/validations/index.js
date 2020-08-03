@@ -10,7 +10,6 @@ const MAX_USER_NAME_LENGTH_IN_EMAIL = 64
  * Check including the email format.
  */
 const emailValidator = (rule, value, callback) => {
-  console.log(121212112, value)
   if (!value) {
     return callback()
   }
