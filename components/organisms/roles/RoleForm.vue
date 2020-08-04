@@ -24,18 +24,18 @@
       </div>
 
       <div class="ant-col ant-col-sm-18 ant-form-item-control-wrapper">
-        <!-- v-if="Array.isArray(nestedPermissions) && nestedPermissions.length" -->
+        <!-- <pre>{{ nestedPermissions }}</pre> -->
         <a-collapse
+          v-if="Array.isArray(nestedPermissions) && nestedPermissions.length"
           v-model="activeCollapseKeys"
           expand-icon-position="right"
         >
           <a-collapse-panel
             v-for="item in nestedPermissions"
-            :key="item.id"
+            :key="`${item.id}`"
             :header="item.name"
           >
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel voluptatum similique iure! Adipisci voluptatibus aliquid numquam. Nostrum numquam minima error quo rem eveniet cumque accusamus enim, voluptas eum dolore vel.
-            {{ item.children }}
+            <!-- <pre>{{ item.children }}</pre> -->
             <!-- <app-checkbox-group
               :value="model.permissions"
               :list="item.children"
@@ -43,6 +43,13 @@
               :inline="false"
               @toggle="updatePermissions"
             /> -->
+            <a-radio-group
+              :value="model.permissions"
+              :options="item.children"
+              name="permissions"
+              :disabled="loading"
+              @change="updatePermissions"
+            />
           </a-collapse-panel>
         </a-collapse>
       </div>
@@ -117,71 +124,6 @@ import Permission from '~/models/Permission'
 // import AppCheckboxGroup from '~/components/atoms/AppCheckboxGroup'
 
 import CreateEditForm from '~/mixins/create-edit-form'
-
-const MOCK_PER = {
-  data: [
-    {
-      id: 1,
-      name: 'role.index'
-    },
-    {
-      id: 2,
-      name: 'role.store'
-    },
-    {
-      id: 3,
-      name: 'role.show'
-    },
-    {
-      id: 4,
-      name: 'role.update'
-    },
-    {
-      id: 5,
-      name: 'role.delete'
-    },
-    {
-      id: 6,
-      name: 'user.index'
-    },
-    {
-      id: 7,
-      name: 'user.store'
-    },
-    {
-      id: 8,
-      name: 'user.show'
-    },
-    {
-      id: 9,
-      name: 'user.update'
-    },
-    {
-      id: 10,
-      name: 'user.delete'
-    },
-    {
-      id: 11,
-      name: 'menu.index'
-    },
-    {
-      id: 12,
-      name: 'menu.store'
-    },
-    {
-      id: 13,
-      name: 'menu.show'
-    },
-    {
-      id: 14,
-      name: 'menu.update'
-    },
-    {
-      id: 15,
-      name: 'menu.delete'
-    }
-  ]
-}
 
 export default {
   components: {
@@ -258,55 +200,34 @@ export default {
      * Prepare master data
      */
     prepareData() {
-      // this.$dam.getPermission()
-      //   .then(res => {
-      //     this.permissions = res.data.map(item => new Permission(item))
+      this.$dam.getPermission()
+        .then(res => {
+          this.permissions = res.data.map(item => new Permission(item))
 
-      //     const parents = [...new Set(res.data.map(item => item.name.split('.')[0]))]
-      //     const permissions = []
-      //     let i = 0
+          const parents = [...new Set(res.data.map(item => item.name.split('.')[0]))]
+          const permissions = []
+          let i = 0
 
-      //     parents.forEach(entry => {
-      //       permissions.push({
-      //         id: --i,
-      //         name: `${entry}.module`,
-      //         parent_id: 0
-      //       })
-      //       this.permissions.forEach((item, index) => {
-      //         if (item.name.startsWith(`${entry}.`)) {
-      //           this.permissions[index].parent_id = i
-      //         }
-      //       })
-      //     })
+          parents.forEach(entry => {
+            permissions.push({
+              id: --i,
+              name: `${entry}.module`,
+              parent_id: 0
+            })
+            this.permissions.forEach((item, index) => {
+              if (item.name.startsWith(`${entry}.`)) {
+                this.permissions[index].parent_id = i
+              }
+            })
+          })
 
-      //     this.permissions = [...permissions, ...this.permissions]
-      //   })
-      //   .catch(_ => {
-      //     this.$toast.error(
-      //       this.$t('messages.error.failed_to_get', { name: this.$t('role.permissions') })
-      //     )
-      //   })
-      // TODO
-      this.permissions = MOCK_PER.data.map(item => new Permission(item))
-
-      const parents = [...new Set(MOCK_PER.data.map(item => item.name.split('.')[0]))]
-      const permissions = []
-      let i = 0
-
-      parents.forEach(entry => {
-        permissions.push({
-          id: --i,
-          name: `${entry}.module`,
-          parent_id: 0
+          this.permissions = [...permissions, ...this.permissions]
         })
-        this.permissions.forEach((item, index) => {
-          if (item.name.startsWith(`${entry}.`)) {
-            this.permissions[index].parent_id = i
-          }
+        .catch(_ => {
+          this.$toast.error(
+            this.$t('messages.error.failed_to_get', { name: this.$t('role.permissions') })
+          )
         })
-      })
-
-      this.permissions = [...permissions, ...this.permissions]
     },
 
     /**
@@ -322,7 +243,7 @@ export default {
           return {
             ...item,
             children: this.convertPermissions(item.id),
-            name: this.$t(`permissions.${item.name}`)
+            label: this.$t(`permissions.${item.name}`)
           }
         })
     },

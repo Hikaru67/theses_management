@@ -86,7 +86,8 @@ export default class DdApiManager {
           let retry = 0
           while (true) {
             try {
-              options.token = this.getAuthToken()
+              // TODO
+              // options.token = this.getAuthToken()
 
               // For mock data
               if (Object.hasOwnProperty.call(api, 'useMock') && api.useMock) {

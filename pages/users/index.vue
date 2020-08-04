@@ -131,27 +131,6 @@ const SORT_LIST = [
   }
 ]
 
-const mock = []
-
-for (let i = 0; i < 11; i++) {
-  mock.push({
-    id: i + 1,
-    name: `Name ${i + 1}`,
-    email: `x${i + 1}@a.com`,
-    roles: [
-      {
-        id: 1,
-        name: 'admin'
-      },
-      {
-        id: 2,
-        name: 'user'
-      }
-    ],
-    status: i % 2 ? 0 : 1
-  })
-}
-
 export default {
   components: {
     UserSearchForm,
@@ -228,15 +207,12 @@ export default {
      * @return {Object} API response for error handle
      */
     async fetch() {
-      this.total = mock.length
-      this.data = mock
-
       const res = await this.$dam.getUserList(this.query)
 
-      // if (Array.isArray(res.data)) {
-      //   this.total = res.meta.total
-      //   this.data = res.data
-      // }
+      if (Array.isArray(res.data)) {
+        this.total = res.meta.total
+        this.data = res.data
+      }
 
       return res
     },

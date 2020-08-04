@@ -30,26 +30,26 @@ export const swagger = {
     // User User API
     '/user': {
       get: {
-        operationId: 'getUserList'
-        // useMock: 'user'
+        operationId: 'getUserList',
+        useMock: 'user'
       },
       post: {
-        operationId: 'createUser'
-        // useMock: 'user'
+        operationId: 'createUser',
+        useMock: 'user'
       }
     },
     '/user/{id}': {
       get: {
-        operationId: 'getUser'
-        // useMock: 'user'
+        operationId: 'getUser',
+        useMock: 'user'
       },
       put: {
-        operationId: 'updateUser'
-        // useMock: 'user'
+        operationId: 'updateUser',
+        useMock: 'user'
       },
       delete: {
-        operationId: 'deleteUser'
-        // useMock: 'user'
+        operationId: 'deleteUser',
+        useMock: 'user'
       }
     },
 
@@ -77,28 +77,34 @@ export const swagger = {
     // Role API
     '/role': {
       post: {
-        operationId: 'createRole'
+        operationId: 'createRole',
+        useMock: 'role'
       },
       get: {
-        operationId: 'getRoleList'
+        operationId: 'getRoleList',
+        useMock: 'role'
       }
     },
     '/role/{id}': {
       get: {
-        operationId: 'getRole'
+        operationId: 'getRole',
+        useMock: 'role'
       },
       put: {
-        operationId: 'updateRole'
+        operationId: 'updateRole',
+        useMock: 'role'
       },
       delete: {
-        operationId: 'deleteRole'
+        operationId: 'deleteRole',
+        useMock: 'role'
       }
     },
 
     // Permission API
     '/permission': {
       get: {
-        operationId: 'getPermission'
+        operationId: 'getPermission',
+        useMock: 'permission'
       }
     },
 

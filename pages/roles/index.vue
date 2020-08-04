@@ -174,7 +174,7 @@ export default {
       fields: [
         { dataIndex: 'id', title: 'ID' },
         { dataIndex: 'name', title: this.$t('role.name') },
-        { dataIndex: 'action', title: this.$t('common.action'), scopedSlots: { customRender: 'action' } }
+        { dataIndex: 'action', title: this.$t('common.action'), scopedSlots: { customRender: 'action' }, width: 100 }
       ],
       loading: false,
       showDetailForm: false

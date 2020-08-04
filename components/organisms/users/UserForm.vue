@@ -195,6 +195,20 @@ export default {
             message: this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') }),
             trigger: ['change', 'blur']
           }
+        ],
+        status: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('user.status') }),
+            trigger: ['change', 'blur']
+          }
+        ],
+        roleId: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('user.roles') }),
+            trigger: ['change', 'blur']
+          }
         ]
       }
     },
