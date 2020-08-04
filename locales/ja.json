@@ -30,7 +30,8 @@
     "choose_files_or_drag_and_drop_here": "ファイルを選択するか、ここにドラッグ&ドロップしてください",
     "not_available": "利用不可",
     "action": "アクション",
-    "email": "メールアドレス"
+    "email": "メールアドレス",
+    "save": "保存する"
   },
   "messages": {
     "error": {

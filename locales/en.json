@@ -30,7 +30,8 @@
     "choose_files_or_drag_and_drop_here": "Choose files or drag & drop here",
     "not_available": "Not available",
     "action": "Action",
-    "email": "Email"
+    "email": "Email",
+    "save": "Save"
   },
   "messages": {
     "error": {

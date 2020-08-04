@@ -9,12 +9,12 @@
     @submit.prevent="onHandleSubmit"
   >
     <div class="box-form-inner p-4">
-      <a-row>
-        <a-col :md="12">
-          <a-form-model-item :label="`${$t('user.name')}`" prop="name">
+      <a-row type="flex" :gutter="30">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('user.name')" prop="name">
             <a-input
               v-model="model.name"
-              :placeholder="`${$t('user.name')}`"
+              :placeholder="$t('user.name')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
@@ -22,11 +22,11 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :md="12">
-          <a-form-model-item :label="`${$t('user.email')}`" prop="email">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('user.email')" prop="email">
             <a-input
               v-model="model.email"
-              :placeholder="`${$t('user.email')}`"
+              :placeholder="$t('user.email')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />
@@ -34,12 +34,12 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :md="12">
-          <a-form-model-item :label="`${$t('user.password')}`" prop="password">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('user.password')" prop="password">
             <a-input
               v-model="model.password"
               type="password"
-              :placeholder="`${$t('user.password')}`"
+              :placeholder="$t('user.password')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="lock" class="width-1x" />
@@ -47,12 +47,12 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :md="12">
-          <a-form-model-item :label="`${$t('user.password_confirm')}`" prop="password_confirm">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('user.password_confirm')" prop="password_confirm">
             <a-input
               v-model="model.password_confirm"
               type="password"
-              :placeholder="`${$t('user.password_confirm')}`"
+              :placeholder="$t('user.password_confirm')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="lock" class="width-1x" />
@@ -60,8 +60,8 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :md="12">
-          <a-form-model-item :label="`${$t('user.status')}`" prop="status">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('user.status')" prop="status">
             <a-radio-group
               v-model="model.status"
               :options="statusList"
@@ -71,8 +71,8 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :md="12">
-          <a-form-model-item :label="`${$t('user.roles')}`" prop="roleId">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('user.roles')" prop="roleId">
             <a-radio-group
               v-model="model.roleId"
               :options="roleList"
@@ -303,11 +303,7 @@ export default {
     onHandleSubmit() {
       this.$refs.refForm.validate(valid => {
         if (valid) {
-          console.log('valid', valid)
           this.onSubmit()
-        } else {
-          console.log('error submit!!')
-          return false
         }
       })
     }

@@ -249,3 +249,21 @@ button,
     }
   }
 }
+
+/* -----------------------------------------------------------
+  Form
+----------------------------------------------------------- */
+.ant-form-item-label {
+  white-space: normal;
+  line-height: 1.5;
+  padding-top: 9px;
+  padding-right: 5px;
+  @include mq(max_xs) {
+    padding: 0 0 3px 0;
+  }
+  > label {
+    &:after {
+      margin-right: 0;
+    }
+  }
+}

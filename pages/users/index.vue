@@ -7,10 +7,14 @@
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="$router.push({ path: '/users/new' })">
+        <a-button html-type="button" type="primary" ghost @click="onShowDetail(0)">
           <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
           {{ $t('common.create_new') }}
         </a-button>
+        <!-- <a-button html-type="button" type="primary" ghost @click="$router.push({ path: '/users/new' })">
+          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+          {{ $t('common.create_new') }}
+        </a-button> -->
       </template>
 
       <UserSearchForm
@@ -29,7 +33,7 @@
         <app-pagination
           :total="total"
           :current-page="page"
-          :item-name="`${$t('user.user')}`"
+          :item-name="$t('user.user')"
           :disabled="loading"
           @page-change="onPageChange"
           @page-size-change="onPageSizeChange"
@@ -42,6 +46,7 @@
         @show-detail="onShowDetail"
         @delete="onConfirmDelete"
         @modify="refresh"
+        @toggle-status="onToggleStatus"
       />
 
       <div class="main-control">
@@ -55,7 +60,7 @@
         <app-pagination
           :total="total"
           :current-page="page"
-          :item-name="`${$t('user.user')}`"
+          :item-name="$t('user.user')"
           :disabled="loading"
           @page-change="onPageChange"
           @page-size-change="onPageSizeChange"
@@ -63,8 +68,14 @@
       </div>
     </a-card>
 
+    <user-detail-modal
+      :id="selectedId"
+      ref="refUserDetailModal"
+      @modify="refresh"
+    />
+
     <app-delete-confirm-dialog
-      ref="deleteConfirmDialog"
+      ref="refDeleteConfirmDialog"
       :name="selectedName"
       @confirm="onDelete"
     />
@@ -80,6 +91,7 @@ import AppPagination from '~/components/molecules/AppPagination'
 import AppSort from '~/components/molecules/AppSort'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
+import Common from '~/mixins/common'
 import AsyncLoading from '~/mixins/do-async-loading'
 import ConditionHandler from '~/mixins/condition'
 import SearchFormHandler from '~/mixins/search-form'
@@ -150,6 +162,7 @@ export default {
   },
 
   mixins: [
+    Common,
     AsyncLoading,
     ConditionHandler,
     SearchFormHandler,
@@ -253,7 +266,7 @@ export default {
      */
     onShowDetail(id) {
       this.setSelectedId(id)
-      this.$refs.userDetailModal.open()
+      this.$refs.refUserDetailModal.open()
     },
 
     /**
@@ -270,7 +283,7 @@ export default {
 
       this.setSelectedId(item.id)
       this.setSelectedName(item.name)
-      this.$refs.deleteConfirmDialog.open()
+      this.$refs.refDeleteConfirmDialog.open()
     },
 
     /**
@@ -284,6 +297,19 @@ export default {
       }
 
       await this.$dam.deleteUser({ id: selectedId })
+    },
+
+    /**
+     * Update status
+     *
+     * @param {object} params - Params
+     */
+    onToggleStatus(params) {
+      if (!params || !params.id) {
+        return
+      }
+
+      this.onAction('updateUser', params, this.$t('common.action'))
     }
   }
 }

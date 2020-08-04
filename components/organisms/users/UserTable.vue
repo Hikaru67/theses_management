@@ -19,6 +19,7 @@
           backgroundColor: record.status === 1 ? '#52c41a' : '#d9d9d9'
         }"
         class="btn-status over"
+        @click="onToggleStatus(record)"
       />
     </template>
 
@@ -83,6 +84,7 @@ const FIELDS = [
 
 const EVENT_DELETE = 'delete'
 const EVENT_SHOW_DETAIL = 'show-detail'
+const EVENT_TOGGLE_STATUS = 'toggle-status'
 
 export default {
   props: {
@@ -212,7 +214,7 @@ export default {
     /**
      * Update status
      *
-     * @param {number} id - User id
+     * @param {object} item - User
      */
     onToggleStatus(item) {
       if (!item || !item.id) {
@@ -224,7 +226,7 @@ export default {
         status: item.status === 1 ? 0 : 1
       }
 
-      this.onAction('updateUser', params, this.$t('common.action'))
+      this.$emit(EVENT_TOGGLE_STATUS, params)
     }
   }
 }

@@ -5,12 +5,12 @@
     class="search-form"
     @submit.prevent="onSubmit"
   >
-    <a-row>
+    <a-row type="flex" :gutter="30">
       <a-col :md="12">
-        <a-form-item :label="`${$t('user.name')}`">
+        <a-form-item :label="$t('user.name')">
           <a-input
             v-model="name"
-            :placeholder="`${$t('user.name')}`"
+            :placeholder="$t('user.name')"
             :disabled="loading"
           >
             <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
@@ -19,10 +19,10 @@
       </a-col>
 
       <a-col :md="12">
-        <a-form-item :label="`${$t('user.email')}`">
+        <a-form-item :label="$t('user.email')">
           <a-input
             v-model="email"
-            :placeholder="`${$t('user.email')}`"
+            :placeholder="$t('user.email')"
             :disabled="loading"
           >
             <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />

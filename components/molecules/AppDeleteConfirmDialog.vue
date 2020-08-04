@@ -1,7 +1,7 @@
 <template>
   <a-modal
     :visible="visible"
-    width="416px"
+    :width="416"
     class="modal-wrap"
     @ok="onConfirm"
     @cancel="onCancel"

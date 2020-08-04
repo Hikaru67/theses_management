@@ -31,14 +31,6 @@ export default {
   },
 
   /*
-  ** Global CSS
-  */
-  css: [
-    'ant-design-vue/dist/antd.css',
-    { src: '~/assets/scss/style.scss', lang: 'scss' }
-  ],
-
-  /*
   ** Style resources
   */
   styleResources: {
@@ -47,6 +39,14 @@ export default {
       '~/assets/scss/_mixins.scss'
     ]
   },
+
+  /*
+  ** Global CSS
+  */
+  css: [
+    'ant-design-vue/dist/antd.css',
+    { src: '~/assets/scss/style.scss', lang: 'scss' }
+  ],
 
   /*
   ** Plugins to load before mounting the App

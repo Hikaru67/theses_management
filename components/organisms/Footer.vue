@@ -1,7 +1,7 @@
 <template>
   <a-layout-footer class="main-footer">
     <div class="container-fluid">
-      <a-row>
+      <a-row type="flex" :gutter="30">
         <a-col :span="24" :sm="12" class="col-left">
           © 2020
           <a href="https://digidinos.com/" target="_blank">Digi Dinos - Adminstrator</a>
