@@ -85,11 +85,12 @@
       </a-row>
     </div>
 
-    <div class="box-form-footer py-3">
+    <div class="box-form-footer text-center bt-1 p-3">
       <a-button
         html-type="submit"
         type="primary"
         :disabled="loading"
+        class="w-min-100"
       >
         <font-awesome-icon icon="save" class="width-1x mr-1" />
         {{ id ? $t('common.update') : $t('common.create') }}
@@ -100,6 +101,7 @@
         html-type="button"
         type="default"
         :disabled="loading"
+        class="w-min-100"
         @click="$emit('cancel')"
       >
         <font-awesome-icon icon="arrow-left" class="width-1x mr-1" />
@@ -108,17 +110,6 @@
     </div>
   </a-form-model>
 </template>
-
-<style lang="scss" scoped>
-.main-form {
-  /deep/ {
-    .box-form-footer {
-      border-top: 1px solid #e8e8e8;
-      text-align: center;
-    }
-  }
-}
-</style>
 
 <script>
 import { USER_STATUS_LIST } from '~/constants'
@@ -236,7 +227,9 @@ export default {
      * Get detail
      */
     id(val) {
-      this.getDetail(val)
+      if (val) {
+        this.getDetail(val)
+      }
     },
 
     /**
@@ -250,7 +243,7 @@ export default {
   },
 
   mounted() {
-    this.prepareData()
+    this.getRoleList()
     this.getDetail(+this.id)
   },
 
@@ -262,13 +255,6 @@ export default {
      */
     setModel(data) {
       this.model = new User(data)
-    },
-
-    /**
-     * Prepare data save user
-     */
-    prepareData() {
-      this.getRoleList()
     },
 
     /**

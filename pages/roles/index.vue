@@ -237,9 +237,9 @@ export default {
           console.error(err)
           this.loading = false
 
-          this.$toast.error(
-            this.$t('messages.error.failed_to_get', { name: this.$t('role.role_list') })
-          )
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_get', { name: this.$t('role.role_list') })
+          })
         })
     },
 
@@ -283,18 +283,18 @@ export default {
       if (this.selected) {
         this.$dam.deleteRole({ id: this.selected })
           .then(_ => {
-            this.$toast.success(
-              this.$t('messages.information.deleted', { name: this.$t('role.role') })
-            )
+            this.$notification.success({
+              message: this.$t('messages.information.deleted', { name: this.$t('role.role') })
+            })
 
             this.getRoleList()
           })
           .catch(err => {
             console.error(err)
 
-            this.$toast.error(
-              this.$t('messages.error.failed_to_delete', { name: this.$t('role.role') })
-            )
+            this.$notification.error({
+              message: this.$t('messages.error.failed_to_delete', { name: this.$t('role.role') })
+            })
           })
       }
     }

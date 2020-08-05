@@ -48,11 +48,12 @@
       </div>
     </div>
 
-    <div class="box-form-footer py-3">
+    <div class="box-form-footer text-center p-3">
       <a-button
         html-type="submit"
         type="primary"
         :disabled="loading"
+        class="w-min-100"
       >
         <font-awesome-icon icon="save" class="width-1x mr-1" />
         {{ $t('common.save') }}
@@ -63,6 +64,7 @@
         html-type="button"
         type="default"
         :disabled="loading"
+        class="w-min-100"
         @click="onCancel"
       >
         {{ $t('common.cancel') }}
@@ -96,12 +98,6 @@
       }
       .card-body {
         border-top: 1px solid #d8dbe0;
-      }
-    }
-    .box-form-footer {
-      text-align: center;
-      .ant-btn {
-        min-width: 100px;
       }
     }
   }
@@ -217,9 +213,9 @@ export default {
           this.permissions = [...permissions, ...this.permissions]
         })
         .catch(_ => {
-          this.$toast.error(
-            this.$t('messages.error.failed_to_get', { name: this.$t('role.permissions') })
-          )
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_get', { name: this.$t('role.permissions') })
+          })
         })
     },
 

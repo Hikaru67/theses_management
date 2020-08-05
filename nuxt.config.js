@@ -56,10 +56,11 @@ export default {
     '@/plugins/antd-ui',
     '@/plugins/api',
     '@/plugins/dd-api-manager',
+    '@/plugins/debugger',
     '@/plugins/validations',
     '@/plugins/directive',
     '@/plugins/directives',
-    '@/plugins/debugger'
+    '@/plugins/csv'
   ],
 
   /*
@@ -203,5 +204,12 @@ export default {
         }
       }
     }
+  },
+
+  /*
+   ** Active router link
+   */
+  router: {
+    linkActiveClass: 'active-link'
   }
 }

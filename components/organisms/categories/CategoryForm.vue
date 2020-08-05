@@ -1,101 +1,82 @@
 <template>
-  <ValidationObserver v-slot="{ handleSubmit }">
-    <CForm
-      v-loading="loading"
-      class="main-form form-2-col"
-      @submit.prevent="handleSubmit(onSubmit)"
-    >
-      <CCardBody>
-        <div class="category-inner-form">
-          <div class="row">
-            <div class="col-12 col-xl-10">
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                name="name"
-                class="icon-required"
-              >
-                <CInput
-                  v-model="model.name"
-                  type="text"
-                  :label="$t('category.name')"
-                  :placeholder="$t('category.name')"
-                  horizontal
-                >
-                  <template #prepend-content>
-                    <font-awesome-icon :icon="['fas', 'user-alt']" class="width-1x" />
-                  </template>
+  <a-form-model
+    ref="refForm"
+    v-loading="loading"
+    :model="model"
+    :rules="rulesForm"
+    :label-col="{ sm: 6 }"
+    :wrapper-col="{ sm: 14 }"
+    class="main-form"
+    @submit.prevent="onHandleSubmit"
+  >
+    <div class="box-form-inner p-4">
+      <a-form-model-item :label="$t('category.name')" prop="name">
+        <a-input
+          v-model="model.name"
+          :placeholder="$t('category.name')"
+          :disabled="loading"
+        >
+          <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
+        </a-input>
+      </a-form-model-item>
 
-                  <template #invalid-feedback>
-                    <div class="d-block invalid-feedback">
-                      {{ errors[0] }}
-                    </div>
-                  </template>
-                </CInput>
-              </ValidationProvider>
-            </div>
-          </div>
+      <a-form-model-item :label="$t('category.description')" prop="description">
+        <a-textarea
+          v-model="model.description"
+          :placeholder="$t('category.description')"
+          rows="6"
+          :disabled="loading"
+        />
+      </a-form-model-item>
+    </div>
 
-          <div class="row">
-            <div class="col-12 col-xl-10">
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                name="Description"
-                class="icon-required"
-              >
-                <CTextarea
-                  v-model="model.description"
-                  type="text"
-                  :label="$t('category.description')"
-                  :placeholder="$t('category.description')"
-                  horizontal
-                  rows="5"
-                  class="custom-prepend-textarea"
-                >
-                  <template #invalid-feedback>
-                    <div class="d-block invalid-feedback">
-                      {{ errors[0] }}
-                    </div>
-                  </template>
-                </CTextarea>
-              </ValidationProvider>
-            </div>
-          </div>
-        </div>
-      </CCardBody>
+    <div class="box-form-footer text-center bt-1 p-3">
+      <a-button
+        html-type="submit"
+        type="primary"
+        :disabled="loading"
+        class="w-min-100"
+      >
+        <font-awesome-icon icon="save" class="width-1x mr-1" />
+        {{ id ? $t('common.update') : $t('common.create') }}
+      </a-button>
 
-      <CCardFooter>
-        <CButton type="submit" color="primary">
-          <font-awesome-icon :icon="['fas', 'save']" class="width-1x" />
-          {{ id ? $t('common.update') : $t('common.create') }}
-        </CButton>
-
-        <CButton color="secondary" @click="$emit('cancel')">
-          <font-awesome-icon :icon="['fas', 'arrow-left']" class="width-1x" />
-          {{ $t('common.cancel') }}
-        </CButton>
-      </CCardFooter>
-    </CForm>
-  </ValidationObserver>
+      &nbsp;
+      <a-button
+        html-type="button"
+        type="default"
+        :disabled="loading"
+        class="w-min-100"
+        @click="$emit('cancel')"
+      >
+        <font-awesome-icon icon="arrow-left" class="width-1x mr-1" />
+        {{ $t('common.cancel') }}
+      </a-button>
+    </div>
+  </a-form-model>
 </template>
 
 <script>
 import Category from '~/models/Category'
-import 'vue2-datepicker/index.css'
 
-import Common from '~/mixins/common'
 import CreateEditForm from '~/mixins/create-edit-form'
 
 export default {
   mixins: [
-    CreateEditForm,
-    Common
+    CreateEditForm
   ],
 
   props: {
     /**
-     *category parent id
+     * category curent id
+     */
+    id: {
+      type: Number,
+      default: 0
+    },
+
+    /**
+     * Category parent id
      */
     parentId: {
       type: Number,
@@ -105,21 +86,65 @@ export default {
 
   data() {
     return {
-      rePassword: null,
       model: new Category(),
-      modelType: 'category'
+      modelType: this.$t('category.category')
+    }
+  },
+
+  computed: {
+    /**
+     * Rules form
+     *
+     * @param {array} - Rules form
+     */
+    rulesForm() {
+      return {
+        name: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('category.name') }),
+            trigger: ['change', 'blur']
+          }
+        ],
+        description: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('category.description') }),
+            trigger: ['change', 'blur']
+          }
+        ]
+      }
     }
   },
 
   watch: {
     /**
+     * Watching changes of id
+     * Get detail
+     */
+    id(val) {
+      this.clearForm()
+
+      if (val) {
+        this.getDetail(val)
+      }
+    },
+
+    /**
+     * Watching changes of parentId
      * Set parent Id
      *
      * @param {Number} val - parent Id
      */
-    'parentId'(val) {
-      this.model.parentId = val
+    parentId(val) {
+      if (val) {
+        this.model.parentId = val
+      }
     }
+  },
+
+  mounted() {
+    this.getDetail(this.id)
   },
 
   methods: {
@@ -129,16 +154,7 @@ export default {
      * @param {Object} data
      */
     setModel(data) {
-      if (data) {
-        this.model = new Category(data)
-      }
-    },
-
-    /**
-     * Prepare data
-     */
-    prepareData() {
-      this.getDetail(this.id)
+      this.model = new Category(data)
     },
 
     /**
@@ -146,6 +162,18 @@ export default {
      */
     clearForm() {
       this.model = new Category()
+    },
+
+    /**
+     * On handle submit
+     * If valid then show error
+     */
+    onHandleSubmit() {
+      this.$refs.refForm.validate(valid => {
+        if (valid) {
+          this.onSubmit()
+        }
+      })
     }
   }
 }

@@ -38,11 +38,14 @@ button,
 .bt-0 {
   border-top: 0 !important;
 }
+.bt-1 {
+  border-top: 1px solid #e8e8e8 !important;
+}
 .width-1x {
   width: 14px !important;
 }
-.width-1xx {
-  width: 200px !important;
+.w-min-100 {
+  min-width: 100px !important;
 }
 .w-min-120 {
   min-width: 120px !important;
@@ -122,6 +125,9 @@ button,
 }
 .text-danger {
   color: $danger !important;
+}
+.position-relative {
+  position: relative !important;
 }
 
 /* -----------------------------------------------------------
@@ -273,6 +279,28 @@ button,
     .ant-checkbox-group-item {
       display: block;
       margin: 0 0 5px 0;
+    }
+  }
+}
+
+/* -----------------------------------------------------------
+  box-change-view
+----------------------------------------------------------- */
+.box-change-view {
+  position: absolute;
+  right: 0;
+  top: -42px;
+  a {
+    font-size: 22px;
+    color: #4c4c4c;
+    text-decoration: none;
+    margin-left: 10px;
+    &.active-link,
+    &:hover {
+      color: $primary;
+    }
+    &[href="/categories"].on-categories-list:not(:hover) {
+      color: #4c4c4c;
     }
   }
 }

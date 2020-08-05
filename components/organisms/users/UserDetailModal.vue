@@ -11,7 +11,7 @@
       {{ id ? $t('user.edit_user') : $t('user.create_new_user') }}
     </template>
 
-    <UserForm
+    <user-form
       :id="id"
       @modify="onCancel(); $emit('modify')"
       @cancel="onCancel"

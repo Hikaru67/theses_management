@@ -33,7 +33,9 @@
         </a-sub-menu>
 
         <a-menu-item-group>
-          <template slot="title"><span>Module</span> </template>
+          <template slot="title">
+            <span>Module</span>
+          </template>
 
           <a-menu-item key="11">
             <nuxt-link to="/categories">
@@ -44,7 +46,9 @@
         </a-menu-item-group>
 
         <a-menu-item-group>
-          <template slot="title"><span>System</span> </template>
+          <template slot="title">
+            <span>System</span>
+          </template>
 
           <a-menu-item key="21">
             <nuxt-link to="/users">

@@ -82,8 +82,8 @@ const FIELDS = [
   { dataIndex: 'action', title: 'common.action', scopedSlots: { customRender: 'action' }, width: 140 }
 ]
 
-const EVENT_DELETE = 'delete'
 const EVENT_SHOW_DETAIL = 'show-detail'
+const EVENT_DELETE = 'delete'
 const EVENT_TOGGLE_STATUS = 'toggle-status'
 
 export default {

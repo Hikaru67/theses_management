@@ -1,151 +1,113 @@
 <template>
-  <div class="main-list">
-    <CCard>
-      <CCardHeader>
-        <div>
-          <font-awesome-icon :icon="['fas', 'th-list']" />
-          <strong>{{ $t('category.category') }}</strong>
-        </div>
+  <div class="main-list position-relative">
+    <div class="box-change-view">
+      <nuxt-link to="/categories" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+        <font-awesome-icon icon="th-list" />
+      </nuxt-link>
 
-        <div class="card-header-actions">
-          <CButton
-            type="button"
-            color="primary"
-            :variant="'ghost'"
-            :disabled="loading"
-            @click="generateCSV"
-          >
-            <font-awesome-icon :icon="['fas', 'download']" class="width-1x" />
-            {{ $t('common.download_csv') }}
-          </CButton>
+      <nuxt-link to="/categories/list" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+        <font-awesome-icon icon="border-all" />
+      </nuxt-link>
+    </div>
 
-          <CButton
-            type="submit"
-            color="primary"
-            :variant="'ghost'"
-            @click="onShowDetail($event, 0)"
-          >
-            <font-awesome-icon :icon="['fas', 'plus-circle']" class="width-1x" />
-            {{ $t('common.create_new') }}
-          </CButton>
-        </div>
-      </CCardHeader>
+    <a-card class="mb-4">
+      <template slot="title">
+        <font-awesome-icon icon="th-list" />
+        <strong>{{ $t('category.category') }}</strong>
+      </template>
 
-      <CCardBody>
-        <div class="box-top">
-          <div class="row">
-            <div class="col-12 col-md-5 total">
-              <strong>{{ $t('common.total') }}:</strong>
-              {{ total }}
-              {{ $t('category.category_for_pagination') }}
-            </div>
+      <template slot="extra">
+        <a-button html-type="button" type="primary" ghost @click="generateCSV">
+          <font-awesome-icon icon="download" class="width-1x mr-1" />
+          {{ $t('common.download_csv') }}
+        </a-button>
 
-            <div
-              v-if="isNoteHidden"
-              class="col-12 col-md-7 note"
-            >
-              {{ $t('category.note_for_deletion') }}
-            </div>
+        &nbsp;
+        <a-button html-type="button" type="primary" ghost @click="onShowDetail(0)">
+          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+          {{ $t('common.create_new') }}
+        </a-button>
+      </template>
+
+      <div class="box-top">
+        <div class="row">
+          <div class="col-12 col-md-5 total">
+            <strong>{{ $t('common.total') }}:</strong>
+            {{ total }}
+            {{ $t('category.category_for_pagination') }}
+          </div>
+
+          <div v-if="isNoteHidden" class="col-12 col-md-7 note">
+            {{ $t('category.note_for_deletion') }}
           </div>
         </div>
+      </div>
 
-        <div class="category-tree">
-          <!-- <tree
-            v-if="Array.isArray(categoryTreeList) && categoryTreeList.length"
-            :data="categoryTreeList"
-            :options="categoryTreeOptions"
-            @node:dragging:finish="onDragFinishCategories"
-          >
-            <div slot-scope="{ node }" class="node-container">
-              <i class="tree-checkbox" />
-
-              <div class="node-text">
-                {{ node.text }}
-              </div>
-
-              <div class="node-controls">
-                <ul class="btns-action">
-                  <li>
-                    <CButton
-                      size="sm"
-                      color="primary"
-                      @click="onCreateChild($event, node.data.id)"
-                    >
-                      <font-awesome-icon :icon="['fas', 'plus-circle']" />
-                    </CButton>
-                  </li>
-
-                  <li>
-                    <CButton
-                      size="sm"
-                      color="primary"
-                      @click="onShowDetail($event, node.data.id)"
-                    >
-                      <font-awesome-icon :icon="['fas', 'pencil-alt']" />
-                    </CButton>
-                  </li>
-
-                  <li v-if="!node.children.length">
-                    <CButton
-                      size="sm"
-                      color="danger"
-                      @click="onConfirmDelete($event, node.data.id)"
-                    >
-                      <font-awesome-icon :icon="['fas', 'trash-alt']" />
-                    </CButton>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </tree> -->
-        </div>
-      </CCardBody>
-    </CCard>
+      <div class="category-tree">
+        <a-tree
+          class="draggable-tree"
+          :tree-data="gData"
+          :default-expanded-keys="expandedKeys"
+          draggable
+          show-icon
+          @dragenter="onDragEnter"
+          @drop="onDrop"
+        >
+          <font-awesome-icon slot="icon" icon="save" class="width-1x mr-1" />
+        </a-tree>
+      </div>
+    </a-card>
 
     <category-create-edit-modal
       :id="selectedId"
-      ref="categoryCreateEditModal"
-      :parent-id="currentId"
-      @modify="onModify"
+      ref="refCategoryCreateEditModal"
+      @modify="refresh"
     />
 
     <app-delete-confirm-dialog
-      ref="deleteConfirmDialog"
-      :name="$t('category.category')"
+      ref="refDeleteConfirmDialog"
+      :name="selectedName"
       @confirm="onDelete"
     />
   </div>
 </template>
 
-<style lang="scss" scoped>
-.main-list {
-  /deep/ {
-    .box-top {
-      .total {
-        margin-bottom: 10px;
-      }
-      .note {
-        font-style: italic;
-        text-align: right;
-      }
-    }
-  }
-}
-</style>
-
 <script>
 import { flatten, pick } from 'lodash'
-// import LiquorTree from 'liquor-tree'
 
-import {
-  SORT_TYPE,
-  MAX_LIMIT_RECORD
-} from '~/constants'
-
+import { SORT_TYPE, MAX_LIMIT_RECORD } from '~/constants'
 import Category from '~/models/Category'
 
 import CategoryCreateEditModal from '~/components/organisms/categories/CategoryCreateEditModal'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
+
+const x = 3
+const y = 2
+const z = 1
+const gData = []
+
+const generateData = (_level, _preKey, _tns) => {
+  const preKey = _preKey || '0'
+  const tns = _tns || gData
+
+  const children = []
+  for (let i = 0; i < x; i++) {
+    const key = `${preKey}-${i}`
+    tns.push({ title: key, key })
+    if (i < y) {
+      children.push(key)
+    }
+  }
+  if (_level < 0) {
+    return tns
+  }
+  const level = _level - 1
+  children.forEach((key, index) => {
+    tns[index].children = []
+    return generateData(level, key, tns[index].children)
+  })
+}
+generateData(z)
 
 export default {
   components: {
@@ -159,6 +121,7 @@ export default {
       loading: false,
       resourceTypeName: this.$t('category.category'),
       selectedId: null,
+      selectedName: '',
       total: 0,
       lastPage: 1,
 
@@ -169,7 +132,11 @@ export default {
         dnd: true
       },
       currentId: null,
-      isNoteHidden: false
+      isNoteHidden: false,
+
+      // Test
+      gData,
+      expandedKeys: ['0-0', '0-0-0', '0-0-0-0']
     }
   },
 
@@ -178,6 +145,68 @@ export default {
   },
 
   methods: {
+    onDragEnter(info) {
+      console.log(info)
+      // expandedKeys 需要受控时设置
+      // this.expandedKeys = info.expandedKeys
+    },
+    onDrop(info) {
+      console.log(info)
+      const dropKey = info.node.eventKey
+      const dragKey = info.dragNode.eventKey
+      const dropPos = info.node.pos.split('-')
+      const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1])
+      const loop = (data, key, callback) => {
+        data.forEach((item, index, arr) => {
+          if (item.key === key) {
+            return callback(item, index, arr)
+          }
+          if (item.children) {
+            return loop(item.children, key, callback)
+          }
+        })
+      }
+      const data = [...this.gData]
+
+      // Find dragObject
+      let dragObj
+      loop(data, dragKey, (item, index, arr) => {
+        arr.splice(index, 1)
+        dragObj = item
+      })
+      if (!info.dropToGap) {
+        // Drop on the content
+        loop(data, dropKey, item => {
+          item.children = item.children || []
+          // where to insert 示例添加到尾部，可以是随意位置
+          item.children.push(dragObj)
+        })
+      } else if (
+        (info.node.children || []).length > 0 && // Has children
+        info.node.expanded && // Is expanded
+        dropPosition === 1 // On the bottom gap
+      ) {
+        loop(data, dropKey, item => {
+          item.children = item.children || []
+          // where to insert 示例添加到尾部，可以是随意位置
+          item.children.unshift(dragObj)
+        })
+      } else {
+        let ar
+        let i
+        loop(data, dropKey, (item, index, arr) => {
+          ar = arr
+          i = index
+        })
+        if (dropPosition === -1) {
+          ar.splice(i, 0, dragObj)
+        } else {
+          ar.splice(i + 1, 0, dragObj)
+        }
+      }
+      this.gData = data
+    },
+
     /**
      * Call API get category list
      */
@@ -200,9 +229,9 @@ export default {
         .catch(err => {
           console.error(err)
 
-          this.$toast.error(
-            this.$t('messages.error.failed_to_get', { name: this.resourceTypeName })
-          )
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_get', { name: this.resourceTypeName })
+          })
         })
     },
 
@@ -287,9 +316,9 @@ export default {
 
       this.$dam.moveCategory({ list: categoriesData })
         .then(_ => {
-          this.$toast.success(
-            this.$t('messages.information.updated', { name: this.resourceTypeName })
-          )
+          this.$notification.success({
+            message: this.$t('messages.information.updated', { name: this.resourceTypeName })
+          })
 
           // this.getCategoryList()
         })
@@ -300,19 +329,10 @@ export default {
           this.categoryTreeList = []
           this.getCategoryList()
 
-          this.$toast.error(
-            this.$t('messages.error.failed_to_update', { name: this.resourceTypeName })
-          )
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_update', { name: this.resourceTypeName })
+          })
         })
-    },
-
-    /**
-     * Set selectedId
-     *
-     * @param {Number} id - Id is selected
-     */
-    setSelectedId(id) {
-      this.selectedId = id
     },
 
     /**
@@ -326,7 +346,7 @@ export default {
       e.stopPropagation()
 
       this.currentId = id
-      this.$refs.categoryCreateEditModal.open()
+      this.$refs.refCategoryCreateEditModal.open()
     },
 
     /**
@@ -340,7 +360,7 @@ export default {
       e.stopPropagation()
 
       this.setSelectedId(id)
-      this.$refs.categoryCreateEditModal.open()
+      this.$refs.refCategoryCreateEditModal.open()
     },
 
     /**
@@ -355,19 +375,42 @@ export default {
     },
 
     /**
+     * Set selectedId
+     *
+     * @param {Number} id - Category Id
+     */
+    setSelectedId(id) {
+      this.selectedId = id
+    },
+
+    /**
+     * Set select id
+     *
+     * @param {String} name - Category name
+     */
+    setSelectedName(name) {
+      this.selectedName = name
+    },
+
+    /**
      * Open confirm delete
      * If confirm then call delete category
      * Else cancel
      *
      * @param {Object} e - Event
-     * @param {String} id - category id
+     * @param {String} item - Category
      */
-    onConfirmDelete(e, id) {
+    onConfirmDelete(e, item) {
       e.preventDefault()
       e.stopPropagation()
 
-      this.setSelectedId(id)
-      this.$refs.deleteConfirmDialog.open()
+      if (!item || !item.id) {
+        return
+      }
+
+      this.setSelectedId(item.id)
+      this.setSelectedName(item.name)
+      this.$refs.refDeleteConfirmDialog.open()
     },
 
     /**
@@ -378,9 +421,9 @@ export default {
       if (this.selectedId) {
         this.$dam.deleteCategory({ id: this.selectedId })
           .then(_ => {
-            this.$toast.success(
-              this.$t('messages.information.deleted', { name: this.resourceTypeName })
-            )
+            this.$notification.success({
+              message: this.$t('messages.information.deleted', { name: this.resourceTypeName })
+            })
 
             this.categories = []
             this.categoryTreeList = []
@@ -389,9 +432,9 @@ export default {
           .catch(err => {
             console.error(err)
 
-            this.$toast.error(
-              this.$t('messages.error.failed_to_delete', { name: this.resourceTypeName })
-            )
+            this.$notification.error({
+              message: this.$t('messages.error.failed_to_delete', { name: this.resourceTypeName })
+            })
           })
       }
     },
@@ -400,7 +443,7 @@ export default {
      * Generate csv file
      */
     async generateCSV() {
-      if (Array.isArray(this.categories) && this.categories.length) {
+      if (Array.isArray(this.data) && this.data.length) {
         this.loading = true
 
         try {

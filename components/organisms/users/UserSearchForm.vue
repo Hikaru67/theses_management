@@ -30,11 +30,12 @@
         </a-form-item>
       </a-col>
 
-      <a-col :md="24" class="box-form-footer mb-3">
+      <a-col :md="24" class="box-form-footer text-center p-3">
         <a-button
           html-type="submit"
           type="primary"
           :disabled="loading"
+          class="w-min-100"
         >
           <font-awesome-icon icon="search" class="width-1x mr-1" />
           {{ $t('common.search') }}
@@ -45,6 +46,7 @@
           html-type="button"
           type="default"
           :disabled="loading"
+          class="w-min-100"
           @click="onClearFormSearch"
         >
           <font-awesome-icon icon="eraser" class="width-1x mr-1" />
@@ -54,19 +56,6 @@
     </a-row>
   </a-form>
 </template>
-
-<style lang="scss" scoped>
-.search-form {
-  /deep/ {
-    .box-form-footer {
-      text-align: center;
-      .ant-btn {
-        min-width: 100px;
-      }
-    }
-  }
-}
-</style>
 
 <script>
 const EVENT_SUBMIT = 'submit'

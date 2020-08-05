@@ -1,89 +1,95 @@
 <template>
-  <div class="main-list">
-    <CCard>
-      <CCardHeader>
-        <div>
-          <font-awesome-icon :icon="['fas', 'th-list']" />
-          <strong>{{ $t('category.category') }}</strong>
-        </div>
-        <div class="card-header-actions">
-          <CButton
-            type="submit"
-            color="primary"
-            :variant="'ghost'"
-            @click="onShowDetail(0)"
-          >
-            <font-awesome-icon :icon="['fas', 'plus-circle']" class="width-1x" />
-            {{ $t('common.create_new') }}
-          </CButton>
-        </div>
-      </CCardHeader>
+  <div class="main-list position-relative">
+    <div class="box-change-view">
+      <nuxt-link to="/categories" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+        <font-awesome-icon icon="th-list" />
+      </nuxt-link>
 
-      <CCardBody>
-        <div class="main-control">
-          <app-sort
-            :value="sortId"
-            :list="SORT_LIST"
-            :name="$t('sort.name')"
-            :placeholder="$t('sort.please_select')"
-            :disabled="loading"
-            @sort-change="onSort"
-          />
-          <app-pagination
-            :total="total"
-            :page-size="limit"
-            :current-page="page"
-            :item-name="$t('category.category_for_pagination')"
-            :disabled="loading"
-            @page-change="onPageChange"
-            @page-size-change="onPageSizeChange"
-          />
-        </div>
+      <nuxt-link to="/categories/list" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+        <font-awesome-icon icon="border-all" />
+      </nuxt-link>
+    </div>
 
-        <category-table
-          :data="data"
-          :loading.sync="loading"
-          @show-detail="onShowDetail"
-          @delete="onConfirmDelete"
+    <a-card class="mb-4">
+      <template slot="title">
+        <font-awesome-icon icon="th-list" />
+        <strong>{{ $t('category.category') }}</strong>
+      </template>
+
+      <template slot="extra">
+        <a-button html-type="button" type="primary" ghost @click="generateCSV">
+          <font-awesome-icon icon="download" class="width-1x mr-1" />
+          {{ $t('common.download_csv') }}
+        </a-button>
+
+        &nbsp;
+        <a-button html-type="button" type="primary" ghost @click="onShowDetail(0)">
+          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+          {{ $t('common.create_new') }}
+        </a-button>
+      </template>
+
+      <div class="main-control">
+        <app-sort
+          :value="sortId"
+          :list="SORT_CONDITIONS"
+          :disabled="loading"
+          :name="$t('sort.name')"
+          @sort-change="onSort"
         />
+        <app-pagination
+          :total="total"
+          :current-page="page"
+          :item-name="$t('category.category_for_pagination')"
+          :disabled="loading"
+          @page-change="onPageChange"
+          @page-size-change="onPageSizeChange"
+        />
+      </div>
 
-        <div class="main-control">
-          <app-sort
-            :value="sortId"
-            :list="SORT_LIST"
-            :name="$t('sort.name')"
-            :placeholder="$t('sort.please_select')"
-            :disabled="loading"
-            @sort-change="onSort"
-          />
-          <app-pagination
-            :total="total"
-            :page-size="limit"
-            :current-page="page"
-            :disabled="loading"
-            @page-change="onPageChange"
-            @page-size-change="onPageSizeChange"
-          />
-        </div>
-      </CCardBody>
-    </CCard>
+      <category-table
+        :data="data"
+        :loading="loading"
+        @show-detail="onShowDetail"
+        @delete="onConfirmDelete"
+      />
+
+      <div class="main-control">
+        <app-sort
+          :value="sortId"
+          :list="SORT_CONDITIONS"
+          :disabled="loading"
+          :name="$t('sort.name')"
+          @sort-change="onSort"
+        />
+        <app-pagination
+          :total="total"
+          :current-page="page"
+          :item-name="$t('category.category_for_pagination')"
+          :disabled="loading"
+          @page-change="onPageChange"
+          @page-size-change="onPageSizeChange"
+        />
+      </div>
+    </a-card>
 
     <category-create-edit-modal
       :id="selectedId"
-      ref="categoryCreateEditModal"
+      ref="refCategoryCreateEditModal"
       @modify="refresh"
     />
 
     <app-delete-confirm-dialog
-      ref="deleteConfirmDialog"
-      :name="$t('category.category')"
+      ref="refDeleteConfirmDialog"
+      :name="selectedName"
       @confirm="onDelete"
     />
   </div>
 </template>
 
 <script>
-import Category from '~/models/Category'
+import { flatten, pick } from 'lodash'
+
 import { SORT_TYPE } from '~/constants'
 
 import CategoryTable from '~/components/organisms/categories/CategoryTable'
@@ -95,19 +101,25 @@ import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialo
 import AsyncLoading from '~/mixins/do-async-loading'
 import ConditionHandler from '~/mixins/condition'
 import SearchFormHandler from '~/mixins/search-form'
-import Paginator from '~/mixins/paginator'
 import SortHandler from '~/mixins/sort'
+import Paginator from '~/mixins/paginator'
 
 const SORT_LIST = [
   {
+    id: -1,
+    label: 'common.option_please_select',
+    sort: null,
+    sortType: null
+  },
+  {
     id: 1,
-    label: 'ID',
+    label: 'category.id',
     sort: 'id',
     sortType: SORT_TYPE.ASC
   },
   {
     id: 2,
-    label: 'ID',
+    label: 'category.id',
     sort: 'id',
     sortType: SORT_TYPE.DESC
   }
@@ -132,13 +144,14 @@ export default {
 
   data() {
     return {
-      resourceTypeName: this.$t('category.category'),
-      total: 0,
-      limit: 100,
       data: [],
+      total: 0,
+      resourceTypeName: this.$t('category.category'),
       selectedId: null,
+      selectedName: '',
       SORT_LIST,
-      sortId: null
+      limit: 100,
+      lastPage: 1
     }
   },
 
@@ -158,6 +171,22 @@ export default {
           sortType: this.sortType
         }
       )
+    },
+
+    /**
+     * Get sort list
+     *
+     * @return {array} Sort list
+     */
+    SORT_CONDITIONS() {
+      return SORT_LIST.map(item => {
+        return {
+          id: item.id,
+          label: this.$t(item.label),
+          sort: item.sort ? item.sort : null,
+          sortType: item.sortType ? item.sortType : null
+        }
+      })
     }
   },
 
@@ -173,12 +202,11 @@ export default {
      * @return {Object} API response for error handle
      */
     async fetch() {
-      // TODO: the cconditions encoder twice
       const res = await this.$dam.getCategoryList(this.query)
 
       if (Array.isArray(res.data)) {
         this.total = res.meta.total
-        this.data = res.data.map(item => new Category(item))
+        this.data = res.data
       }
 
       return res
@@ -191,7 +219,25 @@ export default {
      */
     onShowDetail(id) {
       this.setSelectedId(id)
-      this.$refs.categoryCreateEditModal.open()
+      this.$refs.refCategoryCreateEditModal.open()
+    },
+
+    /**
+     * Set selectedId
+     *
+     * @param {Number} id - Category Id
+     */
+    setSelectedId(id) {
+      this.selectedId = id
+    },
+
+    /**
+     * Set select id
+     *
+     * @param {String} name - Category name
+     */
+    setSelectedName(name) {
+      this.selectedName = name
     },
 
     /**
@@ -199,11 +245,16 @@ export default {
      * If confirm then call delete box
      * Else cancel
      *
-     * @param {String} id - User id
+     * @param {object} item - Category
      */
-    onConfirmDelete(id) {
-      this.setSelectedId(id)
-      this.$refs.deleteConfirmDialog.open()
+    onConfirmDelete(item) {
+      if (!item || !item.id) {
+        return
+      }
+
+      this.setSelectedId(item.id)
+      this.setSelectedName(item.name)
+      this.$refs.refDeleteConfirmDialog.open()
     },
 
     /**
@@ -211,28 +262,38 @@ export default {
      *
      * @param {String} selectedId - User id
      */
-    async delete() {
-      await this.$dam.deleteCategory({ id: this.selectedId }).then(_ => {
-        this.$toast.success(
-          this.$t('messages.information.deleted', { name: this.resourceTypeName })
-        )
-        this.refresh()
-      }).catch(err => {
-        console.error(err)
+    async delete(selectedId) {
+      if (!selectedId) {
+        return
+      }
 
-        this.$toast.error(
-          this.$t('messages.error.failed_to_delete', { name: this.resourceTypeName })
-        )
-      })
+      await this.$dam.deleteCategory({ id: selectedId })
     },
 
     /**
-     * Set selectedId
-     *
-     * @param {Number} id - Id is selected
+     * Generate csv file
      */
-    setSelectedId(id) {
-      this.selectedId = id
+    async generateCSV() {
+      if (Array.isArray(this.data) && this.data.length) {
+        this.loading = true
+
+        try {
+          const promises = [...Array(this.lastPage)].map((item, index) => {
+            const query = { ...this.query, page: index + 1 }
+            return this.$dam.getCategoryList(query)
+          })
+
+          const res = await Promise.all(promises)
+          const keys = ['id', 'name', 'description']
+          const data = flatten(res.map(item => item.data)).map(item => pick(item, keys))
+
+          this.$csv.parseAndDownload({ data })
+        } catch (err) {
+          console.error(err)
+        } finally {
+          this.loading = false
+        }
+      }
     }
   }
 }

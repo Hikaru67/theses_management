@@ -45,7 +45,6 @@
         :loading="loading"
         @show-detail="onShowDetail"
         @delete="onConfirmDelete"
-        @modify="refresh"
         @toggle-status="onToggleStatus"
       />
 
@@ -145,8 +144,8 @@ export default {
     AsyncLoading,
     ConditionHandler,
     SearchFormHandler,
-    Paginator,
-    SortHandler
+    SortHandler,
+    Paginator
   ],
 
   data() {

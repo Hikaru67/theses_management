@@ -1,58 +1,58 @@
 <template>
-  <CModal
-    :show.sync="visible"
-    :centered="false"
-    :close-on-backdrop="false"
-    class="modal-form"
-    size="lg"
-    @open="$emit('open')"
-    @close="$emit('close')"
+  <a-modal
+    :visible="visible"
+    :footer="null"
+    :width="720"
+    class="modal-wrap"
+    @cancel="onCancel"
   >
-    <template #header>
-      <h6 class="modal-title">
-        <font-awesome-icon :icon="['fas', `${id ? 'pencil-alt' : 'plus-circle'}`]" />
-        {{ id ? $t('common.update') : $t('common.create') }}
-      </h6>
-
-      <CButtonClose @click="onCancel" />
+    <template slot="title">
+      <font-awesome-icon :icon="`${id ? 'pencil-alt' : 'plus-circle'}`" />
+      {{ id ? $t('common.update') : $t('common.create') }}
     </template>
 
-    <!-- <category-form
+    <category-form
       :id="id"
-      ref="categoryForm"
+      ref="refCategoryForm"
       :parent-id="parentId"
+      @modify="onCancel(); $emit('modify')"
       @cancel="onCancel"
-      @modify="onModify"
-    /> -->
-
-    <template #footer>
-      <span />
-    </template>
-  </CModal>
+    />
+  </a-modal>
 </template>
 
 <style lang="scss" scoped>
-.modal-form {
+@import '~/assets/scss/_variables.scss';
+@import '~/assets/scss/_mixins.scss';
+
+.modal-wrap {
   /deep/ {
-    .modal-footer {
-      display: none;
+    // .ant-modal {
+    //   @include mq(max_xl) {
+    //     max-width: 1170px;
+    //   }
+    //   @include mq(max_lg) {
+    //     max-width: 95%;
+    //   }
+    // }
+    .ant-modal-body {
+      padding: 0;
     }
   }
 }
 </style>
 
 <script>
-// import CategoryForm from './CategoryForm'
-// import CategoryForm from './CategoryForm'
+import CategoryForm from '~/components/organisms/categories/CategoryForm'
 
 export default {
   components: {
-    // CategoryForm
+    CategoryForm
   },
 
   props: {
     /**
-     *category curent id
+     * category curent id
      */
     id: {
       type: Number,
@@ -60,7 +60,7 @@ export default {
     },
 
     /**
-     *category parent id
+     * category parent id
      */
     parentId: {
       type: Number,
@@ -79,7 +79,6 @@ export default {
      * Open dialog
      */
     open() {
-      this.$refs.categoryForm.clearForm()
       this.visible = true
     },
 
@@ -88,14 +87,6 @@ export default {
      */
     onCancel() {
       this.visible = false
-    },
-
-    /**
-     * On modify
-     */
-    onModify() {
-      this.visible = false
-      this.$emit('modify')
     }
   }
 }

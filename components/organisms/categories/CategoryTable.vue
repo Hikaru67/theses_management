@@ -1,78 +1,49 @@
 <template>
-  <div v-loading="loading">
-    <CDataTable
-      hover
-      :items="data"
-      :fields="FIELDS"
-      class="main-table"
-    >
-      <template #action="{ item }">
-        <td class="white-space-nowrap">
-          <CButton size="sm" color="primary" @click="goToDetail(item.id)">
-            <font-awesome-icon :icon="['fas', 'pencil-alt']" />
-          </CButton>
+  <a-table
+    :columns="FIELDS"
+    :data-source="data"
+    :row-key="record => record.id"
+    :locale="tableLocale"
+    :loading="tableLoading"
+    :pagination="false"
+    class="main-table"
+  >
+    <template slot="action" slot-scope="text, record">
+      <a-button
+        html-type="button"
+        type="primary"
+        size="small"
+        :disabled="loading"
+        @click="onShowDetail(record.id)"
+      >
+        <font-awesome-icon icon="pencil-alt" class="width-1x" />
+      </a-button>
 
-          &nbsp;
-          <CButton size="sm" color="danger" @click="onDelete(item.id)">
-            <font-awesome-icon :icon="['fas', 'trash-alt']" />
-          </CButton>
-        </td>
-      </template>
-
-      <template #no-items-view>
-        <div class="text-center text-muted my-5">
-          <font-awesome-icon :icon="['fas', 'info-circle']" />
-          {{ $t('common.no_data_in_table') }}
-        </div>
-      </template>
-    </CDataTable>
-  </div>
+      <a-button
+        html-type="button"
+        type="danger"
+        size="small"
+        :disabled="loading"
+        @click="onDelete(record)"
+      >
+        <font-awesome-icon icon="trash-alt" class="width-1x" />
+      </a-button>
+    </template>
+  </a-table>
 </template>
 
-<style lang="scss" scoped>
-.main-table {
-  /deep/ {
-    table {
-      border-bottom: 1px solid #d8dbe0;
-      margin-bottom: 0;
-      thead {
-        tr {
-          th {
-            &.id {
-              width: 60px;
-            }
-            &.name {
-              width: 250px;
-            }
-            &.parent_id {
-              width: 300px;
-            }
-            &.description {
-              width: 500px;
-            }
-            &.action {
-              width: 100px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>
-
 <script>
-import Common from '~/mixins/common'
+const FIELDS = [
+  { dataIndex: 'id', title: 'category.id', width: 60 },
+  { dataIndex: 'name', title: 'category.name' },
+  { dataIndex: 'description', title: 'category.description' },
+  { dataIndex: 'action', title: 'common.action', scopedSlots: { customRender: 'action' }, width: 140 }
+]
 
 const EVENT_SHOW_DETAIL = 'show-detail'
 const EVENT_DELETE = 'delete'
-const MINISECOND = 1000
 
 export default {
-  mixins: [
-    Common
-  ],
-
   props: {
     /**
      * Item list
@@ -80,12 +51,14 @@ export default {
     data: {
       type: Array,
       default: () => []
-    }
-  },
+    },
 
-  data() {
-    return {
-      loading: false
+    /**
+     * Loading status
+     */
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -96,41 +69,63 @@ export default {
      * @return {array} FIELDS of header table
      */
     FIELDS() {
-      return [
-        { key: 'id', label: this.$t('category.id'), _classes: 'id' },
-        { key: 'name', label: this.$t('category.name'), _classes: 'name' },
-        { key: 'description', label: this.$t('category.description'), _classes: 'description' },
-        { key: 'action', label: this.$t('common.action'), _classes: 'action' }
-      ]
+      return FIELDS.map(item => {
+        return {
+          ...item,
+          title: this.$t(item.title)
+        }
+      })
     },
 
     /**
-     * return value minisecond
+     * Loading & icon loading
      *
-     * @return {number} minisecond
+     * @return {object} Loading & icon loading
      */
-    MINISECOND() {
-      return MINISECOND
+    tableLoading() {
+      return {
+        spinning: this.loading,
+        indicator: <a-spin />
+      }
+    },
+
+    /**
+     * Locale for Table
+     *
+     * @return {object} Locale for Table
+     */
+    tableLocale() {
+      return {
+        emptyText: this.$t('common.no_data_in_table')
+      }
     }
   },
 
   methods: {
     /**
-     * Go to box detail page
+     * Event show category detail modal
      *
-     * @param {String} id - box id
+     * @param {number} id - Category id
      */
-    goToDetail(id) {
+    onShowDetail(id) {
+      if (!id) {
+        return
+      }
+
       this.$emit(EVENT_SHOW_DETAIL, id)
     },
 
     /**
-     * Delete box
+     * Delete category
      *
-     * @param {String} id - User id
+     * @param {object} item - Category
      */
-    onDelete(id) {
-      this.$emit(EVENT_DELETE, id)
+    onDelete(item) {
+      if (!item || !item.id) {
+        return
+      }
+
+      this.$emit(EVENT_DELETE, item)
     }
   }
 }
