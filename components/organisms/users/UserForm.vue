@@ -1,9 +1,9 @@
 <template>
   <a-form-model
     ref="refForm"
+    v-loading="loading"
     :model="model"
     :rules="rulesForm"
-    v-loading="loading"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"

@@ -1,9 +1,9 @@
 <template>
   <a-form-model
     ref="refForm"
+    v-loading="loading"
     :model="model"
     :rules="rulesForm"
-    v-loading="loading"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"
@@ -114,7 +114,7 @@ import { xor } from 'lodash'
 import Role from '~/models/Role'
 import Permission from '~/models/Permission'
 
-// import AppCheckboxGroup from '~/components/atoms/AppCheckboxGroup'
+// import AppCheckboxGroup from '~/components/molecules/AppCheckboxGroup'
 
 import CreateEditForm from '~/mixins/create-edit-form'
 

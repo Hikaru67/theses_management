@@ -194,21 +194,26 @@ export const swagger = {
     // Category API
     '/category': {
       get: {
-        operationId: 'getCategoryList'
+        operationId: 'getCategoryList',
+        useMock: 'category'
       },
       post: {
-        operationId: 'createCategory'
+        operationId: 'createCategory',
+        useMock: 'category'
       }
     },
     '/category/{id}': {
       get: {
-        operationId: 'getCategory'
+        operationId: 'getCategory',
+        useMock: 'category'
       },
       put: {
-        operationId: 'updateCategory'
+        operationId: 'updateCategory',
+        useMock: 'category'
       },
       delete: {
-        operationId: 'deleteCategory'
+        operationId: 'deleteCategory',
+        useMock: 'category'
       }
     },
     '/category/move': {

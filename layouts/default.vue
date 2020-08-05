@@ -10,7 +10,6 @@
 
       <!-- <a-menu theme="dark" :default-selected-keys="['1']" mode="inline"> -->
       <a-menu theme="dark" mode="inline">
-        <!-- <a-menu-item :key="1"> -->
         <a-menu-item>
           <nuxt-link to="/">
             <font-awesome-icon icon="tachometer-alt" class="anticon" />
@@ -33,19 +32,34 @@
           </a-menu-item>
         </a-sub-menu>
 
-        <a-menu-item>
-          <nuxt-link to="/users">
-            <font-awesome-icon icon="user-friends" class="anticon" />
-            <span>Users</span>
-          </nuxt-link>
-        </a-menu-item>
+        <a-menu-item-group>
+          <template slot="title"><span>Module</span> </template>
 
-        <a-menu-item>
-          <nuxt-link to="/roles">
-            <font-awesome-icon icon="balance-scale" class="anticon" />
-            <span>Roles</span>
-          </nuxt-link>
-        </a-menu-item>
+          <a-menu-item key="11">
+            <nuxt-link to="/categories">
+              <font-awesome-icon icon="th-list" class="anticon" />
+              <span>Categories</span>
+            </nuxt-link>
+          </a-menu-item>
+        </a-menu-item-group>
+
+        <a-menu-item-group>
+          <template slot="title"><span>System</span> </template>
+
+          <a-menu-item key="21">
+            <nuxt-link to="/users">
+              <font-awesome-icon icon="user-friends" class="anticon" />
+              <span>Users</span>
+            </nuxt-link>
+          </a-menu-item>
+
+          <a-menu-item key="22">
+            <nuxt-link to="/roles">
+              <font-awesome-icon icon="balance-scale" class="anticon" />
+              <span>Roles</span>
+            </nuxt-link>
+          </a-menu-item>
+        </a-menu-item-group>
       </a-menu>
     </a-layout-sider>
 
