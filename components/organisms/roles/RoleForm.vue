@@ -3,6 +3,7 @@
     ref="refForm"
     :model="model"
     :rules="rulesForm"
+    v-loading="loading"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"
@@ -24,7 +25,6 @@
       </div>
 
       <div class="ant-col ant-col-sm-18 ant-form-item-control-wrapper">
-        <!-- <pre>{{ nestedPermissions }}</pre> -->
         <a-collapse
           v-if="Array.isArray(nestedPermissions) && nestedPermissions.length"
           v-model="activeCollapseKeys"
@@ -35,19 +35,12 @@
             :key="`${item.id}`"
             :header="item.name"
           >
-            <!-- <pre>{{ item.children }}</pre> -->
-            <!-- <app-checkbox-group
-              :value="model.permissions"
-              :list="item.children"
-              :name="'permissions'"
-              :inline="false"
-              @toggle="updatePermissions"
-            /> -->
-            <a-radio-group
+            <a-checkbox-group
               :value="model.permissions"
               :options="item.children"
               name="permissions"
               :disabled="loading"
+              class="no-inline"
               @change="updatePermissions"
             />
           </a-collapse-panel>
@@ -243,7 +236,8 @@ export default {
           return {
             ...item,
             children: this.convertPermissions(item.id),
-            label: this.$t(`permissions.${item.name}`)
+            label: this.$t(`permissions.${item.name}`),
+            value: item.id
           }
         })
     },
@@ -273,6 +267,18 @@ export default {
           !this.model.permissions.includes(item)
         ) {
           this.model.permissions.push(item)
+        }
+      })
+    },
+
+    /**
+     * On handle submit
+     * If valid then show error
+     */
+    onHandleSubmit() {
+      this.$refs.refForm.validate(valid => {
+        if (valid) {
+          this.onSubmit()
         }
       })
     }

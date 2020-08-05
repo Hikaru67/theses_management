@@ -17,7 +17,7 @@
         </a-button> -->
       </template>
 
-      <UserSearchForm
+      <user-search-form
         :loading="loading"
         @submit="onSearch"
       />
@@ -40,7 +40,7 @@
         />
       </div>
 
-      <UserTable
+      <user-table
         :data="data"
         :loading="loading"
         @show-detail="onShowDetail"

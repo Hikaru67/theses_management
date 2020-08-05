@@ -3,6 +3,7 @@
     ref="refForm"
     :model="model"
     :rules="rulesForm"
+    v-loading="loading"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"

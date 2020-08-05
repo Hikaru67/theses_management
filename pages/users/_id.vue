@@ -6,7 +6,7 @@
         {{ $t('user.edit_user') }}
       </template>
 
-      <UserForm
+      <user-form
         :id="id"
         @modify="goToList"
         @cancel="goToList"

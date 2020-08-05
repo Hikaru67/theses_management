@@ -28,7 +28,7 @@
                 :disabled="loading"
               >
                 <a-button slot="enterButton" html-type="submit" type="primary">
-                  <font-awesome-icon icon="search" class="width-1x" />
+                  <font-awesome-icon icon="search" class="width-1x mr-1" />
                   {{ $t('common.search') }}
                 </a-button>
               </a-input-search>
@@ -153,12 +153,12 @@
 <script>
 import Role from '~/models/Role'
 
-// // import RoleForm from '~/components/organisms/roles/RoleForm'
+import RoleForm from '~/components/organisms/roles/RoleForm'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
 export default {
   components: {
-    // RoleForm,
+    RoleForm,
     AppDeleteConfirmDialog
   },
 

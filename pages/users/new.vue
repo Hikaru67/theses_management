@@ -6,7 +6,7 @@
         {{ $t('user.create_new_user') }}
       </template>
 
-      <UserForm
+      <user-form
         @modify="goToList"
         @cancel="goToList"
       />

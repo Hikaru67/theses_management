@@ -160,6 +160,7 @@ button,
     }
   }
 }
+
 /* -----------------------------------------------------------
   Main control
 ----------------------------------------------------------- */
@@ -264,6 +265,14 @@ button,
   > label {
     &:after {
       margin-right: 0;
+    }
+  }
+}
+.ant-checkbox-group {
+  &.no-inline {
+    .ant-checkbox-group-item {
+      display: block;
+      margin: 0 0 5px 0;
     }
   }
 }

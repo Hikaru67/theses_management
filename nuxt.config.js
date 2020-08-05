@@ -44,7 +44,7 @@ export default {
   ** Global CSS
   */
   css: [
-    'ant-design-vue/dist/antd.css',
+    { src: 'ant-design-vue/dist/antd.css', lang: 'css' },
     { src: '~/assets/scss/style.scss', lang: 'scss' }
   ],
 
@@ -58,6 +58,7 @@ export default {
     '@/plugins/dd-api-manager',
     '@/plugins/validations',
     '@/plugins/directive',
+    '@/plugins/directives',
     '@/plugins/debugger'
   ],
 
