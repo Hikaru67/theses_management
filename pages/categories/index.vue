@@ -44,10 +44,22 @@
       </div>
 
       <div class="category-tree">
+        <a-row type="flex" :gutter="30">
+          <a-col :md="12">
+            <pre>{{ gData }}</pre>
+          </a-col>
+          <a-col :md="12">
+            <pre>{{ categoryTreeList }}</pre>
+            <hr />
+            <pre>{{ expandedCategoryKeys }}</pre>
+          </a-col>
+        </a-row>
+
+        <!-- :auto-expand-parent="true" -->
+
         <a-tree
-          class="draggable-tree"
-          :tree-data="gData"
-          :default-expanded-keys="expandedKeys"
+          :tree-data="categoryTreeList"
+          :default-expanded-keys="expandedCategoryKeys"
           draggable
           show-icon
           @dragenter="onDragEnter"
@@ -61,7 +73,7 @@
     <category-create-edit-modal
       :id="selectedId"
       ref="refCategoryCreateEditModal"
-      @modify="refresh"
+      @modify="onModify"
     />
 
     <app-delete-confirm-dialog
@@ -109,6 +121,67 @@ const generateData = (_level, _preKey, _tns) => {
 }
 generateData(z)
 
+const old = [
+  {
+    data: {
+      id: 1
+    },
+    text: '1 test',
+    state: {
+      expanded: true
+    },
+    children: [
+      {
+        data: {
+          id: 2
+        },
+        text: '2 cat 2',
+        state: {
+          expanded: true
+        },
+        children: [
+          {
+            text: '3 cat 3',
+            data: {
+              id: 3
+            }
+          },
+          {
+            text: '4 cat 4',
+            data: {
+              id: 4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    text: '5 cat 5',
+    data: {
+      id: 5
+    }
+  },
+  {
+    text: '6 cat 6',
+    data: {
+      id: 6
+    }
+  },
+  {
+    text: '7 cat 7',
+    data: {
+      id: 7
+    }
+  },
+  {
+    text: '8 cat 8',
+    data: {
+      id: 8
+    }
+  }
+]
+
 export default {
   components: {
     CategoryCreateEditModal,
@@ -127,16 +200,17 @@ export default {
 
       categories: [],
       categoryTreeList: [],
-      categoryTreeOptions: {
-        checkbox: false,
-        dnd: true
-      },
+      expandedCategoryKeys: ['2', '1'],
+      // categoryTreeOptions: {
+      //   checkbox: false,
+      //   dnd: true
+      // },
       currentId: null,
       isNoteHidden: false,
 
       // Test
       gData,
-      expandedKeys: ['0-0', '0-0-0', '0-0-0-0']
+      old
     }
   },
 
@@ -146,12 +220,12 @@ export default {
 
   methods: {
     onDragEnter(info) {
-      console.log(info)
+      console.log('onDragEnter info', info)
       // expandedKeys 需要受控时设置
       // this.expandedKeys = info.expandedKeys
     },
     onDrop(info) {
-      console.log(info)
+      console.log('onDrop info', info)
       const dropKey = info.node.eventKey
       const dragKey = info.dragNode.eventKey
       const dropPos = info.node.pos.split('-')
@@ -223,7 +297,9 @@ export default {
             this.total = res.meta.total
             this.lastPage = res.meta.last_page
             this.categories = res.data.map(item => new Category(item))
+            console.log('this.categories', this.categories)
             this.categoryTreeList = this.convertCategories()
+            console.log('this.categoryTreeList', this.categoryTreeList)
           }
         })
         .catch(err => {
@@ -250,25 +326,55 @@ export default {
         .map(item => {
           const children = this.convertCategories(item.id)
 
-          if (children.length === 0) {
+          if (children.length) {
+            // this.expandedCategoryKeys.push(String(item.id))
             return {
-              text: item.id + ' ' + item.name,
-              data: {
-                id: item.id
-              }
+              // data: {
+              //   id: item.id
+              // },
+              key: String(item.id),
+              // title: item.name,
+              title: item.id + ' ' + item.name,
+              // state: {
+              //   expanded: true
+              // },
+              children
+            }
+          } else {
+            return {
+              key: String(item.id),
+              title: item.id + ' ' + item.name
+              // data: {
+              //   id: item.id
+              // }
             }
           }
+          // if (children.length === 0) {
+          //   const data = {
+          //     key: item.id,
+          //     title: item.id + ' ' + item.name
+          //     // data: {
+          //     //   id: item.id
+          //     // }
+          //   }
 
-          return {
-            data: {
-              id: item.id
-            },
-            text: item.id + ' ' + item.name,
-            state: {
-              expanded: true
-            },
-            children
-          }
+          //   return data
+          // }
+
+          // const data = {
+          //   // data: {
+          //   //   id: item.id
+          //   // },
+          //   key: item.id,
+          //   title: item.name,
+          //   // title: item.id + ' ' + item.name,
+          //   // state: {
+          //   //   expanded: true
+          //   // },
+          //   children
+          // }
+
+          // return data
         })
     },
 
