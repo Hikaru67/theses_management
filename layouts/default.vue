@@ -6,12 +6,16 @@
       width="256"
       :collapsed-width="collapsedWidth"
     >
-      <div class="logo" />
+      <div class="logo">
+        <nuxt-link to="/" class="over">
+          <img src="~/assets/images/logo.png" alt="DigiDinos" />
+        </nuxt-link>
+      </div>
 
       <!-- <a-menu theme="dark" :default-selected-keys="['1']" mode="inline"> -->
       <a-menu theme="dark" mode="inline">
         <a-menu-item>
-          <nuxt-link to="/">
+          <nuxt-link to="/" class="on-home">
             <font-awesome-icon icon="tachometer-alt" class="anticon" />
             <span>Dashboard</span>
           </nuxt-link>
@@ -24,11 +28,15 @@
           </span>
 
           <a-menu-item>
-            Team 1
+            <nuxt-link to="/categories">
+              Team 1
+            </nuxt-link>
           </a-menu-item>
 
           <a-menu-item>
-            Team 2
+            <nuxt-link to="/users">
+              Team 2
+            </nuxt-link>
           </a-menu-item>
         </a-sub-menu>
 
@@ -100,11 +108,6 @@
 <style lang="scss" scoped>
 .default-layout {
   /deep/ {
-    .logo {
-      height: 32px;
-      background: rgba(255, 255, 255, 0.2);
-      margin: 16px;
-    }
     .trigger {
       font-size: 18px;
       line-height: 64px;

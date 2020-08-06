@@ -147,6 +147,60 @@ button,
     padding-left: 30px;
   }
 }
+.ant-layout-sider {
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    background: #002140;
+    text-align: center;
+    padding: 6px 10px;
+    a {
+      text-decoration: none;
+    }
+    img {
+      max-height: 45px;
+    }
+  }
+  &.ant-layout-sider-collapsed {
+    .ant-menu-item-group-title {
+      display: none;
+    }
+  }
+}
+.ant-menu {
+  .ant-menu-item-selected {
+    background: transparent !important;
+  }
+  .ant-menu-item {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    > a {
+      display: block;
+      padding-left: 24px;
+      padding-right: 16px;
+      &.active-link {
+        background: $primary;
+      }
+      &[href="/"]:not(:hover) {
+        background: $primary;
+        &:not(.on-home) {
+          background: transparent;
+        }
+      }
+    }
+  }
+  .ant-menu-submenu {
+    .ant-menu {
+      .ant-menu-item {
+        > a {
+          padding-left: 48px;
+        }
+      }
+    }
+  }
+}
 
 /* -----------------------------------------------------------
   Footer
@@ -289,9 +343,9 @@ button,
 .box-change-view {
   position: absolute;
   right: 0;
-  top: -42px;
+  top: -44px;
   a {
-    font-size: 22px;
+    font-size: 24px;
     color: #4c4c4c;
     text-decoration: none;
     margin-left: 10px;
@@ -301,6 +355,59 @@ button,
     }
     &[href="/categories"].on-categories-list:not(:hover) {
       color: #4c4c4c;
+    }
+  }
+}
+
+/* -----------------------------------------------------------
+  category-tree
+----------------------------------------------------------- */
+.category-tree {
+  .tree-content {
+    cursor: move;
+  }
+  /deep/ .node-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding-right: 70px;
+   .tree-checkbox {
+      margin-right: 15px;
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+  .tree-node {
+    &.has-child {
+      > .tree-content {
+        .tree-checkbox {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+  .tree-arrow {
+    &.has-child {
+      &:after {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+  .btns-action {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    width: 100px;
+    white-space: nowrap;
+    text-align: left;
+    li {
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 }

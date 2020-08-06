@@ -60,6 +60,8 @@ export default {
     '@/plugins/validations',
     '@/plugins/directive',
     '@/plugins/directives',
+    '@/plugins/moment',
+    '@/plugins/filters',
     '@/plugins/csv'
   ],
 
@@ -179,7 +181,8 @@ export default {
         'faUserCog',
         'faIcons',
         'faListOl',
-        'faStream'
+        'faStream',
+        'faAngleDown'
       ]
     }
   },

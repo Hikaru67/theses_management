@@ -22,7 +22,9 @@
     "ant-design-vue": "^1.6.2",
     "crypto-js": "^4.0.0",
     "json2csv": "^5.0.1",
+    "liquor-tree": "^0.2.70",
     "lodash": "^4.17.19",
+    "moment": "^2.27.0",
     "nuxt": "^2.13.0",
     "nuxt-i18n": "^6.13.1"
   },
