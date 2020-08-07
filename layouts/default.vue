@@ -15,7 +15,7 @@
       <!-- <a-menu theme="dark" :default-selected-keys="['1']" mode="inline"> -->
       <a-menu theme="dark" mode="inline">
         <a-menu-item>
-          <nuxt-link to="/" class="on-home">
+          <nuxt-link to="/" :class="`${$route.path === '/' ? 'on-home' : ''}`">
             <font-awesome-icon icon="tachometer-alt" class="anticon" />
             <span>Dashboard</span>
           </nuxt-link>
@@ -29,13 +29,15 @@
 
           <a-menu-item>
             <nuxt-link to="/categories">
-              Team 1
+              <font-awesome-icon icon="th-list" class="anticon" />
+              <span>Categories</span>
             </nuxt-link>
           </a-menu-item>
 
           <a-menu-item>
             <nuxt-link to="/users">
-              Team 2
+              <font-awesome-icon icon="user-friends" class="anticon" />
+              <span>Users</span>
             </nuxt-link>
           </a-menu-item>
         </a-sub-menu>
@@ -69,6 +71,13 @@
             <nuxt-link to="/roles">
               <font-awesome-icon icon="balance-scale" class="anticon" />
               <span>Roles</span>
+            </nuxt-link>
+          </a-menu-item>
+
+          <a-menu-item key="23">
+            <nuxt-link to="/menus">
+              <font-awesome-icon icon="stream" class="anticon" />
+              <span>Menus</span>
             </nuxt-link>
           </a-menu-item>
         </a-menu-item-group>
@@ -152,6 +161,8 @@ export default {
     Layout
   ],
 
+  // middleware: ['auth'],
+
   data() {
     return {
       isCollapsed: false,
@@ -209,15 +220,6 @@ export default {
 
       return list
     }
-
-    // /**
-    //  * Current first of path
-    //  *
-    //  * return {Array} - Current first of path
-    //  */
-    // currentFirstPath() {
-    //   return this.currentPath.split('/')[1]
-    // }
   },
 
   watch: {
@@ -228,21 +230,9 @@ export default {
       this.isCollapsed = !val
       this.collapsedWidth = val ? COLLAPSED_WIDTH : 0
     }
-
-    // /**
-    //  * Watching change of route
-    //  * Check route to show/hide list button
-    //  */
-    // $route() {
-    //   this.currentPath = this.$router.currentRoute.path
-    //   this.showListButton(this.currentPath)
-    // }
   },
 
   mounted() {
-    // this.currentPath = this.$router.currentRoute.path
-    // this.showListButton(this.currentPath)
-
     // notification config global
     this.$notification.config({
       duration: 2
@@ -265,17 +255,6 @@ export default {
 
       return crumb && crumb.name ? crumb.name : ''
     }
-
-    // /**
-    //  * Set status of isVisibleListButton
-    //  *
-    //  * @param {String} currentPath - Current path of route
-    //  */
-    // showListButton(currentPath) {
-    //   this.isVisibleListButton = PATH_LIST_FOR_SHOW_LIST_BUTTON.includes(
-    //     currentPath
-    //   )
-    // }
   }
 }
 </script>

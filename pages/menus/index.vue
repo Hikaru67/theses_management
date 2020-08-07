@@ -1,28 +1,22 @@
 <template>
   <div class="main-list position-relative">
     <div class="box-change-view">
-      <nuxt-link to="/categories" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+      <nuxt-link to="/menus" :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`">
         <font-awesome-icon icon="th-list" />
       </nuxt-link>
 
-      <nuxt-link to="/categories/list" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+      <nuxt-link to="/menus/list" :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`">
         <font-awesome-icon icon="border-all" />
       </nuxt-link>
     </div>
 
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="th-list" />
-        <strong>{{ $t('category.category') }}</strong>
+        <font-awesome-icon icon="stream" />
+        <strong>{{ $t('menu.menu_list') }}</strong>
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="generateCSV">
-          <font-awesome-icon icon="download" class="width-1x mr-1" />
-          {{ $t('common.download_csv') }}
-        </a-button>
-
-        &nbsp;
         <a-button html-type="button" type="primary" ghost @click="onShowDetail($event, 0)">
           <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
           {{ $t('common.create_new') }}
@@ -34,30 +28,30 @@
           <div class="col-12 col-md-5 total">
             <strong>{{ $t('common.total') }}:</strong>
             {{ total }}
-            {{ $t('category.category_for_pagination') }}
+            {{ $t('menu.menu') }}
           </div>
 
           <div v-if="isNoteHidden" class="col-12 col-md-7 note">
-            {{ $t('category.note_for_deletion') }}
+            {{ $t('menu.note_for_deletion') }}
           </div>
         </div>
       </div>
 
-      <div class="category-tree">
+      <div class="menu-tree">
         <!-- <a-row type="flex" :gutter="30">
           <a-col :md="12">
-            <pre>{{ categories }}</pre>
+            <pre>{{ menus }}</pre>
           </a-col>
           <a-col :md="12">
-            <pre>{{ categoryTreeList }}</pre>
+            <pre>{{ menuTreeList }}</pre>
           </a-col>
         </a-row> -->
 
         <tree
-          v-if="Array.isArray(categoryTreeList) && categoryTreeList.length"
-          :data="categoryTreeList"
-          :options="categoryTreeOptions"
-          @node:dragging:finish="onDragFinishCategories"
+          v-if="Array.isArray(menuTreeList) && menuTreeList.length"
+          :data="menuTreeList"
+          :options="menuTreeOptions"
+          @node:dragging:finish="onDragFinishMenus"
         >
           <div slot-scope="{ node }" class="node-container">
             <i class="tree-checkbox" />
@@ -110,9 +104,9 @@
       </div>
     </a-card>
 
-    <category-detail-modal
+    <menu-detail-modal
       :id="selectedId"
-      ref="refCategoryDetailModal"
+      ref="refMenuDetailModal"
       @modify="onModify"
     />
 
@@ -125,18 +119,17 @@
 </template>
 
 <script>
-import { flatten, pick } from 'lodash'
 import LiquorTree from 'liquor-tree'
 
 import { SORT_TYPE, MAX_LIMIT_RECORD } from '~/constants'
-import Category from '~/models/Category'
+import Menu from '~/models/Menu'
 
-import CategoryDetailModal from '~/components/organisms/categories/CategoryDetailModal'
+import MenuDetailModal from '~/components/organisms/menus/MenuDetailModal'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
 export default {
   components: {
-    CategoryDetailModal,
+    MenuDetailModal,
     AppDeleteConfirmDialog,
     [LiquorTree.name]: LiquorTree
   },
@@ -144,15 +137,15 @@ export default {
   data() {
     return {
       loading: false,
-      resourceTypeName: this.$t('category.category'),
+      resourceTypeName: this.$t('menu.menu'),
       selectedId: null,
       selectedName: '',
       total: 0,
       lastPage: 1,
 
-      categories: [],
-      categoryTreeList: [],
-      categoryTreeOptions: {
+      menus: [],
+      menuTreeList: [],
+      menuTreeOptions: {
         checkbox: false,
         dnd: true
       },
@@ -162,28 +155,28 @@ export default {
   },
 
   mounted() {
-    this.getCategoryList()
+    this.getMenuList()
   },
 
   methods: {
     /**
-     * Call API get category list
+     * Call API get menu list
      */
-    getCategoryList() {
+    getMenuList() {
       const params = {
         limit: MAX_LIMIT_RECORD,
         sort: 'position',
         sortType: SORT_TYPE.ASC
       }
 
-      this.$dam.getCategoryList(params)
+      this.$dam.getMenuList(params)
         .then(res => {
           if (Array.isArray(res.data) && res.data.length) {
             this.total = res.meta.total
             this.lastPage = res.meta.last_page
-            this.categories = res.data.map(item => new Category(item))
-            this.categoryTreeList = this.convertCategories()
-            console.log(111, this.categoryTreeList)
+            this.menus = res.data.map(item => new Menu(item))
+            this.menuTreeList = this.convertMenus()
+            console.log(111, this.menuTreeList)
           }
         })
         .catch(err => {
@@ -196,23 +189,23 @@ export default {
     },
 
     /**
-     * Convert categories to nested
+     * Convert menus to nested
      *
      * @param {Number} parentId
-     * @return {Array} categories
+     * @return {Array} menus
      */
-    convertCategories(parentId = 0) {
-      return [...this.categories]
+    convertMenus(parentId = 0) {
+      return [...this.menus]
         .filter(item => {
           const itemId = item.parent ? item.parent.id : 0
           return itemId === parentId
         })
         .map(item => {
-          const children = this.convertCategories(item.id)
+          const children = this.convertMenus(item.id)
 
           if (!children.length) {
             return {
-              text: item.id + ' ' + item.name,
+              text: item.id + ' ' + item.title,
               data: {
                 ...item
               }
@@ -223,7 +216,7 @@ export default {
             data: {
               ...item
             },
-            text: item.id + ' ' + item.name,
+            text: item.id + ' ' + item.title,
             state: {
               expanded: true
             },
@@ -233,10 +226,10 @@ export default {
     },
 
     /**
-     * On drag finish categories
+     * On drag finish menus
      */
-    onDragFinishCategories(node) {
-      let categoriesData = []
+    onDragFinishMenus(node) {
+      let menusData = []
 
       if (node.parent && node.parent.data.id) {
         // Case: Drag the item to become a child of another parent item
@@ -252,7 +245,7 @@ export default {
           return
         }
 
-        categoriesData = parentNode[0].children.map((item, index) => {
+        menusData = parentNode[0].children.map((item, index) => {
           return {
             id: item.data.id,
             parent_id: parentNode[0].data.id,
@@ -265,7 +258,7 @@ export default {
           return
         }
 
-        categoriesData = node.tree.model.map((item, index) => {
+        menusData = node.tree.model.map((item, index) => {
           return {
             id: item.data.id,
             parent_id: 0,
@@ -274,20 +267,20 @@ export default {
         })
       }
 
-      this.$dam.moveCategory({ list: categoriesData })
+      this.$dam.moveMenu({ list: menusData })
         .then(_ => {
           this.$notification.success({
             message: this.$t('messages.information.updated', { name: this.resourceTypeName })
           })
 
-          // this.getCategoryList()
+          // this.getMenuList()
         })
         .catch(err => {
           console.error(err)
 
-          this.categories = []
-          this.categoryTreeList = []
-          this.getCategoryList()
+          this.menus = []
+          this.menuTreeList = []
+          this.getMenuList()
 
           this.$notification.error({
             message: this.$t('messages.error.failed_to_update', { name: this.resourceTypeName })
@@ -296,7 +289,7 @@ export default {
     },
 
     /**
-     * Create child category from parent id
+     * Create child menu from parent id
      *
      * @param {Object} e - Event
      * @param {Number} id - Parent id
@@ -306,38 +299,38 @@ export default {
       e.stopPropagation()
 
       this.currentId = id
-      this.$refs.refCategoryDetailModal.open()
+      this.$refs.refMenuDetailModal.open()
     },
 
     /**
-     * Open category detail modal
+     * Open menu detail modal
      *
      * @param {Object} e - Event
-     * @param {Object} id - Current category
+     * @param {Object} id - Current menu
      */
     onShowDetail(e, id) {
       e.preventDefault()
       e.stopPropagation()
 
       this.setSelectedId(id)
-      this.$refs.refCategoryDetailModal.open()
+      this.$refs.refMenuDetailModal.open()
     },
 
     /**
      * On modify
      */
     onModify() {
-      this.categories = []
-      this.categoryTreeList = []
+      this.menus = []
+      this.menuTreeList = []
       this.selectedId = null
       this.currentId = null
-      this.getCategoryList()
+      this.getMenuList()
     },
 
     /**
      * Set selectedId
      *
-     * @param {Number} id - Category Id
+     * @param {Number} id - Menu Id
      */
     setSelectedId(id) {
       this.selectedId = id
@@ -346,7 +339,7 @@ export default {
     /**
      * Set select id
      *
-     * @param {String} name - Category name
+     * @param {String} name - Menu name
      */
     setSelectedName(name) {
       this.selectedName = name
@@ -358,7 +351,7 @@ export default {
      * Else cancel
      *
      * @param {Object} e - Event
-     * @param {object} item - Category
+     * @param {object} item - Menu
      */
     onConfirmDelete(e, item) {
       e.preventDefault()
@@ -379,15 +372,15 @@ export default {
      */
     onDelete() {
       if (this.selectedId) {
-        this.$dam.deleteCategory({ id: this.selectedId })
+        this.$dam.deleteMenu({ id: this.selectedId })
           .then(_ => {
             this.$notification.success({
               message: this.$t('messages.information.deleted', { name: this.resourceTypeName })
             })
 
-            this.categories = []
-            this.categoryTreeList = []
-            this.getCategoryList()
+            this.menus = []
+            this.menuTreeList = []
+            this.getMenuList()
           })
           .catch(err => {
             console.error(err)
@@ -396,32 +389,6 @@ export default {
               message: this.$t('messages.error.failed_to_delete', { name: this.resourceTypeName })
             })
           })
-      }
-    },
-
-    /**
-     * Generate csv file
-     */
-    async generateCSV() {
-      if (Array.isArray(this.data) && this.data.length) {
-        this.loading = true
-
-        try {
-          const promises = [...Array(this.lastPage)].map((item, index) => {
-            const query = { ...this.query, page: index + 1 }
-            return this.$dam.getCategoryList(query)
-          })
-
-          const res = await Promise.all(promises)
-          const keys = ['id', 'name', 'description']
-          const data = flatten(res.map(item => item.data)).map(item => pick(item, keys))
-
-          this.$csv.parseAndDownload({ data })
-        } catch (err) {
-          console.error(err)
-        } finally {
-          this.loading = false
-        }
       }
     }
   }

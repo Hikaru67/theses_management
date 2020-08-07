@@ -208,7 +208,8 @@
     "parent_id": "Id của thực đơn cha",
     "position": "Vị trí",
     "create_new_menu": "Tạo thực đơn mới",
-    "edit_menu": "Sửa thực đơn"
+    "edit_menu": "Sửa thực đơn",
+    "note_for_deletion": "Nếu bạn muốn xóa danh mục cha, trước tiên bạn phải xóa hết danh mục con"
   },
   "category": {
     "category": "Danh mục",

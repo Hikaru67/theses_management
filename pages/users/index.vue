@@ -237,7 +237,7 @@ export default {
     /**
      * Open user detail modal
      *
-     * @param {Number} id - Current zone
+     * @param {Number} id - Current id
      */
     onShowDetail(id) {
       this.setSelectedId(id)

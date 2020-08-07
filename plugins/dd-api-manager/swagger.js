@@ -56,21 +56,26 @@ export const swagger = {
     // Menu API
     '/menu': {
       get: {
-        operationId: 'getMenuList'
+        operationId: 'getMenuList',
+        useMock: 'menu'
       },
       post: {
-        operationId: 'createMenu'
+        operationId: 'createMenu',
+        useMock: 'menu'
       }
     },
     '/menu/{id}': {
       get: {
-        operationId: 'getMenu'
+        operationId: 'getMenu',
+        useMock: 'menu'
       },
       put: {
-        operationId: 'updateMenu'
+        operationId: 'updateMenu',
+        useMock: 'menu'
       },
       delete: {
-        operationId: 'deleteMenu'
+        operationId: 'deleteMenu',
+        useMock: 'menu'
       }
     },
 
@@ -116,7 +121,8 @@ export const swagger = {
     },
     '/me': {
       get: {
-        operationId: 'getUserInfo'
+        operationId: 'getUserInfo',
+        useMock: 'me'
       }
     },
     '/logout': {

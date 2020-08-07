@@ -208,7 +208,8 @@
     "parent_id": "親のID",
     "position": "ポジション",
     "create_new_menu": "新しいメニューを作成する",
-    "edit_menu": "メニューを編集する"
+    "edit_menu": "メニューを編集する",
+    "note_for_deletion": "親カテゴリを削除する場合は、まずサブカテゴリ全体を削除する必要があります"
   },
   "category": {
     "category": "カテゴリ",

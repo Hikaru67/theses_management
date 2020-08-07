@@ -167,35 +167,49 @@ button,
     .ant-menu-item-group-title {
       display: none;
     }
-  }
-}
-.ant-menu {
-  .ant-menu-item-selected {
-    background: transparent !important;
-  }
-  .ant-menu-item {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    > a {
-      display: block;
-      padding-left: 24px;
-      padding-right: 16px;
-      &.active-link {
-        background: $primary;
-      }
-      &[href="/"]:not(:hover) {
-        background: $primary;
-        &:not(.on-home) {
-          background: transparent;
-        }
-      }
-    }
-  }
-  .ant-menu-submenu {
     .ant-menu {
       .ant-menu-item {
         > a {
-          padding-left: 48px;
+          display: block;
+          padding-left: 32px !important;
+          padding-right: 32px !important;
+        }
+      }
+      .ant-menu-item {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+  }
+  .ant-menu {
+    .ant-menu-item-selected {
+      background: transparent !important;
+    }
+    .ant-menu-item {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      > a {
+        display: block;
+        padding-left: 24px;
+        padding-right: 16px;
+        &.active-link,
+        &:hover {
+          background: $primary;
+        }
+        &[href="/"]:not(:hover) {
+          background: $primary;
+          &:not(.on-home) {
+            background: transparent;
+          }
+        }
+      }
+    }
+    .ant-menu-submenu {
+      .ant-menu {
+        .ant-menu-item {
+          > a {
+            padding-left: 48px;
+          }
         }
       }
     }
@@ -354,6 +368,9 @@ button,
       color: $primary;
     }
     &[href="/categories"].on-categories-list:not(:hover) {
+      color: #4c4c4c;
+    }
+    &[href="/menus"].on-menus-list:not(:hover) {
       color: #4c4c4c;
     }
   }

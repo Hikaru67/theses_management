@@ -208,7 +208,8 @@
     "parent_id": "Parent Id",
     "position": "Position",
     "create_new_menu": "Create new menu",
-    "edit_menu": "Edit menu"
+    "edit_menu": "Edit menu",
+    "note_for_deletion": "If you want to delete the parent category, you must delete the entire subcategory first"
   },
   "category": {
     "category": "Category",

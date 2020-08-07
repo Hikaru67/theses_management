@@ -2,12 +2,11 @@
   <div class="main-detail">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="pencil-alt" />
-        {{ $t('menu.edit_menu') }}
+        <font-awesome-icon icon="plus-circle" />
+        {{ $t('menu.create_new_menu') }}
       </template>
 
       <menu-form
-        :id="id"
         @modify="goToList"
         @cancel="goToList"
       />
@@ -34,15 +33,6 @@ export default {
   },
 
   computed: {
-    /**
-     * Get menu Id
-     *
-     * @return {Object} menu Id
-     */
-    id() {
-      return +this.$route.params.id
-    },
-
     /**
      * Index path
      *

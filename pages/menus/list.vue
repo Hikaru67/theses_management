@@ -1,57 +1,35 @@
 <template>
   <div class="main-list position-relative">
     <div class="box-change-view">
-      <nuxt-link to="/categories" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+      <nuxt-link to="/menus" :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`">
         <font-awesome-icon icon="th-list" />
       </nuxt-link>
 
-      <nuxt-link to="/categories/list" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+      <nuxt-link to="/menus/list" :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`">
         <font-awesome-icon icon="border-all" />
       </nuxt-link>
     </div>
 
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="th-list" />
-        <strong>{{ $t('category.category') }}</strong>
+        <font-awesome-icon icon="stream" />
+        {{ $t('menu.menu_list') }}
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="generateCSV">
-          <font-awesome-icon icon="download" class="width-1x mr-1" />
-          {{ $t('common.download_csv') }}
-        </a-button>
-
-        &nbsp;
         <a-button html-type="button" type="primary" ghost @click="onShowDetail(0)">
           <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
           {{ $t('common.create_new') }}
         </a-button>
+        <!-- <a-button html-type="button" type="primary" ghost @click="$router.push({ path: '/menus/new' })">
+          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+          {{ $t('common.create_new') }}
+        </a-button> -->
       </template>
 
-      <div class="main-control">
-        <app-sort
-          :value="sortId"
-          :list="SORT_CONDITIONS"
-          :disabled="loading"
-          :name="$t('sort.name')"
-          @sort-change="onSort"
-        />
-        <app-pagination
-          :total="total"
-          :current-page="page"
-          :item-name="$t('category.category_for_pagination')"
-          :disabled="loading"
-          @page-change="onPageChange"
-          @page-size-change="onPageSizeChange"
-        />
-      </div>
-
-      <category-table
-        :data="data"
+      <menu-search-form
         :loading="loading"
-        @show-detail="onShowDetail"
-        @delete="onConfirmDelete"
+        @submit="onSearch"
       />
 
       <div class="main-control">
@@ -65,7 +43,33 @@
         <app-pagination
           :total="total"
           :current-page="page"
-          :item-name="$t('category.category_for_pagination')"
+          :item-name="$t('menu.menu')"
+          :disabled="loading"
+          @page-change="onPageChange"
+          @page-size-change="onPageSizeChange"
+        />
+      </div>
+
+      <menu-table
+        :data="data"
+        :loading="loading"
+        @show-detail="onShowDetail"
+        @delete="onConfirmDelete"
+        @toggle-status="onToggleStatus"
+      />
+
+      <div class="main-control">
+        <app-sort
+          :value="sortId"
+          :list="SORT_CONDITIONS"
+          :disabled="loading"
+          :name="$t('sort.name')"
+          @sort-change="onSort"
+        />
+        <app-pagination
+          :total="total"
+          :current-page="page"
+          :item-name="$t('menu.menu')"
           :disabled="loading"
           @page-change="onPageChange"
           @page-size-change="onPageSizeChange"
@@ -73,9 +77,9 @@
       </div>
     </a-card>
 
-    <category-detail-modal
+    <menu-detail-modal
       :id="selectedId"
-      ref="refCategoryDetailModal"
+      ref="refMenuDetailModal"
       @modify="refresh"
     />
 
@@ -88,16 +92,15 @@
 </template>
 
 <script>
-import { flatten, pick } from 'lodash'
-
 import { SORT_TYPE } from '~/constants'
 
-import CategoryTable from '~/components/organisms/categories/CategoryTable'
-import CategoryDetailModal from '~/components/organisms/categories/CategoryDetailModal'
+import MenuSearchForm from '~/components/organisms/menus/MenuSearchForm'
+import MenuTable from '~/components/organisms/menus/MenuTable'
 import AppPagination from '~/components/molecules/AppPagination'
 import AppSort from '~/components/molecules/AppSort'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
+import Common from '~/mixins/common'
 import AsyncLoading from '~/mixins/do-async-loading'
 import ConditionHandler from '~/mixins/condition'
 import SearchFormHandler from '~/mixins/search-form'
@@ -113,45 +116,56 @@ const SORT_LIST = [
   },
   {
     id: 1,
-    label: 'category.id',
+    label: 'menu.id',
     sort: 'id',
     sortType: SORT_TYPE.ASC
   },
   {
     id: 2,
-    label: 'category.id',
+    label: 'menu.id',
     sort: 'id',
+    sortType: SORT_TYPE.DESC
+  },
+  {
+    id: 3,
+    label: 'menu.name',
+    sort: 'name',
+    sortType: SORT_TYPE.ASC
+  },
+  {
+    id: 4,
+    label: 'menu.name',
+    sort: 'name',
     sortType: SORT_TYPE.DESC
   }
 ]
 
 export default {
   components: {
-    CategoryTable,
-    CategoryDetailModal,
+    MenuSearchForm,
+    MenuTable,
     AppPagination,
     AppSort,
     AppDeleteConfirmDialog
   },
 
   mixins: [
+    Common,
     AsyncLoading,
     ConditionHandler,
     SearchFormHandler,
-    Paginator,
-    SortHandler
+    SortHandler,
+    Paginator
   ],
 
   data() {
     return {
       data: [],
       total: 0,
-      resourceTypeName: this.$t('category.category'),
+      resourceTypeName: this.$t('user.user'),
       selectedId: null,
       selectedName: '',
-      SORT_LIST,
-      limit: 100,
-      lastPage: 1
+      SORT_LIST
     }
   },
 
@@ -196,13 +210,13 @@ export default {
 
   methods: {
     /**
-     * Call API get box list by condition search
+     * Call API get users by condition search
      * Show data on table result
      *
      * @return {Object} API response for error handle
      */
     async fetch() {
-      const res = await this.$dam.getCategoryList(this.query)
+      const res = await this.$dam.getMenuList(this.query)
 
       if (Array.isArray(res.data)) {
         this.total = res.meta.total
@@ -213,19 +227,9 @@ export default {
     },
 
     /**
-     * Open simulator detail modal
+     * Set select id
      *
-     * @param {Object} id - Current simulator
-     */
-    onShowDetail(id) {
-      this.setSelectedId(id)
-      this.$refs.refCategoryDetailModal.open()
-    },
-
-    /**
-     * Set selectedId
-     *
-     * @param {Number} id - Category Id
+     * @param {Number} id - user id
      */
     setSelectedId(id) {
       this.selectedId = id
@@ -234,18 +238,28 @@ export default {
     /**
      * Set select id
      *
-     * @param {String} name - Category name
+     * @param {String} name - Menu name
      */
     setSelectedName(name) {
       this.selectedName = name
     },
 
     /**
+     * Open user detail modal
+     *
+     * @param {Number} id - Current id
+     */
+    onShowDetail(id) {
+      this.setSelectedId(id)
+      this.$refs.refMenuDetailModal.open()
+    },
+
+    /**
      * Open confirm delete
-     * If confirm then call delete box
+     * If confirm then call delete user
      * Else cancel
      *
-     * @param {object} item - Category
+     * @param {object} item - user
      */
     onConfirmDelete(item) {
       if (!item || !item.id) {
@@ -260,40 +274,27 @@ export default {
     /**
      * Call API delete.
      *
-     * @param {String} selectedId - User id
+     * @param {String} selectedId - user id
      */
     async delete(selectedId) {
       if (!selectedId) {
         return
       }
 
-      await this.$dam.deleteCategory({ id: selectedId })
+      await this.$dam.deleteMenu({ id: selectedId })
     },
 
     /**
-     * Generate csv file
+     * Update status
+     *
+     * @param {object} params - Params
      */
-    async generateCSV() {
-      if (Array.isArray(this.data) && this.data.length) {
-        this.loading = true
-
-        try {
-          const promises = [...Array(this.lastPage)].map((item, index) => {
-            const query = { ...this.query, page: index + 1 }
-            return this.$dam.getCategoryList(query)
-          })
-
-          const res = await Promise.all(promises)
-          const keys = ['id', 'name', 'description']
-          const data = flatten(res.map(item => item.data)).map(item => pick(item, keys))
-
-          this.$csv.parseAndDownload({ data })
-        } catch (err) {
-          console.error(err)
-        } finally {
-          this.loading = false
-        }
+    onToggleStatus(params) {
+      if (!params || !params.id) {
+        return
       }
+
+      this.onAction('updateMenu', params, this.$t('common.action'))
     }
   }
 }
