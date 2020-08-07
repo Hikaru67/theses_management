@@ -134,7 +134,8 @@ export const swagger = {
     // Dashboard API
     '/dashboard': {
       get: {
-        operationId: 'getDashboardInfo'
+        operationId: 'getDashboardInfo',
+        useMock: 'dashboard'
       }
     },
 
@@ -149,51 +150,62 @@ export const swagger = {
     // Article API
     '/admin/article': {
       get: {
-        operationId: 'getArticleList'
+        operationId: 'getArticleList',
+        useMock: 'article'
       },
       post: {
         operationId: 'createArticle',
         consumes: ['application/json', 'multipart/form-data'],
-        produces: ['application/json']
+        produces: ['application/json'],
+        useMock: 'article'
       }
     },
     '/admin/article/{id}': {
       get: {
-        operationId: 'getArticle'
+        operationId: 'getArticle',
+        useMock: 'article'
       },
       put: {
         operationId: 'updateArticle',
         consumes: ['application/json', 'multipart/form-data'],
-        produces: ['application/json']
+        produces: ['application/json'],
+        useMock: 'article'
       },
       delete: {
-        operationId: 'deleteArticle'
+        operationId: 'deleteArticle',
+        useMock: 'article'
       }
     },
 
     // Article category API
     '/admin/article-category': {
       get: {
-        operationId: 'getArticleCategoryList'
+        operationId: 'getArticleCategoryList',
+        useMock: 'article-category'
       },
       post: {
-        operationId: 'createArticleCategory'
+        operationId: 'createArticleCategory',
+        useMock: 'article-category'
       }
     },
     '/admin/article-category/{id}': {
       get: {
-        operationId: 'getArticleCategory'
+        operationId: 'getArticleCategory',
+        useMock: 'article-category'
       },
       put: {
-        operationId: 'updateArticleCategory'
+        operationId: 'updateArticleCategory',
+        useMock: 'article-category'
       },
       delete: {
-        operationId: 'deleteArticleCategory'
+        operationId: 'deleteArticleCategory',
+        useMock: 'article-category'
       }
     },
     '/admin/article-category/move': {
       post: {
-        operationId: 'moveArticleCategory'
+        operationId: 'moveArticleCategory',
+        useMock: 'article-category'
       }
     },
 
@@ -231,23 +243,28 @@ export const swagger = {
     //  Site API
     '/admin/site': {
       get: {
-        operationId: 'getSiteList'
+        operationId: 'getSiteList',
+        useMock: 'site'
       },
       post: {
         operationId: 'createSite',
-        consumes: ['application/json', 'multipart/form-data']
+        consumes: ['application/json', 'multipart/form-data'],
+        useMock: 'site'
       }
     },
     '/admin/site/{id}': {
       get: {
-        operationId: 'getSite'
+        operationId: 'getSite',
+        useMock: 'site'
       },
       put: {
         operationId: 'updateSite',
-        consumes: ['application/json', 'multipart/form-data']
+        consumes: ['application/json', 'multipart/form-data'],
+        useMock: 'site'
       },
       delete: {
-        operationId: 'deleteSite'
+        operationId: 'deleteSite',
+        useMock: 'site'
       }
     }
   }
