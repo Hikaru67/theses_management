@@ -5,29 +5,75 @@
     :model="model"
     :rules="rulesForm"
     :label-col="{ sm: 6 }"
-    :wrapper-col="{ sm: 14 }"
+    :wrapper-col="{ sm: 18 }"
     class="main-form"
     @submit.prevent="onHandleSubmit"
   >
     <div class="box-form-inner p-4">
-      <a-form-model-item :label="$t('category.name')" prop="name">
-        <a-input
-          v-model="model.name"
-          :placeholder="$t('category.name')"
-          :disabled="loading"
-        >
-          <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
-        </a-input>
-      </a-form-model-item>
+      <a-row type="flex" :gutter="30">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('menu.title')" prop="title">
+            <a-input
+              v-model="model.title"
+              :placeholder="$t('menu.title')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
 
-      <a-form-model-item :label="$t('category.description')" prop="description">
-        <a-textarea
-          v-model="model.description"
-          :placeholder="$t('category.description')"
-          rows="6"
-          :disabled="loading"
-        />
-      </a-form-model-item>
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('menu.link')" prop="link">
+            <a-input
+              v-model="model.link"
+              :placeholder="$t('menu.link')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('menu.icon')" prop="icon">
+            <a-input
+              v-model="model.icon"
+              type="icon"
+              :placeholder="$t('menu.icon')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="icons" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('menu.parent_id')" prop="parent_id">
+            <a-input
+              v-model="model.parent_id"
+              type="parent_id"
+              :placeholder="$t('menu.parent_id')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="stream" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('menu.position')" prop="position">
+            <a-input
+              v-model="model.position"
+              type="position"
+              :placeholder="$t('menu.position')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="list-ol" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+      </a-row>
     </div>
 
     <div class="box-form-footer text-center bt-1 p-3">
@@ -57,7 +103,7 @@
 </template>
 
 <script>
-import Category from '~/models/Category'
+import Menu from '~/models/Menu'
 
 import CreateEditForm from '~/mixins/create-edit-form'
 
@@ -66,28 +112,10 @@ export default {
     CreateEditForm
   ],
 
-  props: {
-    /**
-     * category curent id
-     */
-    id: {
-      type: Number,
-      default: 0
-    },
-
-    /**
-     * Category parent id
-     */
-    parentId: {
-      type: Number,
-      default: 0
-    }
-  },
-
   data() {
     return {
-      model: new Category(),
-      modelType: this.$t('category.category')
+      model: new Menu(),
+      modelType: this.$t('menu.menu')
     }
   },
 
@@ -99,17 +127,48 @@ export default {
      */
     rulesForm() {
       return {
-        name: [
+        title: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('category.name') }),
+            message: this.$t('messages.error.required', { name: this.$t('menu.title') }),
             trigger: ['change', 'blur']
           }
         ],
-        description: [
+        link: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('category.description') }),
+            message: this.$t('messages.error.required', { name: this.$t('menu.link') }),
+            trigger: ['change', 'blur']
+          }
+        ],
+        icon: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('menu.icon') }),
+            trigger: ['change', 'blur']
+          }
+        ],
+        parent_id: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('menu.parent_id') }),
+            trigger: ['change', 'blur']
+          },
+          {
+            validator: this.$validator.numericValidator,
+            message: this.$t('messages.error.numeric', { name: this.$t('menu.parent_id') }),
+            trigger: ['change', 'blur']
+          }
+        ],
+        position: [
+          {
+            required: true,
+            message: this.$t('messages.error.required', { name: this.$t('menu.position') }),
+            trigger: ['change', 'blur']
+          },
+          {
+            validator: this.$validator.numericValidator,
+            message: this.$t('messages.error.numeric', { name: this.$t('menu.position') }),
             trigger: ['change', 'blur']
           }
         ]
@@ -123,28 +182,16 @@ export default {
      * Get detail
      */
     id(val) {
-      this.clearForm()
+      this.model = new Menu()
 
       if (val) {
         this.getDetail(val)
-      }
-    },
-
-    /**
-     * Watching changes of parentId
-     * Set parent Id
-     *
-     * @param {Number} val - parent Id
-     */
-    parentId(val) {
-      if (val) {
-        this.model.parentId = val
       }
     }
   },
 
   mounted() {
-    this.getDetail(this.id)
+    this.getDetail(+this.id)
   },
 
   methods: {
@@ -154,14 +201,7 @@ export default {
      * @param {Object} data
      */
     setModel(data) {
-      this.model = new Category(data)
-    },
-
-    /**
-     * Clear form data
-     */
-    clearForm() {
-      this.model = new Category()
+      this.model = new Menu(data)
     },
 
     /**
