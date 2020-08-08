@@ -7,25 +7,37 @@
   >
     <a-row type="flex" :gutter="30">
       <a-col :md="12">
-        <a-form-item :label="$t('user.name')">
+        <a-form-item :label="$t('menu.title')">
           <a-input
-            v-model="name"
-            :placeholder="$t('user.name')"
+            v-model="title"
+            :placeholder="$t('menu.title')"
             :disabled="loading"
           >
-            <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
+            <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
           </a-input>
         </a-form-item>
       </a-col>
 
       <a-col :md="12">
-        <a-form-item :label="$t('user.email')">
+        <a-form-item :label="$t('menu.link')">
           <a-input
-            v-model="email"
-            :placeholder="$t('user.email')"
+            v-model="link"
+            :placeholder="$t('menu.link')"
             :disabled="loading"
           >
-            <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />
+            <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
+          </a-input>
+        </a-form-item>
+      </a-col>
+
+      <a-col :md="12">
+        <a-form-item :label="$t('menu.icon')">
+          <a-input
+            v-model="icon"
+            :placeholder="$t('menu.icon')"
+            :disabled="loading"
+          >
+            <font-awesome-icon slot="addonBefore" icon="icons" class="width-1x" />
           </a-input>
         </a-form-item>
       </a-col>
@@ -73,8 +85,9 @@ export default {
 
   data() {
     return {
-      name: this.$route.query.name || '',
-      email: this.$route.query.email || ''
+      title: this.$route.query.title || '',
+      link: this.$route.query.link || '',
+      icon: this.$route.query.icon || ''
     }
   },
 
@@ -85,12 +98,16 @@ export default {
     condition() {
       const condition = {}
 
-      if (this.name) {
-        condition.name = this.name
+      if (this.title) {
+        condition.title = this.title
       }
 
-      if (this.email) {
-        condition.email = this.email
+      if (this.link) {
+        condition.link = this.link
+      }
+
+      if (this.icon) {
+        condition.icon = this.icon
       }
 
       return condition
@@ -111,8 +128,9 @@ export default {
      * On clear form search
      */
     onClearFormSearch() {
-      this.name = ''
-      this.email = ''
+      this.title = ''
+      this.link = ''
+      this.icon = ''
     }
   }
 }

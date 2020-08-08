@@ -156,11 +156,17 @@ import Role from '~/models/Role'
 import RoleForm from '~/components/organisms/roles/RoleForm'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
+import Table from '~/mixins/table'
+
 export default {
   components: {
     RoleForm,
     AppDeleteConfirmDialog
   },
+
+  mixins: [
+    Table
+  ],
 
   data() {
     return {
@@ -178,31 +184,6 @@ export default {
       ],
       loading: false,
       showDetailForm: false
-    }
-  },
-
-  computed: {
-    /**
-     * Loading & icon loading
-     *
-     * @return {object} Loading & icon loading
-     */
-    tableLoading() {
-      return {
-        spinning: this.loading,
-        indicator: <a-spin />
-      }
-    },
-
-    /**
-     * Locale for Table
-     *
-     * @return {object} Locale for Table
-     */
-    tableLocale() {
-      return {
-        emptyText: this.$t('common.no_data_in_table')
-      }
     }
   },
 

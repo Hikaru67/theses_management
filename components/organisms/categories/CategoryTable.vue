@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import Table from '~/mixins/table'
+
 const FIELDS = [
   { dataIndex: 'id', title: 'category.id', width: 60 },
   { dataIndex: 'name', title: 'category.name' },
@@ -61,6 +63,10 @@ export default {
       default: false
     }
   },
+
+  mixins: [
+    Table
+  ],
 
   computed: {
     /**

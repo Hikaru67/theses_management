@@ -73,6 +73,8 @@
 // import { get } from 'lodash'
 // import { mapGetters } from 'vuex'
 
+import Table from '~/mixins/table'
+
 const FIELDS = [
   { dataIndex: 'id', title: 'user.id', width: 60 },
   { dataIndex: 'name', title: 'user.name' },
@@ -106,6 +108,7 @@ export default {
   },
 
   mixins: [
+    Table
   ],
 
   computed: {

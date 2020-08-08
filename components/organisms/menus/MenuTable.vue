@@ -33,10 +33,15 @@
 </template>
 
 <script>
+import Table from '~/mixins/table'
+
 const FIELDS = [
-  { dataIndex: 'id', title: 'category.id', width: 60 },
-  { dataIndex: 'name', title: 'category.name' },
-  { dataIndex: 'description', title: 'category.description' },
+  { dataIndex: 'id', title: 'menu.id', width: 60 },
+  { dataIndex: 'title', title: 'menu.title' },
+  { dataIndex: 'link', title: 'menu.link' },
+  { dataIndex: 'icon', title: 'menu.icon' },
+  { dataIndex: 'parent_id', title: 'menu.parent_id' },
+  { dataIndex: 'position', title: 'menu.position' },
   { dataIndex: 'action', title: 'common.action', scopedSlots: { customRender: 'action' }, width: 140 }
 ]
 
@@ -62,6 +67,10 @@ export default {
     }
   },
 
+  mixins: [
+    Table
+  ],
+
   computed: {
     /**
      * Get FIELDS of header table
@@ -75,37 +84,14 @@ export default {
           title: this.$t(item.title)
         }
       })
-    },
-
-    /**
-     * Loading & icon loading
-     *
-     * @return {object} Loading & icon loading
-     */
-    tableLoading() {
-      return {
-        spinning: this.loading,
-        indicator: <a-spin />
-      }
-    },
-
-    /**
-     * Locale for Table
-     *
-     * @return {object} Locale for Table
-     */
-    tableLocale() {
-      return {
-        emptyText: this.$t('common.no_data_in_table')
-      }
     }
   },
 
   methods: {
     /**
-     * Event show category detail modal
+     * Event show menu detail modal
      *
-     * @param {number} id - Category id
+     * @param {number} id - menu id
      */
     onShowDetail(id) {
       if (!id) {
@@ -116,9 +102,9 @@ export default {
     },
 
     /**
-     * Delete category
+     * Delete menu
      *
-     * @param {object} item - Category
+     * @param {object} item - menu
      */
     onDelete(item) {
       if (!item || !item.id) {
