@@ -154,7 +154,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.email,
+            validator: this.$validator.emailValidator,
             message: this.$t('messages.error.bad_email_format', { name: this.$t('user.email') }),
             trigger: ['change', 'blur']
           }
@@ -227,6 +227,8 @@ export default {
      * Get detail
      */
     id(val) {
+      this.model = new User()
+
       if (val) {
         this.getDetail(val)
       }

@@ -1,20 +1,18 @@
 <template>
   <a-modal
     :visible="visible"
+    :width="1300"
     :footer="null"
-    :width="720"
     class="modal-wrap"
     @cancel="onCancel"
   >
     <template slot="title">
       <font-awesome-icon :icon="`${id ? 'pencil-alt' : 'plus-circle'}`" />
-      {{ id ? $t('common.update') : $t('common.create') }}
+      {{ id ? $t('menu.edit_menu') : $t('menu.create_new_menu') }}
     </template>
 
-    <category-form
+    <menu-form
       :id="id"
-      ref="refCategoryForm"
-      :parent-id="parentId"
       @modify="onCancel(); $emit('modify')"
       @cancel="onCancel"
     />
@@ -27,14 +25,14 @@
 
 .modal-wrap {
   /deep/ {
-    // .ant-modal {
-    //   @include mq(max_xl) {
-    //     max-width: 1170px;
-    //   }
-    //   @include mq(max_lg) {
-    //     max-width: 95%;
-    //   }
-    // }
+    .ant-modal {
+      @include mq(max_xl) {
+        max-width: 1170px;
+      }
+      @include mq(max_lg) {
+        max-width: 95%;
+      }
+    }
     .ant-modal-body {
       padding: 0;
     }
@@ -43,26 +41,18 @@
 </style>
 
 <script>
-import CategoryForm from '~/components/organisms/categories/CategoryForm'
+import MenuForm from '~/components/organisms/menus/MenuForm'
 
 export default {
   components: {
-    CategoryForm
+    MenuForm
   },
 
   props: {
     /**
-     * category curent id
+     * Menu id
      */
     id: {
-      type: Number,
-      default: 0
-    },
-
-    /**
-     * category parent id
-     */
-    parentId: {
       type: Number,
       default: 0
     }

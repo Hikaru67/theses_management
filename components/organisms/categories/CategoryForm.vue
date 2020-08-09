@@ -123,7 +123,7 @@ export default {
      * Get detail
      */
     id(val) {
-      this.clearForm()
+      this.model = new Category()
 
       if (val) {
         this.getDetail(val)
@@ -155,13 +155,6 @@ export default {
      */
     setModel(data) {
       this.model = new Category(data)
-    },
-
-    /**
-     * Clear form data
-     */
-    clearForm() {
-      this.model = new Category()
     },
 
     /**
