@@ -2,8 +2,8 @@
   <div class="main-list">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="user-friends" />
-        {{ $t('user.list_user') }}
+        <font-awesome-icon icon="sitemap" />
+        {{ $t('site.list_site') }}
       </template>
 
       <template slot="extra">
@@ -11,13 +11,9 @@
           <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
           {{ $t('common.create_new') }}
         </a-button>
-        <!-- <a-button html-type="button" type="primary" ghost @click="$router.push({ path: '/users/new' })">
-          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
-          {{ $t('common.create_new') }}
-        </a-button> -->
       </template>
 
-      <user-search-form
+      <site-search-form
         :loading="loading"
         @submit="onSearch"
       />
@@ -33,19 +29,18 @@
         <app-pagination
           :total="total"
           :current-page="page"
-          :item-name="$t('user.user')"
+          :item-name="$t('site.site')"
           :disabled="loading"
           @page-change="onPageChange"
           @page-size-change="onPageSizeChange"
         />
       </div>
 
-      <user-table
+      <site-table
         :data="data"
         :loading="loading"
         @show-detail="onShowDetail"
         @delete="onConfirmDelete"
-        @toggle-status="onToggleStatus"
       />
 
       <div class="main-control">
@@ -59,7 +54,7 @@
         <app-pagination
           :total="total"
           :current-page="page"
-          :item-name="$t('user.user')"
+          :item-name="$t('site.site')"
           :disabled="loading"
           @page-change="onPageChange"
           @page-size-change="onPageSizeChange"
@@ -67,9 +62,9 @@
       </div>
     </a-card>
 
-    <user-detail-modal
+    <site-detail-modal
       :id="selectedId"
-      ref="refUserDetailModal"
+      ref="refSiteDetailModal"
       @modify="refresh"
     />
 
@@ -84,9 +79,9 @@
 <script>
 import { SORT_TYPE } from '~/constants'
 
-import UserSearchForm from '~/components/organisms/users/UserSearchForm'
-import UserTable from '~/components/organisms/users/UserTable'
-import UserDetailModal from '~/components/organisms/users/UserDetailModal'
+import SiteSearchForm from '~/components/organisms/sites/SiteSearchForm'
+import SiteTable from '~/components/organisms/sites/SiteTable'
+import SiteDetailModal from '~/components/organisms/sites/SiteDetailModal'
 import AppPagination from '~/components/molecules/AppPagination'
 import AppSort from '~/components/molecules/AppSort'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
@@ -107,25 +102,25 @@ const SORT_LIST = [
   },
   {
     id: 1,
-    label: 'user.id',
+    label: 'site.id',
     sort: 'id',
     sortType: SORT_TYPE.ASC
   },
   {
     id: 2,
-    label: 'user.id',
+    label: 'site.id',
     sort: 'id',
     sortType: SORT_TYPE.DESC
   },
   {
     id: 3,
-    label: 'user.name',
+    label: 'site.name',
     sort: 'name',
     sortType: SORT_TYPE.ASC
   },
   {
     id: 4,
-    label: 'user.name',
+    label: 'site.name',
     sort: 'name',
     sortType: SORT_TYPE.DESC
   }
@@ -133,9 +128,9 @@ const SORT_LIST = [
 
 export default {
   components: {
-    UserSearchForm,
-    UserTable,
-    UserDetailModal,
+    SiteSearchForm,
+    SiteTable,
+    SiteDetailModal,
     AppPagination,
     AppSort,
     AppDeleteConfirmDialog
@@ -154,7 +149,7 @@ export default {
     return {
       data: [],
       total: 0,
-      resourceTypeName: this.$t('user.user'),
+      resourceTypeName: this.$t('site.site'),
       selectedId: null,
       selectedName: '',
       SORT_LIST
@@ -202,13 +197,13 @@ export default {
 
   methods: {
     /**
-     * Call API get users by condition search
+     * Call API get sites by condition search
      * Show data on table result
      *
      * @return {Object} API response for error handle
      */
     async fetch() {
-      const res = await this.$dam.getUserList(this.query)
+      const res = await this.$dam.getSiteList(this.query)
 
       if (Array.isArray(res.data)) {
         this.total = res.meta.total
@@ -221,7 +216,7 @@ export default {
     /**
      * Set select id
      *
-     * @param {Number} id - user id
+     * @param {Number} id - site id
      */
     setSelectedId(id) {
       this.selectedId = id
@@ -230,28 +225,28 @@ export default {
     /**
      * Set select id
      *
-     * @param {String} name - User name
+     * @param {String} name - Site name
      */
     setSelectedName(name) {
       this.selectedName = name
     },
 
     /**
-     * Open user detail modal
+     * Open site detail modal
      *
      * @param {Number} id - Current id
      */
     onShowDetail(id) {
       this.setSelectedId(id)
-      this.$refs.refUserDetailModal.open()
+      this.$refs.refSiteDetailModal.open()
     },
 
     /**
      * Open confirm delete
-     * If confirm then call delete user
+     * If confirm then call delete site
      * Else cancel
      *
-     * @param {object} item - user
+     * @param {object} item - site
      */
     onConfirmDelete(item) {
       if (!item || !item.id) {
@@ -266,27 +261,14 @@ export default {
     /**
      * Call API delete.
      *
-     * @param {String} selectedId - user id
+     * @param {String} selectedId - site id
      */
     async delete(selectedId) {
       if (!selectedId) {
         return
       }
 
-      await this.$dam.deleteUser({ id: selectedId })
-    },
-
-    /**
-     * Update status
-     *
-     * @param {object} params - Params
-     */
-    onToggleStatus(params) {
-      if (!params || !params.id) {
-        return
-      }
-
-      this.onAction('updateUser', params, this.$t('common.action'))
+      await this.$dam.deleteSite({ id: selectedId })
     }
   }
 }

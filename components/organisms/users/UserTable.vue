@@ -135,29 +135,6 @@ export default {
           title: this.$t(item.title)
         }
       })
-    },
-
-    /**
-     * Loading & icon loading
-     *
-     * @return {object} Loading & icon loading
-     */
-    tableLoading() {
-      return {
-        spinning: this.loading,
-        indicator: <a-spin />
-      }
-    },
-
-    /**
-     * Locale for Table
-     *
-     * @return {object} Locale for Table
-     */
-    tableLocale() {
-      return {
-        emptyText: this.$t('common.no_data_in_table')
-      }
     }
   },
 

@@ -12,7 +12,6 @@
         </nuxt-link>
       </div>
 
-      <!-- <a-menu theme="dark" :default-selected-keys="['1']" mode="inline"> -->
       <a-menu theme="dark" mode="inline">
         <a-menu-item>
           <nuxt-link to="/" :class="`${$route.path === '/' ? 'on-home' : ''}`">
@@ -21,7 +20,7 @@
           </nuxt-link>
         </a-menu-item>
 
-        <a-sub-menu>
+        <!-- <a-sub-menu>
           <span slot="title">
             <font-awesome-icon icon="user-friends" class="anticon" />
             <span>Team</span>
@@ -40,7 +39,7 @@
               <span>Users</span>
             </nuxt-link>
           </a-menu-item>
-        </a-sub-menu>
+        </a-sub-menu> -->
 
         <a-menu-item-group>
           <template slot="title">
@@ -51,6 +50,13 @@
             <nuxt-link to="/categories">
               <font-awesome-icon icon="th-list" class="anticon" />
               <span>Categories</span>
+            </nuxt-link>
+          </a-menu-item>
+
+          <a-menu-item key="12">
+            <nuxt-link to="/sites">
+              <font-awesome-icon icon="th-list" class="anticon" />
+              <span>Sites</span>
             </nuxt-link>
           </a-menu-item>
         </a-menu-item-group>
