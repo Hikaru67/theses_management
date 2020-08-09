@@ -5,66 +5,66 @@
 
 import { camelCase } from 'lodash'
 
-export default function({ $axios }, inject) {
+export default ({ $axios }, inject) => {
   class APIManager {
     constructor(axios) {
       this.axios = axios
     }
 
-    get(path) {
-      const key = camelCase(`get-${path}`)
+    get(path, options = {}) {
+      const key = options.name || camelCase(`get-${path}`)
       return {
         [key]: (config = {}) => this.axios.get(path, config)
       }
     }
 
-    post(path) {
-      const key = camelCase(`post-${path}`)
+    post(path, options = {}) {
+      const key = options.name || camelCase(`post-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.post(path, data, config)
       }
     }
 
-    resource(model) {
+    resource(model, options = {}) {
       return {
-        ...this.index(model),
-        ...this.store(model),
-        ...this.show(model),
-        ...this.update(model),
-        ...this.delete(model)
+        ...this.index(model, options),
+        ...this.store(model, options),
+        ...this.show(model, options),
+        ...this.update(model, options),
+        ...this.delete(model, options)
       }
     }
 
-    index(path) {
-      const key = camelCase(`index-${path}`)
+    index(path, options = {}) {
+      const key = options.name || camelCase(`index-${path}`)
       return {
         [key]: (config = {}) => this.axios.get(path, config)
       }
     }
 
-    store(path) {
-      const key = camelCase(`store-${path}`)
+    store(path, options = {}) {
+      const key = options.name || camelCase(`store-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.post(path, data, config)
       }
     }
 
-    show(path) {
-      const key = camelCase(`show-${path}`)
+    show(path, options = {}) {
+      const key = options.name || camelCase(`show-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.get(`${path}/${data.id}`, config)
       }
     }
 
-    update(path) {
-      const key = camelCase(`update-${path}`)
+    update(path, options = {}) {
+      const key = options.name || camelCase(`update-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.put(`${path}/${data.id}`, data, config)
       }
     }
 
-    delete(path) {
-      const key = camelCase(`delete-${path}`)
+    delete(path, options = {}) {
+      const key = options.name || camelCase(`delete-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.delete(`${path}/${data.id}`, data, config)
       }
@@ -74,7 +74,7 @@ export default function({ $axios }, inject) {
       let data = {}
       Object.entries(routes).forEach(([path, methods]) => {
         Object.entries(methods).forEach(([method, options]) => {
-          data = { ...data, ...this[method](path) }
+          data = { ...data, ...this[method](path, options) }
         })
       })
       return data
@@ -103,6 +103,11 @@ export default function({ $axios }, inject) {
     albums: {
       show: {},
       index: {}
+    },
+    'menu/update': {
+      post: {
+        name: 'moveMenu'
+      }
     }
   }
 
