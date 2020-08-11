@@ -6,7 +6,7 @@ export default {
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  mode: 'spa',
+  mode: 'universal',
 
   /*
   ** Nuxt target
@@ -187,24 +187,76 @@ export default {
     }
   },
 
+  router: {
+    middleware: ['auth']
+  },
+
   /**
    * Nuxt Auth
    * See https://auth.nuxtjs.org/
    */
   auth: {
+    // redirect: {
+    //   login: '/login',
+    //   logout: '/login',
+    //   home: '/profile',
+    //   user: '/profile'
+    // },
+    // strategies: {
+    //   local: {
+    //     endpoints: {
+    //       login: { url: '/api/login', method: 'post', propertyName: 'data.api_token' },
+    //       user: { url: '/api/me', method: 'get', propertyName: 'data' },
+    //       logout: false
+    //     }
+    //   },
+    //   tokenRequired: false,
+    //   tokenType: false
+    // }
     redirect: {
       login: '/login',
-      logout: '/login',
-      home: '/profile',
-      user: '/profile'
+      logout: '/',
+      callback: '/login',
+      user: '/'
     },
     strategies: {
-      local: {
+      password_grant: {
+        _scheme: 'local',
         endpoints: {
-          login: { url: '/api/login', method: 'post', propertyName: 'data.api_token' },
-          user: { url: '/api/me', method: 'get', propertyName: 'data' },
-          logout: false
+          login: {
+            url: '/oauth/token',
+            method: 'post',
+            propertyName: 'access_token'
+          },
+          logout: false,
+          user: {
+            url: 'api/me',
+            propertyName: 'data'
+          }
         }
+      },
+      password_grant_custom: {
+        _scheme: '~/auth/schemes/PassportPasswordScheme.js',
+        client_id: process.env.PASSPORT_PASSWORD_GRANT_ID,
+        client_secret: process.env.PASSPORT_PASSWORD_GRANT_SECRET,
+        endpoints: {
+          login: {
+            url: '/oauth/token',
+            method: 'post',
+            propertyName: 'access_token'
+          },
+          logout: false,
+          user: {
+            url: 'api/me',
+            propertyName: 'data'
+          }
+        }
+      },
+      'laravel.passport': {
+        url: process.env.LARAVEL_ENDPOINT,
+        client_id: process.env.PASSPORT_CLIENT_ID,
+        client_secret: process.env.PASSPORT_CLIENT_SECRET,
+        userinfo_endpoint: process.env.LARAVEL_ENDPOINT + '/api/oauth/me'
       }
     }
   },
