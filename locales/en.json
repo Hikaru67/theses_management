@@ -41,6 +41,7 @@
       "failed_to_get": "Failed to get {name}",
       "failed_to_login": "Failed to login.",
       "failed_to_action": "{name} is failed",
+      "input_error": "入力エラーがあります。",
       "unmatch_value": "{name1}/{name2} does not match.",
       "bad_email_format": "Bad email format.",
       "unmatch_confirmation_email": "{name} does not match.",
@@ -305,7 +306,7 @@
     "status": "Status",
     "url": "URL",
     "description": "Description",
-    "noneActive": "None active",
+    "noneActive": "Inactive",
     "active": "Active"
   },
   "dashboard": {

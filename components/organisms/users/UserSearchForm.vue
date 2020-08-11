@@ -1,13 +1,17 @@
 <template>
-  <a-form
+  <a-form-model
+    ref="refForm"
+    v-loading="loading"
+    :model="this"
+    :rules="{}"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="search-form"
-    @submit.prevent="onSubmit"
+    @submit.prevent="onHandleSubmit"
   >
     <a-row type="flex" :gutter="30">
-      <a-col :md="12">
-        <a-form-item :label="$t('user.name')">
+      <a-col :span="24" :md="12">
+        <a-form-model-item :label="$t('user.name')" prop="name">
           <a-input
             v-model="name"
             :placeholder="$t('user.name')"
@@ -15,11 +19,11 @@
           >
             <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
           </a-input>
-        </a-form-item>
+        </a-form-model-item>
       </a-col>
 
-      <a-col :md="12">
-        <a-form-item :label="$t('user.email')">
+      <a-col :span="24" :md="12">
+        <a-form-model-item :label="$t('user.email')" prop="email">
           <a-input
             v-model="email"
             :placeholder="$t('user.email')"
@@ -27,7 +31,7 @@
           >
             <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />
           </a-input>
-        </a-form-item>
+        </a-form-model-item>
       </a-col>
 
       <a-col :md="24" class="box-form-footer text-center p-3">
@@ -54,7 +58,7 @@
         </a-button>
       </a-col>
     </a-row>
-  </a-form>
+  </a-form-model>
 </template>
 
 <script>
@@ -99,11 +103,9 @@ export default {
 
   methods: {
     /**
-     * Check validate input
-     * If valid then show error
-     * Else call submit event of page index
+     * Handle submit
      */
-    onSubmit() {
+    onHandleSubmit() {
       this.$emit(EVENT_SUBMIT, this.condition)
     },
 

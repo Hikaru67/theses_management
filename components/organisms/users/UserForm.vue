@@ -136,7 +136,7 @@ export default {
     /**
      * Rules form
      *
-     * @param {array} - Rules form
+     * @param {object} - Rules form
      */
     rulesForm() {
       return {
@@ -305,7 +305,11 @@ export default {
      */
     onHandleSubmit() {
       this.$refs.refForm.validate(valid => {
-        if (valid) {
+        if (!valid) {
+          this.$notification.error({
+            message: this.$t('messages.error.input_error')
+          })
+        } else {
           this.onSubmit()
         }
       })

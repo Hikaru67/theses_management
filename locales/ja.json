@@ -41,6 +41,7 @@
       "failed_to_get": "{name}を取得できませんでした。",
       "failed_to_login": "ログインに失敗しました。",
       "failed_to_action": "{name}に失敗しました",
+      "input_error": "入力エラーがあります。",
       "unmatch_value": "{name1}/{name2}と一致するデータを見つけません。",
       "bad_email_format": "無効なメール",
       "unmatch_confirmation_email": "{name}と一致しません。",

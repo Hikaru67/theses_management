@@ -110,14 +110,9 @@ import { xor } from 'lodash'
 import Role from '~/models/Role'
 import Permission from '~/models/Permission'
 
-// import AppCheckboxGroup from '~/components/molecules/AppCheckboxGroup'
-
 import CreateEditForm from '~/mixins/create-edit-form'
 
 export default {
-  components: {
-    // AppCheckboxGroup
-  },
 
   mixins: [
     CreateEditForm
@@ -136,7 +131,7 @@ export default {
     /**
      * Rules form
      *
-     * @param {array} - Rules form
+     * @param {object} - Rules form
      */
     rulesForm() {
       return {
@@ -273,7 +268,11 @@ export default {
      */
     onHandleSubmit() {
       this.$refs.refForm.validate(valid => {
-        if (valid) {
+        if (!valid) {
+          this.$notification.error({
+            message: this.$t('messages.error.input_error')
+          })
+        } else {
           this.onSubmit()
         }
       })

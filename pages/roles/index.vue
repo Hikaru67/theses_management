@@ -15,25 +15,32 @@
             </a-button>
           </template>
 
-          <a-form
+          <a-form-model
+            v-loading="loading"
+            :model="this"
+            :rules="{}"
             :label-col="{ sm: 6 }"
             :wrapper-col="{ sm: 18 }"
             class="role-search-form"
-            @submit.prevent="getRoleList(); closeRoleDetailModal()"
+            @submit.prevent="onHandleSearch"
           >
-            <a-form-item :label="$t('role.name')">
-              <a-input-search
-                v-model="name"
-                :placeholder="$t('role.name')"
-                :disabled="loading"
-              >
-                <a-button slot="enterButton" html-type="submit" type="primary">
-                  <font-awesome-icon icon="search" class="width-1x mr-1" />
-                  {{ $t('common.search') }}
-                </a-button>
-              </a-input-search>
-            </a-form-item>
-          </a-form>
+            <a-row type="flex">
+              <a-col :span="24">
+                <a-form-model-item :label="$t('role.name')" prop="name">
+                  <a-input-search
+                    v-model="name"
+                    :placeholder="$t('role.name')"
+                    :disabled="loading"
+                  >
+                    <a-button slot="enterButton" html-type="submit" type="primary">
+                      <font-awesome-icon icon="search" class="width-1x mr-1" />
+                      {{ $t('common.search') }}
+                    </a-button>
+                  </a-input-search>
+                </a-form-model-item>
+              </a-col>
+            </a-row>
+          </a-form-model>
 
           <a-table
             :columns="fields"
@@ -156,17 +163,11 @@ import Role from '~/models/Role'
 import RoleForm from '~/components/organisms/roles/RoleForm'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
-import Table from '~/mixins/table'
-
 export default {
   components: {
     RoleForm,
     AppDeleteConfirmDialog
   },
-
-  mixins: [
-    Table
-  ],
 
   data() {
     return {
@@ -184,6 +185,31 @@ export default {
       ],
       loading: false,
       showDetailForm: false
+    }
+  },
+
+  computed: {
+    /**
+     * Loading & icon loading
+     *
+     * @return {object} Loading & icon loading
+     */
+    tableLoading() {
+      return {
+        spinning: this.loading,
+        indicator: <a-spin />
+      }
+    },
+
+    /**
+     * Locale for Table
+     *
+     * @return {object} Locale for Table
+     */
+    tableLocale() {
+      return {
+        emptyText: this.$t('common.no_data_in_table')
+      }
     }
   },
 
@@ -238,6 +264,14 @@ export default {
     closeRoleDetailModal() {
       this.selectedId = null
       this.showDetailForm = false
+    },
+
+    /**
+     * Handle submit
+     */
+    onHandleSearch() {
+      this.getRoleList()
+      this.closeRoleDetailModal()
     },
 
     /**

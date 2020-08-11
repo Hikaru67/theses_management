@@ -41,6 +41,7 @@
       "failed_to_get": "Lấy {name} thất bại",
       "failed_to_login": "Đăng nhập thất bại",
       "failed_to_action": "{name} thất bại",
+      "input_error": "Có một lỗi đầu vào",
       "unmatch_value": "{name1}/{name2} không trùng khớp.",
       "bad_email_format": "Email không đúng định dạng.",
       "unmatch_confirmation_email": "{name} không trùng khớp.",

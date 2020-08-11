@@ -62,7 +62,7 @@ export default {
             path: '/upload/logo_site/all-about-africa_14.png',
             updated_at: 1591064267
           },
-          status: 1,
+          status: 0,
           description: '',
           updated_at: 1591064201,
           url: 'http://all-about-africa.com'
@@ -92,7 +92,7 @@ export default {
             path: '/upload/logo_site/europa_12.png',
             updated_at: 1591064267
           },
-          status: 1,
+          status: 0,
           description: '',
           updated_at: 1591064201,
           url: 'https://ec.europa.eu/international-partnerships/newsroom/news'
@@ -107,7 +107,7 @@ export default {
             path: '/upload/logo_site/news-un_11.png',
             updated_at: 1591064267
           },
-          status: 1,
+          status: 0,
           description: '',
           updated_at: 1591064201,
           url: 'https://news.un.org/en/'

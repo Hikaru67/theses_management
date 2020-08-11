@@ -46,7 +46,7 @@
         <a-form-item :label="$t('site.status')" prop="status">
           <a-radio-group
             v-model="status"
-            :options="siteStatusGetMutipleLang"
+            :options="siteStatusList"
             name="status"
             :disabled="loading"
           />
@@ -101,7 +101,7 @@ export default {
       id: this.$route.query.id || '',
       name: this.$route.query.name || '',
       url: this.$route.query.url || '',
-      status: this.$route.query.url || -1
+      status: this.$route.query.status || +this.$route.query.status === 0 ? +this.$route.query.status : -1
     }
   },
 
@@ -124,7 +124,7 @@ export default {
         condition.url = this.url
       }
 
-      if (this.status && this.status !== -1) {
+      if ((this.status && this.status !== -1) || this.status === 0) {
         condition.status = this.status
       }
 
@@ -132,9 +132,11 @@ export default {
     },
 
     /**
-     * Get status multilang
+     * Get status list
+     *
+     * @param {array} - status list
      */
-    siteStatusGetMutipleLang() {
+    siteStatusList() {
       const allItem = [
         {
           id: -1,
@@ -162,6 +164,7 @@ export default {
      * Else call submit event of page index
      */
     onSubmit() {
+      console.log('this.condition', this.condition)
       this.$emit(EVENT_SUBMIT, this.condition)
     },
 

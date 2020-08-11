@@ -12,72 +12,46 @@
     <div class="box-form-inner p-4">
       <a-row type="flex" :gutter="30">
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.name')" prop="name">
+          <a-form-model-item :label="$t('site.name')" prop="name">
             <a-input
               v-model="model.name"
-              :placeholder="$t('user.name')"
+              :placeholder="$t('site.name')"
               :disabled="loading"
             >
-              <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
+              <font-awesome-icon slot="addonBefore" icon="sitemap" class="width-1x" />
             </a-input>
           </a-form-model-item>
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.email')" prop="email">
+          <a-form-model-item :label="$t('site.url')" prop="url">
             <a-input
-              v-model="model.email"
-              :placeholder="$t('user.email')"
+              v-model="model.url"
+              :placeholder="$t('site.url')"
               :disabled="loading"
             >
-              <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />
+              <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
             </a-input>
           </a-form-model-item>
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.password')" prop="password">
-            <a-input
-              v-model="model.password"
-              type="password"
-              :placeholder="$t('user.password')"
-              :disabled="loading"
-            >
-              <font-awesome-icon slot="addonBefore" icon="lock" class="width-1x" />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.password_confirm')" prop="password_confirm">
-            <a-input
-              v-model="model.password_confirm"
-              type="password"
-              :placeholder="$t('user.password_confirm')"
-              :disabled="loading"
-            >
-              <font-awesome-icon slot="addonBefore" icon="lock" class="width-1x" />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.status')" prop="status">
-            <a-radio-group
-              v-model="model.status"
-              :options="statusList"
-              name="status"
+          <a-form-model-item :label="$t('site.description')" prop="description">
+            <a-textarea
+              v-model="model.description"
+              :placeholder="$t('site.description')"
+              rows="5"
               :disabled="loading"
             />
           </a-form-model-item>
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.roles')" prop="roleId">
+          <a-form-model-item :label="$t('site.status')" prop="status">
             <a-radio-group
-              v-model="model.roleId"
-              :options="roleList"
-              name="role"
+              v-model="model.status"
+              :options="siteStatusList"
+              name="status"
               :disabled="loading"
             />
           </a-form-model-item>
@@ -112,10 +86,9 @@
 </template>
 
 <script>
-import { USER_STATUS_LIST } from '~/constants'
+import { SITE_LIST_STATUS } from '~/constants'
 
-import User from '~/models/User'
-import Role from '~/models/Role'
+import Site from '~/models/Site'
 
 import CreateEditForm from '~/mixins/create-edit-form'
 
@@ -126,9 +99,8 @@ export default {
 
   data() {
     return {
-      model: new User(),
-      modelType: this.$t('user.user'),
-      roleList: []
+      model: new Site(),
+      modelType: this.$t('site.site')
     }
   },
 
@@ -136,69 +108,33 @@ export default {
     /**
      * Rules form
      *
-     * @param {array} - Rules form
+     * @param {object} - Rules form
      */
     rulesForm() {
       return {
         name: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.name') }),
+            message: this.$t('messages.error.required', { name: this.$t('site.name') }),
             trigger: ['change', 'blur']
           }
         ],
-        email: [
+        url: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.email') }),
+            message: this.$t('messages.error.required', { name: this.$t('site.url') }),
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.emailValidator,
-            message: this.$t('messages.error.bad_email_format', { name: this.$t('user.email') }),
-            trigger: ['change', 'blur']
-          }
-        ],
-        password: [
-          {
-            required: !this.id || this.model.password_confirm,
-            message: this.$t('messages.error.required', { name: this.$t('user.password') }),
-            trigger: ['change', 'blur']
-          },
-          {
-            min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password'), min: 8 }),
-            trigger: ['change', 'blur']
-          }
-        ],
-        password_confirm: [
-          {
-            required: !this.id || this.model.password,
-            message: this.$t('messages.error.required', { name: this.$t('user.password_confirm') }),
-            trigger: ['change', 'blur']
-          },
-          {
-            min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password_confirm'), min: 8 }),
-            trigger: ['change', 'blur']
-          },
-          {
-            validator: this.validateConfirmPassword,
-            message: this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') }),
+            validator: this.$validator.urlValidator,
+            message: this.$t('messages.error.invalid_url'),
             trigger: ['change', 'blur']
           }
         ],
         status: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.status') }),
-            trigger: ['change', 'blur']
-          }
-        ],
-        roleId: [
-          {
-            required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.roles') }),
+            message: this.$t('messages.error.required', { name: this.$t('site.status') }),
             trigger: ['change', 'blur']
           }
         ]
@@ -206,12 +142,12 @@ export default {
     },
 
     /**
-     * User status list
+     * Get status list
      *
-     * @param {array} - User status list
+     * @param {array} - status list
      */
-    statusList() {
-      return USER_STATUS_LIST.map(item => {
+    siteStatusList() {
+      return SITE_LIST_STATUS.map(item => {
         return {
           id: item.id,
           label: this.$t(item.name),
@@ -227,25 +163,15 @@ export default {
      * Get detail
      */
     id(val) {
-      this.model = new User()
+      this.model = new Site()
 
       if (val) {
         this.getDetail(val)
       }
-    },
-
-    /**
-     * Watching changes of model.roleId
-     * get role id
-     */
-    'model.roleId'(val) {
-      const role = this.roleList.filter(item => item.id === val)
-      this.model.roleList = role
     }
   },
 
   mounted() {
-    this.getRoleList()
     this.getDetail(+this.id)
   },
 
@@ -256,47 +182,7 @@ export default {
      * @param {Object} data
      */
     setModel(data) {
-      this.model = new User(data)
-    },
-
-    /**
-     * Get role list
-     */
-    getRoleList() {
-      this.$dam.getRoleList()
-        .then(res => {
-          if (Array.isArray(res.data)) {
-            this.roleList = res.data.map(item => new Role(item))
-          }
-        })
-        .catch(err => {
-          console.error(err)
-
-          this.$notification.error({
-            message: this.$t('messages.error.failed_to_get', { name: this.$t('role.role_list') })
-          })
-        })
-    },
-
-    /**
-     * Compare two password
-     *
-     * @param {Object} rule - Rule of validation
-     * @param {String} value - Date of input
-     * @param {Function} callback - Callback function
-     */
-    validateConfirmPassword(rule, value, callback) {
-      if (!value || !this.model.password) {
-        return callback()
-      } else if (value !== this.model.password) {
-        return callback(
-          new Error(
-            this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') })
-          )
-        )
-      } else {
-        callback()
-      }
+      this.model = new Site(data)
     },
 
     /**
@@ -305,7 +191,11 @@ export default {
      */
     onHandleSubmit() {
       this.$refs.refForm.validate(valid => {
-        if (valid) {
+        if (!valid) {
+          this.$notification.error({
+            message: this.$t('messages.error.input_error')
+          })
+        } else {
           this.onSubmit()
         }
       })

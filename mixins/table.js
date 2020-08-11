@@ -4,24 +4,6 @@
  */
 
 const Table = {
-  props: {
-    /**
-     * Data list
-     */
-    data: {
-      type: Array,
-      default: () => []
-    },
-
-    /**
-     * Loading status
-     */
-    loading: {
-      type: Boolean,
-      default: false
-    }
-  },
-
   computed: {
     /**
      * Loading & icon loading
