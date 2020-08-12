@@ -1,13 +1,16 @@
 <template>
-  <a-form
+  <a-form-model
+    v-loading="loading"
+    :model="this"
+    :rules="{}"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="search-form"
     @submit.prevent="onSubmit"
   >
     <a-row type="flex" :gutter="30">
-      <a-col :md="12">
-        <a-form-item :label="$t('menu.title')">
+      <a-col :span="24" :md="12">
+        <a-form-model-item :label="$t('menu.title')" prop="title">
           <a-input
             v-model="title"
             :placeholder="$t('menu.title')"
@@ -15,11 +18,11 @@
           >
             <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
           </a-input>
-        </a-form-item>
+        </a-form-model-item>
       </a-col>
 
-      <a-col :md="12">
-        <a-form-item :label="$t('menu.link')">
+      <a-col :span="24" :md="12">
+        <a-form-model-item :label="$t('menu.link')" prop="link">
           <a-input
             v-model="link"
             :placeholder="$t('menu.link')"
@@ -27,19 +30,20 @@
           >
             <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
           </a-input>
-        </a-form-item>
+        </a-form-model-item>
       </a-col>
 
-      <a-col :md="12">
-        <a-form-item :label="$t('menu.icon')">
+      <a-col :span="24" :md="12">
+        <a-form-model-item :label="$t('menu.icon')" prop="icon">
           <a-input
             v-model="icon"
+            type="icon"
             :placeholder="$t('menu.icon')"
             :disabled="loading"
           >
             <font-awesome-icon slot="addonBefore" icon="icons" class="width-1x" />
           </a-input>
-        </a-form-item>
+        </a-form-model-item>
       </a-col>
 
       <a-col :md="24" class="box-form-footer text-center p-3">
@@ -66,7 +70,7 @@
         </a-button>
       </a-col>
     </a-row>
-  </a-form>
+  </a-form-model>
 </template>
 
 <script>

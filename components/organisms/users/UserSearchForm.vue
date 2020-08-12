@@ -1,6 +1,5 @@
 <template>
   <a-form-model
-    ref="refForm"
     v-loading="loading"
     :model="this"
     :rules="{}"

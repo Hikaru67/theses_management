@@ -14,7 +14,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 17,
-            path: '/upload/logo_site/jiji_17.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -29,7 +29,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 16,
-            path: '/upload/logo_site/ganas_16.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -44,7 +44,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 15,
-            path: '/upload/logo_site/afri-quest_15.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -59,7 +59,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 14,
-            path: '/upload/logo_site/all-about-africa_14.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 0,
@@ -74,7 +74,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 13,
-            path: '/upload/logo_site/usaid_13.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -89,7 +89,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 12,
-            path: '/upload/logo_site/europa_12.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 0,
@@ -104,7 +104,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 11,
-            path: '/upload/logo_site/news-un_11.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 0,
@@ -119,7 +119,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 10,
-            path: '/upload/logo_site/adb_10.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -134,7 +134,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 9,
-            path: '/upload/logo_site/jica_9.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -149,7 +149,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 8,
-            path: '/upload/logo_site/jetro_8.jpg',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -164,7 +164,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 7,
-            path: '/upload/logo_site/jbic_7.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -179,7 +179,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 6,
-            path: '/upload/logo_site/mofa_6.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -194,7 +194,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 5,
-            path: '/upload/logo_site/japanplatform_5.gif',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -209,7 +209,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 4,
-            path: '/upload/logo_site/afpbb_4.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -224,7 +224,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 3,
-            path: '/upload/logo_site/reuters_3.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -239,7 +239,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 2,
-            path: '/upload/logo_site/cnn_2.gif',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -254,7 +254,7 @@ export default {
           file: {
             created_at: 1591064267,
             id: 1,
-            path: '/upload/logo_site/bbc_1.png',
+            path: 'https://loremflickr.com/320/240',
             updated_at: 1591064267
           },
           status: 1,
@@ -290,7 +290,7 @@ export default {
         file: {
           created_at: 1591064267,
           id: 17,
-          path: '/upload/logo_site/jiji_17.png',
+          path: 'https://loremflickr.com/320/240',
           updated_at: 1591064267
         },
         status: 1,
@@ -310,7 +310,7 @@ export default {
         file: {
           created_at: 1591064267,
           id: 17,
-          path: '/upload/logo_site/jiji_17.png',
+          path: 'https://loremflickr.com/320/240',
           updated_at: 1591064267
         },
         status: 1,
@@ -330,7 +330,7 @@ export default {
         file: {
           created_at: 1591064267,
           id: 17,
-          path: '/upload/logo_site/jiji_17.png',
+          path: 'https://loremflickr.com/320/240',
           updated_at: 1591064267
         },
         status: 1,

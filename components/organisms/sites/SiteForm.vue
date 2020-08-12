@@ -36,6 +36,33 @@
         </a-col>
 
         <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('site.image')" prop="upload_file">
+            <a-upload
+              v-model="upload_file"
+              name="avatar"
+              list-type="picture-card"
+              class="avatar-uploader"
+              :show-upload-list="false"
+              @change="onSelectFile"
+            >
+              <img
+                v-if="model.file && model.file.path"
+                :src="`${getImagePath(model.file.path)}`"
+                alt="avatar"
+              />
+
+              <div v-else>
+                <a-icon :type="loadingImage ? 'loading' : 'plus'" />
+
+                <div class="ant-upload-text">
+                  {{ $t('common.choose_files_or_drag_and_drop_here') }}
+                </div>
+              </div>
+            </a-upload>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
           <a-form-model-item :label="$t('site.description')" prop="description">
             <a-textarea
               v-model="model.description"
@@ -100,7 +127,8 @@ export default {
   data() {
     return {
       model: new Site(),
-      modelType: this.$t('site.site')
+      modelType: this.$t('site.site'),
+      loadingImage: false
     }
   },
 
@@ -199,6 +227,51 @@ export default {
           this.onSubmit()
         }
       })
+    },
+
+    /**
+     * On select file
+     */
+    onSelectFile(info) {
+      console.log('info', info)
+      if (info.file.status === 'uploading') {
+        this.loadingImage = true
+        return
+      }
+
+      if (info.file.status === 'done') {
+        // Get this url from response in real world.
+        this.getBase64(info.file.originFileObj, imageUrl => {
+          this.model.file.path = imageUrl
+          this.loadingImage = false
+        })
+
+        this.model.upload_file = info.file
+        this.model.file = []
+      }
+    },
+
+    /**
+     * Get image
+     */
+    getImagePath(item) {
+      if (!item) {
+        return ''
+      }
+
+      if (item && item !== undefined) {
+        return item
+        // return item.includes('http') ? item : process.env.dam.baseImageURL + item
+      }
+    },
+
+    /**
+     * Get image base 64
+     */
+    getBase64(img, callback) {
+      const reader = new FileReader()
+      reader.addEventListener('load', () => callback(reader.result))
+      reader.readAsDataURL(img)
     }
   }
 }

@@ -1,83 +1,88 @@
 <template>
-  <a-form
+  <a-form-model
+    v-loading="loading"
+    :model="this"
+    :rules="{}"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="search-form"
     @submit.prevent="onSubmit"
   >
-    <a-row type="flex" :gutter="30">
-      <a-col :md="12">
-        <a-form-item :label="$t('site.id')">
-          <a-input
-            v-model="id"
-            :placeholder="$t('site.id')"
+    <div class="box-form-inner p-4">
+      <a-row type="flex" :gutter="30">
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('site.id')" prop="id">
+            <a-input
+              v-model="id"
+              :placeholder="$t('site.id')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="sitemap" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('site.name')" prop="name">
+            <a-input
+              v-model="name"
+              :placeholder="$t('site.name')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('site.url')" prop="url">
+            <a-input
+              v-model="url"
+              :placeholder="$t('site.url')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('site.status')" prop="status">
+            <a-radio-group
+              v-model="status"
+              :options="siteStatusList"
+              name="status"
+              :disabled="loading"
+            />
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :md="24" class="box-form-footer text-center p-3">
+          <a-button
+            html-type="submit"
+            type="primary"
             :disabled="loading"
+            class="w-min-100"
           >
-            <font-awesome-icon slot="addonBefore" icon="sitemap" class="width-1x" />
-          </a-input>
-        </a-form-item>
-      </a-col>
+            <font-awesome-icon icon="search" class="width-1x mr-1" />
+            {{ $t('common.search') }}
+          </a-button>
 
-      <a-col :md="12">
-        <a-form-item :label="$t('site.name')">
-          <a-input
-            v-model="name"
-            :placeholder="$t('site.name')"
+          &nbsp;
+          <a-button
+            html-type="button"
+            type="default"
             :disabled="loading"
+            class="w-min-100"
+            @click="onClearFormSearch"
           >
-            <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
-          </a-input>
-        </a-form-item>
-      </a-col>
-
-      <a-col :md="12">
-        <a-form-item :label="$t('site.url')">
-          <a-input
-            v-model="url"
-            :placeholder="$t('site.url')"
-            :disabled="loading"
-          >
-            <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
-          </a-input>
-        </a-form-item>
-      </a-col>
-
-      <a-col :span="24" :md="12">
-        <a-form-item :label="$t('site.status')" prop="status">
-          <a-radio-group
-            v-model="status"
-            :options="siteStatusList"
-            name="status"
-            :disabled="loading"
-          />
-        </a-form-item>
-      </a-col>
-
-      <a-col :md="24" class="box-form-footer text-center p-3">
-        <a-button
-          html-type="submit"
-          type="primary"
-          :disabled="loading"
-          class="w-min-100"
-        >
-          <font-awesome-icon icon="search" class="width-1x mr-1" />
-          {{ $t('common.search') }}
-        </a-button>
-
-        &nbsp;
-        <a-button
-          html-type="button"
-          type="default"
-          :disabled="loading"
-          class="w-min-100"
-          @click="onClearFormSearch"
-        >
-          <font-awesome-icon icon="eraser" class="width-1x mr-1" />
-          {{ $t('common.clear') }}
-        </a-button>
-      </a-col>
-    </a-row>
-  </a-form>
+            <font-awesome-icon icon="eraser" class="width-1x mr-1" />
+            {{ $t('common.clear') }}
+          </a-button>
+        </a-col>
+      </a-row>
+    </div>
+  </a-form-model>
 </template>
 
 <script>
@@ -164,7 +169,6 @@ export default {
      * Else call submit event of page index
      */
     onSubmit() {
-      console.log('this.condition', this.condition)
       this.$emit(EVENT_SUBMIT, this.condition)
     },
 
