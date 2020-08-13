@@ -58,8 +58,8 @@
       "color_hex": "Invalid format.",
       "failed_to_sent_mail": "Failed to send mail {name}",
       "decimal": "{name} field must be numeric and decimal",
-      "invalid_url":"Invalid url",
-      "invalid_image":"Only accept files ending with jpg, jpeg , png, gif"
+      "invalid_url": "Invalid url",
+      "invalid_image": "Only accept files ending with jpg, jpeg , png, gif"
     },
     "confirmation": {
       "delete": "Are you sure you want to delete {name}?"
@@ -230,7 +230,7 @@
     "title": "Article category"
   },
   "article": {
-    "index":"List Article",
+    "article_list": "List Article",
     "id": "ID",
     "title": "Title",
     "image": "Image",
@@ -270,7 +270,7 @@
     "admin_note": "Admin note",
     "short_description": "Short description",
     "description": "Description",
-    "article":"Article"
+    "article": "Article"
   },
   "short_date_picker": {
     "today": "Today",
@@ -284,9 +284,9 @@
     "roles-new": "Roles / New",
     "categories": "Categories",
     "categories-new": "Categories / New",
-    "article":"Articles",
-    "article-new":"記事 / 新規作成",
-    "article_category":"Articles Category",
+    "article": "Articles",
+    "article-new": "記事 / 新規作成",
+    "article_category": "Articles Category",
     "site": "Sites"
   },
   "login": {

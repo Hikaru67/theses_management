@@ -47,6 +47,13 @@
           </template>
 
           <a-menu-item key="11">
+            <nuxt-link to="/articles">
+              <font-awesome-icon icon="file-alt" class="anticon" />
+              <span>Articles</span>
+            </nuxt-link>
+          </a-menu-item>
+
+          <a-menu-item key="11">
             <nuxt-link to="/categories">
               <font-awesome-icon icon="th-list" class="anticon" />
               <span>Categories</span>

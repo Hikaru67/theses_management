@@ -58,8 +58,8 @@
       "color_hex": "無効な形式。",
       "failed_to_sent_mail": "{name}メールを送信できませんでした。",
       "decimal": "{name} field must be numeric and decimal",
-      "invalid_url":"無効なURL",
-      "invalid_image":"拡張子がjpg、jpeg、png、gifのファイルのみが受け入れられます"
+      "invalid_url": "無効なURL",
+      "invalid_image": "拡張子がjpg、jpeg、png、gifのファイルのみが受け入れられます"
     },
     "confirmation": {
       "delete": "{name}を削除してもよろしいですか?"
@@ -230,7 +230,7 @@
     "title": "カテゴリー"
   },
   "article": {
-    "index":"記事一覧",
+    "article_list": "記事一覧",
     "id": "ID",
     "title": "タイトル",
     "image": "画像",
@@ -270,7 +270,7 @@
     "admin_note": "管理者メモ",
     "short_description": "短縮本文",
     "description": "本文",
-    "article":"記事"
+    "article": "記事"
   },
   "short_date_picker": {
     "today": "今日",
@@ -284,9 +284,9 @@
     "roles-new": "ロール / 新規作成",
     "categories": "カテゴリー",
     "categories-new": "カテゴリー / 新規作成",
-    "article":"記事",
-    "article-new":"記事 / 新規作成",
-    "article_category":"カテゴリー",
+    "article": "記事",
+    "article-new": "記事 / 新規作成",
+    "article_category": "カテゴリー",
     "site": "サイト"
   },
   "login": {

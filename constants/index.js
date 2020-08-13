@@ -32,16 +32,6 @@ export const SORT_TYPE = {
 }
 
 /**
- * Option place holder for select box
- */
-export const OPTION_PLACEHOLDER = [
-  {
-    label: 'common.option_please_select',
-    value: ' '
-  }
-]
-
-/**
  * User status list
  */
 export const USER_STATUS_LIST = [
@@ -137,6 +127,7 @@ export const ARTICLE_STATUS = [
     name: 'article.status_.public'
   }
 ]
+
 export const ARTICLE_STATUS_HIDDEN = 1
 export const ARTICLE_STATUS_WAITTING = 2
 export const ARTICLE_STATUS_PUBLIC = 3
