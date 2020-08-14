@@ -98,13 +98,10 @@
     </a-layout-sider>
 
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (isCollapsed = !isCollapsed)"
-        />
-      </a-layout-header>
+      <Header
+        :is-collapsed="isCollapsed"
+        @trigger="isCollapsed = !isCollapsed"
+      />
 
       <a-layout-content class="pt-4">
         <transition name="fade">
@@ -128,24 +125,6 @@
 </template>
 
 <style lang="scss" scoped>
-.default-layout {
-  /deep/ {
-    .trigger {
-      font-size: 18px;
-      line-height: 64px;
-      padding: 0 24px;
-      cursor: pointer;
-      transition: color 0.3s;
-      &:hover {
-        // color: $primary;
-        color: #1890ff;
-      }
-    }
-    .ant-layout-sider-zero-width-trigger {
-      display: none;
-    }
-  }
-}
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
@@ -160,6 +139,7 @@
 import { BREAD_CRUMB_LIST } from '~/constants'
 
 import Footer from '~/components/organisms/Footer'
+import Header from '~/components/organisms/Header'
 
 import Layout from '~/mixins/layout'
 
@@ -167,7 +147,8 @@ const COLLAPSED_WIDTH = 80
 
 export default {
   components: {
-    Footer
+    Footer,
+    Header
   },
 
   mixins: [

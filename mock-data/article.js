@@ -117,7 +117,7 @@ export default {
             url: 'https://jp.reuters.com'
           },
           site_id: 3,
-          status: 3,
+          status: 1,
           title: '米ＬＡ市長、外出制限延長巡る保健当局の発言を修正　批判受け - ロイター',
           type: 0,
           update_origin_at: null,
@@ -155,7 +155,7 @@ export default {
             url: 'https://jp.reuters.com'
           },
           site_id: 3,
-          status: 3,
+          status: 2,
           title: 'ACSL---上値抵抗として意識されていた75日線を突破 - ロイター',
           type: 0,
           update_origin_at: null,

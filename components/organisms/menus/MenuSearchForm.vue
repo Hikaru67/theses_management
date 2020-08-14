@@ -120,21 +120,21 @@ export default {
 
   methods: {
     /**
-     * Check validate input
-     * If valid then show error
-     * Else call submit event of page index
-     */
-    onSubmit() {
-      this.$emit(EVENT_SUBMIT, this.condition)
-    },
-
-    /**
      * On clear form search
      */
     onClearFormSearch() {
       this.title = ''
       this.link = ''
       this.icon = ''
+    },
+
+    /**
+     * Check validate input
+     * If valid then show error
+     * Else call submit event of page index
+     */
+    onSubmit() {
+      this.$emit(EVENT_SUBMIT, this.condition)
     }
   }
 }

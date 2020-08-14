@@ -12,22 +12,22 @@
     <div class="box-form-inner p-4">
       <a-row type="flex" :gutter="30">
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.name')" prop="name">
+          <a-form-model-item :label="$t('article.name')" prop="name">
             <a-input
               v-model="model.name"
-              :placeholder="$t('user.name')"
+              :placeholder="$t('article.name')"
               :disabled="loading"
             >
-              <font-awesome-icon slot="addonBefore" icon="user" class="width-1x" />
+              <font-awesome-icon slot="addonBefore" icon="article" class="width-1x" />
             </a-input>
           </a-form-model-item>
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.email')" prop="email">
+          <a-form-model-item :label="$t('article.email')" prop="email">
             <a-input
               v-model="model.email"
-              :placeholder="$t('user.email')"
+              :placeholder="$t('article.email')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="envelope" class="width-1x" />
@@ -36,11 +36,11 @@
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.password')" prop="password">
+          <a-form-model-item :label="$t('article.password')" prop="password">
             <a-input
               v-model="model.password"
               type="password"
-              :placeholder="$t('user.password')"
+              :placeholder="$t('article.password')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="lock" class="width-1x" />
@@ -49,11 +49,11 @@
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.password_confirm')" prop="password_confirm">
+          <a-form-model-item :label="$t('article.password_confirm')" prop="password_confirm">
             <a-input
               v-model="model.password_confirm"
               type="password"
-              :placeholder="$t('user.password_confirm')"
+              :placeholder="$t('article.password_confirm')"
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="lock" class="width-1x" />
@@ -62,7 +62,7 @@
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.status')" prop="status">
+          <a-form-model-item :label="$t('article.status')" prop="status">
             <a-radio-group
               v-model="model.status"
               :options="statusList"
@@ -73,7 +73,7 @@
         </a-col>
 
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('user.roles')" prop="roleId">
+          <a-form-model-item :label="$t('article.roles')" prop="roleId">
             <a-radio-group
               v-model="model.roleId"
               :options="roleList"
@@ -114,7 +114,7 @@
 <script>
 import { USER_STATUS_LIST } from '~/constants'
 
-import User from '~/models/User'
+import Article from '~/models/Article'
 import Role from '~/models/Role'
 
 import CreateEditForm from '~/mixins/create-edit-form'
@@ -126,9 +126,8 @@ export default {
 
   data() {
     return {
-      model: new User(),
-      modelType: this.$t('user.user'),
-      roleList: []
+      model: new Article(),
+      modelType: this.$t('article.article'),
     }
   },
 
@@ -143,62 +142,62 @@ export default {
         name: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.name') }),
+            message: this.$t('messages.error.required', { name: this.$t('article.name') }),
             trigger: ['change', 'blur']
           }
         ],
         email: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.email') }),
+            message: this.$t('messages.error.required', { name: this.$t('article.email') }),
             trigger: ['change', 'blur']
           },
           {
             validator: this.$validator.emailValidator,
-            message: this.$t('messages.error.bad_email_format', { name: this.$t('user.email') }),
+            message: this.$t('messages.error.bad_email_format', { name: this.$t('article.email') }),
             trigger: ['change', 'blur']
           }
         ],
         password: [
           {
             required: !this.id || this.model.password_confirm,
-            message: this.$t('messages.error.required', { name: this.$t('user.password') }),
+            message: this.$t('messages.error.required', { name: this.$t('article.password') }),
             trigger: ['change', 'blur']
           },
           {
             min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password'), min: 8 }),
+            message: this.$t('messages.error.min', { name: this.$t('article.password'), min: 8 }),
             trigger: ['change', 'blur']
           }
         ],
         password_confirm: [
           {
             required: !this.id || this.model.password,
-            message: this.$t('messages.error.required', { name: this.$t('user.password_confirm') }),
+            message: this.$t('messages.error.required', { name: this.$t('article.password_confirm') }),
             trigger: ['change', 'blur']
           },
           {
             min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password_confirm'), min: 8 }),
+            message: this.$t('messages.error.min', { name: this.$t('article.password_confirm'), min: 8 }),
             trigger: ['change', 'blur']
           },
           {
             validator: this.validateConfirmPassword,
-            message: this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') }),
+            message: this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('article.password_confirm') }),
             trigger: ['change', 'blur']
           }
         ],
         status: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.status') }),
+            message: this.$t('messages.error.required', { name: this.$t('article.status') }),
             trigger: ['change', 'blur']
           }
         ],
         roleId: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.roles') }),
+            message: this.$t('messages.error.required', { name: this.$t('article.roles') }),
             trigger: ['change', 'blur']
           }
         ]
@@ -206,9 +205,9 @@ export default {
     },
 
     /**
-     * User status list
+     * Article status list
      *
-     * @param {array} - User status list
+     * @param {array} - Article status list
      */
     statusList() {
       return USER_STATUS_LIST.map(item => {
@@ -227,7 +226,7 @@ export default {
      * Get detail
      */
     id(val) {
-      this.model = new User()
+      this.model = new Article()
 
       if (val) {
         this.getDetail(val)
@@ -256,7 +255,7 @@ export default {
      * @param {Object} data
      */
     setModel(data) {
-      this.model = new User(data)
+      this.model = new Article(data)
     },
 
     /**
@@ -291,7 +290,7 @@ export default {
       } else if (value !== this.model.password) {
         return callback(
           new Error(
-            this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') })
+            this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('article.password_confirm') })
           )
         )
       } else {

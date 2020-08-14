@@ -186,6 +186,7 @@ export default {
       }
 
       if (item.file && item.file !== undefined) {
+        // TODO
         // return item.file.path.includes('http') ? item.file.path : process.env.dam.baseImageURL + item.file.path
         return 'https://loremflickr.com/320/240'
       }

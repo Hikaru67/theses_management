@@ -150,6 +150,9 @@ button,
     padding-left: 30px;
   }
 }
+.ant-layout-sider-zero-width-trigger {
+  display: none;
+}
 .ant-layout-sider {
   .logo {
     display: flex;
@@ -215,6 +218,24 @@ button,
           }
         }
       }
+    }
+  }
+}
+
+/* -----------------------------------------------------------
+  Header
+----------------------------------------------------------- */
+.ant-layout-header {
+  background: #fff;
+  padding: 0;
+  .btn-trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+    &:hover {
+      color: $primary;
     }
   }
 }

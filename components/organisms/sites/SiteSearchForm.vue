@@ -164,15 +164,6 @@ export default {
 
   methods: {
     /**
-     * Check validate input
-     * If valid then show error
-     * Else call submit event of page index
-     */
-    onSubmit() {
-      this.$emit(EVENT_SUBMIT, this.condition)
-    },
-
-    /**
      * On clear form search
      */
     onClearFormSearch() {
@@ -180,6 +171,15 @@ export default {
       this.name = ''
       this.url = ''
       this.status = -1
+    },
+
+    /**
+     * Check validate input
+     * If valid then show error
+     * Else call submit event of page index
+     */
+    onSubmit() {
+      this.$emit(EVENT_SUBMIT, this.condition)
     }
   }
 }

@@ -107,14 +107,38 @@ const SORT_LIST = [
   },
   {
     id: 3,
-    label: 'article.name',
-    sort: 'name',
+    label: 'article.title',
+    sort: 'title',
     sortType: SORT_TYPE.ASC
   },
   {
     id: 4,
-    label: 'article.name',
-    sort: 'name',
+    label: 'article.title',
+    sort: 'title',
+    sortType: SORT_TYPE.DESC
+  },
+  {
+    id: 5,
+    label: 'article.youtube_views',
+    sort: 'youtube_views',
+    sortType: SORT_TYPE.ASC
+  },
+  {
+    id: 6,
+    label: 'article.youtube_views',
+    sort: 'youtube_views',
+    sortType: SORT_TYPE.DESC
+  },
+  {
+    id: 7,
+    label: 'article.views',
+    sort: 'views',
+    sortType: SORT_TYPE.ASC
+  },
+  {
+    id: 8,
+    label: 'article.views',
+    sort: 'views',
     sortType: SORT_TYPE.DESC
   }
 ]

@@ -102,18 +102,18 @@ export default {
 
   methods: {
     /**
-     * Handle submit
-     */
-    onHandleSubmit() {
-      this.$emit(EVENT_SUBMIT, this.condition)
-    },
-
-    /**
      * On clear form search
      */
     onClearFormSearch() {
       this.name = ''
       this.email = ''
+    },
+
+    /**
+     * Handle submit
+     */
+    onHandleSubmit() {
+      this.$emit(EVENT_SUBMIT, this.condition)
     }
   }
 }
