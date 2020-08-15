@@ -12,14 +12,31 @@
     <div class="box-form-inner p-4">
       <a-row type="flex" :gutter="30">
         <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('article.name')" prop="name">
+          <a-form-model-item :label="$t('article.title')" prop="title">
             <a-input
-              v-model="model.name"
-              :placeholder="$t('article.name')"
+              v-model="model.title"
+              :placeholder="$t('article.title')"
               :disabled="loading"
             >
-              <font-awesome-icon slot="addonBefore" icon="article" class="width-1x" />
+              <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
             </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col :span="24" :md="12">
+          <a-form-model-item :label="$t('article.category')" prop="article_category_id">
+            <a-select
+              v-model="model.article_category_id"
+              :disabled="loading"
+            >
+              <a-select-option
+                v-for="(item, index) in categoryList"
+                :key="index"
+                :value="item.id"
+              >
+                {{ item.label }}
+              </a-select-option>
+            </a-select>
           </a-form-model-item>
         </a-col>
 
@@ -127,7 +144,7 @@ export default {
   data() {
     return {
       model: new Article(),
-      modelType: this.$t('article.article'),
+      modelType: this.$t('article.article')
     }
   },
 
@@ -202,6 +219,31 @@ export default {
           }
         ]
       }
+    },
+
+    /**
+     * Return list category item options
+     *
+     * @return {Array} Category list
+     */
+    categoryList() {
+      if (!(Array.isArray(this.categories) && this.categories.length)) {
+        return []
+      }
+
+      const optionPlaceholder = {
+        id: -1,
+        label: this.$t('common.option_please_select')
+      }
+
+      const list = this.categories.map(item => {
+        return {
+          id: item.id,
+          label: item.name
+        }
+      })
+
+      return [optionPlaceholder].concat(list)
     },
 
     /**

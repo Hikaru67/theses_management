@@ -643,8 +643,6 @@ export default {
      * Handle submit
      */
     onHandleSubmit() {
-      console.log('this.condition', this.condition)
-
       this.$refs.refForm.validate(valid => {
         if (!valid) {
           this.$notification.error({

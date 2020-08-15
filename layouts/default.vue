@@ -53,14 +53,21 @@
             </nuxt-link>
           </a-menu-item>
 
-          <a-menu-item key="11">
+          <a-menu-item key="12">
+            <nuxt-link to="/article-category">
+              <font-awesome-icon icon="book" class="anticon" />
+              <span>Article Category</span>
+            </nuxt-link>
+          </a-menu-item>
+
+          <a-menu-item key="13">
             <nuxt-link to="/categories">
               <font-awesome-icon icon="th-list" class="anticon" />
               <span>Categories</span>
             </nuxt-link>
           </a-menu-item>
 
-          <a-menu-item key="12">
+          <a-menu-item key="14">
             <nuxt-link to="/sites">
               <font-awesome-icon icon="th-list" class="anticon" />
               <span>Sites</span>

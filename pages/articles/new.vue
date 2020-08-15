@@ -3,10 +3,10 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="plus-circle" />
-        {{ $t('user.create_new_user') }}
+        {{ $t('common.create') }}
       </template>
 
-      <user-form
+      <article-form
         @modify="goToList"
         @cancel="goToList"
       />
@@ -25,11 +25,11 @@
 </style>
 
 <script>
-import UserForm from '~/components/organisms/users/UserForm'
+import ArticleForm from '~/components/organisms/articles/ArticleForm'
 
 export default {
   components: {
-    UserForm
+    ArticleForm
   },
 
   computed: {

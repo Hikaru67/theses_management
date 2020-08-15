@@ -128,7 +128,7 @@ export default {
     return {
       model: new User(),
       modelType: this.$t('user.user'),
-      roleList: []
+      roles: []
     }
   },
 
@@ -218,6 +218,25 @@ export default {
           value: item.id
         }
       })
+    },
+
+    /**
+     * Role list
+     *
+     * @param {array} - Role list
+     */
+    roleList() {
+      if (!(Array.isArray(this.roles) && this.roles.length)) {
+        return []
+      }
+
+      return this.roles.map(item => {
+        return {
+          id: item.id,
+          label: this.$t(item.name),
+          value: item.id
+        }
+      })
     }
   },
 
@@ -239,8 +258,8 @@ export default {
      * get role id
      */
     'model.roleId'(val) {
-      const role = this.roleList.filter(item => item.id === val)
-      this.model.roleList = role
+      const roles = this.roles.filter(item => item.id === val)
+      this.model.roles = roles
     }
   },
 
@@ -266,7 +285,8 @@ export default {
       this.$dam.getRoleList()
         .then(res => {
           if (Array.isArray(res.data)) {
-            this.roleList = res.data.map(item => new Role(item))
+            this.roles = res.data.map(item => new Role(item))
+            console.log('this.roles', this.roles)
           }
         })
         .catch(err => {

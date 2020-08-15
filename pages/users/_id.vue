@@ -3,10 +3,10 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="pencil-alt" />
-        {{ $t('menu.edit_menu') }}
+        {{ $t('user.edit_user') }}
       </template>
 
-      <menu-form
+      <user-form
         :id="id"
         @modify="goToList"
         @cancel="goToList"
@@ -26,18 +26,18 @@
 </style>
 
 <script>
-import MenuForm from '~/components/organisms/menus/MenuForm'
+import UserForm from '~/components/organisms/users/UserForm'
 
 export default {
   components: {
-    MenuForm
+    UserForm
   },
 
   computed: {
     /**
-     * Get menu Id
+     * Get user Id
      *
-     * @return {Object} menu Id
+     * @return {Object} user Id
      */
     id() {
       return +this.$route.params.id
