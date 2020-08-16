@@ -1,17 +1,20 @@
 <template>
   <a-layout class="default-layout">
+    <!-- main sidebar -->
     <a-layout-sider
       v-model="isCollapsed"
       collapsible
       width="256"
       :collapsed-width="collapsedWidth"
     >
+      <!-- logo -->
       <div class="logo">
         <nuxt-link to="/" class="over">
           <img src="~/assets/images/logo.png" alt="DigiDinos" />
         </nuxt-link>
       </div>
 
+      <!-- sidebar menuv -->
       <a-menu theme="dark" mode="inline">
         <a-menu-item>
           <nuxt-link to="/" :class="`${$route.path === '/' ? 'on-home' : ''}`">
@@ -105,6 +108,7 @@
     </a-layout-sider>
 
     <a-layout>
+      <!-- main header -->
       <Header
         :is-collapsed="isCollapsed"
         @trigger="isCollapsed = !isCollapsed"
@@ -113,6 +117,7 @@
       <a-layout-content class="pt-4">
         <transition name="fade">
           <div class="container-fluid">
+            <!-- breadcrumb -->
             <a-breadcrumb class="mb-3">
               <a-breadcrumb-item v-for="(item, index) in crumbs" :key="index">
                 <nuxt-link :to="item.to">
@@ -121,11 +126,13 @@
               </a-breadcrumb-item>
             </a-breadcrumb>
 
+            <!-- main content -->
             <Nuxt />
           </div>
         </transition>
       </a-layout-content>
 
+      <!-- main footer -->
       <Footer />
     </a-layout>
   </a-layout>
@@ -161,8 +168,6 @@ export default {
   mixins: [
     Layout
   ],
-
-  // middleware: ['auth'],
 
   data() {
     return {

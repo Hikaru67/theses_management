@@ -10,291 +10,131 @@
       </nuxt-link>
     </div>
 
-    <a-card class="mb-4">
-      <template slot="title">
-        <font-awesome-icon icon="stream" />
-        {{ $t('menu.menu_list') }}
-      </template>
-
-      <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="onShowDetail(0)">
-          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
-          {{ $t('common.create_new') }}
-        </a-button>
-        <!-- <a-button html-type="button" type="primary" ghost @click="$router.push({ path: '/menus/new' })">
-          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
-          {{ $t('common.create_new') }}
-        </a-button> -->
-      </template>
-
-      <menu-search-form
-        :loading="loading"
-        @submit="onSearch"
-      />
-
-      <div class="main-control">
-        <app-sort
-          :value="sortId"
-          :list="SORT_CONDITIONS"
-          :disabled="loading"
-          :name="$t('sort.name')"
-          @sort-change="onSort"
-        />
-        <app-pagination
-          :total="total"
-          :current-page="page"
-          :item-name="$t('menu.menu')"
-          :disabled="loading"
-          @page-change="onPageChange"
-          @page-size-change="onPageSizeChange"
-        />
-      </div>
-
-      <menu-table
-        :data="data"
-        :loading="loading"
-        @show-detail="onShowDetail"
-        @delete="onConfirmDelete"
-        @toggle-status="onToggleStatus"
-      />
-
-      <div class="main-control">
-        <app-sort
-          :value="sortId"
-          :list="SORT_CONDITIONS"
-          :disabled="loading"
-          :name="$t('sort.name')"
-          @sort-change="onSort"
-        />
-        <app-pagination
-          :total="total"
-          :current-page="page"
-          :item-name="$t('menu.menu')"
-          :disabled="loading"
-          @page-change="onPageChange"
-          @page-size-change="onPageSizeChange"
-        />
-      </div>
-    </a-card>
-
-    <menu-detail-modal
-      :id="selectedId"
-      ref="refMenuDetailModal"
-      @modify="refresh"
-    />
-
-    <app-delete-confirm-dialog
-      ref="refDeleteConfirmDialog"
-      :name="selectedName"
-      @confirm="onDelete"
+    <a-tree
+      class="draggable-tree"
+      draggable
+      :tree-data="gData"
+      @dragenter="onDragEnter"
+      @drop="onDrop"
     />
   </div>
 </template>
 
 <script>
-import { SORT_TYPE } from '~/constants'
-
-import MenuSearchForm from '~/components/organisms/menus/MenuSearchForm'
-import MenuTable from '~/components/organisms/menus/MenuTable'
-import AppPagination from '~/components/molecules/AppPagination'
-import AppSort from '~/components/molecules/AppSort'
-import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
-
-import Common from '~/mixins/common'
-import AsyncLoading from '~/mixins/do-async-loading'
-import ConditionHandler from '~/mixins/condition'
-import SearchFormHandler from '~/mixins/search-form'
-import SortHandler from '~/mixins/sort'
-import Paginator from '~/mixins/paginator'
-
-const SORT_LIST = [
-  {
-    id: -1,
-    label: 'common.option_please_select',
-    sort: null,
-    sortType: null
-  },
-  {
-    id: 1,
-    label: 'menu.id',
-    sort: 'id',
-    sortType: SORT_TYPE.ASC
-  },
-  {
-    id: 2,
-    label: 'menu.id',
-    sort: 'id',
-    sortType: SORT_TYPE.DESC
-  },
-  {
-    id: 3,
-    label: 'menu.name',
-    sort: 'name',
-    sortType: SORT_TYPE.ASC
-  },
-  {
-    id: 4,
-    label: 'menu.name',
-    sort: 'name',
-    sortType: SORT_TYPE.DESC
-  }
-]
-
+import { cloneDeep } from 'lodash'
 export default {
-  components: {
-    MenuSearchForm,
-    MenuTable,
-    AppPagination,
-    AppSort,
-    AppDeleteConfirmDialog
-  },
-
-  mixins: [
-    Common,
-    AsyncLoading,
-    ConditionHandler,
-    SearchFormHandler,
-    SortHandler,
-    Paginator
-  ],
-
   data() {
     return {
-      data: [],
-      total: 0,
-      resourceTypeName: this.$t('user.user'),
-      selectedId: null,
-      selectedName: '',
-      SORT_LIST
-    }
-  },
-
-  computed: {
-    /**
-     * Get query
-     *
-     * @return {object} Query
-     */
-    query() {
-      return Object.assign(
-        {},
-        this.paginationQuery,
-        this.conditionQuery,
+      gData: [
         {
-          sort: this.sort,
-          sortType: this.sortType
+          key: 1,
+          title: 'title 1',
+          parent: 0,
+          children: [
+            {
+              key: 2,
+              title: 'title 2',
+              parent: 1,
+              children: [
+                {
+                  key: 6,
+                  title: 'title 6',
+                  parent: 2,
+                  children: []
+                }
+              ]
+            },
+            {
+              key: 5,
+              title: 'title 5',
+              parent: 1,
+              children: []
+            }
+          ]
+        },
+        {
+          key: 3,
+          title: 'title 3',
+          parent: 0,
+          children: [
+            {
+              key: 4,
+              title: 'title 4',
+              parent: 3,
+              children: [
+                {
+                  key: 7,
+                  title: 'title 7',
+                  parent: 4,
+                  children: []
+                },
+                {
+                  key: 9,
+                  title: 'title 9',
+                  parent: 4,
+                  children: []
+                },
+                {
+                  key: 10,
+                  title: 'title 10',
+                  parent: 4,
+                  children: []
+                }
+              ]
+            },
+            {
+              key: 8,
+              title: 'title 8',
+              parent: 3,
+              children: []
+            }
+          ]
         }
-      )
-    },
-
-    /**
-     * Get sort list
-     *
-     * @return {array} Sort list
-     */
-    SORT_CONDITIONS() {
-      return SORT_LIST.map(item => {
-        return {
-          id: item.id,
-          label: this.$t(item.label),
-          sort: item.sort ? item.sort : null,
-          sortType: item.sortType ? item.sortType : null
-        }
-      })
+      ],
+      list: []
     }
   },
-
-  mounted() {
-    this.refresh()
-  },
-
   methods: {
-    /**
-     * Call API get users by condition search
-     * Show data on table result
-     *
-     * @return {Object} API response for error handle
-     */
-    async fetch() {
-      const res = await this.$dam.getMenuList(this.query)
+    onDragEnter(info) {
+      // console.warn('drag', info)
+      // expandedKeys 需要受控时设置
+      // this.expandedKeys = info.expandedKeys
+    },
+    extractList(data, dragNode, node, dropPosition) {
+      data.forEach((item, index) => {
+        if (item.key === node.eventKey) {
+          const list = dropPosition === index ? item.children : data
+          this.list = list.filter(entry => entry.key !== dragNode.eventKey)
+        }
+        this.extractList(item.children, dragNode, node, dropPosition)
+      })
+    },
 
-      if (Array.isArray(res.data)) {
-        this.total = res.meta.total
-        this.data = res.data
+    onDrop({ dragNode, dragNodesKeys, dropPosition, dropToGap, node }) {
+      const data = cloneDeep(this.gData)
+      this.extractList(data, dragNode, node, dropPosition)
+      const newNode = {
+        ...dragNode.dataRef,
+        parent: dropToGap ? node.dataRef.parent : node.eventKey
       }
-
-      return res
-    },
-
-    /**
-     * Set select id
-     *
-     * @param {Number} id - user id
-     */
-    setSelectedId(id) {
-      this.selectedId = id
-    },
-
-    /**
-     * Set select id
-     *
-     * @param {String} name - Menu name
-     */
-    setSelectedName(name) {
-      this.selectedName = name
-    },
-
-    /**
-     * Open user detail modal
-     *
-     * @param {Number} id - Current id
-     */
-    onShowDetail(id) {
-      this.setSelectedId(id)
-      this.$refs.refMenuDetailModal.open()
-    },
-
-    /**
-     * Open confirm delete
-     * If confirm then call delete user
-     * Else cancel
-     *
-     * @param {object} item - user
-     */
-    onConfirmDelete(item) {
-      if (!item || !item.id) {
-        return
+      let newData = []
+      if (!dropToGap) {
+        newData = [...this.list, newNode]
+      } else {
+        this.list.forEach((item, index) => {
+          const appendData = [item]
+          if (item.key === node.eventKey) {
+            if (index > dropPosition) {
+              appendData.unshift(newNode)
+            } else if (index < dropPosition) {
+              appendData.push(newNode)
+            }
+          }
+          newData = [...newData, ...appendData]
+        })
       }
-
-      this.setSelectedId(item.id)
-      this.setSelectedName(item.name)
-      this.$refs.refDeleteConfirmDialog.open()
-    },
-
-    /**
-     * Call API delete.
-     *
-     * @param {String} selectedId - user id
-     */
-    async delete(selectedId) {
-      if (!selectedId) {
-        return
-      }
-
-      await this.$dam.deleteMenu({ id: selectedId })
-    },
-
-    /**
-     * Update status
-     *
-     * @param {object} params - Params
-     */
-    onToggleStatus(params) {
-      if (!params || !params.id) {
-        return
-      }
-
-      this.onAction('updateMenu', params, this.$t('common.action'))
+      // await this.$api.post
+      console.warn(this.$api)
     }
   }
 }

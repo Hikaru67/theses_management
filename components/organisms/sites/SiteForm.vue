@@ -38,7 +38,7 @@
         <a-col :span="24" :md="12">
           <a-form-model-item :label="$t('site.image')" prop="upload_file">
             <a-upload
-              v-model="upload_file"
+              v-model="model.upload_file"
               name="avatar"
               list-type="picture-card"
               class="avatar-uploader"

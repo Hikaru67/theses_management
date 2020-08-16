@@ -1,7 +1,6 @@
 <template>
   <div>
     <font-awesome-icon icon="home" />
-    <p>{{ $t('welcome') }}</p>
     <pre>{{ data }}</pre>
   </div>
 </template>

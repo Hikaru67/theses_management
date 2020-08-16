@@ -6,7 +6,8 @@ export default {
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  mode: 'universal',
+  // mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Nuxt target
@@ -62,6 +63,7 @@ export default {
     '@/plugins/directives',
     '@/plugins/moment',
     '@/plugins/filters',
+    { src: '@/plugins/ck-editor', mode: 'client' },
     '@/plugins/csv'
   ],
 
@@ -187,8 +189,12 @@ export default {
     }
   },
 
+  /*
+   ** Active router link
+   */
   router: {
-    middleware: ['auth']
+    // middleware: ['auth'],
+    linkActiveClass: 'active-link'
   },
 
   /**
@@ -259,12 +265,5 @@ export default {
         userinfo_endpoint: process.env.LARAVEL_ENDPOINT + '/api/oauth/me'
       }
     }
-  },
-
-  /*
-   ** Active router link
-   */
-  router: {
-    linkActiveClass: 'active-link'
   }
 }

@@ -44,6 +44,15 @@
       </div>
 
       <div class="category-tree">
+        <!-- <a-row type="flex" :gutter="30">
+          <a-col :md="12">
+            <pre>{{ categories }}</pre>
+          </a-col>
+          <a-col :md="12">
+            <pre>{{ categoryTreeList }}</pre>
+          </a-col>
+        </a-row> -->
+
         <tree
           v-if="Array.isArray(categoryTreeList) && categoryTreeList.length"
           :data="categoryTreeList"
@@ -124,11 +133,6 @@ import Category from '~/models/Category'
 
 import CategoryDetailModal from '~/components/organisms/categories/CategoryDetailModal'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
-
-// let LiquorTree
-// if (process.client) {
-//   LiquorTree = require('liquor-tree')
-// }
 
 export default {
   components: {
