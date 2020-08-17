@@ -72,7 +72,7 @@
 
           <a-menu-item key="14">
             <nuxt-link to="/sites">
-              <font-awesome-icon icon="th-list" class="anticon" />
+              <font-awesome-icon icon="sitemap" class="anticon" />
               <span>Sites</span>
             </nuxt-link>
           </a-menu-item>
