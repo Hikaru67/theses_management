@@ -121,13 +121,13 @@ button,
   }
 }
 .text-primary {
-  color: $primary !important;
+  color: $primary-color !important;
 }
 .text-warning {
-  color: $warning !important;
+  color: $warning-color !important;
 }
 .text-danger {
-  color: $danger !important;
+  color: $danger-color !important;
 }
 .position-relative {
   position: relative !important;
@@ -200,10 +200,10 @@ button,
         padding-right: 16px;
         &.active-link,
         &:hover {
-          background: $primary;
+          background: $primary-color;
         }
         &[href="/"]:not(:hover) {
-          background: $primary;
+          background: $primary-color;
           &:not(.on-home) {
             background: transparent;
           }
@@ -245,7 +245,7 @@ button,
     color: #4c4c4c;
     transition: all 0.4s ease;
     &:hover {
-      color: $primary;
+      color: $primary-color;
     }
   }
   .box-right {
@@ -260,7 +260,7 @@ button,
       padding: 5px;
       color: #4c4c4c;
       &:hover {
-        color: $primary;
+        color: $primary-color;
       }
     }
     .ic-large {
@@ -427,7 +427,7 @@ button,
     margin-left: 10px;
     &.active-link,
     &:hover {
-      color: $primary;
+      color: $primary-color;
     }
     &[href="/categories"].on-categories-list:not(:hover),
     &[href="/article-category"].on-article-category-list:not(:hover),
@@ -461,7 +461,7 @@ button,
     &.has-child {
       > .tree-content {
         .tree-checkbox {
-          border-color: $primary;
+          border-color: $primary-color;
         }
       }
     }

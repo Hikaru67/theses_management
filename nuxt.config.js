@@ -45,7 +45,7 @@ export default {
   ** Global CSS
   */
   css: [
-    { src: 'ant-design-vue/dist/antd.css', lang: 'css' },
+    { src: '~/assets/less/theme.less', lang: 'less' },
     { src: '~/assets/scss/style.scss', lang: 'scss' }
   ],
 
@@ -113,6 +113,13 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    loaders: {
+      less: {
+        lessOptions: {
+          javascriptEnabled: true
+        }
+      }
+    }
   },
 
   /*
@@ -184,7 +191,8 @@ export default {
         'faIcons',
         'faListOl',
         'faStream',
-        'faAngleDown'
+        'faAngleDown',
+        'faCaretDown'
       ]
     }
   },
