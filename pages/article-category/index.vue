@@ -1,19 +1,19 @@
 <template>
   <div class="main-list position-relative">
     <div class="box-change-view">
-      <nuxt-link to="/categories" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+      <nuxt-link to="/article-category" :class="`${$route.path === '/article-category/list' ? 'on-article-category-list' : ''}`">
         <font-awesome-icon icon="th-list" />
       </nuxt-link>
 
-      <nuxt-link to="/categories/list" :class="`${$route.path === '/categories/list' ? 'on-categories-list' : ''}`">
+      <nuxt-link to="/article-category/list" :class="`${$route.path === '/article-category/list' ? 'on-article-category-list' : ''}`">
         <font-awesome-icon icon="border-all" />
       </nuxt-link>
     </div>
 
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="th-list" />
-        <strong>{{ $t('category.category') }}</strong>
+        <font-awesome-icon icon="book" />
+        <strong>{{ $t('article-category.title') }}</strong>
       </template>
 
       <template slot="extra">
@@ -44,15 +44,6 @@
       </div>
 
       <div class="category-tree">
-        <!-- <a-row type="flex" :gutter="30">
-          <a-col :md="12">
-            <pre>{{ categories }}</pre>
-          </a-col>
-          <a-col :md="12">
-            <pre>{{ categoryTreeList }}</pre>
-          </a-col>
-        </a-row> -->
-
         <tree
           v-if="Array.isArray(categoryTreeList) && categoryTreeList.length"
           :data="categoryTreeList"
@@ -68,18 +59,6 @@
 
             <div class="node-controls">
               <ul class="btns-action">
-                <li>
-                  <a-button
-                    html-type="button"
-                    type="primary"
-                    size="small"
-                    :disabled="loading"
-                    @click="onCreateChild($event, node.data.id)"
-                  >
-                    <font-awesome-icon :icon="['fas', 'plus-circle']" />
-                  </a-button>
-                </li>
-
                 <li>
                   <a-button
                     html-type="button"
@@ -110,9 +89,10 @@
       </div>
     </a-card>
 
-    <category-detail-modal
+    <article-category-detail-modal
       :id="selectedId"
-      ref="refCategoryDetailModal"
+      ref="refArticleCategoryDetailModal"
+      :parent-id="currentId"
       @modify="onModify"
     />
 
@@ -129,14 +109,14 @@ import { flatten, pick } from 'lodash'
 import LiquorTree from 'liquor-tree'
 
 import { SORT_TYPE, MAX_LIMIT_RECORD } from '~/constants'
-import Category from '~/models/Category'
+import ArticleCategory from '~/models/ArticleCategory'
 
-import CategoryDetailModal from '~/components/organisms/categories/CategoryDetailModal'
+import ArticleCategoryDetailModal from '~/components/organisms/article-category/ArticleCategoryDetailModal'
 import AppDeleteConfirmDialog from '~/components/molecules/AppDeleteConfirmDialog'
 
 export default {
   components: {
-    CategoryDetailModal,
+    ArticleCategoryDetailModal,
     AppDeleteConfirmDialog,
     [LiquorTree.name]: LiquorTree
   },
@@ -144,7 +124,7 @@ export default {
   data() {
     return {
       loading: false,
-      resourceTypeName: this.$t('category.category'),
+      resourceTypeName: this.$t('article-category.title'),
       selectedId: null,
       selectedName: '',
       total: 0,
@@ -162,28 +142,27 @@ export default {
   },
 
   mounted() {
-    this.getCategoryList()
+    this.getArticleCategoryList()
   },
 
   methods: {
     /**
      * Call API get category list
      */
-    getCategoryList() {
+    getArticleCategoryList() {
       const params = {
         limit: MAX_LIMIT_RECORD,
         sort: 'position',
         sortType: SORT_TYPE.ASC
       }
 
-      this.$dam.getCategoryList(params)
+      this.$dam.getArticleCategoryList(params)
         .then(res => {
           if (Array.isArray(res.data) && res.data.length) {
             this.total = res.meta.total
             this.lastPage = res.meta.last_page
-            this.categories = res.data.map(item => new Category(item))
+            this.categories = res.data.map(item => new ArticleCategory(item))
             this.categoryTreeList = this.convertCategories()
-            console.log(111, this.categoryTreeList)
           }
         })
         .catch(err => {
@@ -212,7 +191,7 @@ export default {
 
           if (!children.length) {
             return {
-              text: item.id + ' ' + item.name,
+              text: item.name,
               data: {
                 ...item
               }
@@ -223,7 +202,7 @@ export default {
             data: {
               ...item
             },
-            text: item.id + ' ' + item.name,
+            text: item.name,
             state: {
               expanded: true
             },
@@ -274,7 +253,7 @@ export default {
         })
       }
 
-      this.$dam.moveCategory({ list: categoriesData })
+      this.$dam.moveArticleCategory({ list: categoriesData })
         .then(_ => {
           this.$notification.success({
             message: this.$t('messages.information.updated', { name: this.resourceTypeName })
@@ -306,7 +285,7 @@ export default {
       e.stopPropagation()
 
       this.currentId = id
-      this.$refs.refCategoryDetailModal.open()
+      this.$refs.refArticleCategoryDetailModal.open()
     },
 
     /**
@@ -320,18 +299,18 @@ export default {
       e.stopPropagation()
 
       this.setSelectedId(id)
-      this.$refs.refCategoryDetailModal.open()
+      this.$refs.refArticleCategoryDetailModal.open()
     },
 
     /**
      * On modify
      */
     onModify() {
-      this.categories = []
+      this.articleCategories = []
       this.categoryTreeList = []
       this.selectedId = null
       this.currentId = null
-      this.getCategoryList()
+      this.getArticleCategoryList()
     },
 
     /**
@@ -379,7 +358,7 @@ export default {
      */
     onDelete() {
       if (this.selectedId) {
-        this.$dam.deleteCategory({ id: this.selectedId })
+        this.$dam.deleteArticleCategory({ id: this.selectedId })
           .then(_ => {
             this.$notification.success({
               message: this.$t('messages.information.deleted', { name: this.resourceTypeName })
@@ -387,7 +366,7 @@ export default {
 
             this.categories = []
             this.categoryTreeList = []
-            this.getCategoryList()
+            this.getArticleCategoryList()
           })
           .catch(err => {
             console.error(err)
@@ -409,7 +388,7 @@ export default {
         try {
           const promises = [...Array(this.lastPage)].map((item, index) => {
             const query = { ...this.query, page: index + 1 }
-            return this.$dam.getCategoryList(query)
+            return this.$dam.getArticleCategoryList(query)
           })
 
           const res = await Promise.all(promises)

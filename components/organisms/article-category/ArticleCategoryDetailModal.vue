@@ -1,8 +1,8 @@
 <template>
   <a-modal
     :visible="visible"
-    :footer="null"
     :width="720"
+    :footer="null"
     class="modal-wrap"
     @cancel="onCancel"
   >
@@ -11,10 +11,8 @@
       {{ id ? $t('common.update') : $t('common.create') }}
     </template>
 
-    <category-form
+    <article-category-form
       :id="id"
-      ref="refCategoryForm"
-      :parent-id="parentId"
       @modify="onCancel(); $emit('modify')"
       @cancel="onCancel"
     />
@@ -27,6 +25,14 @@
 
 .modal-wrap {
   /deep/ {
+    .ant-modal {
+      @include mq(max_xl) {
+        max-width: 1170px;
+      }
+      @include mq(max_lg) {
+        max-width: 95%;
+      }
+    }
     .ant-modal-body {
       padding: 0;
     }
@@ -35,26 +41,18 @@
 </style>
 
 <script>
-import CategoryForm from '~/components/organisms/categories/CategoryForm'
+import ArticleCategoryForm from '~/components/organisms/article-category/ArticleCategoryForm'
 
 export default {
   components: {
-    CategoryForm
+    ArticleCategoryForm
   },
 
   props: {
     /**
-     * category curent id
+     * User id
      */
     id: {
-      type: Number,
-      default: 0
-    },
-
-    /**
-     * category parent id
-     */
-    parentId: {
       type: Number,
       default: 0
     }

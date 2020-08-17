@@ -179,7 +179,6 @@ export default {
             this.lastPage = res.meta.last_page
             this.categories = res.data.map(item => new Category(item))
             this.categoryTreeList = this.convertCategories()
-            console.log(111, this.categoryTreeList)
           }
         })
         .catch(err => {
@@ -208,7 +207,7 @@ export default {
 
           if (!children.length) {
             return {
-              text: item.id + ' ' + item.name,
+              text: item.name,
               data: {
                 ...item
               }
@@ -219,7 +218,7 @@ export default {
             data: {
               ...item
             },
-            text: item.id + ' ' + item.name,
+            text: item.name,
             state: {
               expanded: true
             },

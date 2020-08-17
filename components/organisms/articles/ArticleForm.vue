@@ -273,11 +273,11 @@
             :label-col="{ sm: 3 }"
             :wrapper-col="{ sm: 21 }"
           >
-            <!-- <ckeditor
+            <ckeditor
               v-model="model.description"
               :editor="editor"
               :config="descriptionConfig"
-            /> -->
+            />
           </a-form-model-item>
         </a-col>
       </a-row>
