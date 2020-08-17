@@ -36,12 +36,9 @@
 import Table from '~/mixins/table'
 
 const FIELDS = [
-  { dataIndex: 'id', title: 'menu.id', width: 60 },
-  { dataIndex: 'title', title: 'menu.title' },
-  { dataIndex: 'link', title: 'menu.link' },
-  { dataIndex: 'icon', title: 'menu.icon' },
-  { dataIndex: 'parent_id', title: 'menu.parent_id' },
-  { dataIndex: 'position', title: 'menu.position' },
+  { dataIndex: 'id', title: 'category.id', width: 60 },
+  { dataIndex: 'name', title: 'category.name' },
+  { dataIndex: 'description', title: 'category.description' },
   { dataIndex: 'action', title: 'common.action', scopedSlots: { customRender: 'action' }, width: 140 }
 ]
 
@@ -89,9 +86,9 @@ export default {
 
   methods: {
     /**
-     * Event show menu detail modal
+     * Event show article category detail modal
      *
-     * @param {number} id - menu id
+     * @param {number} id - article category id
      */
     onShowDetail(id) {
       if (!id) {
@@ -102,9 +99,9 @@ export default {
     },
 
     /**
-     * Delete menu
+     * Delete article category
      *
-     * @param {object} item - menu
+     * @param {object} item - article category
      */
     onDelete(item) {
       if (!item || !item.id) {

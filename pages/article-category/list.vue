@@ -219,7 +219,7 @@ export default {
      */
     onShowDetail(id) {
       this.setSelectedId(id)
-      this.$refs.refCategoryDetailModal.open()
+      this.$refs.refArticleCategoryDetailModal.open()
     },
 
     /**

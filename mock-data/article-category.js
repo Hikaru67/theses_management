@@ -9,7 +9,7 @@ export default {
       data: [
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 1,
           name: '平和・安全',
           parent: null,
@@ -19,7 +19,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 2,
           name: '経済・民間連携',
           parent: null,
@@ -29,7 +29,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 3,
           name: '農業・漁業',
           parent: null,
@@ -39,7 +39,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 4,
           name: '保健医療',
           parent: null,
@@ -49,7 +49,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 5,
           name: '交通・インフラ',
           parent: null,
@@ -59,7 +59,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 6,
           name: '環境',
           parent: null,
@@ -69,7 +69,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 7,
           name: 'ジェンダー・人権',
           parent: null,
@@ -79,7 +79,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 8,
           name: 'SDGs',
           parent: null,
@@ -89,7 +89,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 9,
           name: 'IT',
           parent: null,
@@ -99,7 +99,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 10,
           name: '教育',
           parent: null,
@@ -109,7 +109,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 11,
           name: '貧困・開発',
           parent: null,
@@ -119,7 +119,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 12,
           name: 'ガバナンス',
           parent: null,
@@ -129,7 +129,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 13,
           name: 'INTERNATIONAL',
           parent: null,
@@ -139,7 +139,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 14,
           name: 'コラム',
           parent: null,
@@ -149,7 +149,7 @@ export default {
         },
         {
           created_at: 1591064201,
-          description: '',
+          description: 'description',
           id: 15,
           name: 'オリジナル',
           parent: null,
@@ -180,7 +180,7 @@ export default {
     return {
       data: {
         created_at: 1591064201,
-        description: '',
+        description: 'description',
         id: 1,
         name: '平和・安全',
         parent: null,
@@ -195,7 +195,7 @@ export default {
     return {
       data: {
         created_at: 1591064201,
-        description: '',
+        description: 'description',
         id: 1,
         name: '平和・安全',
         parent: null,
@@ -210,7 +210,7 @@ export default {
     return {
       data: {
         created_at: 1591064201,
-        description: '',
+        description: 'description',
         id: 1,
         name: '平和・安全',
         parent: null,

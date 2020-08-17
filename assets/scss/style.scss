@@ -226,18 +226,56 @@ button,
   Header
 ----------------------------------------------------------- */
 .ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.5;
   background: #fff;
   padding: 0;
+  .box-left {
+    display: flex;
+    align-items: center;
+  }
   .btn-trigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 18px;
-    line-height: 64px;
     padding: 0 24px;
     cursor: pointer;
-    transition: color 0.3s;
+    color: #4c4c4c;
+    transition: all 0.4s ease;
     &:hover {
       color: $primary;
     }
   }
+  .box-right {
+    display: flex;
+    align-items: center;
+    > * {
+      margin-left: 10px;
+    }
+    .ant-dropdown-link {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 5px;
+      color: #4c4c4c;
+      &:hover {
+        color: $primary;
+      }
+    }
+    .ic-large {
+      font-size: 25px;
+    }
+  }
+}
+.ant-dropdown.dropdown-language {
+  min-width: 70px;
+  .ant-dropdown-menu-item {
+    text-align: center;
+  }
+}
+.ant-dropdown.dropdown-account {
+  min-width: 160px;
 }
 
 /* -----------------------------------------------------------
@@ -391,9 +429,8 @@ button,
     &:hover {
       color: $primary;
     }
-    &[href="/categories"].on-categories-list:not(:hover) {
-      color: #4c4c4c;
-    }
+    &[href="/categories"].on-categories-list:not(:hover),
+    &[href="/article-category"].on-article-category-list:not(:hover),
     &[href="/menus"].on-menus-list:not(:hover) {
       color: #4c4c4c;
     }

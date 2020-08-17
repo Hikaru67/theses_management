@@ -1,19 +1,28 @@
 <template>
   <a-layout-header>
-    <a-icon
-      class="btn-trigger"
-      :type="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-      @click="$emit('trigger')"
-    />
+    <div class="box-left">
+      <div v-loading.fullscreen="loading" />
+
+      <a href="#" class="btn-trigger" @click="$emit('trigger')">
+        <a-icon :type="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+      </a>
+    </div>
+
+    <div class="box-right pr-4">
+      <header-dropdown-language />
+      <header-dropdown-account />
+    </div>
   </a-layout-header>
 </template>
 
-<style lang="scss" scoped>
-</style>
-
 <script>
+import HeaderDropdownAccount from '~/components/organisms/HeaderDropdownAccount'
+import HeaderDropdownLanguage from '~/components/organisms/HeaderDropdownLanguage'
+
 export default {
   components: {
+    HeaderDropdownAccount,
+    HeaderDropdownLanguage
   },
 
   props: {
@@ -24,14 +33,6 @@ export default {
       type: Boolean,
       default: true
     }
-  },
-
-  data() {
-    return {
-    }
-  },
-
-  methods: {
   }
 }
 </script>
