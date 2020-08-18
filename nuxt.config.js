@@ -193,7 +193,10 @@ export default {
         'faListOl',
         'faStream',
         'faAngleDown',
-        'faCaretDown'
+        'faCaretDown',
+        'faSignInAlt',
+        'faHandPointDown',
+        'faPaperPlane'
       ]
     }
   },
