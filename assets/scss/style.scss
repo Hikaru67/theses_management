@@ -127,10 +127,21 @@ button,
   color: $warning-color !important;
 }
 .text-danger {
-  color: $danger-color !important;
+  color: $error-color !important;
 }
 .position-relative {
   position: relative !important;
+}
+
+/* -----------------------------------------------------------
+  loading
+  ----------------------------------------------------------- */
+.loading-parent--relative {
+  position: relative;
+}
+
+.loading-parent--hidden {
+  overflow: hidden;
 }
 
 /* -----------------------------------------------------------

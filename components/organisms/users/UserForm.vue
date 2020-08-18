@@ -1,7 +1,7 @@
 <template>
   <a-form-model
     ref="refForm"
-    v-loading="loading"
+    v-loading.fullscreen="loading"
     :model="model"
     :rules="rulesForm"
     :label-col="{ sm: 6 }"

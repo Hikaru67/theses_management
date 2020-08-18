@@ -1,7 +1,7 @@
 <template>
   <a-form-model
     ref="refForm"
-    v-loading="loading"
+    v-loading.fullscreen="loading"
     :model="model"
     :rules="rulesForm"
     :label-col="{ sm: 6 }"
@@ -79,7 +79,7 @@
     <div class="box-form-footer text-center bt-1 p-3">
       <a-button
         html-type="submit"
-        type="primary"
+        type="warning"
         :disabled="loading"
         class="w-min-100"
       >
