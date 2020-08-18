@@ -114,6 +114,7 @@ export default {
   */
   build: {
     loaders: {
+      // For less
       less: {
         lessOptions: {
           javascriptEnabled: true

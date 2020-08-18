@@ -1,8 +1,6 @@
 <template>
   <a-layout-header>
     <div class="box-left">
-      <div v-loading.fullscreen="loading" />
-
       <a href="#" class="btn-trigger" @click="$emit('trigger')">
         <a-icon :type="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
       </a>

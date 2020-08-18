@@ -1,23 +1,13 @@
 <template>
-  <div>
-    <font-awesome-icon icon="home" />
-    <pre>{{ data }}</pre>
-  </div>
+  <overview />
 </template>
 
 <script>
-export default {
-  data: () => ({
-    data: []
-  }),
+import Overview from '~/components/organisms/dashboard/Overview'
 
-  async mounted() {
-    // const { data } = await this.$api.updatePosts({
-    //   id: 8,
-    //   name: 'demo'
-    // })
-    // console.warn(this.$api)
-    // this.data = data
+export default {
+  components: {
+    Overview
   }
 }
 </script>

@@ -14,7 +14,7 @@
         </nuxt-link>
       </div>
 
-      <!-- sidebar menuv -->
+      <!-- sidebar menu -->
       <a-menu theme="dark" mode="inline">
         <a-menu-item>
           <nuxt-link to="/" :class="`${$route.path === '/' ? 'on-home' : ''}`">
