@@ -154,8 +154,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.emailValidator,
-            message: this.$t('messages.error.bad_email_format', { name: this.$t('user.email') }),
+            validator: this.$validator.emailValidator(this.$t('user.email')),
             trigger: ['change', 'blur']
           }
         ],

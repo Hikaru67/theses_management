@@ -283,7 +283,10 @@ button,
   }
 }
 .ant-dropdown.dropdown-language {
-  min-width: 70px;
+  min-width: 50px;
+  .ant-dropdown-menu {
+    border: 1px solid #d8dbe0;
+  }
   .ant-dropdown-menu-item {
     text-align: center;
   }
@@ -291,12 +294,14 @@ button,
 .ant-dropdown.dropdown-account {
   min-width: 160px;
   .ant-dropdown-menu {
+    border: 1px solid #d8dbe0;
     padding-top: 0;
   }
   .txt-name {
     background: #ebedef;
     text-align: center;
     cursor: default;
+    pointer-events: none;
   }
 }
 

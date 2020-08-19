@@ -154,8 +154,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.urlValidator,
-            message: this.$t('messages.error.invalid_url'),
+            validator: this.$validator.urlValidator(this.$t('site.url')),
             trigger: ['change', 'blur']
           }
         ],

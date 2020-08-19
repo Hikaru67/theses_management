@@ -79,7 +79,7 @@
     <div class="box-form-footer text-center bt-1 p-3">
       <a-button
         html-type="submit"
-        type="warning"
+        type="primary"
         :disabled="loading"
         class="w-min-100"
       >
@@ -155,8 +155,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.numericValidator,
-            message: this.$t('messages.error.numeric', { name: this.$t('menu.parent_id') }),
+            validator: this.$validator.numericValidator(this.$t('menu.parent_id')),
             trigger: ['change', 'blur']
           }
         ],
@@ -167,8 +166,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.numericValidator,
-            message: this.$t('messages.error.numeric', { name: this.$t('menu.position') }),
+            validator: this.$validator.numericValidator(this.$t('menu.position')),
             trigger: ['change', 'blur']
           }
         ]

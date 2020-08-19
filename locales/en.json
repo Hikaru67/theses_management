@@ -42,11 +42,11 @@
       "failed_to_action": "{name} is failed",
       "input_error": "入力エラーがあります。",
       "unmatch_value": "{name1}/{name2} does not match.",
-      "bad_email_format": "Bad email format.",
+      "bad_email_format": "{name} is not the correct email address format.",
       "unmatch_confirmation_email": "{name} does not match.",
       "unmatch_password": "Password confirmation does not match",
       "required": "{name} is required.",
-      "invalid_format": "Invalid format.",
+      "invalid_format": "{name} is invalid format.",
       "numeric": "{name} requires a number.",
       "alphabe_numeric": "{name} requires a alphabe or a number.",
       "more_than": "{name} must be greater than or equal to {target}",
@@ -57,7 +57,6 @@
       "color_hex": "Invalid format.",
       "failed_to_sent_mail": "Failed to send mail {name}",
       "decimal": "{name} field must be numeric and decimal",
-      "invalid_url": "Invalid url",
       "invalid_image": "Only accept files ending with jpg, jpeg , png, gif"
     },
     "confirmation": {

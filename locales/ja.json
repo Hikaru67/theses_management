@@ -42,11 +42,11 @@
       "failed_to_action": "{name}に失敗しました",
       "input_error": "入力エラーがあります。",
       "unmatch_value": "{name1}/{name2}と一致するデータを見つけません。",
-      "bad_email_format": "無効なメール",
+      "bad_email_format": "{name}は正しいメールアドレスの書式ではありません。",
       "unmatch_confirmation_email": "{name}と一致しません。",
       "unmatch_password": "パスワードと一致しません。",
       "required": "{name}は入力必須です。",
-      "invalid_format": "無効な形式",
+      "invalid_format": "{name}の形式が不正です。",
       "numeric": "{name}は半角数字で入力してください。",
       "alphabe_numeric": "{name}は半角で入力してください。",
       "more_than": "{name}は{target}以上で入力してください。",
@@ -57,7 +57,6 @@
       "color_hex": "無効な形式。",
       "failed_to_sent_mail": "{name}メールを送信できませんでした。",
       "decimal": "{name} field must be numeric and decimal",
-      "invalid_url": "無効なURL",
       "invalid_image": "拡張子がjpg、jpeg、png、gifのファイルのみが受け入れられます"
     },
     "confirmation": {
