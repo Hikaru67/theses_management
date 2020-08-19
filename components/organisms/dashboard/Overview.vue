@@ -6,8 +6,12 @@
           <div class="box-detail">
             <a-row type="flex" :gutter="30">
               <a-col flex="auto">
-                <div class="txt-number">10</div>
-                <div class="txt-title">記事</div>
+                <div class="txt-number">
+                  10
+                </div>
+                <div class="txt-title">
+                  記事
+                </div>
               </a-col>
               <a-col>
                 <font-awesome-icon :icon="['fas', 'wine-bottle']" class="ic-top" />
@@ -22,8 +26,12 @@
           <div class="box-detail">
             <a-row type="flex" :gutter="30">
               <a-col flex="auto">
-                <div class="txt-number">10</div>
-                <div class="txt-title">ページ</div>
+                <div class="txt-number">
+                  10
+                </div>
+                <div class="txt-title">
+                  ページ
+                </div>
               </a-col>
               <a-col>
                 <font-awesome-icon :icon="['fas', 'user-friends']" class="ic-top" />
@@ -38,8 +46,12 @@
           <div class="box-detail">
             <a-row type="flex" :gutter="30">
               <a-col flex="auto">
-                <div class="txt-number">10</div>
-                <div class="txt-title">閲覧数</div>
+                <div class="txt-number">
+                  10
+                </div>
+                <div class="txt-title">
+                  閲覧数
+                </div>
               </a-col>
               <a-col>
                 <font-awesome-icon :icon="['fas', 'eye']" class="ic-top" />
@@ -54,8 +66,12 @@
           <div class="box-detail">
             <a-row type="flex" :gutter="30">
               <a-col flex="auto">
-                <div class="txt-number">10</div>
-                <div class="txt-title">カテゴリー</div>
+                <div class="txt-number">
+                  10
+                </div>
+                <div class="txt-title">
+                  カテゴリー
+                </div>
               </a-col>
               <a-col>
                 <font-awesome-icon :icon="['fas', 'wine-bottle']" class="ic-top" />

@@ -40,7 +40,7 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :span="24" :md="12">
+        <a-col v-if="checkField(false)" :span="24" :md="12">
           <a-form-model-item :label="$t('article.origin_url')" prop="origin_url">
             <a-input
               v-model="model.origin_url"
@@ -52,7 +52,7 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :span="24" :md="12">
+        <a-col v-if="checkField(false)" :span="24" :md="12">
           <a-form-model-item :label="$t('article.site')" prop="site_id">
             <a-select
               v-model="model.site_id"
@@ -74,6 +74,7 @@
             <a-input
               v-model="model.views"
               :placeholder="$t('article.views')"
+              readonly
               :disabled="loading"
             >
               <font-awesome-icon slot="addonBefore" icon="eye" class="width-1x" />
@@ -119,7 +120,19 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :span="24" :md="12">
+        <a-col v-if="checkField(true)" :span="24" :md="12">
+          <a-form-model-item :label="$t('article.youtube_url')" prop="youtube_url">
+            <a-input
+              v-model="model.youtube_url"
+              :placeholder="$t('article.youtube_url')"
+              :disabled="loading"
+            >
+              <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col v-if="checkField(true)" :span="24" :md="12">
           <a-form-model-item :label="$t('article.youtube_id')" prop="youtube_id">
             <a-input
               v-model="model.youtube_id"
@@ -143,19 +156,7 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :span="24" :md="12">
-          <a-form-model-item :label="$t('article.youtube_url')" prop="youtube_url">
-            <a-input
-              v-model="model.youtube_url"
-              :placeholder="$t('article.youtube_url')"
-              :disabled="loading"
-            >
-              <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col :span="24" :md="12">
+        <a-col v-if="checkField(true)" :span="24" :md="12">
           <a-form-model-item :label="$t('article.type')" prop="type">
             <a-radio-group
               v-model="model.type"
@@ -166,7 +167,7 @@
           </a-form-model-item>
         </a-col>
 
-        <a-col :span="24" :md="12">
+        <a-col v-if="checkField(true)" :span="24" :md="12">
           <a-form-model-item :label="$t('article.youtube_views')" prop="youtube_views">
             <a-input
               v-model="model.youtube_views"
@@ -273,11 +274,11 @@
             :label-col="{ sm: 3 }"
             :wrapper-col="{ sm: 21 }"
           >
-            <ckeditor
+            <!-- <ckeditor
               v-model="model.description"
               :editor="editor"
               :config="descriptionConfig"
-            />
+            /> -->
           </a-form-model-item>
         </a-col>
       </a-row>
@@ -311,6 +312,8 @@
 
 <script>
 import { get } from 'lodash'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import uploadPlugin from '~/plugins/ck-editor/upload-plugin'
 
 import {
   ARTICLE_TYPE,
@@ -322,11 +325,11 @@ import {
 import Article from '~/models/Article'
 import CreateEditForm from '~/mixins/create-edit-form'
 
-import uploadPlugin from '~/plugins/ck-editor/upload-plugin'
-let ClassicEditor
-if (process.browser) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-}
+// import uploadPlugin from '~/plugins/ck-editor/upload-plugin'
+// let ClassicEditor
+// if (process.client) {
+//   ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
+// }
 
 const TOOLBAR_SETTING = [
   'Heading',
@@ -389,6 +392,16 @@ export default {
             required: true,
             message: this.$t('messages.error.required', { name: this.$t('article.title') }),
             trigger: ['change', 'blur']
+          },
+          {
+            min: 1,
+            message: this.$t('messages.error.min_max', { name: this.$t('article.title'), min: 1, max: 255 }),
+            trigger: ['change', 'blur']
+          },
+          {
+            max: 255,
+            message: this.$t('messages.error.min_max', { name: this.$t('article.title'), min: 1, max: 255 }),
+            trigger: ['change', 'blur']
           }
         ],
 
@@ -402,6 +415,14 @@ export default {
         public_start_at_to: [
           {
             validator: this.validateRangePublicStartAt,
+            trigger: ['change', 'blur']
+          }
+        ],
+
+        upload_file: [
+          {
+            required: this.isOriginCategory,
+            message: this.$t('messages.error.required', { name: this.$t('article.image') }),
             trigger: ['change', 'blur']
           }
         ]
@@ -711,12 +732,12 @@ export default {
      * show or hide field
      */
     checkField(isOriginalField) {
-      return true
-      // return this.id === 0
-      //   ? isOriginalField
-      //   : this.model.article_category_id === ORIGINAL_CATEGORY_ID
-      //     ? isOriginalField
-      //     : !isOriginalField
+      // TODO
+      return this.id === 0
+        ? isOriginalField
+        : this.model.article_category_id === ORIGINAL_CATEGORY_ID
+          ? isOriginalField
+          : !isOriginalField
     },
 
     /**

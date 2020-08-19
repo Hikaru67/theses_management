@@ -23,26 +23,26 @@
           </nuxt-link>
         </a-menu-item>
 
-        <!-- <a-sub-menu>
+        <a-sub-menu>
           <span slot="title">
-            <font-awesome-icon icon="user-friends" class="anticon" />
-            <span>Team</span>
+            <font-awesome-icon icon="cog" class="anticon" />
+            <span>Multi level</span>
           </span>
 
           <a-menu-item>
-            <nuxt-link to="/categories">
-              <font-awesome-icon icon="th-list" class="anticon" />
-              <span>Categories</span>
+            <nuxt-link to="/login">
+              <font-awesome-icon icon="sign-in-alt" class="anticon" />
+              <span>Login</span>
             </nuxt-link>
           </a-menu-item>
 
           <a-menu-item>
-            <nuxt-link to="/users">
-              <font-awesome-icon icon="user-friends" class="anticon" />
-              <span>Users</span>
+            <nuxt-link to="/forgot">
+              <font-awesome-icon icon="lock" class="anticon" />
+              <span>Forgot</span>
             </nuxt-link>
           </a-menu-item>
-        </a-sub-menu> -->
+        </a-sub-menu>
 
         <a-menu-item-group>
           <template slot="title">

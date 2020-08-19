@@ -196,7 +196,8 @@ export default {
         'faCaretDown',
         'faSignInAlt',
         'faHandPointDown',
-        'faPaperPlane'
+        'faPaperPlane',
+        'faCog'
       ]
     }
   },
