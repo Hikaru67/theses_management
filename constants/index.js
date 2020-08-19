@@ -71,17 +71,17 @@ export const BREAD_CRUMB_LIST = [
   },
   {
     id: 5,
-    name: 'breadcrumb.article',
-    value: 'article'
+    name: 'breadcrumb.articles',
+    value: 'articles'
   },
   {
     id: 6,
-    name: 'breadcrumb.article-new',
-    value: 'article-new'
+    name: 'breadcrumb.articles-new',
+    value: 'articles-new'
   },
   {
     id: 7,
-    name: 'breadcrumb.article_category',
+    name: 'breadcrumb.article-category',
     value: 'article-category'
   },
   {

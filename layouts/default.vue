@@ -191,7 +191,7 @@ export default {
         const crumb = {}
 
         crumb.to = item.path
-        crumb.text = this.getCrumbName(item.name)
+        crumb.text = this.getCrumbName(item.path.replace(/\//, ''))
 
         // is last item?
         if (i === length - 1) {
@@ -216,15 +216,13 @@ export default {
      * Breadcrumb list
      */
     breadcrumbList() {
-      const list = BREAD_CRUMB_LIST.map(item => {
+      return BREAD_CRUMB_LIST.map(item => {
         return {
           id: item.id,
           name: this.$t(item.name),
           value: item.value
         }
       })
-
-      return list
     }
   },
 

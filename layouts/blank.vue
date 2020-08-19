@@ -16,8 +16,3 @@
   opacity: 0;
 }
 </style>
-
-<script>
-export default {
-}
-</script>

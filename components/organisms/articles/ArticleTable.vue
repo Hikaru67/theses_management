@@ -63,7 +63,7 @@
         :disabled="loading"
         @click="goToDetail(record.id)"
       >
-        <font-awesome-icon icon="eye" class="width-1x" />
+        <font-awesome-icon icon="pencil-alt" class="width-1x" />
       </a-button>
 
       <a-button

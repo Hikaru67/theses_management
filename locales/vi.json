@@ -282,9 +282,9 @@
     "roles-new": "Quyền / Thêm mới",
     "categories": "Thể loại",
     "categories-new": "Thể loại / Thêm mới",
-    "article": "Bài viết",
-    "article-new": "記事 / 新規作成",
-    "article_category": "Thể loại bài viết",
+    "articles": "Bài viết",
+    "articles-new": "Bài viết / Thêm mới",
+    "article-category": "Thể loại bài viết",
     "site": "Trang web"
   },
   "login": {

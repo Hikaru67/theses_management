@@ -282,9 +282,9 @@
     "roles-new": "ロール / 新規作成",
     "categories": "カテゴリー",
     "categories-new": "カテゴリー / 新規作成",
-    "article": "記事",
-    "article-new": "記事 / 新規作成",
-    "article_category": "カテゴリー",
+    "articles": "記事",
+    "articles-new": "記事 / 新規作成",
+    "article-category": "カテゴリー",
     "site": "サイト"
   },
   "login": {

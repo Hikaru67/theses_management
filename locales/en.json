@@ -282,9 +282,9 @@
     "roles-new": "Roles / New",
     "categories": "Categories",
     "categories-new": "Categories / New",
-    "article": "Articles",
-    "article-new": "記事 / 新規作成",
-    "article_category": "Articles Category",
+    "articles": "Articles",
+    "articles-new": "Articles / New",
+    "article-category": "Articles Category",
     "site": "Sites"
   },
   "login": {

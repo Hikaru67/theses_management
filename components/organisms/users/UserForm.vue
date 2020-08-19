@@ -285,7 +285,6 @@ export default {
         .then(res => {
           if (Array.isArray(res.data)) {
             this.roles = res.data.map(item => new Role(item))
-            console.log('this.roles', this.roles)
           }
         })
         .catch(err => {
