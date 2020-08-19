@@ -8,6 +8,9 @@
       </a>
 
       <a-menu slot="overlay">
+        <a-menu-item key="1" class="txt-name">
+          a@a.com
+        </a-menu-item>
         <a-menu-item key="0">
           <a href="#" @click="logout()">
             <font-awesome-icon icon="sign-out-alt" class="width-1x" />&nbsp;

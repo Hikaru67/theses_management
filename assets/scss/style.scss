@@ -290,6 +290,14 @@ button,
 }
 .ant-dropdown.dropdown-account {
   min-width: 160px;
+  .ant-dropdown-menu {
+    padding-top: 0;
+  }
+  .txt-name {
+    background: #ebedef;
+    text-align: center;
+    cursor: default;
+  }
 }
 
 /* -----------------------------------------------------------
