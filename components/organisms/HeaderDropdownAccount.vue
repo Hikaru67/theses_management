@@ -2,18 +2,36 @@
   <div>
     <div v-loading.fullscreen="loading" />
 
-    <a-dropdown overlay-class-name="dropdown-account" :trigger="['click']">
-      <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-        <font-awesome-icon icon="user-cog" class="ic-large" />
+    <a-dropdown
+      overlay-class-name="dropdown-account"
+      :trigger="['click']"
+    >
+      <a
+        class="ant-dropdown-link"
+        @click="e => e.preventDefault()"
+      >
+        <font-awesome-icon
+          icon="user-cog"
+          class="ic-large"
+        />
       </a>
 
       <a-menu slot="overlay">
-        <a-menu-item key="1" class="txt-name">
+        <a-menu-item
+          key="1"
+          class="txt-name"
+        >
           a@a.com
         </a-menu-item>
         <a-menu-item key="0">
-          <a href="#" @click="logout()">
-            <font-awesome-icon icon="sign-out-alt" class="width-1x" />&nbsp;
+          <a
+            href="#"
+            @click="logout()"
+          >
+            <font-awesome-icon
+              icon="sign-out-alt"
+              class="width-1x"
+            />&nbsp;
             {{ $t('common.logout') }}
           </a>
         </a-menu-item>
@@ -34,14 +52,11 @@ export default {
     /**
      * Logout user
      */
-    async logout() {
+    logout() {
       this.loading = true
 
       try {
-        await this.$dam.logout()
-
         this.loading = false
-        this.$dam.clearAuthToken()
         this.$router.push('login')
       } catch (err) {
         console.error(err)

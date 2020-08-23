@@ -1,11 +1,17 @@
 <template>
   <div class="main-list position-relative">
     <div class="box-change-view">
-      <nuxt-link to="/menus" :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`">
+      <nuxt-link
+        to="/menus"
+        :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`"
+      >
         <font-awesome-icon icon="th-list" />
       </nuxt-link>
 
-      <nuxt-link to="/menus/list" :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`">
+      <nuxt-link
+        to="/menus/list"
+        :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`"
+      >
         <font-awesome-icon icon="border-all" />
       </nuxt-link>
     </div>
@@ -13,7 +19,7 @@
     <a-tree
       class="draggable-tree"
       draggable
-      :tree-data="gData"
+      :tree-data="data"
       @dragenter="onDragEnter"
       @drop="onDrop"
     />
@@ -25,7 +31,7 @@ import { cloneDeep } from 'lodash'
 export default {
   data() {
     return {
-      gData: [
+      data: [
         {
           key: 1,
           title: 'title 1',
@@ -111,7 +117,7 @@ export default {
     },
 
     onDrop({ dragNode, dragNodesKeys, dropPosition, dropToGap, node }) {
-      const data = cloneDeep(this.gData)
+      const data = cloneDeep(this.data)
       this.extractList(data, dragNode, node, dropPosition)
       const newNode = {
         ...dragNode.dataRef,

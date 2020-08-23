@@ -10,7 +10,10 @@
     <div class="box-wrapper">
       <div class="box-img">
         <div class="img-user">
-          <font-awesome-icon icon="user-tie" class="ic" />
+          <font-awesome-icon
+            icon="user-tie"
+            class="ic"
+          />
         </div>
       </div>
 
@@ -26,7 +29,11 @@
             :placeholder="$t('login.login_id')"
             :disabled="loading"
           >
-            <font-awesome-icon slot="prefix" icon="user-tie" class="width-1x" />
+            <font-awesome-icon
+              slot="prefix"
+              icon="user-tie"
+              class="width-1x"
+            />
           </a-input>
         </a-form-model-item>
 
@@ -37,11 +44,18 @@
             :placeholder="$t('login.password')"
             :disabled="loading"
           >
-            <font-awesome-icon slot="prefix" icon="lock" class="width-1x" />
+            <font-awesome-icon
+              slot="prefix"
+              icon="lock"
+              class="width-1x"
+            />
           </a-input>
         </a-form-model-item>
 
-        <div v-if="message" class="ant-form-item has-error">
+        <div
+          v-if="message"
+          class="ant-form-item has-error"
+        >
           <span class="ant-form-explain">{{ message }}</span>
         </div>
 
@@ -54,7 +68,10 @@
             class="w-min-120"
           >
             {{ $t('login.title') }}
-            <font-awesome-icon icon="sign-in-alt" class="ml-1" />
+            <font-awesome-icon
+              icon="sign-in-alt"
+              class="ml-1"
+            />
           </a-button>
         </div>
       </div>
@@ -69,15 +86,15 @@
 </template>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/_variables.scss';
-@import '~/assets/scss/_mixins.scss';
+@import "~/assets/scss/_variables.scss";
+@import "~/assets/scss/_mixins.scss";
 
 .main-form {
   /deep/ {
     width: 100%;
     max-width: 400px;
     background: #fff;
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
     margin: 30px 0;
     .box-wrapper {
       padding-bottom: 30px;
@@ -127,7 +144,6 @@
 </style>
 
 <script>
-import { get } from 'lodash'
 
 export default {
   layout: 'blank',
@@ -189,24 +205,12 @@ export default {
     /**
      * login function
      */
-    async login() {
+    login() {
       this.loading = true
 
       try {
-        const resLogin = await this.$dam.login({
-          email: this.email,
-          password: this.password
-        })
-
         this.loading = false
 
-        const data = resLogin.data
-        if (!get(data, 'api_token', false)) {
-          this.message = 'Reponse invalid, plse check server api.'
-          return
-        }
-
-        this.$dam.setAuthToken(data.api_token)
         this.$toast.success(
           this.$t('messages.information.login')
         )

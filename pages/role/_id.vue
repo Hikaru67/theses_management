@@ -1,5 +1,5 @@
 <template>
-  <user-form
+  <role-form
     :id="id"
     @save="goBack"
     @cancel="goBack"
@@ -7,10 +7,10 @@
 </template>
 <script>
 
-import UserForm from '~/components/organisms/UserForm'
+import RoleForm from '~/components/organisms/RoleForm'
 
 export default {
-  components: { UserForm },
+  components: { RoleForm },
   data() {
     return {
       id: +this.$route.params.id || 0

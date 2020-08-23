@@ -56,15 +56,9 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/api',
-    '@/plugins/dd-api-manager',
-    '@/plugins/debugger',
     '@/plugins/validations',
     '@/plugins/directive',
-    '@/plugins/directives',
-    '@/plugins/moment',
-    '@/plugins/filters',
-    { src: '@/plugins/ck-editor', mode: 'client' },
-    '@/plugins/csv'
+    '@/plugins/directives'
   ],
 
   /*

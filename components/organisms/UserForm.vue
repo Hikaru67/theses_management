@@ -103,6 +103,30 @@
             </a-input>
           </a-form-model-item>
         </a-col>
+
+        <a-col
+          :span="24"
+          :md="12"
+        >
+          <a-form-model-item
+            :label="$t('user.roles')"
+            prop="roles"
+          >
+            <a-select
+              v-model="model.roleIds"
+              mode="multiple"
+              style="width: 100%"
+              placeholder="Please select"
+            >
+              <a-select-option
+                v-for="role in roles"
+                :key="role.id"
+              >
+                {{ role.name }}
+              </a-select-option>
+            </a-select>
+          </a-form-model-item>
+        </a-col>
       </a-row>
     </div>
 
@@ -145,8 +169,14 @@ import DataForm from '~/mixins/data-form'
 export default {
   mixins: [DataForm],
 
+  async fetch() {
+    const { data } = await this.$api.indexRole()
+    this.roles = data.data
+  },
+
   data: () => ({
-    resource: 'user'
+    resource: 'user',
+    roles: []
   }),
 
   computed: {

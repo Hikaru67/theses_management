@@ -1,21 +1,15 @@
 <template>
-  <user-form
-    :id="id"
+  <role-form
     @save="goBack"
     @cancel="goBack"
   />
 </template>
 <script>
 
-import UserForm from '~/components/organisms/UserForm'
+import RoleForm from '~/components/organisms/RoleForm'
 
 export default {
-  components: { UserForm },
-  data() {
-    return {
-      id: +this.$route.params.id || 0
-    }
-  },
+  components: { RoleForm },
   methods: {
     /**
      * Go to list
