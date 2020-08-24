@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div v-loading.fullscreen="loading" />
-
     <a-dropdown
       overlay-class-name="dropdown-account"
       :trigger="['click']"
@@ -53,14 +51,14 @@ export default {
      * Logout user
      */
     logout() {
-      this.loading = true
+      this.$store.dispatch('setLoading', true)
 
       try {
-        this.loading = false
         this.$router.push('login')
       } catch (err) {
         console.error(err)
-        this.loading = false
+      } finally {
+        this.$store.dispatch('setLoading', false)
       }
     }
   }

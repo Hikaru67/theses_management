@@ -2,7 +2,6 @@
   <div>
     <a-form-model
       ref="form"
-      v-loading="loading"
       :model="filters"
       :label-col="{ sm: 6 }"
       :wrapper-col="{ sm: 18 }"

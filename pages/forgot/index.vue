@@ -1,7 +1,6 @@
 <template>
   <a-form-model
     ref="refForm"
-    v-loading.fullscreen="loading"
     :model="this"
     :rules="rulesForm"
     class="main-form"
@@ -25,11 +24,18 @@
             :placeholder="$t('login.login_id')"
             :disabled="loading"
           >
-            <font-awesome-icon slot="prefix" icon="user-tie" class="width-1x" />
+            <font-awesome-icon
+              slot="prefix"
+              icon="user-tie"
+              class="width-1x"
+            />
           </a-input>
         </a-form-model-item>
 
-        <div v-if="message" class="ant-form-item has-error">
+        <div
+          v-if="message"
+          class="ant-form-item has-error"
+        >
           <span class="ant-form-explain">{{ message }}</span>
         </div>
 
@@ -40,7 +46,10 @@
             :disabled="loading"
             class="w-min-120"
           >
-            <font-awesome-icon icon="paper-plane" class="mr-1" />
+            <font-awesome-icon
+              icon="paper-plane"
+              class="mr-1"
+            />
             送信する
           </a-button>
 
@@ -52,7 +61,10 @@
             class="w-min-120"
             @click="$router.push({ path: '/login' })"
           >
-            <font-awesome-icon icon="arrow-left" class="mr-1" />
+            <font-awesome-icon
+              icon="arrow-left"
+              class="mr-1"
+            />
             戻る
           </a-button>
         </div>
@@ -62,15 +74,15 @@
 </template>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/_variables.scss';
-@import '~/assets/scss/_mixins.scss';
+@import "~/assets/scss/_variables.scss";
+@import "~/assets/scss/_mixins.scss";
 
 .main-form {
   /deep/ {
     width: 100%;
     max-width: 450px;
     background: #fff;
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
     margin: 30px 0;
     .txt-title-top {
       font-size: 24px;

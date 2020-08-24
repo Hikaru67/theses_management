@@ -42,10 +42,10 @@ export default {
      * @param {Number} id
      */
     async getModel(id) {
-      this.loading = true
+      this.$store.dispatch('setLoading', true)
       const action = `${this.resource}/getModel`
       this.model = await this.$store.dispatch(action, { id })
-      this.loading = false
+      this.$store.dispatch('setLoading', false)
     },
 
     validateBeforeSubmit() {
@@ -64,10 +64,10 @@ export default {
      * Event trigger on Submit
      */
     async handleSubmit() {
-      this.loading = true
+      this.$store.dispatch('setLoading', true)
       const action = `${this.resource}/saveModel`
       this.model = await this.$store.dispatch(action, this.model)
-      this.loading = false
+      this.$store.dispatch('setLoading', false)
       this.$emit('save')
     }
   }

@@ -8,7 +8,7 @@ import { camelCase } from 'lodash'
 export default {
   async fetch() {
     const params = this.$route.query
-    this.loading = true
+    this.$store.dispatch('setLoading', true)
     const action = `${this.resource}/getList`
     const { data, meta } = await this.$store.dispatch(action, { params })
     this.pagination = {
@@ -19,7 +19,7 @@ export default {
       showTotal: total => `Total ${total} items`
     }
     this.data = data
-    this.loading = false
+    this.$store.dispatch('setLoading', false)
   },
 
   data() {
@@ -81,10 +81,10 @@ export default {
     },
 
     async deleteRecord(id) {
-      this.loading = true
+      this.$store.dispatch('setLoading', true)
       const action = camelCase(`delete-${this.resource}`)
       await this.$api[action]({ id })
-      this.loading = false
+      this.$store.dispatch('setLoading', false)
       this.$fetch()
     }
   }

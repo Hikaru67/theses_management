@@ -1,7 +1,6 @@
 <template>
   <a-form-model
     ref="refForm"
-    v-loading.fullscreen="loading"
     :model="this"
     :rules="rulesForm"
     class="main-form"
@@ -206,11 +205,9 @@ export default {
      * login function
      */
     login() {
-      this.loading = true
+      this.$store.dispatch('setLoading', true)
 
       try {
-        this.loading = false
-
         this.$toast.success(
           this.$t('messages.information.login')
         )
@@ -218,7 +215,6 @@ export default {
         this.$router.push('/')
       } catch (err) {
         console.error(err)
-        this.loading = false
 
         this.message = this.$t(
           'messages.error.unmatch_value',
@@ -228,6 +224,8 @@ export default {
         this.$toast.error(
           this.$t('messages.error.failed_to_login')
         )
+      } finally {
+        this.$store.dispatch('setLoading', false)
       }
     }
   }
