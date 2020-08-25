@@ -5,6 +5,8 @@
 
 import { camelCase } from 'lodash'
 
+import { mapGetters } from 'vuex'
+
 export default {
   async fetch() {
     const params = this.$route.query
@@ -25,11 +27,16 @@ export default {
   data() {
     return {
       data: [],
-      loading: false,
       pagination: {
         showSizeChanger: true
       }
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      loading: 'loading'
+    })
   },
 
   watch: {

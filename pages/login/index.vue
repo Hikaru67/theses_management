@@ -26,7 +26,6 @@
           <a-input
             v-model="email"
             :placeholder="$t('login.login_id')"
-            :disabled="loading"
           >
             <font-awesome-icon
               slot="prefix"
@@ -41,7 +40,6 @@
             v-model="password"
             type="password"
             :placeholder="$t('login.password')"
-            :disabled="loading"
           >
             <font-awesome-icon
               slot="prefix"
@@ -63,7 +61,6 @@
             html-type="submit"
             type="primary"
             size="large"
-            :disabled="loading"
             class="w-min-120"
           >
             {{ $t('login.title') }}

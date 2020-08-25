@@ -43,6 +43,9 @@ export default {
      */
     async getModel(id) {
       this.$store.dispatch('setLoading', true)
+      if (this.$refs.form) {
+        this.$refs.form.clearValidate()
+      }
       const action = `${this.resource}/getModel`
       this.model = await this.$store.dispatch(action, { id })
       this.$store.dispatch('setLoading', false)

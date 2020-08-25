@@ -40,12 +40,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      loading: false
-    }
-  },
-
   methods: {
     /**
      * Logout user

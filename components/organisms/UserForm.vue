@@ -24,7 +24,6 @@
             <a-input
               v-model="model.name"
               :placeholder="$t('user.name')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -46,7 +45,6 @@
             <a-input
               v-model="model.email"
               :placeholder="$t('user.email')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -69,7 +67,6 @@
               v-model="model.password"
               type="password"
               :placeholder="$t('user.password')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -92,7 +89,6 @@
               v-model="model.password_confirm"
               type="password"
               :placeholder="$t('user.password_confirm')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -133,7 +129,6 @@
       <a-button
         html-type="submit"
         type="primary"
-        :disabled="loading"
         class="w-min-100"
       >
         <font-awesome-icon
@@ -147,7 +142,6 @@
       <a-button
         html-type="button"
         type="default"
-        :disabled="loading"
         class="w-min-100"
         @click="$emit('cancel')"
       >

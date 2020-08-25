@@ -23,7 +23,6 @@
             <a-input
               v-model="filters.name"
               :placeholder="$t('role.name')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -41,7 +40,6 @@
           <a-button
             html-type="submit"
             type="primary"
-            :disabled="loading"
             class="w-min-100"
           >
             <font-awesome-icon
@@ -55,7 +53,6 @@
           <a-button
             html-type="button"
             type="default"
-            :disabled="loading"
             class="w-min-100"
             @click="reset"
           >
@@ -70,7 +67,6 @@
     </a-form-model>
     <a-button
       type="primary"
-      :disabled="loading"
       @click="showDetail(0)"
     >
       Create Role
@@ -89,7 +85,6 @@
       >
         <a-button
           type="success"
-          :disabled="loading"
           @click="goToDetail(record.id)"
         >
           <font-awesome-icon
@@ -99,7 +94,6 @@
         </a-button>
         <a-button
           type="primary"
-          :disabled="loading"
           @click="showDetail(record.id)"
         >
           <font-awesome-icon
@@ -109,7 +103,6 @@
         </a-button>
         <a-button
           type="danger"
-          :disabled="loading"
           @click="confirmToDelete(record.id)"
         >
           <font-awesome-icon
@@ -124,17 +117,15 @@
       :visible="visible"
       :footer="null"
       class="modal-wrap"
+      :title="currentId ? $t('role.role') : $t('role.role')"
     >
-      <template slot="title">
-        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ currentId ? $t('role.edit_role') : $t('role.create_new_role') }}
-      </template>
-
-      <role-form
-        :id="currentId"
-        @save="closeDialog(true)"
-        @cancel="closeDialog(false)"
-      />
+      <a-spin :spinning="loading">
+        <role-form
+          :id="currentId"
+          @save="closeDialog(true)"
+          @cancel="closeDialog(false)"
+        />
+      </a-spin>
     </a-modal>
   </div>
 </template>

@@ -24,7 +24,6 @@
             <a-input
               v-model="model.name"
               :placeholder="$t('role.name')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -47,7 +46,6 @@
             <a-checkbox-group
               v-model="model.permissionIds"
               name="permissions"
-              :disabled="loading"
               class="no-inline"
             >
               <a-collapse
@@ -79,7 +77,6 @@
       <a-button
         html-type="submit"
         type="primary"
-        :disabled="loading"
         class="w-min-100"
       >
         <font-awesome-icon
@@ -93,7 +90,6 @@
       <a-button
         html-type="button"
         type="default"
-        :disabled="loading"
         class="w-min-100"
         @click="$emit('cancel')"
       >

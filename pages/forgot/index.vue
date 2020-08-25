@@ -22,7 +22,6 @@
           <a-input
             v-model="email"
             :placeholder="$t('login.login_id')"
-            :disabled="loading"
           >
             <font-awesome-icon
               slot="prefix"
@@ -43,7 +42,6 @@
           <a-button
             html-type="submit"
             type="primary"
-            :disabled="loading"
             class="w-min-120"
           >
             <font-awesome-icon
@@ -57,7 +55,6 @@
           <a-button
             html-type="button"
             type="secondary"
-            :disabled="loading"
             class="w-min-120"
             @click="$router.push({ path: '/login' })"
           >
@@ -114,8 +111,7 @@ export default {
   data() {
     return {
       email: '',
-      message: '',
-      loading: false
+      message: ''
     }
   },
 

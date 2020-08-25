@@ -51,11 +51,6 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  data() {
-    return {
-      loading: false
-    }
-  },
 
   computed: {
     ...mapGetters('i18n', ['getLocale']),

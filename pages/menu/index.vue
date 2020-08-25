@@ -18,7 +18,6 @@
 
     <a-button
       type="primary"
-      :disabled="loading"
       @click="showDetail(0)"
     >
       Create Menu
@@ -63,17 +62,15 @@
       :visible="visible"
       :footer="null"
       class="modal-wrap"
+      :title="currentId ? $t('menu.menu') : $t('menu.menu')"
     >
-      <template slot="title">
-        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ currentId ? $t('menu.menu') : $t('menu.menu') }}
-      </template>
-
-      <menu-form
-        :id="currentId"
-        @save="closeDialog(true)"
-        @cancel="closeDialog(false)"
-      />
+      <a-spin :spinning="loading">
+        <menu-form
+          :id="currentId"
+          @save="closeDialog(true)"
+          @cancel="closeDialog(false)"
+        />
+      </a-spin>
     </a-modal>
   </div>
 </template>

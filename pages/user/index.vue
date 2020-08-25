@@ -23,7 +23,6 @@
             <a-input
               v-model="filters.name"
               :placeholder="$t('user.name')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -45,7 +44,6 @@
             <a-input
               v-model="filters.email"
               :placeholder="$t('user.email')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -63,7 +61,6 @@
           <a-button
             html-type="submit"
             type="primary"
-            :disabled="loading"
             class="w-min-100"
           >
             <font-awesome-icon
@@ -77,7 +74,6 @@
           <a-button
             html-type="button"
             type="default"
-            :disabled="loading"
             class="w-min-100"
             @click="reset"
           >
@@ -92,7 +88,6 @@
     </a-form-model>
     <a-button
       type="primary"
-      :disabled="loading"
       @click="showDetail(0)"
     >
       Create User
@@ -111,7 +106,6 @@
       >
         <a-button
           type="success"
-          :disabled="loading"
           @click="goToDetail(record.id)"
         >
           <font-awesome-icon
@@ -121,7 +115,6 @@
         </a-button>
         <a-button
           type="primary"
-          :disabled="loading"
           @click="showDetail(record.id)"
         >
           <font-awesome-icon
@@ -131,7 +124,6 @@
         </a-button>
         <a-button
           type="danger"
-          :disabled="loading"
           @click="confirmToDelete(record.id)"
         >
           <font-awesome-icon
@@ -146,17 +138,15 @@
       :visible="visible"
       :footer="null"
       class="modal-wrap"
+      :title="currentId ? $t('user.user') : $t('user.user')"
     >
-      <template slot="title">
-        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ currentId ? $t('user.edit_user') : $t('user.create_new_user') }}
-      </template>
-
-      <user-form
-        :id="currentId"
-        @save="closeDialog(true)"
-        @cancel="closeDialog(false)"
-      />
+      <a-spin :spinning="loading">
+        <user-form
+          :id="currentId"
+          @save="closeDialog(true)"
+          @cancel="closeDialog(false)"
+        />
+      </a-spin>
     </a-modal>
   </div>
 </template>

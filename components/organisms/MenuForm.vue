@@ -24,7 +24,6 @@
             <a-input
               v-model="model.title"
               :placeholder="$t('menu.title')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -46,7 +45,6 @@
             <a-input
               v-model="model.icon"
               :placeholder="$t('menu.icon')"
-              :disabled="loading"
             >
               <font-awesome-icon
                 slot="addonBefore"
@@ -87,7 +85,6 @@
       <a-button
         html-type="submit"
         type="primary"
-        :disabled="loading"
         class="w-min-100"
       >
         <font-awesome-icon
@@ -101,7 +98,6 @@
       <a-button
         html-type="button"
         type="default"
-        :disabled="loading"
         class="w-min-100"
         @click="$emit('cancel')"
       >

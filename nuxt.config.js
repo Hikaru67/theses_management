@@ -56,9 +56,8 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/api',
-    '@/plugins/validations',
-    '@/plugins/directive',
-    '@/plugins/directives'
+    '@/plugins/validator',
+    '@/plugins/directive'
   ],
 
   /*
