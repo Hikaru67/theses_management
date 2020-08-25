@@ -100,10 +100,13 @@ export default ({ $axios }, inject) => {
     role: {
       resource: {}
     },
+    menu: {
+      resource: {}
+    },
     permission: {
       get: {}
     },
-    'menu/update': {
+    'menu/move': {
       post: {
         name: 'moveMenu'
       }

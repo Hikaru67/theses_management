@@ -16,96 +16,112 @@
       </nuxt-link>
     </div>
 
+    <a-button
+      type="primary"
+      :disabled="loading"
+      @click="showDetail(0)"
+    >
+      Create Menu
+    </a-button>
+
     <a-tree
       class="draggable-tree"
       draggable
       :tree-data="data"
-      @dragenter="onDragEnter"
       @drop="onDrop"
-    />
+    >
+      <template
+        slot="action"
+        slot-scope="{ title, key }"
+      >
+        <span>
+          {{ title }}
+        </span>
+        <a
+          href="#"
+          @click="showDetail(key)"
+        >
+          <font-awesome-icon
+            icon="eye"
+            class="width-1x"
+          />
+        </a>
+        <a
+          href="#"
+          @click="confirmToDelete(key)"
+        >
+          <font-awesome-icon
+            icon="times"
+            class="width-1x"
+          />
+        </a>
+      </template>
+    </a-tree>
+
+    <a-modal
+      ref="detail"
+      :visible="visible"
+      :footer="null"
+      class="modal-wrap"
+    >
+      <template slot="title">
+        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
+        {{ currentId ? $t('menu.menu') : $t('menu.menu') }}
+      </template>
+
+      <menu-form
+        :id="currentId"
+        @save="closeDialog(true)"
+        @cancel="closeDialog(false)"
+      />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import { cloneDeep } from 'lodash'
+import { mapGetters } from 'vuex'
+import MenuForm from '~/components/organisms/MenuForm'
 export default {
+  components: { MenuForm },
+  async fetch() {
+    this.$store.dispatch('setLoading', true)
+    const params = { limit: 0 }
+    const { data } = await this.$api.indexMenu({ params })
+    const recursive = (parentId = 0) => {
+      const list = cloneDeep(data.data.filter(item => item.parent_id === parentId))
+      list.sort((a, b) => a.position - b.position)
+      return list.map(item => {
+        const children = recursive(item.id)
+        return {
+          key: item.id,
+          title: item.title,
+          scopedSlots: {
+            title: 'action'
+          },
+          parent: item.parent_id,
+          children
+        }
+      })
+    }
+    this.data = recursive()
+    this.$store.dispatch('setLoading', false)
+  },
   data() {
     return {
-      data: [
-        {
-          key: 1,
-          title: 'title 1',
-          parent: 0,
-          children: [
-            {
-              key: 2,
-              title: 'title 2',
-              parent: 1,
-              children: [
-                {
-                  key: 6,
-                  title: 'title 6',
-                  parent: 2,
-                  children: []
-                }
-              ]
-            },
-            {
-              key: 5,
-              title: 'title 5',
-              parent: 1,
-              children: []
-            }
-          ]
-        },
-        {
-          key: 3,
-          title: 'title 3',
-          parent: 0,
-          children: [
-            {
-              key: 4,
-              title: 'title 4',
-              parent: 3,
-              children: [
-                {
-                  key: 7,
-                  title: 'title 7',
-                  parent: 4,
-                  children: []
-                },
-                {
-                  key: 9,
-                  title: 'title 9',
-                  parent: 4,
-                  children: []
-                },
-                {
-                  key: 10,
-                  title: 'title 10',
-                  parent: 4,
-                  children: []
-                }
-              ]
-            },
-            {
-              key: 8,
-              title: 'title 8',
-              parent: 3,
-              children: []
-            }
-          ]
-        }
-      ],
+      resource: 'menu',
+      visible: false,
+      currentId: 0,
+      data: [],
       list: []
     }
   },
+  computed: {
+    ...mapGetters({
+      loading: 'loading'
+    })
+  },
   methods: {
-    onDragEnter(info) {
-      // console.warn('drag', info)
-      // expandedKeys 需要受控时设置
-      // this.expandedKeys = info.expandedKeys
-    },
     extractList(data, dragNode, node, dropPosition) {
       data.forEach((item, index) => {
         if (item.key === node.eventKey) {
@@ -139,8 +155,45 @@ export default {
           newData = [...newData, ...appendData]
         })
       }
-      // await this.$api.post
-      console.warn(this.$api)
+      let i = 0
+      const batchData = newData.map(item => {
+        return {
+          id: item.key,
+          parent_id: item.parent,
+          position: i++
+        }
+      })
+      this.batchUpdate(batchData)
+    },
+
+    async batchUpdate(list) {
+      this.$store.dispatch('setLoading', true)
+      await this.$api.moveMenu({ list })
+      this.$store.dispatch('setLoading', false)
+      this.$fetch()
+    },
+
+    showDetail(id) {
+      this.currentId = id
+      this.visible = true
+    },
+
+    closeDialog(fetch) {
+      this.visible = false
+      if (fetch) {
+        this.$fetch()
+      }
+    },
+
+    confirmToDelete(id) {
+      this.$confirm({
+        title: 'Are you sure delete this task?',
+        content: 'Some descriptions',
+        okText: 'Yes',
+        okType: 'danger',
+        cancelText: 'No',
+        onOk: () => this.deleteRecord(id)
+      })
     }
   }
 }
