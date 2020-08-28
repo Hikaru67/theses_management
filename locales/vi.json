@@ -146,22 +146,6 @@
       "update": "Cập nhật người dùng",
       "delete": "Xóa người dùng"
     },
-    "category": {
-      "module": "Chủng loại",
-      "index": "Danh sách chủng loại",
-      "store": "Tạo chủng loại",
-      "show": "Chi tiết chủng loại",
-      "update": "Cập nhật chủng loại",
-      "delete": "Xóa chủng loại"
-    },
-    "article": {
-      "module": "Bài viết",
-      "index": "Danh sách bài viết",
-      "store": "Tạo bài viết",
-      "show": "Chi tiết bài viết",
-      "update": "Cập nhật bài viết",
-      "delete": "Xóa bài viết"
-    },
     "menu": {
       "module": "Thực đơn",
       "index": "Danh sách thực đơn",
@@ -182,8 +166,6 @@
     "user": "Người dùng",
     "update_status": "Cập nhật trạng thái",
     "list_user": "Danh sách người dùng",
-    "create_new_user": "Tạo mới người dùng",
-    "edit_user": "Sửa người dùng",
     "status": "Trạng thái",
     "statuses": {
       "active": "Hoạt động",
@@ -193,7 +175,6 @@
   "role": {
     "role": "Vai trò",
     "role_list": "Danh sách vai trò",
-    "add_role": "Thêm quyền",
     "name": "Tên",
     "select_role_from_list": "Chọn từ danh sách vai trò",
     "permissions": "Quyền vai trò"
@@ -211,101 +192,19 @@
     "edit_menu": "Sửa thực đơn",
     "note_for_deletion": "Nếu bạn muốn xóa danh mục cha, trước tiên bạn phải xóa hết danh mục con"
   },
-  "category": {
-    "category": "Danh mục",
-    "category_for_pagination": "danh mục",
-    "id": "ID",
-    "name": "Tên",
-    "created_at": "Ngày tạo",
-    "created_at_from": "Ngày tạo (từ ngày)",
-    "created_at_to": "Ngày tạo (đến ngày)",
-    "status": "Trạng thái",
-    "description": "Mô tả",
-    "category_list": "Danh sách danh mục",
-    "note_for_deletion": "Nếu bạn muốn xóa danh mục cha, trước tiên bạn phải xóa hết danh mục con"
-  },
-  "article-category": {
-    "title": "Thể loại bài viết"
-  },
-  "article": {
-    "article_list": "Danh sách bài viết",
-    "id": "ID",
-    "title": "Tiêu đề",
-    "image": "Ảnh",
-    "category": "Thể loại",
-    "youtube_id": "YouTube ID",
-    "youtube_url": "YouTube URL",
-    "youtube_info": "Thông tin Youtube",
-    "site": "Trang web",
-    "all": "Tất cả",
-    "type": "Loại",
-    "type_": {
-      "1": "OB/OG Interview",
-      "2": "Contents"
-    },
-    "status": "Trạng thái",
-    "status_": {
-      "hidden": "Ẩn",
-      "watting_classification": "Chờ phân loại",
-      "public": "Công khai"
-    },
-    "created_at_from": "Ngày tạo (từ ngày)",
-    "created_at_to": "Ngày tạo (đến ngày)",
-    "public_start_at": "Hiển thị lúc",
-    "public_start_at_from": "Hiển thị lúc (từ ngày)",
-    "public_start_at_to": "Hiển thị lúc (đến ngày)",
-    "public_end_at": "Kết thúc lúc",
-    "public_end_at_from": "Kết thúc lúc (từ ngày)",
-    "public_end_at_to": "Kết thúc lúc (đến ngày)",
-    "views": "Lượt xem",
-    "youtube_views": "Lượt xem YouTube",
-    "youtube_view_n_views": "Lượt xem YouTube / Lượt xem",
-    "origin_url": "URL trang gốc",
-    "create_origin_at": "Thời gian tạo (trang gốc)",
-    "update_origin_at": "Thời gian cập nhật (trang gốc)",
-    "last_crawl": "Lần cuối crawl lúc",
-    "ai_score": "Điểm AI",
-    "admin_note": "Ghi chú Admin",
-    "short_description": "Mô tả ngắn",
-    "description": "Mô tả",
-    "article": "Bài viết"
-  },
-  "short_date_picker": {
-    "today": "Hôm nay",
-    "yesterday": "Hôm qua",
-    "tomorrow": "Ngày mai"
-  },
   "breadcrumb": {
-    "users": "Người dùng",
-    "users-new": "Người dùng / Thêm mới",
-    "roles": "Quyền",
-    "roles-new": "Quyền / Thêm mới",
-    "categories": "Thể loại",
-    "categories-new": "Thể loại / Thêm mới",
-    "articles": "Bài viết",
-    "articles-new": "Bài viết / Thêm mới",
-    "article-category": "Thể loại bài viết",
-    "site": "Trang web"
+    "user": "Người dùng",
+    "user-new": "Người dùng / Thêm mới",
+    "role": "Quyền",
+    "role-new": "Quyền / Thêm mới",
+    "menu": "Thực đơn",
+    "menu-new": "Thực đơn / Thêm mới"
   },
   "login": {
     "title": "Đăng nhập",
     "login_id": "Email",
     "password": "Mật khẩu",
     "return": "Quay lại"
-  },
-  "site": {
-    "list_site": "Danh sách trang web",
-    "create": "Thêm mới trang web",
-    "update": "Cập nhật trang web",
-    "site": "Trang web",
-    "id": "ID",
-    "name": "Tên",
-    "image": "Ảnh",
-    "status": "Trạng thái",
-    "url": "Đường dẫn",
-    "description": "Mô tả",
-    "noneActive": "Không hoạt động",
-    "active": "Hoạt động"
   },
   "dashboard": {
     "total_article": "Tổng số bài viết",

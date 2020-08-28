@@ -15,7 +15,7 @@
       >
         <a-col
           :span="24"
-          :md="12"
+          :md="20"
         >
           <a-form-model-item
             :label="$t('role.name')"
@@ -33,30 +33,29 @@
             </a-input>
           </a-form-model-item>
         </a-col>
-      </a-row>
-      <a-row>
+
         <a-col
           :span="24"
-          :md="12"
+          :md="20"
         >
           <a-form-model-item
-            :label="$t('roles.permissions')"
+            :label="$t('role.permissions')"
             prop="permissions"
           >
-            <a-checkbox-group
-              v-model="model.permissionIds"
-              name="permissions"
-              class="no-inline"
+            <a-collapse
+              v-if="permissions.length"
+              v-model="activeCollapseKeys"
+              expand-icon-position="right"
             >
-              <a-collapse
-                v-if="permissions.length"
-                v-model="activeCollapseKeys"
-                expand-icon-position="right"
+              <a-collapse-panel
+                v-for="group in permissions"
+                :key="`${group.name}`"
+                :header="group.name"
               >
-                <a-collapse-panel
-                  v-for="group in permissions"
-                  :key="`${group.name}`"
-                  :header="group.name"
+                <a-checkbox-group
+                  v-model="model.permissionIds"
+                  name="permissions"
+                  class="no-inline"
                 >
                   <a-checkbox
                     v-for="permission in group.permissions"
@@ -65,9 +64,9 @@
                   >
                     {{ permission.name }}
                   </a-checkbox>
-                </a-collapse-panel>
-              </a-collapse>
-            </a-checkbox-group>
+                </a-checkbox-group>
+              </a-collapse-panel>
+            </a-collapse>
           </a-form-model-item>
         </a-col>
       </a-row>
@@ -77,7 +76,7 @@
       <a-button
         html-type="submit"
         type="primary"
-        class="w-min-100"
+        class="min-w-100"
       >
         <font-awesome-icon
           icon="save"
@@ -90,7 +89,7 @@
       <a-button
         html-type="button"
         type="default"
-        class="w-min-100"
+        class="min-w-100"
         @click="$emit('cancel')"
       >
         <font-awesome-icon

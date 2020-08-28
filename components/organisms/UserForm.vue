@@ -129,7 +129,7 @@
       <a-button
         html-type="submit"
         type="primary"
-        class="w-min-100"
+        class="min-w-100"
       >
         <font-awesome-icon
           icon="save"
@@ -142,7 +142,7 @@
       <a-button
         html-type="button"
         type="default"
-        class="w-min-100"
+        class="min-w-100"
         @click="$emit('cancel')"
       >
         <font-awesome-icon
@@ -160,7 +160,9 @@
 import DataForm from '~/mixins/data-form'
 
 export default {
-  mixins: [DataForm],
+  mixins: [
+    DataForm
+  ],
 
   async fetch() {
     const { data } = await this.$api.indexRole()

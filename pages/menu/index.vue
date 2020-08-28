@@ -2,60 +2,67 @@
   <div class="main-list position-relative">
     <div class="box-change-view">
       <nuxt-link
-        to="/menus"
-        :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`"
+        to="/menu"
+        :class="`${$route.path === '/menu/list' ? 'on-menu-list' : ''}`"
       >
         <font-awesome-icon icon="th-list" />
       </nuxt-link>
 
       <nuxt-link
-        to="/menus/list"
-        :class="`${$route.path === '/menus/list' ? 'on-menus-list' : ''}`"
+        to="/menu/list"
+        :class="`${$route.path === '/menu/list' ? 'on-menu-list' : ''}`"
       >
         <font-awesome-icon icon="border-all" />
       </nuxt-link>
     </div>
 
-    <a-button
-      type="primary"
-      @click="showDetail(0)"
-    >
-      Create Menu
-    </a-button>
-
-    <a-tree
-      class="draggable-tree"
-      draggable
-      :tree-data="data"
-      @drop="onDrop"
-    >
-      <template
-        slot="action"
-        slot-scope="{ title, key }"
-      >
-        <span>
-          {{ title }}
-        </span>
-        <a
-          href="#"
-          @click="showDetail(key)"
-        >
-          <font-awesome-icon
-            icon="eye"
-            class="width-1x"
-          />
-        </a>
-        <a
-          href="#"
-          @click="confirmToDelete(key)"
-        >
-          <font-awesome-icon
-            icon="times"
-            class="width-1x"
-          />
-        </a>
+    <a-card class="mb-4">
+      <template slot="title">
+        <font-awesome-icon icon="stream" />
+        {{ $t('menu.menu_list') }}
       </template>
-    </a-tree>
+
+      <template slot="extra">
+        <a-button html-type="button" type="primary" ghost @click="showDetail(0)">
+          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+          {{ $t('common.create_new') }}
+        </a-button>
+      </template>
+
+      <a-tree
+        class="draggable-tree"
+        draggable
+        :tree-data="data"
+        @drop="onDrop"
+      >
+        <template
+          slot="action"
+          slot-scope="{ title, key }"
+        >
+          <span>
+            {{ title }}
+          </span>
+          <a
+            href="#"
+            @click="showDetail(key)"
+          >
+            <font-awesome-icon
+              icon="eye"
+              class="width-1x"
+            />
+          </a>
+          <a
+            href="#"
+            @click="confirmToDelete(key)"
+          >
+            <font-awesome-icon
+              icon="times"
+              class="width-1x"
+            />
+          </a>
+        </template>
+      </a-tree>
+    </a-card>
 
     <a-modal
       ref="detail"
@@ -72,15 +79,21 @@
         />
       </a-spin>
     </a-modal>
+    <!-- end modal-detail -->
   </div>
 </template>
 
 <script>
 import { cloneDeep } from 'lodash'
 import { mapGetters } from 'vuex'
+
 import MenuForm from '~/components/organisms/MenuForm'
+
 export default {
-  components: { MenuForm },
+  components: {
+    MenuForm
+  },
+
   async fetch() {
     this.$store.dispatch('setLoading', true)
     const params = { limit: 0 }
@@ -104,6 +117,7 @@ export default {
     this.data = recursive()
     this.$store.dispatch('setLoading', false)
   },
+
   data() {
     return {
       resource: 'menu',
@@ -113,11 +127,13 @@ export default {
       list: []
     }
   },
+
   computed: {
     ...mapGetters({
       loading: 'loading'
     })
   },
+
   methods: {
     extractList(data, dragNode, node, dropPosition) {
       data.forEach((item, index) => {

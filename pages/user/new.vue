@@ -1,15 +1,27 @@
 <template>
-  <user-form
-    @save="goBack"
-    @cancel="goBack"
-  />
+  <div class="main-detail">
+    <a-card class="mb-4">
+      <template slot="title">
+        <font-awesome-icon icon="plus-circle" />
+        {{ $t('user.user') }}
+      </template>
+
+      <user-form
+        @save="goBack"
+        @cancel="goBack"
+      />
+    </a-card>
+  </div>
 </template>
 <script>
 
 import UserForm from '~/components/organisms/UserForm'
 
 export default {
-  components: { UserForm },
+  components: {
+    UserForm
+  },
+
   methods: {
     /**
      * Go to list

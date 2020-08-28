@@ -30,7 +30,6 @@ export default {
 
   data() {
     return {
-      loading: false,
       model: {}
     }
   },
@@ -42,15 +41,25 @@ export default {
      * @param {Number} id
      */
     async getModel(id) {
-      this.$store.dispatch('setLoading', true)
-      if (this.$refs.form) {
-        this.$refs.form.clearValidate()
+      try {
+        this.$store.dispatch('setLoading', true)
+        if (this.$refs.form) {
+          this.$refs.form.clearValidate()
+        }
+        const action = `${this.resource}/getModel`
+        this.model = await this.$store.dispatch(action, { id })
+      } catch (_) {
+        this.$notification.error({
+          message: this.$t('messages.error.failed_to_get', { name: this.resourceName })
+        })
+      } finally {
+        this.$store.dispatch('setLoading', false)
       }
-      const action = `${this.resource}/getModel`
-      this.model = await this.$store.dispatch(action, { id })
-      this.$store.dispatch('setLoading', false)
     },
 
+    /**
+     * Validate before submit
+     */
     validateBeforeSubmit() {
       this.$refs.form.validate(valid => {
         if (!valid) {
@@ -67,11 +76,26 @@ export default {
      * Event trigger on Submit
      */
     async handleSubmit() {
-      this.$store.dispatch('setLoading', true)
-      const action = `${this.resource}/saveModel`
-      this.model = await this.$store.dispatch(action, this.model)
-      this.$store.dispatch('setLoading', false)
-      this.$emit('save')
+      try {
+        this.$store.dispatch('setLoading', true)
+        const action = `${this.resource}/saveModel`
+        this.model = await this.$store.dispatch(action, this.model)
+
+        this.$notification.success({
+          message: this.$t(this.id ? 'messages.information.updated' : 'messages.information.created')
+        })
+
+        this.$emit('save')
+      } catch (_) {
+        this.$notification.error({
+          message: this.$t(
+            this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
+            { name: this.resourceName }
+          )
+        })
+      } finally {
+        this.$store.dispatch('setLoading', false)
+      }
     }
   }
 }

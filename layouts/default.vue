@@ -1,191 +1,189 @@
 <template>
-  <a-spin :spinning="loading">
-    <a-layout class="default-layout">
-      <!-- main sidebar -->
-      <a-layout-sider
-        v-model="isCollapsed"
-        collapsible
-        width="256"
-        :collapsed-width="collapsedWidth"
+  <a-layout class="default-layout">
+    <!-- main sidebar -->
+    <a-layout-sider
+      v-model="isCollapsed"
+      collapsible
+      width="256"
+      :collapsed-width="collapsedWidth"
+    >
+      <!-- logo -->
+      <div class="logo">
+        <nuxt-link
+          to="/"
+          class="over"
+        >
+          <img
+            src="~/assets/images/logo.png"
+            alt="DigiDinos"
+          />
+        </nuxt-link>
+      </div>
+
+      <!-- sidebar menu -->
+      <a-menu
+        theme="dark"
+        mode="inline"
       >
-        <!-- logo -->
-        <div class="logo">
+        <a-menu-item>
           <nuxt-link
             to="/"
-            class="over"
+            :class="`${$route.path === '/' ? 'on-home' : ''}`"
           >
-            <img
-              src="~/assets/images/logo.png"
-              alt="DigiDinos"
+            <font-awesome-icon
+              icon="tachometer-alt"
+              class="anticon"
             />
+            <span>Dashboard</span>
           </nuxt-link>
-        </div>
+        </a-menu-item>
 
-        <!-- sidebar menu -->
-        <a-menu
-          theme="dark"
-          mode="inline"
-        >
+        <a-sub-menu>
+          <span slot="title">
+            <font-awesome-icon
+              icon="cog"
+              class="anticon"
+            />
+            <span>Multi level</span>
+          </span>
+
           <a-menu-item>
-            <nuxt-link
-              to="/"
-              :class="`${$route.path === '/' ? 'on-home' : ''}`"
-            >
+            <nuxt-link to="/login">
               <font-awesome-icon
-                icon="tachometer-alt"
+                icon="sign-in-alt"
                 class="anticon"
               />
-              <span>Dashboard</span>
+              <span>Login</span>
             </nuxt-link>
           </a-menu-item>
 
-          <a-sub-menu>
-            <span slot="title">
+          <a-menu-item>
+            <nuxt-link to="/forgot">
               <font-awesome-icon
-                icon="cog"
+                icon="lock"
                 class="anticon"
               />
-              <span>Multi level</span>
-            </span>
+              <span>Forgot</span>
+            </nuxt-link>
+          </a-menu-item>
+        </a-sub-menu>
 
-            <a-menu-item>
-              <nuxt-link to="/login">
-                <font-awesome-icon
-                  icon="sign-in-alt"
-                  class="anticon"
-                />
-                <span>Login</span>
-              </nuxt-link>
-            </a-menu-item>
+        <!-- <a-menu-item-group>
+          <template slot="title">
+            <span>Module</span>
+          </template>
 
-            <a-menu-item>
-              <nuxt-link to="/forgot">
-                <font-awesome-icon
-                  icon="lock"
-                  class="anticon"
-                />
-                <span>Forgot</span>
-              </nuxt-link>
-            </a-menu-item>
-          </a-sub-menu>
+          <a-menu-item key="11">
+            <nuxt-link to="/articles">
+              <font-awesome-icon
+                icon="file-alt"
+                class="anticon"
+              />
+              <span>Articles</span>
+            </nuxt-link>
+          </a-menu-item>
 
-          <a-menu-item-group>
-            <template slot="title">
-              <span>Module</span>
-            </template>
+          <a-menu-item key="12">
+            <nuxt-link to="/article-category">
+              <font-awesome-icon
+                icon="book"
+                class="anticon"
+              />
+              <span>Article Category</span>
+            </nuxt-link>
+          </a-menu-item>
 
-            <a-menu-item key="11">
-              <nuxt-link to="/articles">
-                <font-awesome-icon
-                  icon="file-alt"
-                  class="anticon"
-                />
-                <span>Articles</span>
-              </nuxt-link>
-            </a-menu-item>
+          <a-menu-item key="13">
+            <nuxt-link to="/categories">
+              <font-awesome-icon
+                icon="th-list"
+                class="anticon"
+              />
+              <span>Categories</span>
+            </nuxt-link>
+          </a-menu-item>
 
-            <a-menu-item key="12">
-              <nuxt-link to="/article-category">
-                <font-awesome-icon
-                  icon="book"
-                  class="anticon"
-                />
-                <span>Article Category</span>
-              </nuxt-link>
-            </a-menu-item>
+          <a-menu-item key="14">
+            <nuxt-link to="/sites">
+              <font-awesome-icon
+                icon="sitemap"
+                class="anticon"
+              />
+              <span>Sites</span>
+            </nuxt-link>
+          </a-menu-item>
+        </a-menu-item-group> -->
 
-            <a-menu-item key="13">
-              <nuxt-link to="/categories">
-                <font-awesome-icon
-                  icon="th-list"
-                  class="anticon"
-                />
-                <span>Categories</span>
-              </nuxt-link>
-            </a-menu-item>
+        <a-menu-item-group>
+          <template slot="title">
+            <span>System</span>
+          </template>
 
-            <a-menu-item key="14">
-              <nuxt-link to="/sites">
-                <font-awesome-icon
-                  icon="sitemap"
-                  class="anticon"
-                />
-                <span>Sites</span>
-              </nuxt-link>
-            </a-menu-item>
-          </a-menu-item-group>
+          <a-menu-item key="21">
+            <nuxt-link to="/user">
+              <font-awesome-icon
+                icon="user-friends"
+                class="anticon"
+              />
+              <span>User</span>
+            </nuxt-link>
+          </a-menu-item>
 
-          <a-menu-item-group>
-            <template slot="title">
-              <span>System</span>
-            </template>
+          <a-menu-item key="22">
+            <nuxt-link to="/role">
+              <font-awesome-icon
+                icon="balance-scale"
+                class="anticon"
+              />
+              <span>Role</span>
+            </nuxt-link>
+          </a-menu-item>
 
-            <a-menu-item key="21">
-              <nuxt-link to="/users">
-                <font-awesome-icon
-                  icon="user-friends"
-                  class="anticon"
-                />
-                <span>Users</span>
-              </nuxt-link>
-            </a-menu-item>
+          <a-menu-item key="23">
+            <nuxt-link to="/menu">
+              <font-awesome-icon
+                icon="stream"
+                class="anticon"
+              />
+              <span>Menu</span>
+            </nuxt-link>
+          </a-menu-item>
+        </a-menu-item-group>
+      </a-menu>
+    </a-layout-sider>
 
-            <a-menu-item key="22">
-              <nuxt-link to="/roles">
-                <font-awesome-icon
-                  icon="balance-scale"
-                  class="anticon"
-                />
-                <span>Roles</span>
-              </nuxt-link>
-            </a-menu-item>
+    <a-layout>
+      <!-- main header -->
+      <Header
+        :is-collapsed="isCollapsed"
+        @trigger="isCollapsed = !isCollapsed"
+      />
 
-            <a-menu-item key="23">
-              <nuxt-link to="/menus">
-                <font-awesome-icon
-                  icon="stream"
-                  class="anticon"
-                />
-                <span>Menus</span>
-              </nuxt-link>
-            </a-menu-item>
-          </a-menu-item-group>
-        </a-menu>
-      </a-layout-sider>
+      <a-layout-content class="pt-4">
+        <transition name="fade">
+          <div class="container-fluid">
+            <!-- breadcrumb -->
+            <a-breadcrumb class="mb-3">
+              <a-breadcrumb-item
+                v-for="(item, index) in crumbs"
+                :key="index"
+              >
+                <nuxt-link :to="item.to">
+                  {{ item.text }}
+                </nuxt-link>
+              </a-breadcrumb-item>
+            </a-breadcrumb>
 
-      <a-layout>
-        <!-- main header -->
-        <Header
-          :is-collapsed="isCollapsed"
-          @trigger="isCollapsed = !isCollapsed"
-        />
+            <!-- main content -->
+            <Nuxt />
+          </div>
+        </transition>
+      </a-layout-content>
 
-        <a-layout-content class="pt-4">
-          <transition name="fade">
-            <div class="container-fluid">
-              <!-- breadcrumb -->
-              <a-breadcrumb class="mb-3">
-                <a-breadcrumb-item
-                  v-for="(item, index) in crumbs"
-                  :key="index"
-                >
-                  <nuxt-link :to="item.to">
-                    {{ item.text }}
-                  </nuxt-link>
-                </a-breadcrumb-item>
-              </a-breadcrumb>
-
-              <!-- main content -->
-              <Nuxt />
-            </div>
-          </transition>
-        </a-layout-content>
-
-        <!-- main footer -->
-        <Footer />
-      </a-layout>
+      <!-- main footer -->
+      <Footer />
     </a-layout>
-  </a-spin>
+  </a-layout>
 </template>
 
 <style lang="scss" scoped>
@@ -200,7 +198,6 @@
 </style>
 
 <script>
-import { mapGetters } from 'vuex'
 import { BREAD_CRUMB_LIST } from '~/constants'
 
 import Footer from '~/components/organisms/Footer'
@@ -228,9 +225,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      loading: 'loading'
-    }),
     /**
      * Breadcrumbs
      *

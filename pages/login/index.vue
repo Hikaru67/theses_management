@@ -61,7 +61,7 @@
             html-type="submit"
             type="primary"
             size="large"
-            class="w-min-120"
+            class="min-w-120"
           >
             {{ $t('login.title') }}
             <font-awesome-icon

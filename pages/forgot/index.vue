@@ -42,7 +42,7 @@
           <a-button
             html-type="submit"
             type="primary"
-            class="w-min-120"
+            class="min-w-120"
           >
             <font-awesome-icon
               icon="paper-plane"
@@ -55,7 +55,7 @@
           <a-button
             html-type="button"
             type="secondary"
-            class="w-min-120"
+            class="min-w-120"
             @click="$router.push({ path: '/login' })"
           >
             <font-awesome-icon

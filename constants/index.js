@@ -51,102 +51,32 @@ export const USER_STATUS_LIST = [
 export const BREAD_CRUMB_LIST = [
   {
     id: 1,
-    name: 'breadcrumb.users',
-    value: 'users'
+    name: 'breadcrumb.user',
+    value: 'user'
   },
   {
     id: 2,
-    name: 'breadcrumb.users-new',
-    value: 'users-new'
+    name: 'breadcrumb.user-new',
+    value: 'user-new'
   },
   {
     id: 3,
-    name: 'breadcrumb.roles',
-    value: 'roles'
+    name: 'breadcrumb.role',
+    value: 'role'
   },
   {
     id: 4,
-    name: 'breadcrumb.roles-new',
-    value: 'roles-new'
+    name: 'breadcrumb.role-new',
+    value: 'role-new'
   },
   {
     id: 5,
-    name: 'breadcrumb.articles',
-    value: 'articles'
+    name: 'breadcrumb.menu',
+    value: 'menu'
   },
   {
     id: 6,
-    name: 'breadcrumb.articles-new',
-    value: 'articles-new'
-  },
-  {
-    id: 7,
-    name: 'breadcrumb.article-category',
-    value: 'article-category'
-  },
-  {
-    id: 8,
-    name: 'breadcrumb.categories',
-    value: 'categories'
-  },
-  {
-    id: 9,
-    name: 'breadcrumb.site',
-    value: 'sites'
-  }
-]
-
-/**
- * AI Article Type
- */
-export const ARTICLE_TYPE = [
-  {
-    id: 0,
-    name: 'article.type_.1'
-  },
-  {
-    id: 1,
-    name: 'article.type_.2'
-  }
-]
-
-/**
-* Article Status
-*/
-export const ARTICLE_STATUS = [
-  {
-    id: 1,
-    name: 'article.status_.hidden'
-  },
-  {
-    id: 2,
-    name: 'article.status_.watting_classification'
-  },
-  {
-    id: 3,
-    name: 'article.status_.public'
-  }
-]
-
-export const ARTICLE_STATUS_HIDDEN = 1
-export const ARTICLE_STATUS_WAITTING = 2
-export const ARTICLE_STATUS_PUBLIC = 3
-
-/**
- * Original category id
- */
-export const ORIGINAL_CATEGORY_ID = 15
-
-/**
- * Status sites list
- */
-export const SITE_LIST_STATUS = [
-  {
-    id: 0,
-    name: 'site.noneActive'
-  },
-  {
-    id: 1,
-    name: 'site.active'
+    name: 'breadcrumb.menu-new',
+    value: 'menu-new'
   }
 ]

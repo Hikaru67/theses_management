@@ -1,8 +1,17 @@
 <template>
-  <role-form
-    @save="goBack"
-    @cancel="goBack"
-  />
+  <div class="main-detail">
+    <a-card class="mb-4">
+      <template slot="title">
+        <font-awesome-icon icon="plus-circle" />
+        {{ $t('role.role') }}
+      </template>
+
+      <role-form
+        @save="goBack"
+        @cancel="goBack"
+      />
+    </a-card>
+  </div>
 </template>
 <script>
 

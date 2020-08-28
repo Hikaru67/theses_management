@@ -47,16 +47,16 @@ button,
 .width-1x {
   width: 14px !important;
 }
-.w-min-100 {
+.min-w-100 {
   min-width: 100px !important;
 }
-.w-min-120 {
+.min-w-120 {
   min-width: 120px !important;
 }
-.min-vh-100 {
-  min-height: 100vh!important;
+.min-h-100vh {
+  min-height: 100vh !important;
 }
-.mw-5x {
+.max-w-500 {
   width: 100%;
   max-width: 500px;
   margin: auto;
@@ -64,7 +64,7 @@ button,
     max-width: 100%;
   }
 }
-.mw-9x {
+.max-w-900 {
   width: 100%;
   max-width: 900px;
   margin: auto;
@@ -72,7 +72,7 @@ button,
     max-width: 100%;
   }
 }
-.mw-12x {
+.max-w-1200 {
   width: 100%;
   max-width: 1200px;
   margin: auto;
@@ -134,6 +134,9 @@ button,
 }
 .position-relative {
   position: relative !important;
+}
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 /* -----------------------------------------------------------
@@ -433,7 +436,7 @@ button,
 }
 .ant-checkbox-group {
   &.no-inline {
-    .ant-checkbox-group-item {
+    > * {
       display: block;
       margin: 0 0 5px 0;
     }
@@ -456,9 +459,7 @@ button,
     &:hover {
       color: $primary-color;
     }
-    &[href="/categories"].on-categories-list:not(:hover),
-    &[href="/article-category"].on-article-category-list:not(:hover),
-    &[href="/menus"].on-menus-list:not(:hover) {
+    &[href="/menu"].on-menu-list:not(:hover) {
       color: #4c4c4c;
     }
   }
@@ -514,5 +515,22 @@ button,
       display: inline-block;
       vertical-align: middle;
     }
+  }
+}
+
+/* -----------------------------------------------------------
+  modal
+----------------------------------------------------------- */
+.modal-detail {
+  .ant-modal {
+    @include mq(max_xl) {
+      max-width: 1170px;
+    }
+    @include mq(max_lg) {
+      max-width: 95%;
+    }
+  }
+  .ant-modal-body {
+    padding: 0;
   }
 }

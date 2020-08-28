@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" justify="center" align="middle" class="blank-layout container-fluid min-vh-100">
+  <a-row type="flex" justify="center" align="middle" class="blank-layout container-fluid min-h-100vh">
     <transition name="fade">
       <Nuxt />
     </transition>

@@ -1,145 +1,185 @@
 <template>
-  <div>
-    <a-form-model
-      ref="form"
-      :model="filters"
-      :label-col="{ sm: 6 }"
-      :wrapper-col="{ sm: 18 }"
-      class="search-form"
-      @submit.prevent="search"
-    >
-      <a-row
-        type="flex"
-        :gutter="30"
+  <div class="main-list">
+    <a-card class="mb-4">
+      <template slot="title">
+        <font-awesome-icon icon="user-friends" />
+        {{ $t('user.list_user') }}
+      </template>
+
+      <template slot="extra">
+        <a-button html-type="button" type="primary" ghost @click="showDetail(0)">
+          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+          {{ $t('common.create_new') }}
+        </a-button>
+      </template>
+
+      <a-form-model
+        ref="form"
+        :model="filters"
+        :label-col="{ sm: 6 }"
+        :wrapper-col="{ sm: 18 }"
+        class="main-search mb-4"
+        @submit.prevent="search"
       >
-        <a-col
-          :span="24"
-          :md="12"
+        <a-row
+          type="flex"
+          :gutter="30"
         >
-          <a-form-model-item
-            :label="$t('user.name')"
-            prop="name"
+          <a-col
+            :span="24"
+            :md="12"
           >
-            <a-input
-              v-model="filters.name"
-              :placeholder="$t('user.name')"
+            <a-form-model-item
+              :label="$t('user.name')"
+              prop="name"
+            >
+              <a-input
+                v-model="filters.name"
+                :placeholder="$t('user.name')"
+                :disabled="loading"
+              >
+                <font-awesome-icon
+                  slot="addonBefore"
+                  icon="user"
+                  class="width-1x"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
+
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('user.email')"
+              prop="email"
+            >
+              <a-input
+                v-model="filters.email"
+                :placeholder="$t('user.email')"
+                :disabled="loading"
+              >
+                <font-awesome-icon
+                  slot="addonBefore"
+                  icon="envelope"
+                  class="width-1x"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
+
+          <a-col
+            :md="24"
+            class="text-center"
+          >
+            <a-button
+              html-type="submit"
+              type="primary"
+              class="min-w-100"
+              :disabled="loading"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="user"
-                class="width-1x"
+                icon="search"
+                class="width-1x mr-1"
               />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
+              {{ $t('common.search') }}
+            </a-button>
 
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('user.email')"
-            prop="email"
-          >
-            <a-input
-              v-model="filters.email"
-              :placeholder="$t('user.email')"
+            &nbsp;
+            <a-button
+              html-type="button"
+              type="default"
+              class="min-w-100"
+              :disabled="loading"
+              @click="reset"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="envelope"
-                class="width-1x"
+                icon="eraser"
+                class="width-1x mr-1"
               />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
+              {{ $t('common.clear') }}
+            </a-button>
+          </a-col>
+        </a-row>
+      </a-form-model>
+      <!-- end main-search -->
 
-        <a-col
-          :md="24"
-          class="box-form-footer text-center p-3"
+      <a-table
+        :columns="columns"
+        :row-key="record => record.id"
+        :data-source="data"
+        :pagination="pagination"
+        :loading="loading"
+        class="main-table"
+        @change="handleTableChange"
+      >
+        <template slot="roles" slot-scope="text, record">
+          {{ getRolesName(record.roles) }}
+        </template>
+
+        <template slot="status" slot-scope="text, record">
+          <a-badge
+            :count="`${record.status === 1 ? $t('user.statuses.active') : $t('user.statuses.inactive')}`"
+            :number-style="{
+              backgroundColor: record.status === 1 ? '#52c41a' : '#d9d9d9'
+            }"
+            class="btn-status cursor-pointer over"
+            @click="onToggleStatus(record)"
+          />
+        </template>
+
+        <template
+          slot="action"
+          slot-scope="text, record"
         >
-          <a-button
-            html-type="submit"
-            type="primary"
-            class="w-min-100"
-          >
-            <font-awesome-icon
-              icon="search"
-              class="width-1x mr-1"
-            />
-            {{ $t('common.search') }}
-          </a-button>
-
-          &nbsp;
           <a-button
             html-type="button"
-            type="default"
-            class="w-min-100"
-            @click="reset"
+            type="primary"
+            size="small"
+            :disabled="loading"
+            @click="goToDetail(record.id)"
           >
-            <font-awesome-icon
-              icon="eraser"
-              class="width-1x mr-1"
-            />
-            {{ $t('common.clear') }}
+            <font-awesome-icon icon="eye" class="width-1x" />
           </a-button>
-        </a-col>
-      </a-row>
-    </a-form-model>
-    <a-button
-      type="primary"
-      @click="showDetail(0)"
-    >
-      Create User
-    </a-button>
-    <a-table
-      :columns="columns"
-      :row-key="record => record.id"
-      :data-source="data"
-      :pagination="pagination"
-      :loading="loading"
-      @change="handleTableChange"
-    >
-      <span
-        slot="action"
-        slot-scope="record"
-      >
-        <a-button
-          type="success"
-          @click="goToDetail(record.id)"
-        >
-          <font-awesome-icon
-            icon="pencil-alt"
-            class="width-1x"
-          />
-        </a-button>
-        <a-button
-          type="primary"
-          @click="showDetail(record.id)"
-        >
-          <font-awesome-icon
-            icon="eye"
-            class="width-1x"
-          />
-        </a-button>
-        <a-button
-          type="danger"
-          @click="confirmToDelete(record.id)"
-        >
-          <font-awesome-icon
-            icon="times"
-            class="width-1x"
-          />
-        </a-button>
-      </span>
-    </a-table>
+
+          <a-button
+            html-type="button"
+            type="primary"
+            size="small"
+            :disabled="loading"
+            @click="showDetail(record.id)"
+          >
+            <font-awesome-icon icon="pencil-alt" class="width-1x" />
+          </a-button>
+
+          <a-button
+            html-type="button"
+            type="danger"
+            size="small"
+            :disabled="loading"
+            @click="confirmToDelete(record.id)"
+          >
+            <font-awesome-icon icon="trash-alt" class="width-1x" />
+          </a-button>
+        </template>
+      </a-table>
+      <!-- end main-table -->
+    </a-card>
+
     <a-modal
       ref="detail"
       :visible="visible"
+      :width="1300"
       :footer="null"
-      class="modal-wrap"
-      :title="currentId ? $t('user.user') : $t('user.user')"
+      class="modal-detail"
+      @cancel="visible = false"
     >
+      <template slot="title">
+        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
+        {{ $t('user.user') }}
+      </template>
+
       <a-spin :spinning="loading">
         <user-form
           :id="currentId"
@@ -148,19 +188,27 @@
         />
       </a-spin>
     </a-modal>
+    <!-- end modal-detail -->
   </div>
 </template>
-<script>
 
-import DataTable from '~/mixins/data-table'
+<script>
 import UserForm from '~/components/organisms/UserForm'
+import DataTable from '~/mixins/data-table'
 
 export default {
-  components: { UserForm },
-  mixins: [DataTable],
+  components: {
+    UserForm
+  },
+
+  mixins: [
+    DataTable
+  ],
+
   data() {
     return {
       resource: 'user',
+      resourceName: this.$t('user.user'),
       visible: false,
       currentId: 0,
       filters: {
@@ -170,48 +218,96 @@ export default {
     }
   },
   computed: {
+    /**
+     * Columns
+     *
+     * @param {array} - Columns
+     */
     columns() {
       const columns = [
         {
-          title: 'Name',
-          dataIndex: 'name',
-          sorter: true,
-          width: '20%'
+          title: 'ID',
+          dataIndex: 'id',
+          width: 60
         },
         {
-          title: 'Email',
+          title: this.$t('user.name'),
+          dataIndex: 'name',
+          sorter: true
+        },
+        {
+          title: this.$t('user.email'),
           sorter: true,
           dataIndex: 'email'
         },
         {
-          title: 'Action',
-          key: 'action',
-          scopedSlots: { customRender: 'action' }
+          title: this.$t('user.roles'),
+          dataIndex: 'roles',
+          scopedSlots: { customRender: 'roles' }
+        },
+        {
+          dataIndex: 'status',
+          title: this.$t('user.status'),
+          scopedSlots: { customRender: 'status' },
+          width: 140
+        },
+        {
+          title: this.$t('common.action'),
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'action' },
+          width: 140
         }
       ]
+
       columns.forEach(item => {
         if (this.$route.query.sortField === item.dataIndex) {
           item.sortOrder = this.$route.query.sortOrder
         }
       })
+
       return columns
     }
   },
+
   methods: {
+    /**
+     * Get roles name
+     *
+     * @param {array} roles - Role list
+     */
+    getRolesName(roles) {
+      if (!Array.isArray(roles) || !roles.length) {
+        return ''
+      }
+
+      return roles.map(role => role.name).join(', ')
+    },
+
+    /**
+     * Show detail
+     *
+     * @param {number} id - Item Id
+     */
     showDetail(id) {
       this.currentId = id
       this.visible = true
     },
 
+    /**
+     * Close dialog
+     *
+     * @param {boolean} fetch - fetch status
+     */
     closeDialog(fetch) {
       this.visible = false
+
       if (fetch) {
         this.$fetch()
       }
     },
 
     /**
-     * On clear form search
+     * Clear form search
      */
     reset() {
       this.filters = {
@@ -220,8 +316,29 @@ export default {
       }
     },
 
+    /**
+     * Search data
+     */
     search() {
       this.replaceQuery(this.filters)
+    },
+
+    /**
+     * Update status
+     *
+     * @param {object} item - User
+     */
+    onToggleStatus(item) {
+      if (!item || !item.id) {
+        return
+      }
+
+      const params = {
+        id: item.id,
+        status: item.status === 1 ? 0 : 1
+      }
+
+      console.log('params', params)
     }
   }
 }

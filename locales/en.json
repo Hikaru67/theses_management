@@ -146,22 +146,6 @@
       "update": "Update User",
       "delete": "Delete User"
     },
-    "category": {
-      "module": "Category",
-      "index": "List Category",
-      "store": "Create Category",
-      "show": "Category Detail",
-      "update": "Update Category",
-      "delete": "Delete Category"
-    },
-    "article": {
-      "module": "Article",
-      "index": "List Article",
-      "store": "Create Article",
-      "show": "Article Detail",
-      "update": "Update Article",
-      "delete": "Delete Article"
-    },
     "menu": {
       "module": "Menu",
       "index": "Menu list",
@@ -182,8 +166,6 @@
     "user": "User",
     "update_status": "Update status",
     "list_user": "List user",
-    "create_new_user": "Create new user",
-    "edit_user": "Edit user",
     "status": "Status",
     "statuses": {
       "active": "Active",
@@ -193,7 +175,6 @@
   "role": {
     "role": "Role",
     "role_list": "Role list",
-    "add_role": "Add role",
     "name": "Name",
     "select_role_from_list": "Select from the role list",
     "permissions": "Permissions"
@@ -211,101 +192,19 @@
     "edit_menu": "Edit menu",
     "note_for_deletion": "If you want to delete the parent category, you must delete the entire subcategory first"
   },
-  "category": {
-    "category": "Category",
-    "category_for_pagination": "category(s)",
-    "id": "ID",
-    "name": "Name",
-    "created_at": "Created at",
-    "created_at_from": "Created at (from)",
-    "created_at_to": "Created at (to)",
-    "status": "Status",
-    "description": "Description",
-    "category_list": "Category List",
-    "note_for_deletion": "If you want to delete the parent category, you must delete the entire subcategory first"
-  },
-  "article-category": {
-    "title": "Article category"
-  },
-  "article": {
-    "article_list": "List Article",
-    "id": "ID",
-    "title": "Title",
-    "image": "Image",
-    "category": "Category",
-    "youtube_id": "YouTube ID",
-    "youtube_url": "YouTube URL",
-    "youtube_info": "Youtube Info",
-    "site": "Site",
-    "all": "All",
-    "type": "Type",
-    "type_": {
-      "1": "OB/OG Interview",
-      "2": "Contents"
-    },
-    "status": "Status",
-    "status_": {
-      "hidden": "Hidden",
-      "watting_classification": "Watting Classification",
-      "public": "Public"
-    },
-    "created_at_from": "Created at (from)",
-    "created_at_to": "Created at (to)",
-    "public_start_at": "Public start at",
-    "public_start_at_from": "Public start at (from)",
-    "public_start_at_to": "Public start at (to)",
-    "public_end_at": "Public end at",
-    "public_end_at_from": "Public end at (from)",
-    "public_end_at_to": "Public end at (to)",
-    "views": "Views",
-    "youtube_views": "YouTube Views",
-    "youtube_view_n_views": "YouTube Views / Views",
-    "origin_url": "Origin URL",
-    "create_origin_at": "Create origin at",
-    "update_origin_at": "Update origin at",
-    "last_crawl": "Last crawl at",
-    "ai_score": "AI Score",
-    "admin_note": "Admin note",
-    "short_description": "Short description",
-    "description": "Description",
-    "article": "Article"
-  },
-  "short_date_picker": {
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "tomorrow": "Tomorrow"
-  },
   "breadcrumb": {
-    "users": "Users",
-    "users-new": "Users / New",
-    "roles": "Roles",
-    "roles-new": "Roles / New",
-    "categories": "Categories",
-    "categories-new": "Categories / New",
-    "articles": "Articles",
-    "articles-new": "Articles / New",
-    "article-category": "Articles Category",
-    "site": "Sites"
+    "user": "User",
+    "user-new": "User / New",
+    "role": "Role",
+    "role-new": "Role / New",
+    "menu": "Menu",
+    "menu-new": "Menu / New"
   },
   "login": {
     "title": "Login",
     "login_id": "Email",
     "password": "Password",
     "return": "Return"
-  },
-  "site": {
-    "list_site": "List site",
-    "create": "Create site",
-    "update": "Update site",
-    "site": "Site",
-    "id": "ID",
-    "name": "Name",
-    "image": "Image",
-    "status": "Status",
-    "url": "URL",
-    "description": "Description",
-    "noneActive": "Inactive",
-    "active": "Active"
   },
   "dashboard": {
     "total_article": "Total article",

@@ -129,7 +129,8 @@ export default {
         ja: require('./locales/ja.json'),
         en: require('./locales/en.json'),
         vi: require('./locales/vi.json')
-      }
+      },
+      silentTranslationWarn: true
     }
   },
 
