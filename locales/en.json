@@ -30,7 +30,8 @@
     "choose_files_or_drag_and_drop_here": "Choose files or drag & drop here",
     "not_available": "Not available",
     "action": "Action",
-    "save": "Save"
+    "save": "Save",
+    "profile": "Profile"
   },
   "messages": {
     "error": {
@@ -188,8 +189,7 @@
     "icon": "Icon",
     "parent_id": "Parent Id",
     "position": "Position",
-    "create_new_menu": "Create new menu",
-    "edit_menu": "Edit menu",
+    "role": "Role",
     "note_for_deletion": "If you want to delete the parent category, you must delete the entire subcategory first"
   },
   "breadcrumb": {

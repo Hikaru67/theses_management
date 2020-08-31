@@ -29,48 +29,63 @@
         </a-button>
       </template>
 
-      <a-tree
-        class="draggable-tree"
-        draggable
-        :tree-data="data"
-        @drop="onDrop"
-      >
-        <template
-          slot="action"
-          slot-scope="{ title, key }"
-        >
-          <span>
-            {{ title }}
-          </span>
-          <a
-            href="#"
-            @click="showDetail(key)"
+      <div class="draggable-tree">
+        <a-spin :spinning="loading">
+          <a-tree
+            class=""
+            draggable
+            :tree-data="data"
+            @drop="onDrop"
           >
-            <font-awesome-icon
-              icon="eye"
-              class="width-1x"
-            />
-          </a>
-          <a
-            href="#"
-            @click="confirmToDelete(key)"
-          >
-            <font-awesome-icon
-              icon="times"
-              class="width-1x"
-            />
-          </a>
-        </template>
-      </a-tree>
+            <template
+              slot="action"
+              slot-scope="{ title, key, children }"
+            >
+              <span class="txt-title">
+                {{ title }}
+              </span>
+
+              <div class="box-action">
+                <a-button
+                  html-type="button"
+                  type="primary"
+                  size="small"
+                  :disabled="loading"
+                  @click="showDetail(key)"
+                >
+                  <font-awesome-icon icon="pencil-alt" class="width-1x" />
+                </a-button>
+
+                <a-button
+                  v-if="!children.length"
+                  html-type="button"
+                  type="danger"
+                  size="small"
+                  :disabled="loading"
+                  @click="confirmToDelete(key)"
+                >
+                  <font-awesome-icon icon="trash-alt" class="width-1x" />
+                </a-button>
+              </div>
+            </template>
+          </a-tree>
+        </a-spin>
+      </div>
     </a-card>
 
     <a-modal
       ref="detail"
       :visible="visible"
+      :width="1300"
       :footer="null"
-      class="modal-wrap"
-      :title="currentId ? $t('menu.menu') : $t('menu.menu')"
+      class="modal-detail"
+      @cancel="visible = false"
     >
+      <template slot="title">
+        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
+        {{ $t('menu.menu') }}
+      </template>
+
       <a-spin :spinning="loading">
         <menu-form
           :id="currentId"
@@ -135,6 +150,14 @@ export default {
   },
 
   methods: {
+    /**
+     * Extract list
+     *
+     * @param {Array} data - data
+     * @param {Object} dragNode - VueComponent
+     * @param {Object} node - VueComponent
+     * @param {Number} dropPosition - Drop position
+     */
     extractList(data, dragNode, node, dropPosition) {
       data.forEach((item, index) => {
         if (item.key === node.eventKey) {
@@ -145,6 +168,15 @@ export default {
       })
     },
 
+    /**
+     * Drop action
+     *
+     * @param {Object} dragNode - VueComponent
+     * @param {Array} dragNodesKeys - Drag nodes keys
+     * @param {Number} dropPosition - Drop position
+     * @param {Boolean} dropToGap - Drop to gap status
+     * @param {Object} node - VueComponent
+     */
     onDrop({ dragNode, dragNodesKeys, dropPosition, dropToGap, node }) {
       const data = cloneDeep(this.data)
       this.extractList(data, dragNode, node, dropPosition)
@@ -179,6 +211,11 @@ export default {
       this.batchUpdate(batchData)
     },
 
+    /**
+     * Batch update
+     *
+     * @param {Array} Item list
+     */
     async batchUpdate(list) {
       this.$store.dispatch('setLoading', true)
       await this.$api.moveMenu({ list })
@@ -186,11 +223,21 @@ export default {
       this.$fetch()
     },
 
+    /**
+     * Show detail
+     *
+     * @param {Number} Item Id
+     */
     showDetail(id) {
       this.currentId = id
       this.visible = true
     },
 
+    /**
+     * Close dialog
+     *
+     * @param {boolean} fetch - fetch status
+     */
     closeDialog(fetch) {
       this.visible = false
       if (fetch) {
@@ -198,6 +245,11 @@ export default {
       }
     },
 
+    /**
+     * Confirm to delete
+     *
+     * @param {Number} Item Id
+     */
     confirmToDelete(id) {
       this.$confirm({
         title: 'Are you sure delete this task?',
@@ -207,6 +259,29 @@ export default {
         cancelText: 'No',
         onOk: () => this.deleteRecord(id)
       })
+    },
+
+    /**
+     * Delete record
+     *
+     * @param {Number} Item Id
+     */
+    async deleteRecord(id) {
+      try {
+        this.$store.dispatch('setLoading', true)
+        await this.$api.deleteMenu({ id })
+
+        this.$notification.success({
+          message: this.$t('messages.information.deleted')
+        })
+        this.$fetch()
+      } catch (_) {
+        this.$notification.error({
+          message: this.$t('messages.error.failed_to_delete', { name: this.$t('menu.menu') })
+        })
+      } finally {
+        this.$store.dispatch('setLoading', false)
+      }
     }
   }
 }

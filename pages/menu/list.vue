@@ -1,9 +1,25 @@
 <template>
-  <div class="main-list">
+  <div class="main-list position-relative">
+    <div class="box-change-view">
+      <nuxt-link
+        to="/menu"
+        :class="`${$route.path === '/menu/list' ? 'on-menu-list' : ''}`"
+      >
+        <font-awesome-icon icon="th-list" />
+      </nuxt-link>
+
+      <nuxt-link
+        to="/menu/list"
+        :class="`${$route.path === '/menu/list' ? 'on-menu-list' : ''}`"
+      >
+        <font-awesome-icon icon="border-all" />
+      </nuxt-link>
+    </div>
+
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="user-friends" />
-        {{ $t('user.list_user') }}
+        <font-awesome-icon icon="stream" />
+        {{ $t('menu.menu_list') }}
       </template>
 
       <template slot="extra">
@@ -21,50 +37,27 @@
         class="main-search mb-4"
         @submit.prevent="search"
       >
-        <a-row
-          type="flex"
-          :gutter="30"
-        >
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.name')"
-              prop="name"
-            >
+        <a-row type="flex" :gutter="30">
+          <a-col :span="24" :md="12">
+            <a-form-model-item :label="$t('menu.title')" prop="title">
               <a-input
-                v-model="filters.name"
-                :placeholder="$t('user.name')"
+                v-model="title"
+                :placeholder="$t('menu.title')"
                 :disabled="loading"
               >
-                <font-awesome-icon
-                  slot="addonBefore"
-                  icon="user"
-                  class="width-1x"
-                />
+                <font-awesome-icon slot="addonBefore" icon="heading" class="width-1x" />
               </a-input>
             </a-form-model-item>
           </a-col>
 
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.email')"
-              prop="email"
-            >
+          <a-col :span="24" :md="12">
+            <a-form-model-item :label="$t('menu.link')" prop="link">
               <a-input
-                v-model="filters.email"
-                :placeholder="$t('user.email')"
+                v-model="link"
+                :placeholder="$t('menu.link')"
                 :disabled="loading"
               >
-                <font-awesome-icon
-                  slot="addonBefore"
-                  icon="envelope"
-                  class="width-1x"
-                />
+                <font-awesome-icon slot="addonBefore" icon="link" class="width-1x" />
               </a-input>
             </a-form-model-item>
           </a-col>
@@ -114,35 +107,10 @@
         class="main-table"
         @change="handleTableChange"
       >
-        <template slot="roles" slot-scope="text, record">
-          {{ getRolesName(record.roles) }}
-        </template>
-
-        <template slot="status" slot-scope="text, record">
-          <a-badge
-            :count="`${record.status === 1 ? $t('user.statuses.active') : $t('user.statuses.inactive')}`"
-            :number-style="{
-              backgroundColor: record.status === 1 ? '#52c41a' : '#d9d9d9'
-            }"
-            class="btn-status cursor-pointer over"
-            @click="onToggleStatus(record)"
-          />
-        </template>
-
         <template
           slot="action"
           slot-scope="text, record"
         >
-          <a-button
-            html-type="button"
-            type="primary"
-            size="small"
-            :disabled="loading"
-            @click="goToDetail(record.id)"
-          >
-            <font-awesome-icon icon="eye" class="width-1x" />
-          </a-button>
-
           <a-button
             html-type="button"
             type="primary"
@@ -177,11 +145,11 @@
     >
       <template slot="title">
         <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ $t('user.user') }}
+        {{ $t('menu.menu') }}
       </template>
 
       <a-spin :spinning="loading">
-        <user-form
+        <menu-form
           :id="currentId"
           @save="closeDialog(true)"
           @cancel="closeDialog(false)"
@@ -193,12 +161,12 @@
 </template>
 
 <script>
-import UserForm from '~/components/organisms/UserForm'
+import MenuForm from '~/components/organisms/MenuForm'
 import DataTable from '~/mixins/data-table'
 
 export default {
   components: {
-    UserForm
+    MenuForm
   },
 
   mixins: [
@@ -207,13 +175,13 @@ export default {
 
   data() {
     return {
-      resource: 'user',
-      resourceName: this.$t('user.user'),
+      resource: 'menu',
+      resourceName: this.$t('menu.menu'),
       visible: false,
       currentId: 0,
       filters: {
-        name: this.$route.query.name || '',
-        email: this.$route.query.email || ''
+        title: this.$route.query.title || '',
+        link: this.$route.query.link || ''
       }
     }
   },
@@ -226,34 +194,33 @@ export default {
     columns() {
       const columns = [
         {
-          title: 'ID',
           dataIndex: 'id',
+          title: this.$t('menu.id'),
           width: 60
         },
         {
-          title: this.$t('user.name'),
-          dataIndex: 'name',
-          sorter: true
+          dataIndex: 'title',
+          title: this.$t('menu.title')
         },
         {
-          title: this.$t('user.email'),
-          sorter: true,
-          dataIndex: 'email'
+          dataIndex: 'link',
+          title: this.$t('menu.link')
         },
         {
-          title: this.$t('user.roles'),
-          dataIndex: 'roles',
-          scopedSlots: { customRender: 'roles' }
+          dataIndex: 'icon',
+          title: this.$t('menu.icon')
         },
         {
-          dataIndex: 'status',
-          title: this.$t('user.status'),
-          scopedSlots: { customRender: 'status' },
-          width: 140
+          dataIndex: 'parent_id',
+          title: this.$t('menu.parent_id')
         },
         {
-          title: this.$t('common.action'),
+          dataIndex: 'position',
+          title: this.$t('menu.position')
+        },
+        {
           dataIndex: 'action',
+          title: this.$t('common.action'),
           scopedSlots: { customRender: 'action' },
           width: 140
         }
@@ -270,19 +237,6 @@ export default {
   },
 
   methods: {
-    /**
-     * Get roles name
-     *
-     * @param {array} roles - Role list
-     */
-    getRolesName(roles) {
-      if (!Array.isArray(roles) || !roles.length) {
-        return ''
-      }
-
-      return roles.map(role => role.name).join(', ')
-    },
-
     /**
      * Show detail
      *
@@ -311,8 +265,8 @@ export default {
      */
     reset() {
       this.filters = {
-        name: '',
-        email: ''
+        title: '',
+        link: ''
       }
     },
 
@@ -321,23 +275,6 @@ export default {
      */
     search() {
       this.replaceQuery(this.filters)
-    },
-
-    /**
-     * Update status
-     *
-     * @param {object} item - User
-     */
-    onToggleStatus(item) {
-      if (!item || !item.id) {
-        return
-      }
-
-      const params = {
-        id: item.id,
-        status: item.status === 1 ? 0 : 1
-      }
-      console.log('params', params)
     }
   }
 }

@@ -110,8 +110,8 @@
             <a-select
               v-model="model.roleIds"
               mode="multiple"
-              style="width: 100%"
               placeholder="Please select"
+              class="w-100"
             >
               <a-select-option
                 v-for="role in roles"
