@@ -4,6 +4,7 @@
  */
 
 import { camelCase } from 'lodash'
+import routes from '../configs/routes'
 
 export default ({ $axios }, inject) => {
   class APIManager {
@@ -92,31 +93,6 @@ export default ({ $axios }, inject) => {
   axios.setBaseURL(process.env.API_BASE_URL)
 
   const apiManager = new APIManager(axios)
-
-  const routes = {
-    me: {
-      post: {
-        name: 'updateProfile'
-      }
-    },
-    user: {
-      resource: {}
-    },
-    role: {
-      resource: {}
-    },
-    permission: {
-      get: {}
-    },
-    menu: {
-      resource: {}
-    },
-    'menu/move': {
-      post: {
-        name: 'moveMenu'
-      }
-    }
-  }
 
   const api = apiManager.generateMethods(routes)
 
