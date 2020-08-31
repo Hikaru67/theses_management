@@ -61,7 +61,6 @@ export default {
      * @param {Object} Sorter
      */
     handleTableChange(pagination, filters, sorter) {
-      console.log(pagination, filters, sorter)
       const query = {
         limit: pagination.pageSize,
         page: pagination.current,

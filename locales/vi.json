@@ -30,7 +30,8 @@
     "choose_files_or_drag_and_drop_here": "Chọn tệp hoặc kéo và thả tại đây",
     "not_available": "Không khả dụng",
     "action": "Tác vụ",
-    "save": "Lưu"
+    "save": "Lưu",
+    "profile": "Thông tin tài khoản"
   },
   "messages": {
     "error": {
@@ -188,8 +189,7 @@
     "icon": "Biểu tượng",
     "parent_id": "Id của thực đơn cha",
     "position": "Vị trí",
-    "create_new_menu": "Tạo thực đơn mới",
-    "edit_menu": "Sửa thực đơn",
+    "role": "Quyền",
     "note_for_deletion": "Nếu bạn muốn xóa danh mục cha, trước tiên bạn phải xóa hết danh mục con"
   },
   "breadcrumb": {

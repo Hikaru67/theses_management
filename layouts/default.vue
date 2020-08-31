@@ -1,13 +1,11 @@
 <template>
   <a-layout class="default-layout">
-    <!-- main sidebar -->
     <a-layout-sider
       v-model="isCollapsed"
       collapsible
       width="256"
       :collapsed-width="collapsedWidth"
     >
-      <!-- logo -->
       <div class="logo">
         <nuxt-link
           to="/"
@@ -19,8 +17,8 @@
           />
         </nuxt-link>
       </div>
+      <!-- end logo -->
 
-      <!-- sidebar menu -->
       <a-menu
         theme="dark"
         mode="inline"
@@ -150,19 +148,19 @@
           </a-menu-item>
         </a-menu-item-group>
       </a-menu>
+      <!-- end sidebar menu -->
     </a-layout-sider>
 
     <a-layout>
-      <!-- main header -->
       <Header
         :is-collapsed="isCollapsed"
         @trigger="isCollapsed = !isCollapsed"
       />
+      <!-- end main header -->
 
       <a-layout-content class="pt-4">
         <transition name="fade">
           <div class="container-fluid">
-            <!-- breadcrumb -->
             <a-breadcrumb class="mb-3">
               <a-breadcrumb-item
                 v-for="(item, index) in crumbs"
@@ -173,16 +171,18 @@
                 </nuxt-link>
               </a-breadcrumb-item>
             </a-breadcrumb>
+            <!-- end breadcrumb -->
 
-            <!-- main content -->
             <Nuxt />
+            <!-- end main content -->
           </div>
         </transition>
       </a-layout-content>
 
-      <!-- main footer -->
       <Footer />
+      <!-- end main footer -->
     </a-layout>
+    <!-- end main sidebar -->
   </a-layout>
 </template>
 

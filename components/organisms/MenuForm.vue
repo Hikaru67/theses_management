@@ -60,14 +60,14 @@
           :md="12"
         >
           <a-form-model-item
-            :label="$t('menu.roles')"
+            :label="$t('menu.role')"
             prop="roles"
           >
             <a-select
               v-model="model.roleIds"
               mode="multiple"
-              style="width: 100%"
               placeholder="Please select"
+              class="w-100"
             >
               <a-select-option
                 v-for="role in roles"
