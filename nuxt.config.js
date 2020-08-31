@@ -1,3 +1,4 @@
+import icons from './configs/icons'
 
 require('dotenv').config()
 
@@ -107,7 +108,6 @@ export default {
   */
   build: {
     loaders: {
-      // For less
       less: {
         lessOptions: {
           javascriptEnabled: true
@@ -139,68 +139,13 @@ export default {
   ** See https://github.com/nuxt-community/fontawesome-module/
   */
   fontawesome: {
-    icons: {
-      solid: [
-        'faArrowCircleLeft',
-        'faArrowLeft',
-        'faBalanceScale',
-        'faBorderAll',
-        'faBoxes',
-        'faCalendarAlt',
-        'faDownload',
-        'faEnvelope',
-        'faEraser',
-        'faFileAlt',
-        'faGlobeAmericas',
-        'faHeading',
-        'faHome',
-        'faInfoCircle',
-        'faLock',
-        'faPencilAlt',
-        'faPlus',
-        'faPlusCircle',
-        'faSave',
-        'faSearch',
-        'faSignOutAlt',
-        'faTachometerAlt',
-        'faThList',
-        'faTimes',
-        'faTimesCircle',
-        'faTrashAlt',
-        'faUser',
-        'faUserAlt',
-        'faUserCircle',
-        'faUserFriends',
-        'faUsers',
-        'faUserTie',
-        'faWineBottle',
-        'faSitemap',
-        'faLink',
-        'faEye',
-        'faBook',
-        'faPager',
-        'faChevronDown',
-        'faChevronUp',
-        'faNetworkWired',
-        'faUserCog',
-        'faIcons',
-        'faListOl',
-        'faStream',
-        'faAngleDown',
-        'faCaretDown',
-        'faSignInAlt',
-        'faHandPointDown',
-        'faPaperPlane',
-        'faCog'
-      ]
-    }
+    icons
   },
 
   /*
    ** Active router link
    */
   router: {
-    // middleware: ['auth'],
     linkActiveClass: 'active-link'
   },
 
