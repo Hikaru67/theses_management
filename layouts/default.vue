@@ -38,116 +38,59 @@
           </nuxt-link>
         </a-menu-item>
 
-        <a-sub-menu>
-          <span slot="title">
-            <font-awesome-icon
-              icon="cog"
-              class="anticon"
-            />
-            <span>Multi level</span>
-          </span>
-
-          <a-menu-item>
-            <nuxt-link to="/login">
-              <font-awesome-icon
-                icon="sign-in-alt"
-                class="anticon"
-              />
-              <span>Login</span>
-            </nuxt-link>
-          </a-menu-item>
-
-          <a-menu-item>
-            <nuxt-link to="/forgot">
-              <font-awesome-icon
-                icon="lock"
-                class="anticon"
-              />
-              <span>Forgot</span>
-            </nuxt-link>
-          </a-menu-item>
-        </a-sub-menu>
-
-        <!-- <a-menu-item-group>
+        <a-menu-item-group
+          v-for="group in menu"
+          :key="group.id"
+        >
           <template slot="title">
-            <span>Module</span>
+            <span>{{ group.title }}</span>
           </template>
 
-          <a-menu-item key="11">
-            <nuxt-link to="/articles">
-              <font-awesome-icon
-                icon="file-alt"
-                class="anticon"
-              />
-              <span>Articles</span>
-            </nuxt-link>
-          </a-menu-item>
+          <template v-if="group.menus.length">
+            <template v-for="parent in group.menus">
+              <a-sub-menu
+                v-if="parent.menus.length > 1"
+                :key="parent.id"
+              >
+                <span slot="title">
+                  <font-awesome-icon
+                    v-if="parent.icon"
+                    :icon="parent.icon"
+                    class="anticon"
+                  />
+                  <span>{{ parent.title }}</span>
+                </span>
 
-          <a-menu-item key="12">
-            <nuxt-link to="/article-category">
-              <font-awesome-icon
-                icon="book"
-                class="anticon"
-              />
-              <span>Article Category</span>
-            </nuxt-link>
-          </a-menu-item>
+                <a-menu-item
+                  v-for="child in parent.menus"
+                  :key="child.length"
+                >
+                  <nuxt-link :to="child.link">
+                    <font-awesome-icon
+                      v-if="child.icon"
+                      :icon="child.icon"
+                      class="anticon"
+                    />
+                    <span>{{ child.title }}</span>
+                  </nuxt-link>
+                </a-menu-item>
+              </a-sub-menu>
 
-          <a-menu-item key="13">
-            <nuxt-link to="/categories">
-              <font-awesome-icon
-                icon="th-list"
-                class="anticon"
-              />
-              <span>Categories</span>
-            </nuxt-link>
-          </a-menu-item>
-
-          <a-menu-item key="14">
-            <nuxt-link to="/sites">
-              <font-awesome-icon
-                icon="sitemap"
-                class="anticon"
-              />
-              <span>Sites</span>
-            </nuxt-link>
-          </a-menu-item>
-        </a-menu-item-group> -->
-
-        <a-menu-item-group>
-          <template slot="title">
-            <span>System</span>
+              <a-menu-item
+                v-else
+                :key="parent.id"
+              >
+                <nuxt-link :to="parent.menus[0].link">
+                  <font-awesome-icon
+                    v-if="parent.menus[0].icon"
+                    :icon="parent.menus[0].icon"
+                    class="anticon"
+                  />
+                  <span>{{ parent.menus[0].title }}</span>
+                </nuxt-link>
+              </a-menu-item>
+            </template>
           </template>
-
-          <a-menu-item key="21">
-            <nuxt-link to="/user">
-              <font-awesome-icon
-                icon="user-friends"
-                class="anticon"
-              />
-              <span>User</span>
-            </nuxt-link>
-          </a-menu-item>
-
-          <a-menu-item key="22">
-            <nuxt-link to="/role">
-              <font-awesome-icon
-                icon="balance-scale"
-                class="anticon"
-              />
-              <span>Role</span>
-            </nuxt-link>
-          </a-menu-item>
-
-          <a-menu-item key="23">
-            <nuxt-link to="/menu">
-              <font-awesome-icon
-                icon="stream"
-                class="anticon"
-              />
-              <span>Menu</span>
-            </nuxt-link>
-          </a-menu-item>
         </a-menu-item-group>
       </a-menu>
     </a-layout-sider>
@@ -227,6 +170,9 @@ export default {
   },
 
   computed: {
+    menu() {
+      return this.$auth.user.menus
+    },
     /**
      * Breadcrumbs
      *
