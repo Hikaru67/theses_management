@@ -208,6 +208,7 @@ import Layout from '~/mixins/layout'
 const COLLAPSED_WIDTH = 80
 
 export default {
+
   components: {
     Footer,
     Header
@@ -216,6 +217,7 @@ export default {
   mixins: [
     Layout
   ],
+  middleware: ['auth'],
 
   data() {
     return {

@@ -16,12 +16,24 @@
 
       <a-menu slot="overlay">
         <a-menu-item
-          key="1"
+          key="0"
           class="txt-name"
         >
-          a@a.com
+          {{ $auth.user.email }}
         </a-menu-item>
-        <a-menu-item key="0">
+        <a-menu-item key="1">
+          <a
+            href="#"
+            @click="gotoProfile()"
+          >
+            <font-awesome-icon
+              icon="user"
+              class="width-1x"
+            />&nbsp;
+            {{ $t('common.profile') }}
+          </a>
+        </a-menu-item>
+        <a-menu-item key="2">
           <a
             href="#"
             @click="logout()"
@@ -44,16 +56,21 @@ export default {
     /**
      * Logout user
      */
-    logout() {
+    async logout() {
       this.$store.dispatch('setLoading', true)
 
       try {
-        this.$router.push('login')
+        await this.$auth.logout()
+        this.$router.push('/login')
       } catch (err) {
         console.error(err)
       } finally {
         this.$store.dispatch('setLoading', false)
       }
+    },
+
+    gotoProfile() {
+      this.$router.push('/profile')
     }
   }
 }

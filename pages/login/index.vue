@@ -142,7 +142,9 @@
 <script>
 
 export default {
+
   layout: 'blank',
+  middleware: ['guest'],
 
   data() {
     return {
@@ -201,13 +203,15 @@ export default {
     /**
      * login function
      */
-    login() {
+    async login() {
       this.$store.dispatch('setLoading', true)
 
       try {
-        this.$toast.success(
-          this.$t('messages.information.login')
-        )
+        const data = {
+          email: this.email,
+          password: this.password
+        }
+        await this.$auth.login({ data })
 
         this.$router.push('/')
       } catch (err) {
@@ -216,10 +220,6 @@ export default {
         this.message = this.$t(
           'messages.error.unmatch_value',
           { name1: this.$t('user.email'), name2: this.$t('user.password') }
-        )
-
-        this.$toast.error(
-          this.$t('messages.error.failed_to_login')
         )
       } finally {
         this.$store.dispatch('setLoading', false)

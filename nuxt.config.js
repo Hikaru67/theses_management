@@ -209,68 +209,23 @@ export default {
    * See https://auth.nuxtjs.org/
    */
   auth: {
-    // redirect: {
-    //   login: '/login',
-    //   logout: '/login',
-    //   home: '/profile',
-    //   user: '/profile'
-    // },
-    // strategies: {
-    //   local: {
-    //     endpoints: {
-    //       login: { url: '/api/login', method: 'post', propertyName: 'data.api_token' },
-    //       user: { url: '/api/me', method: 'get', propertyName: 'data' },
-    //       logout: false
-    //     }
-    //   },
-    //   tokenRequired: false,
-    //   tokenType: false
-    // }
     redirect: {
       login: '/login',
-      logout: '/',
-      callback: '/login',
-      user: '/'
+      logout: '/login',
+      home: '/',
+      user: '/profile'
     },
     strategies: {
-      password_grant: {
-        _scheme: 'local',
+      local: {
         endpoints: {
-          login: {
-            url: '/oauth/token',
-            method: 'post',
-            propertyName: 'access_token'
-          },
-          logout: false,
-          user: {
-            url: 'api/me',
-            propertyName: 'data'
-          }
+          login: { url: '/login', method: 'post', propertyName: 'data.api_token' },
+          user: { url: '/me', method: 'get', propertyName: 'data' },
+          logout: false
         }
-      },
-      password_grant_custom: {
-        _scheme: '~/auth/schemes/PassportPasswordScheme.js',
-        client_id: process.env.PASSPORT_PASSWORD_GRANT_ID,
-        client_secret: process.env.PASSPORT_PASSWORD_GRANT_SECRET,
-        endpoints: {
-          login: {
-            url: '/oauth/token',
-            method: 'post',
-            propertyName: 'access_token'
-          },
-          logout: false,
-          user: {
-            url: 'api/me',
-            propertyName: 'data'
-          }
-        }
-      },
-      'laravel.passport': {
-        url: process.env.LARAVEL_ENDPOINT,
-        client_id: process.env.PASSPORT_CLIENT_ID,
-        client_secret: process.env.PASSPORT_CLIENT_SECRET,
-        userinfo_endpoint: process.env.LARAVEL_ENDPOINT + '/api/oauth/me'
       }
-    }
+    },
+    plugins: [
+      '~/plugins/api.js'
+    ]
   }
 }

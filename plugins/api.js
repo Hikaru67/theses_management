@@ -94,17 +94,22 @@ export default ({ $axios }, inject) => {
   const apiManager = new APIManager(axios)
 
   const routes = {
+    me: {
+      post: {
+        name: 'updateProfile'
+      }
+    },
     user: {
       resource: {}
     },
     role: {
       resource: {}
     },
-    menu: {
-      resource: {}
-    },
     permission: {
       get: {}
+    },
+    menu: {
+      resource: {}
     },
     'menu/move': {
       post: {
