@@ -31,6 +31,7 @@ export const mutations = {
 
 export const actions = {
   async getList({ commit }, payload) {
+    payload.params.except_role = 1
     const { data } = await this.$api.indexRole(payload)
     commit('SET_LIST', data.data)
     return data

@@ -63,7 +63,10 @@
                   v-for="child in parent.menus"
                   :key="child.length"
                 >
-                  <nuxt-link :to="child.link">
+                  <nuxt-link
+                    v-if="child.link"
+                    :to="child.link"
+                  >
                     <font-awesome-icon
                       v-if="child.icon"
                       :icon="child.icon"
@@ -75,16 +78,36 @@
               </a-sub-menu>
 
               <a-menu-item
-                v-else
+                v-else-if="parent.menus.length === 1"
                 :key="parent.id"
               >
-                <nuxt-link :to="parent.menus[0].link">
+                <nuxt-link
+                  v-if="parent.menus[0].link"
+                  :to="parent.menus[0].link"
+                >
                   <font-awesome-icon
                     v-if="parent.menus[0].icon"
                     :icon="parent.menus[0].icon"
                     class="anticon"
                   />
                   <span>{{ parent.menus[0].title }}</span>
+                </nuxt-link>
+              </a-menu-item>
+
+              <a-menu-item
+                v-else
+                :key="parent.id"
+              >
+                <nuxt-link
+                  v-if="parent.link"
+                  :to="parent.link"
+                >
+                  <font-awesome-icon
+                    v-if="parent.icon"
+                    :icon="parent.icon"
+                    class="anticon"
+                  />
+                  <span>{{ parent.title }}</span>
                 </nuxt-link>
               </a-menu-item>
             </template>
