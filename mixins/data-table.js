@@ -126,7 +126,7 @@ export default {
     async deleteRecord(id) {
       try {
         this.$store.dispatch('setLoading', true)
-        const action = camelCase(`delete-${this.resource}`)
+        const action = camelCase(`destroy-${this.resource}`)
         await this.$api[action]({ id })
 
         this.$notification.success({

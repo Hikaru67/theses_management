@@ -23,8 +23,16 @@
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="showDetail(0)">
-          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+        <a-button
+          html-type="button"
+          type="primary"
+          ghost
+          @click="showDetail(0)"
+        >
+          <font-awesome-icon
+            icon="plus-circle"
+            class="width-1x mr-1"
+          />
           {{ $t('common.create_new') }}
         </a-button>
       </template>
@@ -53,7 +61,10 @@
                   :disabled="loading"
                   @click="showDetail(key)"
                 >
-                  <font-awesome-icon icon="pencil-alt" class="width-1x" />
+                  <font-awesome-icon
+                    icon="pencil-alt"
+                    class="width-1x"
+                  />
                 </a-button>
 
                 <a-button
@@ -64,7 +75,10 @@
                   :disabled="loading"
                   @click="confirmToDelete(key)"
                 >
-                  <font-awesome-icon icon="trash-alt" class="width-1x" />
+                  <font-awesome-icon
+                    icon="trash-alt"
+                    class="width-1x"
+                  />
                 </a-button>
               </div>
             </template>
@@ -269,7 +283,7 @@ export default {
     async deleteRecord(id) {
       try {
         this.$store.dispatch('setLoading', true)
-        await this.$api.deleteMenu({ id })
+        await this.$api.destroyMenu({ id })
 
         this.$notification.success({
           message: this.$t('messages.information.deleted')

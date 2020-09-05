@@ -32,7 +32,7 @@ export default ({ $axios }, inject) => {
         ...this.store(model, options),
         ...this.show(model, options),
         ...this.update(model, options),
-        ...this.delete(model, options)
+        ...this.destroy(model, options)
       }
     }
 
@@ -64,8 +64,8 @@ export default ({ $axios }, inject) => {
       }
     }
 
-    delete(path, options = {}) {
-      const key = options.name || camelCase(`delete-${path}`)
+    destroy(path, options = {}) {
+      const key = options.name || camelCase(`destroy-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.delete(`${path}/${data.id}`, data, config)
       }
