@@ -23,7 +23,7 @@ export default {
       this.data = data
     } catch (_) {
       this.$notification.error({
-        message: this.$t('messages.error.failed_to_get', { name: this.resourceName })
+        message: this.$t('messages.error.failed_to_get', { name: this.resource })
       })
     } finally {
       this.$store.dispatch('setLoading', false)
@@ -135,7 +135,7 @@ export default {
         this.$fetch()
       } catch (_) {
         this.$notification.error({
-          message: this.$t('messages.error.failed_to_delete', { name: this.resourceName })
+          message: this.$t('messages.error.failed_to_delete', { name: this.resource })
         })
       } finally {
         this.$store.dispatch('setLoading', false)

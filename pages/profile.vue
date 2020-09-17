@@ -233,7 +233,7 @@ export default {
         })
       } catch (_) {
         this.$notification.error({
-          message: this.$t('messages.error.failed_to_update', { name: this.resourceName })
+          message: this.$t('messages.error.failed_to_update', { name: this.resource })
         })
       } finally {
         this.$store.dispatch('setLoading', false)

@@ -50,7 +50,7 @@ export default {
         this.model = await this.$store.dispatch(action, { id })
       } catch (_) {
         this.$notification.error({
-          message: this.$t('messages.error.failed_to_get', { name: this.resourceName })
+          message: this.$t('messages.error.failed_to_get', { name: this.resource })
         })
       } finally {
         this.$store.dispatch('setLoading', false)
@@ -90,7 +90,7 @@ export default {
         this.$notification.error({
           message: this.$t(
             this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
-            { name: this.resourceName }
+            { name: this.resource }
           )
         })
       } finally {

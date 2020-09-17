@@ -7,8 +7,16 @@
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="showDetail(0)">
-          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+        <a-button
+          html-type="button"
+          type="primary"
+          ghost
+          @click="showDetail(0)"
+        >
+          <font-awesome-icon
+            icon="plus-circle"
+            class="width-1x mr-1"
+          />
           {{ $t('common.create_new') }}
         </a-button>
       </template>
@@ -25,7 +33,10 @@
           type="flex"
           :gutter="30"
         >
-          <a-col :span="24" :md="21">
+          <a-col
+            :span="24"
+            :md="21"
+          >
             <a-form-model-item
               :label="$t('role.name')"
               prop="name"
@@ -97,7 +108,10 @@
             :disabled="loading"
             @click="goToDetail(record.id)"
           >
-            <font-awesome-icon icon="eye" class="width-1x" />
+            <font-awesome-icon
+              icon="eye"
+              class="width-1x"
+            />
           </a-button>
 
           <a-button
@@ -107,7 +121,10 @@
             :disabled="loading"
             @click="showDetail(record.id)"
           >
-            <font-awesome-icon icon="pencil-alt" class="width-1x" />
+            <font-awesome-icon
+              icon="pencil-alt"
+              class="width-1x"
+            />
           </a-button>
 
           <a-button
@@ -117,7 +134,10 @@
             :disabled="loading"
             @click="confirmToDelete(record.id)"
           >
-            <font-awesome-icon icon="trash-alt" class="width-1x" />
+            <font-awesome-icon
+              icon="trash-alt"
+              class="width-1x"
+            />
           </a-button>
         </template>
       </a-table>
@@ -165,7 +185,6 @@ export default {
   data() {
     return {
       resource: 'role',
-      resourceName: this.$t('role.role'),
       visible: false,
       currentId: 0,
       filters: {

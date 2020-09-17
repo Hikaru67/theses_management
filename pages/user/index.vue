@@ -7,8 +7,16 @@
       </template>
 
       <template slot="extra">
-        <a-button html-type="button" type="primary" ghost @click="showDetail(0)">
-          <font-awesome-icon icon="plus-circle" class="width-1x mr-1" />
+        <a-button
+          html-type="button"
+          type="primary"
+          ghost
+          @click="showDetail(0)"
+        >
+          <font-awesome-icon
+            icon="plus-circle"
+            class="width-1x mr-1"
+          />
           {{ $t('common.create_new') }}
         </a-button>
       </template>
@@ -114,11 +122,17 @@
         class="main-table"
         @change="handleTableChange"
       >
-        <template slot="roles" slot-scope="text, record">
+        <template
+          slot="roles"
+          slot-scope="text, record"
+        >
           {{ getRolesName(record.roles) }}
         </template>
 
-        <template slot="status" slot-scope="text, record">
+        <template
+          slot="status"
+          slot-scope="text, record"
+        >
           <a-badge
             :count="`${record.status === 1 ? $t('user.statuses.active') : $t('user.statuses.inactive')}`"
             :number-style="{
@@ -140,7 +154,10 @@
             :disabled="loading"
             @click="goToDetail(record.id)"
           >
-            <font-awesome-icon icon="eye" class="width-1x" />
+            <font-awesome-icon
+              icon="eye"
+              class="width-1x"
+            />
           </a-button>
 
           <a-button
@@ -150,7 +167,10 @@
             :disabled="loading"
             @click="showDetail(record.id)"
           >
-            <font-awesome-icon icon="pencil-alt" class="width-1x" />
+            <font-awesome-icon
+              icon="pencil-alt"
+              class="width-1x"
+            />
           </a-button>
 
           <a-button
@@ -160,7 +180,10 @@
             :disabled="loading"
             @click="confirmToDelete(record.id)"
           >
-            <font-awesome-icon icon="trash-alt" class="width-1x" />
+            <font-awesome-icon
+              icon="trash-alt"
+              class="width-1x"
+            />
           </a-button>
         </template>
       </a-table>
@@ -208,7 +231,6 @@ export default {
   data() {
     return {
       resource: 'user',
-      resourceName: this.$t('user.user'),
       visible: false,
       currentId: 0,
       filters: {

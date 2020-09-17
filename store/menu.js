@@ -52,6 +52,7 @@ export const actions = {
       id: payload.id,
       title: payload.title,
       icon: payload.icon,
+      link: payload.link,
       roles: payload.roleIds
     }
     if (payload.password) {
