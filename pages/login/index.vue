@@ -142,9 +142,9 @@
 <script>
 
 export default {
-
   layout: 'blank',
-  middleware: ['guest'],
+
+  auth: 'guest',
 
   data() {
     return {

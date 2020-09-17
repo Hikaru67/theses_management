@@ -1,21 +1,5 @@
 <template>
   <div class="main-list position-relative">
-    <div class="box-change-view">
-      <nuxt-link
-        to="/menu"
-        :class="`${$route.path === '/menu/list' ? 'on-menu-list' : ''}`"
-      >
-        <font-awesome-icon icon="th-list" />
-      </nuxt-link>
-
-      <nuxt-link
-        to="/menu/list"
-        :class="`${$route.path === '/menu/list' ? 'on-menu-list' : ''}`"
-      >
-        <font-awesome-icon icon="border-all" />
-      </nuxt-link>
-    </div>
-
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="stream" />

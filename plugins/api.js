@@ -4,12 +4,12 @@
  */
 
 import { camelCase } from 'lodash'
-import routes from '../configs/routes'
+import routes from '~/configs/routes'
 
-export default ({ $axios }, inject) => {
-  class APIManager {
-    constructor(axios) {
-      this.axios = axios
+export default ({ $axios, $auth }, inject) => {
+  class API {
+    constructor() {
+      this.axios = $axios
     }
 
     get(path, options = {}) {
@@ -78,23 +78,16 @@ export default ({ $axios }, inject) => {
           data = { ...data, ...this[method](path, options) }
         })
       })
-      return data
+
+      Object.entries(data).forEach(([key, method]) => {
+        this[key] = method
+      })
     }
   }
 
-  const axios = $axios.create({
-    headers: {
-      common: {
-        Accept: 'application/json'
-      }
-    }
-  })
+  const api = new API()
 
-  axios.setBaseURL(process.env.API_BASE_URL)
-
-  const apiManager = new APIManager(axios)
-
-  const api = apiManager.generateMethods(routes)
+  api.generateMethods(routes)
 
   inject('api', api)
 }

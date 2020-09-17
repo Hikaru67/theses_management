@@ -19,7 +19,7 @@
           key="0"
           class="txt-name"
         >
-          {{ $auth.user.email }}
+          {{ $auth.user ? $auth.user.email : '' }}
         </a-menu-item>
         <a-menu-item key="1">
           <a
