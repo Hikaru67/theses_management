@@ -42,20 +42,20 @@
             :label="$t('role.permissions')"
             prop="permissions"
           >
-            <a-collapse
-              v-if="permissions.length"
-              v-model="activeCollapseKeys"
-              expand-icon-position="right"
+            <a-checkbox-group
+              v-model="model.permissionIds"
+              name="permissions"
+              class="no-inline"
             >
-              <a-collapse-panel
-                v-for="group in permissions"
-                :key="`${group.name}`"
-                :header="group.name"
+              <a-collapse
+                v-if="permissions.length"
+                v-model="activeCollapseKeys"
+                expand-icon-position="right"
               >
-                <a-checkbox-group
-                  v-model="model.permissionIds"
-                  name="permissions"
-                  class="no-inline"
+                <a-collapse-panel
+                  v-for="group in permissions"
+                  :key="`${group.name}`"
+                  :header="group.name"
                 >
                   <a-checkbox
                     v-for="permission in group.permissions"
@@ -64,9 +64,9 @@
                   >
                     {{ permission.name }}
                   </a-checkbox>
-                </a-checkbox-group>
-              </a-collapse-panel>
-            </a-collapse>
+                </a-collapse-panel>
+              </a-collapse>
+            </a-checkbox-group>
           </a-form-model-item>
         </a-col>
       </a-row>
