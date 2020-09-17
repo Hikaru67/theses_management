@@ -60,6 +60,27 @@
           :md="12"
         >
           <a-form-model-item
+            :label="$t('menu.link')"
+            prop="link"
+          >
+            <a-input
+              v-model="model.link"
+              :placeholder="$t('menu.link')"
+            >
+              <font-awesome-icon
+                slot="addonBefore"
+                icon="envelope"
+                class="width-1x"
+              />
+            </a-input>
+          </a-form-model-item>
+        </a-col>
+
+        <a-col
+          :span="24"
+          :md="12"
+        >
+          <a-form-model-item
             :label="$t('menu.role')"
             prop="roles"
           >

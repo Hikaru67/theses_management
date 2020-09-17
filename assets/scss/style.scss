@@ -198,10 +198,6 @@ button,
           padding-right: 32px !important;
         }
       }
-      .ant-menu-item {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-      }
     }
   }
   .ant-menu {
@@ -209,29 +205,13 @@ button,
       background: transparent !important;
     }
     .ant-menu-item {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
       > a {
         display: block;
-        padding-left: 24px;
-        padding-right: 16px;
         &.active-link,
-        &:hover {
-          background: $primary-color;
-        }
         &[href="/"]:not(:hover) {
           background: $primary-color;
           &:not(.on-home) {
             background: transparent;
-          }
-        }
-      }
-    }
-    .ant-menu-submenu {
-      .ant-menu {
-        .ant-menu-item {
-          > a {
-            padding-left: 48px;
           }
         }
       }

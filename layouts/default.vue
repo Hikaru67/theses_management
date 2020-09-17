@@ -23,96 +23,30 @@
         theme="dark"
         mode="inline"
       >
-        <a-menu-item>
-          <nuxt-link
-            to="/"
-            :class="`${$route.path === '/' ? 'on-home' : ''}`"
+        <template v-for="item in menu">
+          <a-menu-item
+            v-if="!item.menus.length"
+            :key="item.id"
           >
             <font-awesome-icon
-              icon="tachometer-alt"
+              v-if="item.icon"
+              :icon="item.icon"
               class="anticon"
             />
-            <span>Dashboard</span>
-          </nuxt-link>
-        </a-menu-item>
-
-        <a-menu-item-group
-          v-for="group in menu"
-          :key="group.id"
-        >
-          <template slot="title">
-            <span>{{ group.title }}</span>
-          </template>
-
-          <template v-if="group.menus.length">
-            <template v-for="parent in group.menus">
-              <a-sub-menu
-                v-if="parent.menus.length > 1"
-                :key="parent.id"
-              >
-                <span slot="title">
-                  <font-awesome-icon
-                    v-if="parent.icon"
-                    :icon="parent.icon"
-                    class="anticon"
-                  />
-                  <span>{{ parent.title }}</span>
-                </span>
-
-                <a-menu-item
-                  v-for="child in parent.menus"
-                  :key="child.length"
-                >
-                  <nuxt-link
-                    v-if="child.link"
-                    :to="child.link"
-                  >
-                    <font-awesome-icon
-                      v-if="child.icon"
-                      :icon="child.icon"
-                      class="anticon"
-                    />
-                    <span>{{ child.title }}</span>
-                  </nuxt-link>
-                </a-menu-item>
-              </a-sub-menu>
-
-              <a-menu-item
-                v-else-if="parent.menus.length === 1"
-                :key="parent.id"
-              >
-                <nuxt-link
-                  v-if="parent.menus[0].link"
-                  :to="parent.menus[0].link"
-                >
-                  <font-awesome-icon
-                    v-if="parent.menus[0].icon"
-                    :icon="parent.menus[0].icon"
-                    class="anticon"
-                  />
-                  <span>{{ parent.menus[0].title }}</span>
-                </nuxt-link>
-              </a-menu-item>
-
-              <a-menu-item
-                v-else
-                :key="parent.id"
-              >
-                <nuxt-link
-                  v-if="parent.link"
-                  :to="parent.link"
-                >
-                  <font-awesome-icon
-                    v-if="parent.icon"
-                    :icon="parent.icon"
-                    class="anticon"
-                  />
-                  <span>{{ parent.title }}</span>
-                </nuxt-link>
-              </a-menu-item>
-            </template>
-          </template>
-        </a-menu-item-group>
+            <nuxt-link
+              v-if="item.link"
+              :to="item.link"
+            >
+              {{ item.title }}
+            </nuxt-link>
+            <span v-else>{{ item.title }}</span>
+          </a-menu-item>
+          <sub-menu
+            v-else
+            :key="item.id"
+            :menu="item"
+          />
+        </template>
       </a-menu>
       <!-- end sidebar menu -->
     </a-layout-sider>
@@ -168,6 +102,7 @@ import { BREAD_CRUMB_LIST } from '~/constants'
 
 import Footer from '~/components/organisms/Footer'
 import Header from '~/components/organisms/Header'
+import SubMenu from '~/components/organisms/SubMenu'
 
 import Layout from '~/mixins/layout'
 
@@ -177,6 +112,7 @@ export default {
 
   components: {
     Footer,
+    SubMenu,
     Header
   },
 
