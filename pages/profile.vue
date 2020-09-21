@@ -204,24 +204,23 @@ export default {
      */
     handleSubmit() {
       this.$refs.form.validate(async valid => {
-        if (!valid) {
-          return
-        }
-        try {
-          this.$store.dispatch('setLoading', true)
-          await this.$api.updateProfile(this.model)
-          await this.$auth.fetchUser()
-          await this.$fetch()
+        if (valid) {
+          try {
+            this.$store.dispatch('setLoading', true)
+            await this.$api.updateProfile(this.model)
+            await this.$auth.fetchUser()
+            await this.$fetch()
 
-          this.$notification.success({
-            message: this.$t('messages.information.updated')
-          })
-        } catch (_) {
-          this.$notification.error({
-            message: this.$t('messages.error.failed_to_update', { name: this.resource })
-          })
-        } finally {
-          this.$store.dispatch('setLoading', false)
+            this.$notification.success({
+              message: this.$t('messages.information.updated')
+            })
+          } catch (_) {
+            this.$notification.error({
+              message: this.$t('messages.error.failed_to_update', { name: this.resource })
+            })
+          } finally {
+            this.$store.dispatch('setLoading', false)
+          }
         }
       })
     }

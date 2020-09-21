@@ -4,7 +4,7 @@
     :model="this"
     :rules="formRules"
     class="main-form"
-    @submit.prevent="onHandleSubmit"
+    @submit.prevent="handleSubmit"
   >
     <div class="box-wrapper">
       <div class="box-img">
@@ -170,47 +170,31 @@ export default {
     }
   },
 
-  created() {
-    // TODO
-    // if (this.$cookies.get('token')) {
-    //   return this.$router.push('/')
-    // }
-  },
-
   methods: {
     /**
-     * On handle submit
+     * Handle submit
      */
-    onHandleSubmit() {
-      this.$refs.refForm.validate(valid => {
+    handleSubmit() {
+      this.$refs.refForm.validate(async valid => {
         if (valid) {
-          this.login()
+          this.$store.dispatch('setLoading', true)
+
+          try {
+            const data = {
+              email: this.email,
+              password: this.password
+            }
+            await this.$auth.login({ data })
+          } catch (err) {
+            this.message = this.$t(
+              'messages.error.unmatch_value',
+              { name1: this.$t('user.email'), name2: this.$t('user.password') }
+            )
+          } finally {
+            this.$store.dispatch('setLoading', false)
+          }
         }
       })
-    },
-
-    /**
-     * login function
-     */
-    async login() {
-      this.$store.dispatch('setLoading', true)
-
-      try {
-        const data = {
-          email: this.email,
-          password: this.password
-        }
-        await this.$auth.login({ data })
-
-        this.$router.push('/')
-      } catch (err) {
-        this.message = this.$t(
-          'messages.error.unmatch_value',
-          { name1: this.$t('user.email'), name2: this.$t('user.password') }
-        )
-      } finally {
-        this.$store.dispatch('setLoading', false)
-      }
     }
   }
 }

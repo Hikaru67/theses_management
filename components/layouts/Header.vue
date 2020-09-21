@@ -117,6 +117,24 @@ export default {
     /**
      * Logout user
      */
+    async logout() {
+      this.$store.dispatch('setLoading', true)
+
+      try {
+        await this.$auth.logout()
+      } catch (err) {
+        this.message = this.$t(
+          'messages.error.unmatch_value',
+          { name1: this.$t('user.email'), name2: this.$t('user.password') }
+        )
+      } finally {
+        this.$store.dispatch('setLoading', false)
+      }
+    },
+
+    /**
+     * Toggle collapsed status
+     */
     toggleIsCollapsed() {
       this.isCollapsed = !this.isCollapsed
     }

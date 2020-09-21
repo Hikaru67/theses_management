@@ -55,29 +55,27 @@ export default {
      */
     handleSubmit() {
       this.$refs.form.validate(async valid => {
-        if (!valid) {
-          return
-        }
+        if (valid) {
+          try {
+            this.$store.dispatch('setLoading', true)
+            const action = `${this.resource}/saveModel`
+            this.model = await this.$store.dispatch(action, this.model)
 
-        try {
-          this.$store.dispatch('setLoading', true)
-          const action = `${this.resource}/saveModel`
-          this.model = await this.$store.dispatch(action, this.model)
+            this.$notification.success({
+              message: this.$t(this.id ? 'messages.information.updated' : 'messages.information.created')
+            })
 
-          this.$notification.success({
-            message: this.$t(this.id ? 'messages.information.updated' : 'messages.information.created')
-          })
-
-          this.$emit('save')
-        } catch (_) {
-          this.$notification.error({
-            message: this.$t(
-              this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
-              { name: this.resource }
-            )
-          })
-        } finally {
-          this.$store.dispatch('setLoading', false)
+            this.$emit('save')
+          } catch (_) {
+            this.$notification.error({
+              message: this.$t(
+                this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
+                { name: this.resource }
+              )
+            })
+          } finally {
+            this.$store.dispatch('setLoading', false)
+          }
         }
       })
     }

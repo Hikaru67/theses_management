@@ -76,10 +76,6 @@ export default {
   },
 
   mounted() {
-    this.$notification.config({
-      duration: 2
-    })
-
     this.checkIsPc()
 
     let resizeTimer
