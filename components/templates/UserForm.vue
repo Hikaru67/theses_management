@@ -2,11 +2,11 @@
   <a-form-model
     ref="form"
     :model="model"
-    :rules="rulesForm"
+    :rules="formRules"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"
-    @submit.prevent="validateBeforeSubmit"
+    @submit.prevent="handleSubmit"
   >
     <div class="box-form-inner p-4">
       <a-row
@@ -156,13 +156,10 @@
 </template>
 
 <script>
-
 import DataForm from '~/mixins/data-form'
 
 export default {
-  mixins: [
-    DataForm
-  ],
+  mixins: [DataForm],
 
   async fetch() {
     const { data } = await this.$api.indexRole()
@@ -175,12 +172,7 @@ export default {
   }),
 
   computed: {
-    /**
-     * Rules form
-     *
-     * @param {object} - Rules form
-     */
-    rulesForm() {
+    formRules() {
       return {
         name: [
           {
@@ -196,7 +188,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.emailValidator(this.$t('user.email')),
+            type: 'email',
             trigger: ['change', 'blur']
           }
         ],

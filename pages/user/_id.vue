@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import UserForm from '~/components/organisms/UserForm'
+import UserForm from '~/components/templates/UserForm'
 
 export default {
   components: {

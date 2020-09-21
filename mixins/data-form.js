@@ -5,9 +5,6 @@
 
 export default {
   props: {
-    /**
-     * Model id
-     */
     id: {
       type: Number,
       default: 0
@@ -19,10 +16,6 @@ export default {
   },
 
   watch: {
-    /**
-     * Watching changes of id
-     * Get detail
-     */
     id(val) {
       this.getModel(val)
     }
@@ -60,42 +53,33 @@ export default {
     /**
      * Validate before submit
      */
-    validateBeforeSubmit() {
-      this.$refs.form.validate(valid => {
+    handleSubmit() {
+      this.$refs.form.validate(async valid => {
         if (!valid) {
-          this.$notification.error({
-            message: this.$t('messages.error.input_error')
+          return
+        }
+
+        try {
+          this.$store.dispatch('setLoading', true)
+          const action = `${this.resource}/saveModel`
+          this.model = await this.$store.dispatch(action, this.model)
+
+          this.$notification.success({
+            message: this.$t(this.id ? 'messages.information.updated' : 'messages.information.created')
           })
-        } else {
-          this.handleSubmit()
+
+          this.$emit('save')
+        } catch (_) {
+          this.$notification.error({
+            message: this.$t(
+              this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
+              { name: this.resource }
+            )
+          })
+        } finally {
+          this.$store.dispatch('setLoading', false)
         }
       })
-    },
-
-    /**
-     * Event trigger on Submit
-     */
-    async handleSubmit() {
-      try {
-        this.$store.dispatch('setLoading', true)
-        const action = `${this.resource}/saveModel`
-        this.model = await this.$store.dispatch(action, this.model)
-
-        this.$notification.success({
-          message: this.$t(this.id ? 'messages.information.updated' : 'messages.information.created')
-        })
-
-        this.$emit('save')
-      } catch (_) {
-        this.$notification.error({
-          message: this.$t(
-            this.id ? 'messages.error.failed_to_update' : 'messages.error.failed_to_create',
-            { name: this.resource }
-          )
-        })
-      } finally {
-        this.$store.dispatch('setLoading', false)
-      }
     }
   }
 }

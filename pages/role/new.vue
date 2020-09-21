@@ -15,7 +15,7 @@
 </template>
 <script>
 
-import RoleForm from '~/components/organisms/RoleForm'
+import RoleForm from '~/components/templates/RoleForm'
 
 export default {
   components: { RoleForm },

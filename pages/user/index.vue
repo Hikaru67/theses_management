@@ -130,20 +130,6 @@
         </template>
 
         <template
-          slot="status"
-          slot-scope="text, record"
-        >
-          <a-badge
-            :count="`${record.status === 1 ? $t('user.statuses.active') : $t('user.statuses.inactive')}`"
-            :number-style="{
-              backgroundColor: record.status === 1 ? '#52c41a' : '#d9d9d9'
-            }"
-            class="btn-status cursor-pointer over"
-            @click="onToggleStatus(record)"
-          />
-        </template>
-
-        <template
           slot="action"
           slot-scope="text, record"
         >
@@ -216,7 +202,7 @@
 </template>
 
 <script>
-import UserForm from '~/components/organisms/UserForm'
+import UserForm from '~/components/templates/UserForm'
 import DataTable from '~/mixins/data-table'
 
 export default {
@@ -343,23 +329,6 @@ export default {
      */
     search() {
       this.replaceQuery(this.filters)
-    },
-
-    /**
-     * Update status
-     *
-     * @param {object} item - User
-     */
-    onToggleStatus(item) {
-      if (!item || !item.id) {
-        return
-      }
-
-      const params = {
-        id: item.id,
-        status: item.status === 1 ? 0 : 1
-      }
-      console.log('params', params)
     }
   }
 }

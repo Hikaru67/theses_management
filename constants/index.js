@@ -4,48 +4,6 @@
  */
 
 /**
- * List of number record in one page
- */
-export const PAGE_SIZES = [10, 20, 50, 100, 200]
-
-/**
- * Number record in one page
- */
-export const PAGE_SIZE = 10
-
-/**
- * Max number record return by api
- */
-export const MAX_LIMIT_RECORD = 1000
-
-/**
- * Minisecond
- */
-export const MINISECOND = 1000
-
-/**
- * Sort type
- */
-export const SORT_TYPE = {
-  DESC: 0,
-  ASC: 1
-}
-
-/**
- * User status list
- */
-export const USER_STATUS_LIST = [
-  {
-    id: 0,
-    name: 'user.statuses.inactive'
-  },
-  {
-    id: 1,
-    name: 'user.statuses.active'
-  }
-]
-
-/**
  * Breadcrumb list
  */
 export const BREAD_CRUMB_LIST = [

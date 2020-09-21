@@ -9,11 +9,11 @@
       <a-form-model
         ref="form"
         :model="model"
-        :rules="rulesForm"
+        :rules="formRules"
         :label-col="{ sm: 6 }"
         :wrapper-col="{ sm: 18 }"
         class="main-form"
-        @submit.prevent="validateBeforeSubmit"
+        @submit.prevent="handleSubmit"
       >
         <div class="box-form-inner p-4">
           <a-row
@@ -143,12 +143,7 @@ export default {
   }),
 
   computed: {
-    /**
-     * Rules form
-     *
-     * @param {object} - Rules form
-     */
-    rulesForm() {
+    formRules() {
       return {
         name: [
           {
@@ -164,7 +159,7 @@ export default {
             trigger: ['change', 'blur']
           },
           {
-            validator: this.$validator.emailValidator(this.$t('user.email')),
+            type: 'email',
             trigger: ['change', 'blur']
           }
         ],
@@ -207,37 +202,28 @@ export default {
     /**
      * Validate before submit
      */
-    validateBeforeSubmit() {
-      this.$refs.form.validate(valid => {
+    handleSubmit() {
+      this.$refs.form.validate(async valid => {
         if (!valid) {
-          this.$notification.error({
-            message: this.$t('messages.error.input_error')
+          return
+        }
+        try {
+          this.$store.dispatch('setLoading', true)
+          await this.$api.updateProfile(this.model)
+          await this.$auth.fetchUser()
+          await this.$fetch()
+
+          this.$notification.success({
+            message: this.$t('messages.information.updated')
           })
-        } else {
-          this.handleSubmit()
+        } catch (_) {
+          this.$notification.error({
+            message: this.$t('messages.error.failed_to_update', { name: this.resource })
+          })
+        } finally {
+          this.$store.dispatch('setLoading', false)
         }
       })
-    },
-    /**
-     * Event trigger on Submit
-     */
-    async handleSubmit() {
-      try {
-        this.$store.dispatch('setLoading', true)
-        await this.$api.updateProfile(this.model)
-        await this.$auth.fetchUser()
-        await this.$fetch()
-
-        this.$notification.success({
-          message: this.$t('messages.information.updated')
-        })
-      } catch (_) {
-        this.$notification.error({
-          message: this.$t('messages.error.failed_to_update', { name: this.resource })
-        })
-      } finally {
-        this.$store.dispatch('setLoading', false)
-      }
     }
   }
 }

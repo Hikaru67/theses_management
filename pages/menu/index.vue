@@ -100,7 +100,7 @@
 import { cloneDeep } from 'lodash'
 import { mapGetters } from 'vuex'
 
-import MenuForm from '~/components/organisms/MenuForm'
+import MenuForm from '~/components/templates/MenuForm'
 
 export default {
   components: {

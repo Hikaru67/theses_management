@@ -34,6 +34,7 @@ export default {
 
   /*
   ** Style resources
+  ** See https://github.com/nuxt-community/style-resources-module
   */
   styleResources: {
     scss: [
@@ -57,7 +58,6 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/api',
-    '@/plugins/validator',
     '@/plugins/directive'
   ],
 
@@ -82,7 +82,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxt/content',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     'nuxt-i18n'
@@ -95,12 +94,6 @@ export default {
   axios: {
     baseURL: process.env.API_BASE_URL
   },
-
-  /*
-  ** Content module configuration
-  ** See https://content.nuxtjs.org/configuration
-  */
-  content: {},
 
   /*
   ** Build configuration
@@ -121,7 +114,11 @@ export default {
   ** See https://i18n.nuxtjs.org/
   */
   i18n: {
-    locales: ['ja', 'en', 'vi'],
+    locales: [
+      { code: 'en', iso: 'en-US' },
+      { code: 'ja', iso: 'ja-JP' },
+      { code: 'vi', iso: 'vi-VN' }
+    ],
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',

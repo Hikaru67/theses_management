@@ -2,11 +2,11 @@
   <a-form-model
     ref="form"
     :model="model"
-    :rules="rulesForm"
+    :rules="formRules"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"
-    @submit.prevent="validateBeforeSubmit"
+    @submit.prevent="handleSubmit"
   >
     <div class="box-form-inner p-4">
       <a-row
@@ -49,7 +49,6 @@
             >
               <a-collapse
                 v-if="permissions.length"
-                v-model="activeCollapseKeys"
                 expand-icon-position="right"
               >
                 <a-collapse-panel
@@ -103,7 +102,6 @@
 </template>
 
 <script>
-
 import DataForm from '~/mixins/data-form'
 
 export default {
@@ -114,32 +112,20 @@ export default {
     const parents = [...new Set(data.data.map(item => item.name.split('.')[0]))]
 
     this.permissions = parents.map(entry => {
-      const permissions = []
-      data.data.forEach((item, index) => {
-        if (item.name.startsWith(`${entry}.`)) {
-          permissions.push(item)
-        }
-      })
       return {
         name: `${entry}.module`,
-        permissions
+        permissions: data.data.filter((item, index) => item.name.startsWith(`${entry}.`))
       }
     })
   },
 
   data: () => ({
     resource: 'role',
-    permissions: [],
-    activeCollapseKeys: []
+    permissions: []
   }),
 
   computed: {
-    /**
-     * Rules form
-     *
-     * @param {object} - Rules form
-     */
-    rulesForm() {
+    formRules() {
       return {
         name: [
           {

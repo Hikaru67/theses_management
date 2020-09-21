@@ -1,3 +1,5 @@
+import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
+
 class Menu {
   constructor(props) {
     Object.entries(props).forEach(([key, value]) => {
@@ -12,29 +14,40 @@ export const state = () => ({
 })
 
 export const getters = {
-  model: state => {
-    return state.model
-  },
-  list: state => {
-    return state.list
-  }
+  model: state => state.model,
+  list: state => state.list
 }
 
 export const mutations = {
-  SET_LIST: (state, payload) => {
+  [SET_LIST]: (state, payload) => {
     state.list = payload.map(item => new Menu(item))
   },
-  SET_MODEL: (state, payload) => {
+  [SET_MODEL]: (state, payload) => {
     state.model = new Menu(payload)
   }
 }
 
 export const actions = {
+  /**
+   * Get list menu
+   *
+   * @param {Function} commit
+   * @param {Array} payload
+   * @return {Array} menu list
+   */
   async getList({ commit }, payload) {
     const { data } = await this.$api.indexMenu(payload)
     commit('SET_LIST', data.data)
     return data
   },
+
+  /**
+   * Get menu detail
+   *
+   * @param {Function} commit
+   * @param {Object} payload
+   * @return {Object} menu detail
+   */
   async getModel({ commit }, { id }) {
     let model = {
       roleIds: []
@@ -47,6 +60,14 @@ export const actions = {
     commit('SET_MODEL', model)
     return model
   },
+
+  /**
+   * Create/Update menu
+   *
+   * @param {Function} commit
+   * @param {Object} payload
+   * @return {Object} menu detail
+   */
   async saveModel({ commit }, payload) {
     const form = {
       id: payload.id,

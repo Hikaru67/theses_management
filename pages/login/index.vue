@@ -2,7 +2,7 @@
   <a-form-model
     ref="refForm"
     :model="this"
-    :rules="rulesForm"
+    :rules="formRules"
     class="main-form"
     @submit.prevent="onHandleSubmit"
   >
@@ -71,12 +71,6 @@
           </a-button>
         </div>
       </div>
-
-      <div class="btn-forgot text-center">
-        <nuxt-link to="/forgot">
-          パスワードをリセット
-        </nuxt-link>
-      </div>
     </div>
   </a-form-model>
 </template>
@@ -144,7 +138,7 @@
 export default {
   layout: 'blank',
 
-  auth: 'guest',
+  middleware: 'guest',
 
   data() {
     return {
@@ -156,12 +150,7 @@ export default {
   },
 
   computed: {
-    /**
-     * Rules form
-     *
-     * @param {object} - Rules form
-     */
-    rulesForm() {
+    formRules() {
       return {
         email: [
           {
@@ -215,8 +204,6 @@ export default {
 
         this.$router.push('/')
       } catch (err) {
-        console.error(err)
-
         this.message = this.$t(
           'messages.error.unmatch_value',
           { name1: this.$t('user.email'), name2: this.$t('user.password') }

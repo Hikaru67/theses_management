@@ -5,8 +5,6 @@
 
 import Vue from 'vue'
 
-const PRESS_TIMEOUT = 1000
-
 Vue.directive('auto-focus', {
   inserted: el => el.focus()
 })
@@ -35,7 +33,7 @@ Vue.directive('hold', {
       }
 
       if (pressTimer === null) {
-        pressTimer = setTimeout(() => value(e), PRESS_TIMEOUT)
+        pressTimer = setTimeout(() => value(e), 1000)
       }
     }
 
@@ -46,7 +44,10 @@ Vue.directive('hold', {
       }
     }
 
-    ;['mousedown', 'touchstart'].forEach(e => el.addEventListener(e, start))
-    ;['click', 'mouseout', 'touchend', 'touchcancel'].forEach(e => el.addEventListener(e, cancel))
+    const startActions = ['mousedown', 'touchstart']
+    const endActions = ['click', 'mouseout', 'touchend', 'touchcancel']
+
+    startActions.forEach(e => el.addEventListener(e, start))
+    endActions.forEach(e => el.addEventListener(e, cancel))
   }
 })
