@@ -20,9 +20,11 @@ export default {
      * return {Array} - Breadcrumbs
      */
     crumbs() {
-      const home = { to: '/', text: this.$t('common.home') }
+      const crumbs = [
+        { to: '/', text: this.$t('common.home') }
+      ]
 
-      const crumbs = this.$route.matched.map((item, i, { length }) => {
+      this.$route.matched.map((item, i, { length }) => {
         const crumb = {}
 
         crumb.to = item.path
@@ -43,10 +45,10 @@ export default {
           }
         }
 
-        return crumb
+        crumbs.push(crumb)
       })
 
-      return [home, ...crumbs]
+      return crumbs
     }
   }
 }

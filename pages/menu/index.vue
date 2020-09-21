@@ -235,11 +235,11 @@ export default {
     /**
      * Close dialog
      *
-     * @param {boolean} fetch - fetch status
+     * @param {boolean} canFetch - fetch status
      */
-    closeDialog(fetch) {
+    closeDialog(canFetch) {
       this.visible = false
-      if (fetch) {
+      if (canFetch) {
         this.$fetch()
       }
     },

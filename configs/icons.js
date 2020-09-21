@@ -50,6 +50,7 @@ export default {
     'faSignInAlt',
     'faHandPointDown',
     'faPaperPlane',
-    'faCog'
+    'faCog',
+    'faList'
   ]
 }

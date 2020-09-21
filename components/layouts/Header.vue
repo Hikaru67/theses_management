@@ -31,9 +31,9 @@
             v-for="locale in $i18n.locales"
             :key="locale.code"
           >
-            <nuxt-link :to="switchLocalePath(locale.code)">
+            <a href="#" @click="$i18n.setLocale(locale.code)">
               <img :src="require(`~/assets/images/ic_flag_${locale.iso}.png`)" />
-            </nuxt-link>
+            </a>
           </a-menu-item>
         </a-menu>
       </a-dropdown>

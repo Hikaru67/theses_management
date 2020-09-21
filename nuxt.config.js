@@ -120,6 +120,7 @@ export default {
       { code: 'vi', iso: 'vi-VN' }
     ],
     defaultLocale: 'en',
+    strategy: 'no_prefix',
     vueI18n: {
       fallbackLocale: 'en',
       messages: {
