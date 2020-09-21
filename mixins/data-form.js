@@ -59,7 +59,7 @@ export default {
           try {
             this.$store.dispatch('setLoading', true)
             const action = `${this.resource}/saveModel`
-            this.model = await this.$store.dispatch(action, this.model)
+            await this.$store.dispatch(action, this.model)
 
             this.$notification.success({
               message: this.$t(this.id ? 'messages.information.updated' : 'messages.information.created')

@@ -99,7 +99,6 @@
 <script>
 import { cloneDeep } from 'lodash'
 import { mapGetters } from 'vuex'
-
 import MenuForm from '~/components/templates/MenuForm'
 
 export default {

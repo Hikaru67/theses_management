@@ -109,7 +109,7 @@
             @click="goToDetail(record.id)"
           >
             <font-awesome-icon
-              icon="eye"
+              icon="pencil-alt"
               class="width-1x"
             />
           </a-button>
@@ -122,7 +122,7 @@
             @click="showDetail(record.id)"
           >
             <font-awesome-icon
-              icon="pencil-alt"
+              icon="eye"
               class="width-1x"
             />
           </a-button>
