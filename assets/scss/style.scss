@@ -194,16 +194,11 @@ button,
       .ant-menu-item {
         > a {
           display: block;
-          padding-left: 32px !important;
-          padding-right: 32px !important;
         }
       }
     }
   }
   .ant-menu {
-    .ant-menu-item-selected {
-      background: transparent !important;
-    }
     .ant-menu-item {
       > a {
         display: block;

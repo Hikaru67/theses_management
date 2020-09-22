@@ -127,6 +127,7 @@ export default {
       })
     }
     this.data = recursive()
+    this.$auth.fetchUser()
     this.$store.dispatch('setLoading', false)
   },
 
@@ -216,7 +217,6 @@ export default {
     async batchUpdate(list) {
       this.$store.dispatch('setLoading', true)
       await this.$api.moveMenu({ list })
-      await this.$auth.fetchUser()
       this.$store.dispatch('setLoading', false)
       this.$fetch()
     },

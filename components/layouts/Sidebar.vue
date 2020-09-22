@@ -22,6 +22,15 @@
       theme="dark"
       mode="inline"
     >
+      <a-menu-item key="0">
+        <nuxt-link to="/">
+          <font-awesome-icon
+            icon="home"
+            class="anticon"
+          />
+          {{ $t('home') }}
+        </nuxt-link>
+      </a-menu-item>
       <template v-for="item in menu">
         <a-menu-item
           v-if="!item.menus.length"
