@@ -56,13 +56,14 @@
                   :key="`${group.name}`"
                   :header="group.name"
                 >
-                  <a-checkbox
+                  <div
                     v-for="permission in group.permissions"
                     :key="permission.id"
-                    :value="permission.id"
                   >
-                    {{ permission.name }}
-                  </a-checkbox>
+                    <a-checkbox :value="permission.id">
+                      {{ permission.name }}
+                    </a-checkbox>
+                  </div>
                 </a-collapse-panel>
               </a-collapse>
             </a-checkbox-group>

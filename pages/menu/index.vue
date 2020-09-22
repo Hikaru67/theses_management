@@ -188,9 +188,9 @@ export default {
         this.list.forEach((item, index) => {
           const appendData = [item]
           if (item.key === node.eventKey) {
-            if (index > dropPosition) {
+            if (index >= dropPosition) {
               appendData.unshift(newNode)
-            } else if (index < dropPosition) {
+            } else {
               appendData.push(newNode)
             }
           }
