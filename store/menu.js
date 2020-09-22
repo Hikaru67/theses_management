@@ -69,16 +69,9 @@ export const actions = {
    * @return {Object} menu detail
    */
   async saveModel({ commit }, payload) {
-    const form = {
-      id: payload.id,
-      title: payload.title,
-      icon: payload.icon,
-      link: payload.link,
-      roles: payload.roleIds
-    }
-    if (payload.password) {
-      form.password = payload.password
-    }
+    const form = this.$util.getFormData(payload, ['id', 'title'], ['icon', 'link'])
+    form.roles = payload.roleIds
+
     const { data } = payload.id ? await this.$api.updateMenu(form) : await this.$api.storeMenu(form)
     const model = data.data
     commit('SET_MODEL', model)

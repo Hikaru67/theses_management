@@ -69,11 +69,9 @@ export const actions = {
    * @return {Object} role detail
    */
   async saveModel({ commit }, payload) {
-    const form = {
-      id: payload.id,
-      name: payload.name,
-      permissions: payload.permissionIds
-    }
+    const form = this.$util.getFormData(payload, ['id', 'name'])
+    form.permissions = payload.permissionIds
+
     const { data } = payload.id ? await this.$api.updateRole(form) : await this.$api.storeRole(form)
     const model = data.data
     commit(SET_MODEL, model)

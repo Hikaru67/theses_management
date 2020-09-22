@@ -58,7 +58,8 @@ export default {
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/api',
-    '@/plugins/directive'
+    '@/plugins/directive',
+    '@/plugins/util'
   ],
 
   /*

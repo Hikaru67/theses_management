@@ -69,15 +69,9 @@ export const actions = {
    * @return {Object} user detail
    */
   async saveModel({ commit }, payload) {
-    const form = {
-      id: payload.id,
-      name: payload.name,
-      email: payload.email,
-      roles: payload.roleIds
-    }
-    if (payload.password) {
-      form.password = payload.password
-    }
+    const form = this.$util.getFormData(payload, ['id', 'name', 'email', 'password'])
+    form.roles = payload.roleIds
+
     const { data } = payload.id ? await this.$api.updateUser(form) : await this.$api.storeUser(form)
     const model = data.data
     commit(SET_MODEL, model)
