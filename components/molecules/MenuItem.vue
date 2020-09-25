@@ -8,15 +8,16 @@
       :icon="item.icon"
       class="anticon"
     />
-    {{ item.title }}
+    <span>{{ item.title }}</span>
   </nuxt-link>
+
   <span v-else>
     <font-awesome-icon
       v-if="item.icon"
       :icon="item.icon"
       class="anticon"
     />
-    {{ item.title }}
+    <span>{{ item.title }}</span>
   </span>
 </template>
 

@@ -28,9 +28,10 @@
             icon="home"
             class="anticon"
           />
-          {{ $t('home') }}
+          <span>{{ $t('home') }}</span>
         </nuxt-link>
       </a-menu-item>
+
       <template v-for="item in menu">
         <a-menu-item
           v-if="!item.menus.length"
@@ -38,6 +39,7 @@
         >
           <menu-item :item="item" />
         </a-menu-item>
+
         <sub-menu
           v-else
           :key="item.id"
@@ -80,6 +82,10 @@ export default {
     },
 
     menu() {
+      if (!this.$auth.user || !Array.isArray(this.$auth.user.menus)) {
+        return []
+      }
+
       return this.$auth.user.menus
     }
   },
