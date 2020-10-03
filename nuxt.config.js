@@ -85,7 +85,8 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
-    'nuxt-i18n'
+    'nuxt-i18n',
+    '@nuxtjs/style-resources'
   ],
 
   /*
