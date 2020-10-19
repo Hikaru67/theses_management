@@ -1,214 +1,37 @@
 {
-  "common": {
-    "home": "ダッシュボード",
-    "login": "ログイン",
-    "logout": "ログアウト",
-    "dashboard": "ダッシュボード",
-    "create_new": "新規作成",
-    "search": "検索",
-    "clear": "クリア",
-    "total": "合計",
-    "update": "更新",
-    "create": "新規作成",
-    "cancel": "キャンセル",
-    "all": "すべて",
-    "no_data_in_table": "データがありません。",
-    "download_csv": "CSVダウンロード",
-    "upload_csv": "CSVアップロード",
-    "option_please_select": "選択してください",
-    "confirm_delete": "削除確認",
-    "yes": "はい",
-    "no": "いいえ",
-    "more": "もっと見る",
-    "less": "省略",
-    "genders": {
-      "both": "その他",
-      "male": "男性",
-      "fermale": "女性"
-    },
-    "empty": "空き",
-    "choose_files_or_drag_and_drop_here": "ファイルを選択するか、ここにドラッグ&ドロップしてください",
-    "not_available": "利用不可",
-    "action": "アクション",
-    "profile": "マイデータ"
-  },
-  "messages": {
-    "error": {
-      "failed_to_create": "{name}を作成できませんでした。",
-      "failed_to_update": "{name}を更新できませんでした。",
-      "failed_to_delete": "{name}を削除できませんでした。",
-      "failed_to_get": "{name}を取得できませんでした。",
-      "failed_to_login": "ログインに失敗しました。",
-      "failed_to_action": "{name}に失敗しました",
-      "input_error": "入力エラーがあります。",
-      "unmatch_value": "{name1}/{name2}と一致するデータを見つけません。",
-      "bad_email_format": "{name}は正しいメールアドレスの書式ではありません。",
-      "unmatch_confirmation_email": "{name}と一致しません。",
-      "unmatch_password": "パスワードと一致しません。",
-      "required": "{name}は入力必須です。",
-      "invalid_format": "{name}の形式が不正です。",
-      "numeric": "{name}は半角数字で入力してください。",
-      "alphabe_numeric": "{name}は半角で入力してください。",
-      "more_than": "{name}は{target}以上で入力してください。",
-      "less_than": "{name}は{target}以下で入力してください。",
-      "date_before": "{name}は{target}より前の日付を入力してください。",
-      "min_max": "{name}は{min}以上、{max}以内で入力してください。",
-      "min": "{name}は{min}字以上で入力してください。",
-      "color_hex": "無効な形式。",
-      "failed_to_sent_mail": "{name}メールを送信できませんでした。",
-      "decimal": "{name} field must be numeric and decimal",
-      "invalid_image": "拡張子がjpg、jpeg、png、gifのファイルのみが受け入れられます"
-    },
-    "confirmation": {
-      "delete": "{name}を削除してもよろしいですか?"
-    },
-    "information": {
-      "created": "正常に作成されました。",
-      "updated": "正常に更新されました。",
-      "deleted": "正常に削除されました。",
-      "login": "正常にログインしました。",
-      "action": "{name}が成功しました",
-      "sent_mail_success": "正常に{name}メールを送るされました。"
-    }
-  },
-  "constants": {
-    "order_statuses": {
-      "all": "すべて",
-      "wait_for_pay": "給料を待つ",
-      "waiting_for_goods": "商品を待っています",
-      "traffering": "人身売買",
-      "delivered": "配達済み",
-      "cancelled": "キャンセル"
-    },
-    "delivery_types": {
-      "customer_address": "お客様の住所",
-      "working_address": "勤務先住所",
-      "friend_address": "友達の住所",
-      "home_address": "自宅の住所",
-      "back_order": "取り寄せ",
-      "other": "その他の"
-    },
-    "delivery_statuses": {
-      "processing": "処理",
-      "out_for_delivery": "配送中",
-      "shipping": "運送",
-      "failed_attempt": "失敗した試み",
-      "delivered": "お届け",
-      "returning": "戻る",
-      "returned": "戻ってきた"
-    },
-    "delivery_notification_statuses": {
-      "sent": "送信しました",
-      "not_sent": "送信されません"
-    },
-    "payment_methods": {
-      "atm": "ATM",
-      "visa": "VISA",
-      "cod": "COD"
-    },
-    "sale_types": {
-      "normal": "正常",
-      "preorder": "予約注文"
-    },
-    "order_types": {
-      "ec": "EC",
-      "ec_store": "ECストア",
-      "offline_store": "オフラインストア"
-    },
-    "tax_types": {
-      "included_tax": "税込",
-      "not_included_tax": "税別",
-      "tax_free": "無税"
-    }
-  },
-  "sort": {
-    "name": "ソート",
-    "please_select": "選択してください",
-    "sort_asc": "の昇順",
-    "sort_desc": "の降順"
-  },
-  "permissions": {
-    "system": "システム",
-    "module": "モジュール",
-    "role": {
-      "module": "ロール",
-      "index": "ロール管理",
-      "store": "新規作成",
-      "show": "詳細",
-      "update": "編集",
-      "delete": "削除"
-    },
-    "user": {
-      "module": "ユーザー",
-      "index": "ユーザー管理",
-      "store": "新規作成",
-      "show": "詳細",
-      "update": "更新",
-      "delete": "削除"
-    },
-    "menu": {
-      "module": "メニュー",
-      "index": "メニュー管理",
-      "store": "新規作成",
-      "show": "詳細",
-      "update": "更新",
-      "delete": "消除"
-    }
-  },
-  "user": {
-    "id": "ID",
-    "name": "名前",
-    "email": "メールアドレス",
-    "password": "パスワード",
-    "password_confirm": "確認パスワード",
-    "roles": "ロール",
-    "admin": "管理者",
-    "user": "ユーザー",
-    "update_status": "最新状況",
-    "list_user": "管理者管理",
-    "status": "ステータス",
-    "statuses": {
-      "active": "有効",
-      "inactive": "無効"
-    }
-  },
-  "role": {
-    "role": "ロール",
-    "role_list": "ロール一覧",
-    "name": "名前",
-    "select_role_from_list": "ロール一覧から選択してください。",
-    "permissions": "権限"
-  },
-  "menu": {
-    "menu": "メニュー",
-    "id": "ID",
-    "menu_list": "メニュー一覧",
-    "title": "タイトル",
-    "link": "リンク",
-    "icon": "アイコン",
-    "parent_id": "親のID",
-    "position": "ポジション",
-    "role": "ロール",
-    "note_for_deletion": "親カテゴリを削除する場合は、まずサブカテゴリ全体を削除する必要があります"
-  },
-  "breadcrumb": {
-    "user": "ユーザー",
-    "user-new": "ユーザー / 新規作成",
-    "role": "ロール",
-    "role-new": "ロール / 新規作成",
-    "menu": "メニュー",
-    "menu-new": "メニュー / 新規作成"
-  },
-  "login": {
-    "title": "ログイン",
-    "login_id": "メールアドレス",
-    "password": "パスワード",
-    "return": "戻る"
-  },
-  "dashboard": {
-    "total_article": "記事",
-    "total_site": "ページ",
-    "total_view": "閲覧数",
-    "total_category": "カテゴリー"
-  }
+  "common.action": "アクション",
+  "common.cancel": "キャンセル",
+  "common.clear": "クリア",
+  "common.create": "作成",
+  "common.delete": "削除",
+  "common.edit": "編集",
+  "common.home": "ホーム",
+  "common.login": "ログイン",
+  "common.logout": "ログアウト",
+  "common.new": "新着",
+  "common.no": "番号",
+  "common.profile": "プロファイル",
+  "common.search": "検索",
+  "common.update": "更新",
+  "common.yes": "はい",
+  "menu.icon": "アイコン",
+  "menu.link": "リンク",
+  "menu.roles": "役割",
+  "menu.title": "タイトル",
+  "module.menu": "メニュー",
+  "module.role": "役割",
+  "module.user": "ユーザー",
+  "role.name": "名前",
+  "role.permissions": "権限",
+  "text.confirm_to_delete": "このアイテムを削除してもよろしいですか？",
+  "text.something_wrong": "問題が発生しました",
+  "text.successfully": "正常に",
+  "user.email": "メール",
+  "user.name": "名前",
+  "user.password_confirm": "パスワード確認",
+  "user.password": "パスワード",
+  "user.roles": "役割",
+  "validation.min": "{field}は少なくとも{min}文字である必要があります",
+  "validation.not_match": "{field1}と{field2}が一致しません",
+  "validation.required": "{field}が必要です"
 }

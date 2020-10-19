@@ -3,7 +3,7 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="stream" />
-        {{ $t('menu.menu_list') }}
+        {{ $t('module.menu') }}
       </template>
 
       <template slot="extra">
@@ -17,7 +17,7 @@
             icon="plus-circle"
             class="width-1x mr-1"
           />
-          {{ $t('common.create_new') }}
+          {{ $t('common.new') }}
         </a-button>
       </template>
 
@@ -81,7 +81,7 @@
     >
       <template slot="title">
         <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ $t('menu.menu') }}
+        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.menu') }}
       </template>
 
       <a-spin :spinning="loading">
@@ -108,27 +108,33 @@ export default {
 
   async fetch() {
     this.$store.dispatch('setLoading', true)
-    const params = { limit: 0 }
-    const { data } = await this.$api.indexMenu({ params })
-    const recursive = (parentId = 0) => {
-      const list = cloneDeep(data.data.filter(item => item.parent_id === parentId))
-      list.sort((a, b) => a.position - b.position)
-      return list.map(item => {
-        const children = recursive(item.id)
-        return {
-          key: item.id,
-          title: item.title,
-          scopedSlots: {
-            title: 'action'
-          },
-          parent: item.parent_id,
-          children
-        }
+    try {
+      const { data } = await this.$api.indexMenu({ params: { limit: 0 } })
+      const recursive = (parentId = 0) => {
+        const list = cloneDeep(data.data.filter(item => item.parent_id === parentId))
+        list.sort((a, b) => a.position - b.position)
+        return list.map(item => {
+          const children = recursive(item.id)
+          return {
+            key: item.id,
+            title: item.title,
+            scopedSlots: {
+              title: 'action'
+            },
+            parent: item.parent_id,
+            children
+          }
+        })
+      }
+      this.data = recursive()
+      this.$auth.fetchUser()
+    } catch (_) {
+      this.$notification.error({
+        message: this.$t('text.something_wrong')
       })
+    } finally {
+      this.$store.dispatch('setLoading', false)
     }
-    this.data = recursive()
-    this.$auth.fetchUser()
-    this.$store.dispatch('setLoading', false)
   },
 
   data() {
@@ -216,9 +222,16 @@ export default {
      */
     async batchUpdate(list) {
       this.$store.dispatch('setLoading', true)
-      await this.$api.moveMenu({ list })
-      this.$store.dispatch('setLoading', false)
-      this.$fetch()
+      try {
+        await this.$api.moveMenu({ list })
+        this.$fetch()
+      } catch (_) {
+        this.$notification.error({
+          message: this.$t('text.something_wrong')
+        })
+      } finally {
+        this.$store.dispatch('setLoading', false)
+      }
     },
 
     /**
@@ -250,11 +263,10 @@ export default {
      */
     confirmToDelete(id) {
       this.$confirm({
-        title: 'Are you sure delete this task?',
-        content: 'Some descriptions',
-        okText: 'Yes',
+        title: this.$t('text.confirm_to_delete'),
+        okText: this.$t('common.yes'),
         okType: 'danger',
-        cancelText: 'No',
+        cancelText: this.$t('common.no'),
         onOk: () => this.deleteRecord(id)
       })
     },
@@ -270,12 +282,12 @@ export default {
         await this.$api.destroyMenu({ id })
 
         this.$notification.success({
-          message: this.$t('messages.information.deleted')
+          message: this.$t('text.successfully')
         })
         this.$fetch()
       } catch (_) {
         this.$notification.error({
-          message: this.$t('messages.error.failed_to_delete', { name: this.$t('menu.menu') })
+          message: this.$t('text.something_wrong')
         })
       } finally {
         this.$store.dispatch('setLoading', false)

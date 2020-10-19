@@ -3,7 +3,7 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="pencil-alt" />
-        {{ $t('user.user') }}
+        {{ $t('common.profile') }}
       </template>
 
       <a-form-model
@@ -148,14 +148,14 @@ export default {
         name: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.name') }),
+            message: this.$t('validation.required', { field: this.$t('user.name') }),
             trigger: ['change', 'blur']
           }
         ],
         email: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.email') }),
+            message: this.$t('validation.required', { field: this.$t('user.email') }),
             trigger: ['change', 'blur']
           },
           {
@@ -166,14 +166,14 @@ export default {
         password: [
           {
             min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password'), min: 8 }),
+            message: this.$t('validation.min', { field: this.$t('user.password'), min: 8 }),
             trigger: ['change', 'blur']
           }
         ],
         password_confirm: [
           {
             min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password_confirm'), min: 8 }),
+            message: this.$t('validation.min', { field: this.$t('user.password_confirm'), min: 8 }),
             trigger: ['change', 'blur']
           },
           {
@@ -183,14 +183,14 @@ export default {
               } else if (value !== this.model.password) {
                 return callback(
                   new Error(
-                    this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') })
+                    this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password_confirm') })
                   )
                 )
               } else {
                 callback()
               }
             },
-            message: this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') }),
+            message: this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password_confirm') }),
             trigger: ['change', 'blur']
           }
         ]
@@ -212,11 +212,11 @@ export default {
             await this.$fetch()
 
             this.$notification.success({
-              message: this.$t('messages.information.updated')
+              message: this.$t('text.successfully')
             })
           } catch (_) {
             this.$notification.error({
-              message: this.$t('messages.error.failed_to_update', { name: this.resource })
+              message: this.$t('text.something_wrong')
             })
           } finally {
             this.$store.dispatch('setLoading', false)

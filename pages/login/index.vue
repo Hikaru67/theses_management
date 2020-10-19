@@ -18,14 +18,13 @@
 
       <div class="box-form-inner p-4">
         <div class="txt-title-top text-center mb-3">
-          {{ $t('login.title') }}
-          <font-awesome-icon icon="hand-point-down" />
+          {{ $t('common.login') }}
         </div>
 
         <a-form-model-item prop="email">
           <a-input
             v-model="email"
-            :placeholder="$t('login.login_id')"
+            :placeholder="$t('user.email')"
           >
             <font-awesome-icon
               slot="prefix"
@@ -39,7 +38,7 @@
           <a-input
             v-model="password"
             type="password"
-            :placeholder="$t('login.password')"
+            :placeholder="$t('user.password')"
           >
             <font-awesome-icon
               slot="prefix"
@@ -63,7 +62,7 @@
             size="large"
             class="min-w-120"
           >
-            {{ $t('login.title') }}
+            {{ $t('common.login') }}
             <font-awesome-icon
               icon="sign-in-alt"
               class="ml-1"
@@ -152,14 +151,14 @@ export default {
         email: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('login.login_id') }),
+            message: this.$t('validation.required', { field: this.$t('user.email') }),
             trigger: ['change', 'blur']
           }
         ],
         password: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('login.password') }),
+            message: this.$t('validation.required', { field: this.$t('user.password') }),
             trigger: ['change', 'blur']
           }
         ]
@@ -182,11 +181,8 @@ export default {
               password: this.password
             }
             await this.$auth.login({ data })
-          } catch (err) {
-            this.message = this.$t(
-              'messages.error.unmatch_value',
-              { name1: this.$t('user.email'), name2: this.$t('user.password') }
-            )
+          } catch (_) {
+            this.message = this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password') })
           } finally {
             this.$store.dispatch('setLoading', false)
           }

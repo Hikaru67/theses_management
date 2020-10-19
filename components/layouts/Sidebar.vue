@@ -28,7 +28,7 @@
             icon="home"
             class="anticon"
           />
-          <span>{{ $t('home') }}</span>
+          <span>{{ $t('common.home') }}</span>
         </nuxt-link>
       </a-menu-item>
 

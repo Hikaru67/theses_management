@@ -3,7 +3,7 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="pencil-alt" />
-        {{ $t('role.role') }}
+        {{ $t('common.edit') }} {{ $t('module.role') }}
       </template>
 
       <div class="max-w-900">

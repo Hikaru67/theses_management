@@ -23,7 +23,7 @@ export default {
       this.data = data
     } catch (_) {
       this.$notification.error({
-        message: this.$t('messages.error.failed_to_get', { name: this.resource })
+        message: this.$t('text.something_wrong')
       })
     } finally {
       this.$store.dispatch('setLoading', false)
@@ -94,9 +94,16 @@ export default {
     },
 
     /**
+     * Go to new
+     */
+    gotoNew() {
+      this.$router.push(`/${this.resource}/new`)
+    },
+
+    /**
      * Go to detail
      *
-     * @param {Number} Item Id
+     * @param {Number} id
      */
     goToDetail(id) {
       this.$router.push(`/${this.resource}/${id}`)
@@ -105,15 +112,14 @@ export default {
     /**
      * Confirm to delete
      *
-     * @param {Number} Item Id
+     * @param {Number} id
      */
     confirmToDelete(id) {
       this.$confirm({
-        title: 'Are you sure delete this task?',
-        content: 'Some descriptions',
-        okText: 'Yes',
+        title: this.$t('text.confirm_to_delete'),
+        okText: this.$t('common.yes'),
         okType: 'danger',
-        cancelText: 'No',
+        cancelText: this.$t('common.no'),
         onOk: () => this.deleteRecord(id)
       })
     },
@@ -121,7 +127,7 @@ export default {
     /**
      * Delete record
      *
-     * @param {Number} Item Id
+     * @param {Number} id
      */
     async deleteRecord(id) {
       try {
@@ -130,12 +136,12 @@ export default {
         await this.$api[action]({ id })
 
         this.$notification.success({
-          message: this.$t('messages.information.deleted')
+          message: this.$t('text.successfully')
         })
         this.$fetch()
       } catch (_) {
         this.$notification.error({
-          message: this.$t('messages.error.failed_to_delete', { name: this.resource })
+          message: this.$t('text.something_wrong')
         })
       } finally {
         this.$store.dispatch('setLoading', false)

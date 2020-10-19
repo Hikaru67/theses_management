@@ -3,7 +3,7 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="plus-circle" />
-        {{ $t('user.user') }}
+        {{ $t('common.new') }} {{ $t('module.user') }}
       </template>
 
       <user-form

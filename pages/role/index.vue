@@ -3,7 +3,7 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="balance-scale" />
-        {{ $t('role.role_list') }}
+        {{ $t('module.role') }}
       </template>
 
       <template slot="extra">
@@ -11,13 +11,13 @@
           html-type="button"
           type="primary"
           ghost
-          @click="showDetail(0)"
+          @click="gotoNew()"
         >
           <font-awesome-icon
             icon="plus-circle"
             class="width-1x mr-1"
           />
-          {{ $t('common.create_new') }}
+          {{ $t('common.new') }}
         </a-button>
       </template>
 
@@ -154,7 +154,7 @@
     >
       <template slot="title">
         <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ $t('role.role') }}
+        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.role') }}
       </template>
 
       <a-spin :spinning="loading">

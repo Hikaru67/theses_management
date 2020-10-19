@@ -14,11 +14,6 @@
 <script>
 export default {
   computed: {
-    /**
-     * Breadcrumbs
-     *
-     * return {Array} - Breadcrumbs
-     */
     crumbs() {
       const crumbs = [
         { to: '/', text: this.$t('common.home') }

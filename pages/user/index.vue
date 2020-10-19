@@ -3,7 +3,7 @@
     <a-card class="mb-4">
       <template slot="title">
         <font-awesome-icon icon="user-friends" />
-        {{ $t('user.list_user') }}
+        {{ $t('module.user') }}
       </template>
 
       <template slot="extra">
@@ -11,13 +11,13 @@
           html-type="button"
           type="primary"
           ghost
-          @click="showDetail(0)"
+          @click="gotoNew()"
         >
           <font-awesome-icon
             icon="plus-circle"
             class="width-1x mr-1"
           />
-          {{ $t('common.create_new') }}
+          {{ $t('common.new') }}
         </a-button>
       </template>
 
@@ -186,7 +186,7 @@
     >
       <template slot="title">
         <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ $t('user.user') }}
+        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.user') }}
       </template>
 
       <a-spin :spinning="loading">
@@ -254,12 +254,6 @@ export default {
           scopedSlots: { customRender: 'roles' }
         },
         {
-          dataIndex: 'status',
-          title: this.$t('user.status'),
-          scopedSlots: { customRender: 'status' },
-          width: 140
-        },
-        {
           title: this.$t('common.action'),
           dataIndex: 'action',
           scopedSlots: { customRender: 'action' },
@@ -282,12 +276,9 @@ export default {
      * Get roles name
      *
      * @param {array} roles - Role list
+     * @return {string} role list
      */
     getRolesName(roles) {
-      if (!Array.isArray(roles) || !roles.length) {
-        return ''
-      }
-
       return roles.map(role => role.name).join(', ')
     },
 

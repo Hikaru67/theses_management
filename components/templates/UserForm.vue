@@ -162,8 +162,17 @@ export default {
   mixins: [DataForm],
 
   async fetch() {
-    const { data } = await this.$api.indexRole()
-    this.roles = data.data
+    this.$store.dispatch('setLoading', true)
+    try {
+      const { data } = await this.$api.indexRole()
+      this.roles = data.data
+    } catch (_) {
+      this.$notification.error({
+        message: this.$t('text.something_wrong')
+      })
+    } finally {
+      this.$store.dispatch('setLoading', false)
+    }
   },
 
   data: () => ({
@@ -177,14 +186,14 @@ export default {
         name: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.name') }),
+            message: this.$t('validation.required', { field: this.$t('user.name') }),
             trigger: ['change', 'blur']
           }
         ],
         email: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('user.email') }),
+            message: this.$t('validation.required', { field: this.$t('user.email') }),
             trigger: ['change', 'blur']
           },
           {
@@ -195,24 +204,24 @@ export default {
         password: [
           {
             required: !this.id || this.model.password_confirm,
-            message: this.$t('messages.error.required', { name: this.$t('user.password') }),
+            message: this.$t('validation.required', { field: this.$t('user.password') }),
             trigger: ['change', 'blur']
           },
           {
             min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password'), min: 8 }),
+            message: this.$t('validation.min', { field: this.$t('user.password'), min: 8 }),
             trigger: ['change', 'blur']
           }
         ],
         password_confirm: [
           {
             required: !this.id || this.model.password,
-            message: this.$t('messages.error.required', { name: this.$t('user.password_confirm') }),
+            message: this.$t('validation.required', { field: this.$t('user.password_confirm') }),
             trigger: ['change', 'blur']
           },
           {
             min: 8,
-            message: this.$t('messages.error.min', { name: this.$t('user.password_confirm'), min: 8 }),
+            message: this.$t('validation.min', { field: this.$t('user.password_confirm'), min: 8 }),
             trigger: ['change', 'blur']
           },
           {
@@ -222,14 +231,14 @@ export default {
               } else if (value !== this.model.password) {
                 return callback(
                   new Error(
-                    this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') })
+                    this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password_confirm') })
                   )
                 )
               } else {
                 callback()
               }
             },
-            message: this.$t('messages.error.unmatch_confirmation_email', { name: this.$t('user.password_confirm') }),
+            message: this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password_confirm') }),
             trigger: ['change', 'blur']
           }
         ]

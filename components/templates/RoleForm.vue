@@ -109,15 +109,24 @@ export default {
   mixins: [DataForm],
 
   async fetch() {
-    const { data } = await this.$api.getPermission()
-    const parents = [...new Set(data.data.map(item => item.name.split('.')[0]))]
+    this.$store.dispatch('setLoading', true)
+    try {
+      const { data } = await this.$api.getPermission()
+      const parents = [...new Set(data.data.map(item => item.name.split('.')[0]))]
 
-    this.permissions = parents.map(entry => {
-      return {
-        name: `${entry}.module`,
-        permissions: data.data.filter((item, index) => item.name.startsWith(`${entry}.`))
-      }
-    })
+      this.permissions = parents.map(entry => {
+        return {
+          name: `${entry}.module`,
+          permissions: data.data.filter((item, index) => item.name.startsWith(`${entry}.`))
+        }
+      })
+    } catch (_) {
+      this.$notification.error({
+        message: this.$t('text.something_wrong')
+      })
+    } finally {
+      this.$store.dispatch('setLoading', false)
+    }
   },
 
   data: () => ({
@@ -131,7 +140,7 @@ export default {
         name: [
           {
             required: true,
-            message: this.$t('messages.error.required', { name: this.$t('role.name') }),
+            message: this.$t('validation.required', { field: this.$t('role.name') }),
             trigger: ['change', 'blur']
           }
         ]

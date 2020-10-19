@@ -1,215 +1,37 @@
 {
-  "common": {
-    "home": "Home",
-    "login": "Login",
-    "logout": "Logout",
-    "dashboard": "Dashboard",
-    "create_new": "New",
-    "search": "Search",
-    "clear": "Clear",
-    "total": "Total",
-    "update": "Update",
-    "create": "Create",
-    "cancel": "Cancel",
-    "all": "All",
-    "no_data_in_table": "No data",
-    "download_csv": "Download CSV",
-    "upload_csv": "Upload CSV",
-    "option_please_select": "Please select",
-    "confirm_delete": "Confirm delete",
-    "yes": "Yes",
-    "no": "No",
-    "more": "More",
-    "less": "Less",
-    "genders": {
-      "both": "Both",
-      "male": "Male",
-      "fermale": "Fermale"
-    },
-    "empty": "Empty",
-    "choose_files_or_drag_and_drop_here": "Choose files or drag & drop here",
-    "not_available": "Not available",
-    "action": "Action",
-    "save": "Save",
-    "profile": "Profile"
-  },
-  "messages": {
-    "error": {
-      "failed_to_create": "Failed to create {name}",
-      "failed_to_update": "Failed to update {name}",
-      "failed_to_delete": "Failed to delete {name}",
-      "failed_to_get": "Failed to get {name}",
-      "failed_to_login": "Failed to login.",
-      "failed_to_action": "{name} is failed",
-      "input_error": "入力エラーがあります。",
-      "unmatch_value": "{name1}/{name2} does not match.",
-      "bad_email_format": "{name} is not the correct email address format.",
-      "unmatch_confirmation_email": "{name} does not match.",
-      "unmatch_password": "Password confirmation does not match",
-      "required": "{name} is required.",
-      "invalid_format": "{name} is invalid format.",
-      "numeric": "{name} requires a number.",
-      "alphabe_numeric": "{name} requires a alphabe or a number.",
-      "more_than": "{name} must be greater than or equal to {target}",
-      "less_than": "{name} must be less than or equal to {target}",
-      "date_before": "{name} must be before {target}",
-      "min_max": "{name} must into between: {min}-{max}",
-      "min": "{name}  is at least {min} characters",
-      "color_hex": "Invalid format.",
-      "failed_to_sent_mail": "Failed to send mail {name}",
-      "decimal": "{name} field must be numeric and decimal",
-      "invalid_image": "Only accept files ending with jpg, jpeg , png, gif"
-    },
-    "confirmation": {
-      "delete": "Are you sure you want to delete {name}?"
-    },
-    "information": {
-      "created": "Created successfully",
-      "updated": "Updated successfully",
-      "deleted": "Deleted successfully",
-      "login": "Login successfully",
-      "action": "{name} is successfully",
-      "sent_mail_success": "Sent mail {name} successfully"
-    }
-  },
-  "constants": {
-    "order_statuses": {
-      "all": "All",
-      "wait_for_pay": "Wait for pay",
-      "waiting_for_goods": "Waiting for goods",
-      "traffering": "Traffering",
-      "delivered": "Delivered",
-      "cancelled": "Cencelled"
-    },
-    "delivery_types": {
-      "customer_address": "Customer's address",
-      "working_address": "Working address",
-      "friend_address": "Friend's address",
-      "home_address": "Home address",
-      "back_order": "Back order",
-      "other": "Other"
-    },
-    "delivery_statuses": {
-      "processing": "Processing",
-      "out_for_delivery": "Out for delivery",
-      "shipping": "Shipping",
-      "failed_attempt": "Failed attempt",
-      "delivered": "Delivered",
-      "returning": "Returning",
-      "returned": "Returned"
-    },
-    "delivery_notification_statuses": {
-      "sent": "Sent",
-      "not_sent": "Not sent"
-    },
-    "payment_methods": {
-      "atm": "ATM",
-      "visa": "VISA",
-      "cod": "COD"
-    },
-    "sale_types": {
-      "normal": "Normal",
-      "preorder": "Pre order"
-    },
-    "order_types": {
-      "ec": "EC",
-      "ec_store": "EC store",
-      "offline_store": "Offline store"
-    },
-    "tax_types": {
-      "included_tax": "Included tax",
-      "not_included_tax": "Not included tax",
-      "tax_free": "Tax-free"
-    }
-  },
-  "sort": {
-    "name": "Sort",
-    "please_select": "Please select",
-    "sort_asc": " ascending",
-    "sort_desc": " descending"
-  },
-  "permissions": {
-    "system": "System",
-    "module": "Module",
-    "role": {
-      "module": "Role",
-      "index": "List Role",
-      "store": "Create Role",
-      "show": "Role Detail",
-      "update": "Update Role",
-      "delete": "Delete Role"
-    },
-    "user": {
-      "module": "User",
-      "index": "List User",
-      "store": "Create User",
-      "show": "User Detail",
-      "update": "Update User",
-      "delete": "Delete User"
-    },
-    "menu": {
-      "module": "Menu",
-      "index": "Menu list",
-      "store": "Create menu",
-      "show": "Menu detail",
-      "update": "Update menu",
-      "delete": "Delete menu"
-    }
-  },
-  "user": {
-    "id": "ID",
-    "name": "Name",
-    "email": "Email",
-    "password": "Password",
-    "password_confirm": "Password (Confirm)",
-    "roles": "Roles",
-    "admin": "Admin",
-    "user": "User",
-    "update_status": "Update status",
-    "list_user": "List user",
-    "status": "Status",
-    "statuses": {
-      "active": "Active",
-      "inactive": "Inactive"
-    }
-  },
-  "role": {
-    "role": "Role",
-    "role_list": "Role list",
-    "name": "Name",
-    "select_role_from_list": "Select from the role list",
-    "permissions": "Permissions"
-  },
-  "menu": {
-    "menu": "Menu",
-    "id": "ID",
-    "menu_list": "Menu list",
-    "title": "Title",
-    "link": "Link",
-    "icon": "Icon",
-    "parent_id": "Parent Id",
-    "position": "Position",
-    "role": "Role",
-    "note_for_deletion": "If you want to delete the parent category, you must delete the entire subcategory first"
-  },
-  "breadcrumb": {
-    "user": "User",
-    "user-new": "User / New",
-    "role": "Role",
-    "role-new": "Role / New",
-    "menu": "Menu",
-    "menu-new": "Menu / New"
-  },
-  "login": {
-    "title": "Login",
-    "login_id": "Email",
-    "password": "Password",
-    "return": "Return"
-  },
-  "dashboard": {
-    "total_article": "Total article",
-    "total_site": "Total site",
-    "total_view": "Total view",
-    "total_category": "Total category"
-  }
+  "common.action": "Action",
+  "common.cancel": "Cancel",
+  "common.clear": "Clear",
+  "common.create": "Create",
+  "common.delete": "Delete",
+  "common.edit": "Edit",
+  "common.home": "Home",
+  "common.login": "Login",
+  "common.logout": "Logout",
+  "common.new": "New",
+  "common.no": "No",
+  "common.profile": "Profile",
+  "common.search": "Search",
+  "common.update": "Update",
+  "common.yes": "Yes",
+  "menu.icon": "Icon",
+  "menu.link": "Link",
+  "menu.roles": "Roles",
+  "menu.title": "Title",
+  "module.menu": "Menu",
+  "module.role": "Role",
+  "module.user": "User",
+  "role.name": "Name",
+  "role.permissions": "Permissions",
+  "text.confirm_to_delete": "Are you sure to delete this item ?",
+  "text.something_wrong": "Something went wrong",
+  "text.successfully": "Successfully",
+  "user.email": "Email",
+  "user.name": "Name",
+  "user.password_confirm": "Password Confirm",
+  "user.password": "Password",
+  "user.roles": "Roles",
+  "validation.min": "{field} must be at least {min} characters",
+  "validation.not_match": "{field1} and {field2} do not match",
+  "validation.required": "{field} is required"
 }

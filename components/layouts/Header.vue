@@ -31,7 +31,10 @@
             v-for="locale in $i18n.locales"
             :key="locale.code"
           >
-            <a href="#" @click="$i18n.setLocale(locale.code)">
+            <a
+              href="javascript:void(0)"
+              @click="$i18n.setLocale(locale.code)"
+            >
               <img :src="require(`~/assets/images/ic_flag_${locale.iso}.png`)" />
             </a>
           </a-menu-item>
@@ -43,7 +46,7 @@
       >
         <a
           class="ant-dropdown-link"
-          @click="e => e.preventDefault()"
+          @click.prevent
         >
           <font-awesome-icon
             icon="user-cog"
@@ -122,11 +125,10 @@ export default {
 
       try {
         await this.$auth.logout()
-      } catch (err) {
-        this.message = this.$t(
-          'messages.error.unmatch_value',
-          { name1: this.$t('user.email'), name2: this.$t('user.password') }
-        )
+      } catch (_) {
+        this.$notification.error({
+          message: this.$t('text.something_wrong')
+        })
       } finally {
         this.$store.dispatch('setLoading', false)
       }

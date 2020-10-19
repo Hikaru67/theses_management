@@ -81,7 +81,7 @@
           :md="12"
         >
           <a-form-model-item
-            :label="$t('menu.role')"
+            :label="$t('menu.roles')"
             prop="roles"
           >
             <a-select
@@ -139,8 +139,17 @@ export default {
   mixins: [DataForm],
 
   async fetch() {
-    const { data } = await this.$api.indexRole()
-    this.roles = data.data
+    this.$store.dispatch('setLoading', true)
+    try {
+      const { data } = await this.$api.indexRole()
+      this.roles = data.data
+    } catch (_) {
+      this.$notification.error({
+        message: this.$t('text.something_wrong')
+      })
+    } finally {
+      this.$store.dispatch('setLoading', false)
+    }
   },
 
   data: () => ({
@@ -154,7 +163,7 @@ export default {
         title: [
           {
             required: true,
-            message: this.$t('messages.error.required', { title: this.$t('menu.title') }),
+            message: this.$t('validation.required', { field: this.$t('menu.title') }),
             trigger: ['change', 'blur']
           }
         ]
