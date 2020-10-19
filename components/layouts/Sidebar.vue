@@ -82,11 +82,7 @@ export default {
     },
 
     menu() {
-      if (!this.$auth.user || !Array.isArray(this.$auth.user.menus)) {
-        return []
-      }
-
-      return this.$auth.user.menus
+      return this.$auth.user.menus || []
     }
   },
 

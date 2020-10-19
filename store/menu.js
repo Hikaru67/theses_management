@@ -37,7 +37,7 @@ export const actions = {
    */
   async getList({ commit }, payload) {
     const { data } = await this.$api.indexMenu(payload)
-    commit('SET_LIST', data.data)
+    commit(SET_LIST, data.data)
     return data
   },
 
@@ -57,7 +57,7 @@ export const actions = {
       model = data.data
       model.roleIds = model.roles.map(item => item.id)
     }
-    commit('SET_MODEL', model)
+    commit(SET_MODEL, model)
     return model
   },
 
@@ -74,7 +74,7 @@ export const actions = {
 
     const { data } = payload.id ? await this.$api.updateMenu(form) : await this.$api.storeMenu(form)
     const model = data.data
-    commit('SET_MODEL', model)
+    commit(SET_MODEL, model)
     return model
   }
 }
