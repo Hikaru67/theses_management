@@ -90,6 +90,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { REFRESH_TOKEN } from '~/constants/cookies'
 
 export default {
   computed: {
@@ -125,6 +126,7 @@ export default {
 
       try {
         await this.$auth.logout()
+        this.$cookies.remove(REFRESH_TOKEN)
       } catch (_) {
         this.$notification.error({
           message: this.$t('text.something_wrong')

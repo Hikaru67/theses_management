@@ -86,6 +86,7 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     'nuxt-i18n',
+    'cookie-universal-nuxt',
     '@nuxtjs/style-resources'
   ],
 
@@ -163,14 +164,14 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/login', method: 'post', propertyName: 'data.api_token' },
+          login: { url: '/login', method: 'post', propertyName: 'access_token' },
           user: { url: '/me', method: 'get', propertyName: 'data' },
           logout: { url: '/logout', method: 'post' }
         }
       }
     },
     plugins: [
-      '~/plugins/api.js'
+      '@/plugins/api.js'
     ]
   }
 }

@@ -4,11 +4,38 @@
  */
 
 import { camelCase } from 'lodash'
+import { REFRESH_TOKEN } from '~/constants/cookies'
 import routes from '~/configs/routes'
 
-export default ({ $axios, $auth }, inject) => {
+export default ({ $axios, $cookies, app }, inject) => {
   class API {
     constructor() {
+      $axios.onError(async error => {
+        const statusCode = error.response.status
+
+        // refresh token if expired
+        const refreshToken = $cookies.get(REFRESH_TOKEN)
+        if (statusCode === 401 && refreshToken) {
+          try {
+            const { data } = await $axios.post('/refresh', { refresh_token: refreshToken })
+            $cookies.set(REFRESH_TOKEN, data.refresh_token)
+            if (app.$auth) {
+              app.$auth.setUserToken(data.access_token)
+            }
+            const originalRequest = error.config
+            originalRequest.headers.Authorization = 'Bearer ' + data.access_token
+
+            return $axios(originalRequest)
+          } catch (e) {
+            $cookies.remove(REFRESH_TOKEN)
+
+            return Promise.reject(e)
+          }
+        }
+
+        return Promise.reject(error)
+      })
+
       this.axios = $axios
     }
 

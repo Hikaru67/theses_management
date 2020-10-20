@@ -130,6 +130,7 @@
 </style>
 
 <script>
+import { REFRESH_TOKEN } from '~/constants/cookies'
 
 export default {
   layout: 'blank',
@@ -176,11 +177,14 @@ export default {
           this.$store.dispatch('setLoading', true)
 
           try {
-            const data = {
+            const credential = {
               email: this.email,
               password: this.password
             }
-            await this.$auth.login({ data })
+            const { data } = await this.$auth.login({ data: credential })
+            if (data.refresh_token) {
+              this.$cookies.set(REFRESH_TOKEN, data.refresh_token)
+            }
           } catch (_) {
             this.message = this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password') })
           } finally {
