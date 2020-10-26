@@ -33,7 +33,7 @@
               slot-scope="{ title, key, children }"
             >
               <span class="txt-title">
-                {{ title }}
+                {{ $t(title) }}
               </span>
 
               <div class="box-action">
