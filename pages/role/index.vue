@@ -2,7 +2,7 @@
   <div class="main-list">
     <a-card class="mb-4">
       <template slot="title">
-        {{ $t('role.module') }}
+        {{ $t('module.role') }}
       </template>
 
       <template slot="extra">
@@ -154,7 +154,7 @@
     >
       <template slot="title">
         <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('role.module') }}
+        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.role') }}
       </template>
 
       <a-spin :spinning="loading">

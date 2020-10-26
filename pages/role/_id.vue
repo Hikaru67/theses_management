@@ -2,7 +2,7 @@
   <div class="main-detail">
     <a-card class="mb-4">
       <template slot="title">
-        {{ $t('common.edit') }} {{ $t('role.module') }}
+        {{ $t('common.edit') }} {{ $t('module.role') }}
       </template>
 
       <div class="max-w-900">
