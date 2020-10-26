@@ -12,10 +12,6 @@
           ghost
           @click="gotoNew()"
         >
-          <font-awesome-icon
-            icon="plus-circle"
-            class="width-1x mr-1"
-          />
           {{ $t('common.new') }}
         </a-button>
       </template>
