@@ -2,7 +2,6 @@
   <div class="main-detail">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="pencil-alt" />
         {{ $t('common.profile') }}
       </template>
 
@@ -33,9 +32,10 @@
                   :placeholder="$t('user.name')"
                 >
                   <font-awesome-icon
-                    slot="addonBefore"
-                    icon="user"
+                    slot="prefix"
+                    icon="heading"
                     class="width-1x"
+                    style="color:rgba(0,0,0,.25)"
                   />
                 </a-input>
               </a-form-model-item>
@@ -54,9 +54,10 @@
                   :placeholder="$t('user.email')"
                 >
                   <font-awesome-icon
-                    slot="addonBefore"
+                    slot="prefix"
                     icon="envelope"
                     class="width-1x"
+                    style="color:rgba(0,0,0,.25)"
                   />
                 </a-input>
               </a-form-model-item>
@@ -76,9 +77,10 @@
                   :placeholder="$t('user.password')"
                 >
                   <font-awesome-icon
-                    slot="addonBefore"
+                    slot="prefix"
                     icon="lock"
                     class="width-1x"
+                    style="color:rgba(0,0,0,.25)"
                   />
                 </a-input>
               </a-form-model-item>
@@ -98,9 +100,10 @@
                   :placeholder="$t('user.password_confirm')"
                 >
                   <font-awesome-icon
-                    slot="addonBefore"
+                    slot="prefix"
                     icon="lock"
                     class="width-1x"
+                    style="color:rgba(0,0,0,.25)"
                   />
                 </a-input>
               </a-form-model-item>
@@ -114,10 +117,6 @@
             type="primary"
             class="min-w-100"
           >
-            <font-awesome-icon
-              icon="save"
-              class="width-1x mr-1"
-            />
             {{ $t('common.update') }}
           </a-button>
         </div>

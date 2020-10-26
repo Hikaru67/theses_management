@@ -26,9 +26,10 @@
               :placeholder="$t('user.name')"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="user"
+                slot="prefix"
+                icon="heading"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -47,9 +48,10 @@
               :placeholder="$t('user.email')"
             >
               <font-awesome-icon
-                slot="addonBefore"
+                slot="prefix"
                 icon="envelope"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -69,9 +71,10 @@
               :placeholder="$t('user.password')"
             >
               <font-awesome-icon
-                slot="addonBefore"
+                slot="prefix"
                 icon="lock"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -91,9 +94,10 @@
               :placeholder="$t('user.password_confirm')"
             >
               <font-awesome-icon
-                slot="addonBefore"
+                slot="prefix"
                 icon="lock"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -104,7 +108,7 @@
           :md="12"
         >
           <a-form-model-item
-            :label="$t('user.roles')"
+            :label="$t('module.roles')"
             prop="roles"
           >
             <a-select
@@ -131,10 +135,6 @@
         type="primary"
         class="min-w-100"
       >
-        <font-awesome-icon
-          icon="save"
-          class="width-1x mr-1"
-        />
         {{ id ? $t('common.update') : $t('common.create') }}
       </a-button>
 
@@ -145,10 +145,6 @@
         class="min-w-100"
         @click="$emit('cancel')"
       >
-        <font-awesome-icon
-          icon="arrow-left"
-          class="width-1x mr-1"
-        />
         {{ $t('common.cancel') }}
       </a-button>
     </div>

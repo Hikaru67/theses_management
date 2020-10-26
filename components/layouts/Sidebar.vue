@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import { debounce, get } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import SubMenu from '~/components/organisms/SubMenu'
 import MenuItem from '~/components/molecules/MenuItem'
@@ -82,7 +82,7 @@ export default {
     },
 
     menu() {
-      return this.$auth.user.menus || []
+      return get(this, '$auth.user.menus', [])
     }
   },
 

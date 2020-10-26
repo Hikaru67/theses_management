@@ -2,7 +2,6 @@
   <div class="main-list position-relative">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="stream" />
         {{ $t('module.menu') }}
       </template>
 
@@ -80,7 +79,6 @@
       @cancel="visible = false"
     >
       <template slot="title">
-        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
         {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.menu') }}
       </template>
 

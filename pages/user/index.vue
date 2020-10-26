@@ -2,7 +2,6 @@
   <div class="main-list">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="user-friends" />
         {{ $t('module.user') }}
       </template>
 
@@ -47,9 +46,10 @@
                 :disabled="loading"
               >
                 <font-awesome-icon
-                  slot="addonBefore"
-                  icon="user"
+                  slot="prefix"
+                  icon="heading"
                   class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
                 />
               </a-input>
             </a-form-model-item>
@@ -69,9 +69,10 @@
                 :disabled="loading"
               >
                 <font-awesome-icon
-                  slot="addonBefore"
+                  slot="prefix"
                   icon="envelope"
                   class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
                 />
               </a-input>
             </a-form-model-item>
@@ -185,7 +186,6 @@
       @cancel="visible = false"
     >
       <template slot="title">
-        <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
         {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.user') }}
       </template>
 
@@ -249,7 +249,7 @@ export default {
           dataIndex: 'email'
         },
         {
-          title: this.$t('user.roles'),
+          title: this.$t('module.roles'),
           dataIndex: 'roles',
           scopedSlots: { customRender: 'roles' }
         },

@@ -8,7 +8,7 @@
       :icon="item.icon"
       class="anticon"
     />
-    <span>{{ item.title }}</span>
+    <span>{{ $t(item.title) }}</span>
   </nuxt-link>
 
   <span v-else>
@@ -17,7 +17,7 @@
       :icon="item.icon"
       class="anticon"
     />
-    <span>{{ item.title }}</span>
+    <span>{{ $t(item.title) }}</span>
   </span>
 </template>
 

@@ -28,8 +28,9 @@
           >
             <font-awesome-icon
               slot="prefix"
-              icon="user-tie"
+              icon="envelope"
               class="width-1x"
+              style="color:rgba(0,0,0,.25)"
             />
           </a-input>
         </a-form-model-item>
@@ -44,6 +45,7 @@
               slot="prefix"
               icon="lock"
               class="width-1x"
+              style="color:rgba(0,0,0,.25)"
             />
           </a-input>
         </a-form-model-item>
@@ -63,10 +65,6 @@
             class="min-w-120"
           >
             {{ $t('common.login') }}
-            <font-awesome-icon
-              icon="sign-in-alt"
-              class="ml-1"
-            />
           </a-button>
         </div>
       </div>

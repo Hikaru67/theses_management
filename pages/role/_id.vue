@@ -2,8 +2,7 @@
   <div class="main-detail">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="pencil-alt" />
-        {{ $t('common.edit') }} {{ $t('module.role') }}
+        {{ $t('common.edit') }} {{ $t('role.module') }}
       </template>
 
       <div class="max-w-900">

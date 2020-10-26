@@ -23,7 +23,6 @@ export default {
         const crumb = {}
 
         crumb.to = item.path
-        // crumb.text = this.getCrumbName(item.path.replace(/\//, ''))
         crumb.text = item.path.replace(/\//, '')
 
         // is last item?
@@ -32,7 +31,6 @@ export default {
           if (item.regex.keys.length > 0) {
             crumbs.push({
               to: item.path.replace(/\/:[^/:]*$/, ''),
-              // text: this.getCrumbName(item.name.replace(/-[^-]*$/, ''))
               text: item.name.replace(/-[^-]*$/, '')
             })
             crumb.to = this.$route.path

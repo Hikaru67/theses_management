@@ -26,9 +26,10 @@
               :placeholder="$t('role.name')"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="user"
+                slot="prefix"
+                icon="heading"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -78,10 +79,6 @@
         type="primary"
         class="min-w-100"
       >
-        <font-awesome-icon
-          icon="save"
-          class="width-1x mr-1"
-        />
         {{ id ? $t('common.update') : $t('common.create') }}
       </a-button>
 
@@ -92,10 +89,6 @@
         class="min-w-100"
         @click="$emit('cancel')"
       >
-        <font-awesome-icon
-          icon="arrow-left"
-          class="width-1x mr-1"
-        />
         {{ $t('common.cancel') }}
       </a-button>
     </div>
@@ -116,7 +109,7 @@ export default {
 
       this.permissions = parents.map(entry => {
         return {
-          name: `${entry}.module`,
+          name: this.$t(`module.${entry}`),
           permissions: data.data.filter((item, index) => item.name.startsWith(`${entry}.`))
         }
       })

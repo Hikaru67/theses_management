@@ -26,9 +26,10 @@
               :placeholder="$t('menu.title')"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="user"
+                slot="prefix"
+                icon="heading"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -47,9 +48,10 @@
               :placeholder="$t('menu.icon')"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="envelope"
+                slot="prefix"
+                icon="icons"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -68,9 +70,10 @@
               :placeholder="$t('menu.link')"
             >
               <font-awesome-icon
-                slot="addonBefore"
-                icon="envelope"
+                slot="prefix"
+                icon="link"
                 class="width-1x"
+                style="color:rgba(0,0,0,.25)"
               />
             </a-input>
           </a-form-model-item>
@@ -108,10 +111,6 @@
         type="primary"
         class="min-w-100"
       >
-        <font-awesome-icon
-          icon="save"
-          class="width-1x mr-1"
-        />
         {{ id ? $t('common.update') : $t('common.create') }}
       </a-button>
 
@@ -122,10 +121,6 @@
         class="min-w-100"
         @click="$emit('cancel')"
       >
-        <font-awesome-icon
-          icon="arrow-left"
-          class="width-1x mr-1"
-        />
         {{ $t('common.cancel') }}
       </a-button>
     </div>

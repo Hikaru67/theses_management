@@ -2,8 +2,7 @@
   <div class="main-list">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="balance-scale" />
-        {{ $t('module.role') }}
+        {{ $t('role.module') }}
       </template>
 
       <template slot="extra">
@@ -46,9 +45,10 @@
                 :placeholder="$t('role.name')"
               >
                 <font-awesome-icon
-                  slot="addonBefore"
-                  icon="balance-scale"
+                  slot="prefix"
+                  icon="heading"
                   class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
                 />
               </a-input>
             </a-form-model-item>
@@ -154,7 +154,7 @@
     >
       <template slot="title">
         <font-awesome-icon :icon="`${currentId ? 'pencil-alt' : 'plus-circle'}`" />
-        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.role') }}
+        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('role.module') }}
       </template>
 
       <a-spin :spinning="loading">

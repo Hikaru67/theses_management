@@ -2,8 +2,7 @@
   <div class="main-detail">
     <a-card class="mb-4">
       <template slot="title">
-        <font-awesome-icon icon="plus-circle" />
-        {{ $t('common.new') }} {{ $t('module.user') }}
+        {{ $t('common.create') }} {{ $t('module.user') }}
       </template>
 
       <user-form

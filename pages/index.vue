@@ -22,7 +22,7 @@
                   10
                 </div>
                 <div class="txt-title">
-                  記事
+                  A
                 </div>
               </a-col>
               <a-col>
@@ -53,7 +53,7 @@
                   10
                 </div>
                 <div class="txt-title">
-                  ページ
+                  B
                 </div>
               </a-col>
               <a-col>
@@ -84,7 +84,7 @@
                   10
                 </div>
                 <div class="txt-title">
-                  閲覧数
+                  C
                 </div>
               </a-col>
               <a-col>
@@ -115,7 +115,7 @@
                   10
                 </div>
                 <div class="txt-title">
-                  カテゴリー
+                  D
                 </div>
               </a-col>
               <a-col>
