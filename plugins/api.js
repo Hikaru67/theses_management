@@ -18,7 +18,7 @@ export default ({ $axios, $cookies, app }, inject) => {
         if (statusCode === 401 && refreshToken) {
           try {
             const { data } = await $axios.post('/refresh', { refresh_token: refreshToken })
-            $cookies.set(REFRESH_TOKEN, data.refresh_token)
+            $cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: 60 * 60 * 24 * 15 })
             if (app.$auth) {
               app.$auth.setUserToken(data.access_token)
             }
@@ -50,6 +50,20 @@ export default ({ $axios, $cookies, app }, inject) => {
       const key = options.name || camelCase(`post-${path}`)
       return {
         [key]: (data, config = {}) => this.axios.post(path, data, config)
+      }
+    }
+
+    put(path, options = {}) {
+      const key = options.name || camelCase(`put-${path}`)
+      return {
+        [key]: (data, config = {}) => this.axios.put(path, data, config)
+      }
+    }
+
+    delete(path, options = {}) {
+      const key = options.name || camelCase(`delete-${path}`)
+      return {
+        [key]: (config = {}) => this.axios.delete(path, config)
       }
     }
 

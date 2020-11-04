@@ -44,6 +44,7 @@ export default {
     'faTimes',
     'faTimesCircle',
     'faTrashAlt',
+    'faUpload',
     'faUser',
     'faUserAlt',
     'faUserCircle',
