@@ -73,21 +73,21 @@ export default {
   */
   buildModules: [
     '@nuxtjs/eslint-module',
-    '@nuxtjs/moment',
-    '@nuxtjs/fontawesome'
+    '@nuxtjs/fontawesome',
+    '@nuxtjs/moment'
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/auth',
+    '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    'nuxt-i18n',
+    '@nuxtjs/pwa',
+    '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
-    '@nuxtjs/style-resources'
+    'nuxt-i18n'
   ],
 
   /*
