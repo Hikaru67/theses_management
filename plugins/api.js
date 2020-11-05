@@ -4,7 +4,7 @@
  */
 
 import { camelCase } from 'lodash'
-import { REFRESH_TOKEN } from '~/constants/cookies'
+import { REFRESH_TOKEN, REFRESH_TOKEN_MAX_AGE } from '~/constants/cookies'
 import routes from '~/configs/routes'
 
 export default ({ $axios, $cookies, app }, inject) => {
@@ -18,7 +18,7 @@ export default ({ $axios, $cookies, app }, inject) => {
         if (statusCode === 401 && refreshToken) {
           try {
             const { data } = await $axios.post('/refresh', { refresh_token: refreshToken })
-            $cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: 60 * 60 * 24 * 15 })
+            $cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
             if (app.$auth) {
               app.$auth.setUserToken(data.access_token)
             }

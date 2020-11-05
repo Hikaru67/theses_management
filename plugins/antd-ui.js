@@ -5,7 +5,27 @@
 
 import Vue from 'vue'
 // import Antd from 'ant-design-vue/lib'
-import { Breadcrumb, Button, Card, Checkbox, Col, Collapse, Dropdown, FormModel, Icon, Input, Layout, Menu, Modal, Row, Select, Spin, Table, Tree, notification } from 'ant-design-vue'
+import {
+  Breadcrumb,
+  Button,
+  Card,
+  Checkbox,
+  Col,
+  Collapse,
+  Dropdown,
+  FormModel,
+  Icon,
+  Input,
+  Layout,
+  Menu,
+  Modal,
+  Row,
+  Select,
+  Spin,
+  Table,
+  Tree,
+  notification
+} from 'ant-design-vue'
 
 // Vue.use(Antd)
 Vue.use(Breadcrumb)

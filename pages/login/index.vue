@@ -128,7 +128,7 @@
 </style>
 
 <script>
-import { REFRESH_TOKEN } from '~/constants/cookies'
+import { REFRESH_TOKEN, REFRESH_TOKEN_MAX_AGE } from '~/constants/cookies'
 
 export default {
   layout: 'blank',
@@ -181,7 +181,7 @@ export default {
             }
             const { data } = await this.$auth.login({ data: credential })
             if (data.refresh_token) {
-              this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: 60 * 60 * 24 * 15 })
+              this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
             }
           } catch (_) {
             this.message = this.$t('validation.not_match', { field1: this.$t('user.email'), field2: this.$t('user.password') })
