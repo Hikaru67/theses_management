@@ -8,122 +8,124 @@
     class="main-form"
     @submit.prevent="handleSubmit"
   >
-    <div class="box-form-inner p-4">
-      <a-row
-        type="flex"
-        :gutter="30"
-      >
-        <a-col
-          :span="24"
-          :md="12"
+    <a-spin :spinning="loading">
+      <div class="box-form-inner p-4">
+        <a-row
+          type="flex"
+          :gutter="30"
         >
-          <a-form-model-item
-            :label="$t('menu.title')"
-            prop="title"
+          <a-col
+            :span="24"
+            :md="12"
           >
-            <a-input
-              v-model="model.title"
-              :placeholder="$t('menu.title')"
+            <a-form-model-item
+              :label="$t('menu.title')"
+              prop="title"
             >
-              <font-awesome-icon
-                slot="prefix"
-                icon="heading"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('menu.icon')"
-            prop="icon"
-          >
-            <a-input
-              v-model="model.icon"
-              :placeholder="$t('menu.icon')"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="icons"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('menu.link')"
-            prop="link"
-          >
-            <a-input
-              v-model="model.link"
-              :placeholder="$t('menu.link')"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="link"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('menu.roles')"
-            prop="roles"
-          >
-            <a-select
-              v-model="model.roleIds"
-              mode="multiple"
-              placeholder="Please select"
-              class="w-100"
-            >
-              <a-select-option
-                v-for="role in roles"
-                :key="role.id"
+              <a-input
+                v-model="model.title"
+                :placeholder="$t('menu.title')"
               >
-                {{ role.name }}
-              </a-select-option>
-            </a-select>
-          </a-form-model-item>
-        </a-col>
-      </a-row>
-    </div>
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="heading"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
 
-    <div class="box-form-footer text-center bt-1 p-3">
-      <a-button
-        html-type="submit"
-        type="primary"
-        class="min-w-100"
-      >
-        {{ id ? $t('common.update') : $t('common.create') }}
-      </a-button>
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('menu.icon')"
+              prop="icon"
+            >
+              <a-input
+                v-model="model.icon"
+                :placeholder="$t('menu.icon')"
+              >
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="icons"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
 
-      &nbsp;
-      <a-button
-        html-type="button"
-        type="default"
-        class="min-w-100"
-        @click="$emit('cancel')"
-      >
-        {{ $t('common.cancel') }}
-      </a-button>
-    </div>
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('menu.link')"
+              prop="link"
+            >
+              <a-input
+                v-model="model.link"
+                :placeholder="$t('menu.link')"
+              >
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="link"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
+
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('menu.roles')"
+              prop="roles"
+            >
+              <a-select
+                v-model="model.roleIds"
+                mode="multiple"
+                placeholder="Please select"
+                class="w-100"
+              >
+                <a-select-option
+                  v-for="role in roles"
+                  :key="role.id"
+                >
+                  {{ role.name }}
+                </a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+        </a-row>
+      </div>
+
+      <div class="box-form-footer text-center bt-1 p-3">
+        <a-button
+          html-type="submit"
+          type="primary"
+          class="min-w-100"
+        >
+          {{ id ? $t('common.update') : $t('common.create') }}
+        </a-button>
+
+        &nbsp;
+        <a-button
+          html-type="button"
+          type="default"
+          class="min-w-100"
+          @click="$emit('cancel')"
+        >
+          {{ $t('common.cancel') }}
+        </a-button>
+      </div>
+    </a-spin>
   </a-form-model>
 </template>
 

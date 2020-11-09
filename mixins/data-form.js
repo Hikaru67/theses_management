@@ -2,6 +2,7 @@
  * Copyright 2020 Digi Dinos JSC. All rights reserved.
  * Email: tech@digidinos.com.
  */
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -25,6 +26,12 @@ export default {
     return {
       model: {}
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      loading: 'loading'
+    })
   },
 
   methods: {

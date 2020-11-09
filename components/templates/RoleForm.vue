@@ -8,90 +8,92 @@
     class="main-form"
     @submit.prevent="handleSubmit"
   >
-    <div class="box-form-inner p-4">
-      <a-row
-        type="flex"
-        :gutter="30"
-      >
-        <a-col
-          :span="24"
-          :md="20"
+    <a-spin :spinning="loading">
+      <div class="box-form-inner p-4">
+        <a-row
+          type="flex"
+          :gutter="30"
         >
-          <a-form-model-item
-            :label="$t('role.name')"
-            prop="name"
+          <a-col
+            :span="24"
+            :md="20"
           >
-            <a-input
-              v-model="model.name"
-              :placeholder="$t('role.name')"
+            <a-form-model-item
+              :label="$t('role.name')"
+              prop="name"
             >
-              <font-awesome-icon
-                slot="prefix"
-                icon="heading"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="20"
-        >
-          <a-form-model-item
-            :label="$t('role.permissions')"
-            prop="permissions"
-          >
-            <a-checkbox-group
-              v-model="model.permissionIds"
-              name="permissions"
-              class="no-inline"
-            >
-              <a-collapse
-                v-if="permissions.length"
-                expand-icon-position="right"
+              <a-input
+                v-model="model.name"
+                :placeholder="$t('role.name')"
               >
-                <a-collapse-panel
-                  v-for="group in permissions"
-                  :key="`${group.name}`"
-                  :header="group.name"
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="heading"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
+
+          <a-col
+            :span="24"
+            :md="20"
+          >
+            <a-form-model-item
+              :label="$t('role.permissions')"
+              prop="permissions"
+            >
+              <a-checkbox-group
+                v-model="model.permissionIds"
+                name="permissions"
+                class="no-inline"
+              >
+                <a-collapse
+                  v-if="permissions.length"
+                  expand-icon-position="right"
                 >
-                  <div
-                    v-for="permission in group.permissions"
-                    :key="permission.id"
+                  <a-collapse-panel
+                    v-for="group in permissions"
+                    :key="`${group.name}`"
+                    :header="group.name"
                   >
-                    <a-checkbox :value="permission.id">
-                      {{ permission.name }}
-                    </a-checkbox>
-                  </div>
-                </a-collapse-panel>
-              </a-collapse>
-            </a-checkbox-group>
-          </a-form-model-item>
-        </a-col>
-      </a-row>
-    </div>
+                    <div
+                      v-for="permission in group.permissions"
+                      :key="permission.id"
+                    >
+                      <a-checkbox :value="permission.id">
+                        {{ permission.name }}
+                      </a-checkbox>
+                    </div>
+                  </a-collapse-panel>
+                </a-collapse>
+              </a-checkbox-group>
+            </a-form-model-item>
+          </a-col>
+        </a-row>
+      </div>
 
-    <div class="box-form-footer text-center bt-1 p-3">
-      <a-button
-        html-type="submit"
-        type="primary"
-        class="min-w-100"
-      >
-        {{ id ? $t('common.update') : $t('common.create') }}
-      </a-button>
+      <div class="box-form-footer text-center bt-1 p-3">
+        <a-button
+          html-type="submit"
+          type="primary"
+          class="min-w-100"
+        >
+          {{ id ? $t('common.update') : $t('common.create') }}
+        </a-button>
 
-      &nbsp;
-      <a-button
-        html-type="button"
-        type="default"
-        class="min-w-100"
-        @click="$emit('cancel')"
-      >
-        {{ $t('common.cancel') }}
-      </a-button>
-    </div>
+        &nbsp;
+        <a-button
+          html-type="button"
+          type="default"
+          class="min-w-100"
+          @click="$emit('cancel')"
+        >
+          {{ $t('common.cancel') }}
+        </a-button>
+      </div>
+    </a-spin>
   </a-form-model>
 </template>
 

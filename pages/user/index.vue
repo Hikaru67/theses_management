@@ -249,7 +249,7 @@ export default {
           dataIndex: 'email'
         },
         {
-          title: this.$t('module.roles'),
+          title: this.$t('user.roles'),
           dataIndex: 'roles',
           scopedSlots: { customRender: 'roles' }
         },

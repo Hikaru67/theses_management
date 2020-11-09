@@ -6,69 +6,71 @@
     class="main-form"
     @submit.prevent="handleSubmit"
   >
-    <div class="box-wrapper">
-      <div class="box-img">
-        <div class="img-user">
-          <font-awesome-icon
-            icon="user-tie"
-            class="ic"
-          />
-        </div>
-      </div>
-
-      <div class="box-form-inner p-4">
-        <div class="txt-title-top text-center mb-3">
-          {{ $t('common.login') }}
-        </div>
-
-        <a-form-model-item prop="email">
-          <a-input
-            v-model="email"
-            :placeholder="$t('user.email')"
-          >
+    <a-spin :spinning="loading">
+      <div class="box-wrapper">
+        <div class="box-img">
+          <div class="img-user">
             <font-awesome-icon
-              slot="prefix"
-              icon="envelope"
-              class="width-1x"
-              style="color:rgba(0,0,0,.25)"
+              icon="user-tie"
+              class="ic"
             />
-          </a-input>
-        </a-form-model-item>
-
-        <a-form-model-item prop="password">
-          <a-input
-            v-model="password"
-            type="password"
-            :placeholder="$t('user.password')"
-          >
-            <font-awesome-icon
-              slot="prefix"
-              icon="lock"
-              class="width-1x"
-              style="color:rgba(0,0,0,.25)"
-            />
-          </a-input>
-        </a-form-model-item>
-
-        <div
-          v-if="message"
-          class="ant-form-item has-error"
-        >
-          <span class="ant-form-explain">{{ message }}</span>
+          </div>
         </div>
 
-        <div class="text-center">
-          <a-button
-            html-type="submit"
-            type="primary"
-            size="large"
-            class="min-w-120"
-          >
+        <div class="box-form-inner p-4">
+          <div class="txt-title-top text-center mb-3">
             {{ $t('common.login') }}
-          </a-button>
+          </div>
+
+          <a-form-model-item prop="email">
+            <a-input
+              v-model="email"
+              :placeholder="$t('user.email')"
+            >
+              <font-awesome-icon
+                slot="prefix"
+                icon="envelope"
+                class="width-1x"
+                style="color:rgba(0,0,0,.25)"
+              />
+            </a-input>
+          </a-form-model-item>
+
+          <a-form-model-item prop="password">
+            <a-input
+              v-model="password"
+              type="password"
+              :placeholder="$t('user.password')"
+            >
+              <font-awesome-icon
+                slot="prefix"
+                icon="lock"
+                class="width-1x"
+                style="color:rgba(0,0,0,.25)"
+              />
+            </a-input>
+          </a-form-model-item>
+
+          <div
+            v-if="message"
+            class="ant-form-item has-error"
+          >
+            <span class="ant-form-explain">{{ message }}</span>
+          </div>
+
+          <div class="text-center">
+            <a-button
+              html-type="submit"
+              type="primary"
+              size="large"
+              class="min-w-120"
+            >
+              {{ $t('common.login') }}
+            </a-button>
+          </div>
         </div>
       </div>
-    </div>
+    </a-spin>
   </a-form-model>
 </template>
 
@@ -128,6 +130,7 @@
 </style>
 
 <script>
+import { mapGetters } from 'vuex'
 import { REFRESH_TOKEN, REFRESH_TOKEN_MAX_AGE } from '~/constants/cookies'
 
 export default {
@@ -139,12 +142,15 @@ export default {
     return {
       email: '',
       password: '',
-      message: '',
-      loading: false
+      message: ''
     }
   },
 
   computed: {
+    ...mapGetters({
+      loading: 'loading'
+    }),
+
     formRules() {
       return {
         email: [

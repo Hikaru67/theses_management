@@ -8,146 +8,148 @@
     class="main-form"
     @submit.prevent="handleSubmit"
   >
-    <div class="box-form-inner p-4">
-      <a-row
-        type="flex"
-        :gutter="30"
-      >
-        <a-col
-          :span="24"
-          :md="12"
+    <a-spin :spinning="loading">
+      <div class="box-form-inner p-4">
+        <a-row
+          type="flex"
+          :gutter="30"
         >
-          <a-form-model-item
-            :label="$t('user.name')"
-            prop="name"
+          <a-col
+            :span="24"
+            :md="12"
           >
-            <a-input
-              v-model="model.name"
-              :placeholder="$t('user.name')"
+            <a-form-model-item
+              :label="$t('user.name')"
+              prop="name"
             >
-              <font-awesome-icon
-                slot="prefix"
-                icon="heading"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('user.email')"
-            prop="email"
-          >
-            <a-input
-              v-model="model.email"
-              :placeholder="$t('user.email')"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="envelope"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('user.password')"
-            prop="password"
-          >
-            <a-input
-              v-model="model.password"
-              type="password"
-              :placeholder="$t('user.password')"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="lock"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('user.password_confirm')"
-            prop="password_confirm"
-          >
-            <a-input
-              v-model="model.password_confirm"
-              type="password"
-              :placeholder="$t('user.password_confirm')"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="lock"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
-          </a-form-model-item>
-        </a-col>
-
-        <a-col
-          :span="24"
-          :md="12"
-        >
-          <a-form-model-item
-            :label="$t('module.roles')"
-            prop="roles"
-          >
-            <a-select
-              v-model="model.roleIds"
-              mode="multiple"
-              placeholder="Please select"
-              class="w-100"
-            >
-              <a-select-option
-                v-for="role in roles"
-                :key="role.id"
+              <a-input
+                v-model="model.name"
+                :placeholder="$t('user.name')"
               >
-                {{ role.name }}
-              </a-select-option>
-            </a-select>
-          </a-form-model-item>
-        </a-col>
-      </a-row>
-    </div>
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="heading"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
 
-    <div class="box-form-footer text-center bt-1 p-3">
-      <a-button
-        html-type="submit"
-        type="primary"
-        class="min-w-100"
-      >
-        {{ id ? $t('common.update') : $t('common.create') }}
-      </a-button>
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('user.email')"
+              prop="email"
+            >
+              <a-input
+                v-model="model.email"
+                :placeholder="$t('user.email')"
+              >
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="envelope"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
 
-      &nbsp;
-      <a-button
-        html-type="button"
-        type="default"
-        class="min-w-100"
-        @click="$emit('cancel')"
-      >
-        {{ $t('common.cancel') }}
-      </a-button>
-    </div>
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('user.password')"
+              prop="password"
+            >
+              <a-input
+                v-model="model.password"
+                type="password"
+                :placeholder="$t('user.password')"
+              >
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="lock"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
+
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('user.password_confirm')"
+              prop="password_confirm"
+            >
+              <a-input
+                v-model="model.password_confirm"
+                type="password"
+                :placeholder="$t('user.password_confirm')"
+              >
+                <font-awesome-icon
+                  slot="prefix"
+                  icon="lock"
+                  class="width-1x"
+                  style="color:rgba(0,0,0,.25)"
+                />
+              </a-input>
+            </a-form-model-item>
+          </a-col>
+
+          <a-col
+            :span="24"
+            :md="12"
+          >
+            <a-form-model-item
+              :label="$t('user.roles')"
+              prop="roles"
+            >
+              <a-select
+                v-model="model.roleIds"
+                mode="multiple"
+                placeholder="Please select"
+                class="w-100"
+              >
+                <a-select-option
+                  v-for="role in roles"
+                  :key="role.id"
+                >
+                  {{ role.name }}
+                </a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+        </a-row>
+      </div>
+
+      <div class="box-form-footer text-center bt-1 p-3">
+        <a-button
+          html-type="submit"
+          type="primary"
+          class="min-w-100"
+        >
+          {{ id ? $t('common.update') : $t('common.create') }}
+        </a-button>
+
+        &nbsp;
+        <a-button
+          html-type="button"
+          type="default"
+          class="min-w-100"
+          @click="$emit('cancel')"
+        >
+          {{ $t('common.cancel') }}
+        </a-button>
+      </div>
+    </a-spin>
   </a-form-model>
 </template>
 
