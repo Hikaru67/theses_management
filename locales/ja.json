@@ -23,6 +23,7 @@
   "module.menu": "メニュー",
   "module.role": "役割",
   "module.user": "ユーザー",
+  "pagination.total": "合計{total}アイテム",
   "role.name": "名前",
   "role.permissions": "権限",
   "text.confirm_to_delete": "このアイテムを削除してもよろしいですか？",

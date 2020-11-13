@@ -23,6 +23,7 @@
   "module.menu": "Menu",
   "module.role": "Role",
   "module.user": "User",
+  "pagination.total": "Total {total} items",
   "role.name": "Name",
   "role.permissions": "Permissions",
   "text.confirm_to_delete": "Are you sure to delete this item ?",

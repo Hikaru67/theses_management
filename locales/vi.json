@@ -23,6 +23,7 @@
   "module.menu": "Thực đơn",
   "module.role": "Vai trò",
   "module.user": "Người dùng",
+  "pagination.total": "Tổng {total} mục",
   "role.name": "Tên",
   "role.permissions": "Quyền",
   "text.confirm_to_delete": "Bạn có chắc chắn muốn xóa mục này?",

@@ -17,8 +17,7 @@ export default {
         ...this.pagination,
         total: meta ? meta.total : data.length,
         current: +params.page,
-        pageSize: +params.limit,
-        showTotal: total => `Total ${total} items`
+        pageSize: +params.limit
       }
       this.data = data
     } catch (_) {
@@ -34,7 +33,8 @@ export default {
     return {
       data: [],
       pagination: {
-        showSizeChanger: true
+        showSizeChanger: true,
+        showTotal: (total, range) => this.$t('pagination.total', { total })
       }
     }
   },

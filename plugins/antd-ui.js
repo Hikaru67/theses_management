@@ -12,6 +12,7 @@ import {
   Checkbox,
   Col,
   Collapse,
+  ConfigProvider,
   Dropdown,
   FormModel,
   Icon,
@@ -34,6 +35,7 @@ Vue.use(Card)
 Vue.use(Checkbox)
 Vue.use(Col)
 Vue.use(Collapse)
+Vue.use(ConfigProvider)
 Vue.use(Dropdown)
 Vue.use(FormModel)
 Vue.use(Icon)
