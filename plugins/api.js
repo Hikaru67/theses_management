@@ -24,99 +24,21 @@ export default ({ $axios, $cookies, app }, inject) => {
             }
             const originalRequest = error.config
             originalRequest.headers.Authorization = 'Bearer ' + data.access_token
-
             return $axios(originalRequest)
           } catch (e) {
             $cookies.remove(REFRESH_TOKEN)
-
             return Promise.reject(e)
           }
         }
-
         return Promise.reject(error)
       })
 
       this.axios = $axios
-    }
 
-    get(path, options = {}) {
-      const key = options.name || camelCase(`get-${path}`)
-      return {
-        [key]: (config = {}) => this.axios.get(path, config)
-      }
-    }
-
-    post(path, options = {}) {
-      const key = options.name || camelCase(`post-${path}`)
-      return {
-        [key]: (data, config = {}) => this.axios.post(path, data, config)
-      }
-    }
-
-    put(path, options = {}) {
-      const key = options.name || camelCase(`put-${path}`)
-      return {
-        [key]: (data, config = {}) => this.axios.put(path, data, config)
-      }
-    }
-
-    delete(path, options = {}) {
-      const key = options.name || camelCase(`delete-${path}`)
-      return {
-        [key]: (config = {}) => this.axios.delete(path, config)
-      }
-    }
-
-    resource(model, options = {}) {
-      return {
-        ...this.index(model, options),
-        ...this.store(model, options),
-        ...this.show(model, options),
-        ...this.update(model, options),
-        ...this.destroy(model, options)
-      }
-    }
-
-    index(path, options = {}) {
-      const key = options.name || camelCase(`index-${path}`)
-      return {
-        [key]: (config = {}) => this.axios.get(path, config)
-      }
-    }
-
-    store(path, options = {}) {
-      const key = options.name || camelCase(`store-${path}`)
-      return {
-        [key]: (data, config = {}) => this.axios.post(path, data, config)
-      }
-    }
-
-    show(path, options = {}) {
-      const key = options.name || camelCase(`show-${path}`)
-      return {
-        [key]: (data, config = {}) => this.axios.get(`${path}/${data.id}`, config)
-      }
-    }
-
-    update(path, options = {}) {
-      const key = options.name || camelCase(`update-${path}`)
-      return {
-        [key]: (data, config = {}) => this.axios.put(`${path}/${data.id}`, data, config)
-      }
-    }
-
-    destroy(path, options = {}) {
-      const key = options.name || camelCase(`destroy-${path}`)
-      return {
-        [key]: (data, config = {}) => this.axios.delete(`${path}/${data.id}`, data, config)
-      }
-    }
-
-    generateMethods(routes = {}) {
       let data = {}
       Object.entries(routes).forEach(([path, methods]) => {
         Object.entries(methods).forEach(([method, options]) => {
-          data = { ...data, ...this[method](path, options) }
+          data = { ...data, ...this.buildMethod(method, path, options) }
         })
       })
 
@@ -124,11 +46,62 @@ export default ({ $axios, $cookies, app }, inject) => {
         this[key] = method
       })
     }
+
+    /**
+     * Method builder
+     *
+     * @param {string} method
+     * @param {string} path
+     * @param {object} options
+     *
+     * @return {object}
+     */
+    buildMethod(method, path, options = {}) {
+      const key = options.name || camelCase(`${method}-${path}`)
+      let entry = {}
+      switch (method) {
+        case 'get':
+          entry[key] = (config = {}) => this.axios.get(path, config)
+          break
+        case 'post':
+          entry[key] = (data, config = {}) => this.axios.post(path, data, config)
+          break
+        case 'put':
+          entry[key] = (data, config = {}) => this.axios.put(path, data, config)
+          break
+        case 'delete':
+          entry[key] = (config = {}) => this.axios.delete(path, config)
+          break
+        case 'index':
+          entry[key] = (config = {}) => this.axios.get(path, config)
+          break
+        case 'store':
+          entry[key] = (data, config = {}) => this.axios.post(path, data, config)
+          break
+        case 'show':
+          entry[key] = (data, config = {}) => this.axios.get(`${path}/${data.id}`, config)
+          break
+        case 'update':
+          entry[key] = (data, config = {}) => this.axios.put(`${path}/${data.id}`, data, config)
+          break
+        case 'destroy':
+          entry[key] = (data, config = {}) => this.axios.delete(`${path}/${data.id}`, data, config)
+          break
+        case 'resource':
+          entry = {
+            ...this.buildMethod('index', path, options),
+            ...this.buildMethod('store', path, options),
+            ...this.buildMethod('show', path, options),
+            ...this.buildMethod('update', path, options),
+            ...this.buildMethod('destroy', path, options)
+          }
+          break
+        default:
+          break
+      }
+      return entry
+    }
   }
 
-  const api = new API()
-
-  api.generateMethods(routes)
-
-  inject('api', api)
+  inject('api', new API())
 }
