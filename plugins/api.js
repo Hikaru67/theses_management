@@ -35,15 +35,10 @@ export default ({ $axios, $cookies, app }, inject) => {
 
       this.axios = $axios
 
-      let data = {}
       Object.entries(routes).forEach(([path, methods]) => {
         Object.entries(methods).forEach(([method, options]) => {
-          data = { ...data, ...this.buildMethod(method, path, options) }
+          this.buildMethod(method, path, options)
         })
-      })
-
-      Object.entries(data).forEach(([key, method]) => {
-        this[key] = method
       })
     }
 
@@ -58,48 +53,40 @@ export default ({ $axios, $cookies, app }, inject) => {
      */
     buildMethod(method, path, options = {}) {
       const key = options.name || camelCase(`${method}-${path}`)
-      let entry = {}
       switch (method) {
         case 'get':
-          entry[key] = (config = {}) => this.axios.get(path, config)
+          this[key] = (config = {}) => this.axios.get(path, config)
           break
         case 'post':
-          entry[key] = (data, config = {}) => this.axios.post(path, data, config)
+          this[key] = (data, config = {}) => this.axios.post(path, data, config)
           break
         case 'put':
-          entry[key] = (data, config = {}) => this.axios.put(path, data, config)
+          this[key] = (data, config = {}) => this.axios.put(path, data, config)
           break
         case 'delete':
-          entry[key] = (config = {}) => this.axios.delete(path, config)
+          this[key] = (config = {}) => this.axios.delete(path, config)
           break
         case 'index':
-          entry[key] = (config = {}) => this.axios.get(path, config)
+          this[key] = (config = {}) => this.axios.get(path, config)
           break
         case 'store':
-          entry[key] = (data, config = {}) => this.axios.post(path, data, config)
+          this[key] = (data, config = {}) => this.axios.post(path, data, config)
           break
         case 'show':
-          entry[key] = (data, config = {}) => this.axios.get(`${path}/${data.id}`, config)
+          this[key] = (data, config = {}) => this.axios.get(`${path}/${data.id}`, config)
           break
         case 'update':
-          entry[key] = (data, config = {}) => this.axios.put(`${path}/${data.id}`, data, config)
+          this[key] = (data, config = {}) => this.axios.put(`${path}/${data.id}`, data, config)
           break
         case 'destroy':
-          entry[key] = (data, config = {}) => this.axios.delete(`${path}/${data.id}`, data, config)
+          this[key] = (data, config = {}) => this.axios.delete(`${path}/${data.id}`, data, config)
           break
         case 'resource':
-          entry = {
-            ...this.buildMethod('index', path, options),
-            ...this.buildMethod('store', path, options),
-            ...this.buildMethod('show', path, options),
-            ...this.buildMethod('update', path, options),
-            ...this.buildMethod('destroy', path, options)
-          }
+          ['index', 'store', 'show', 'update', 'destroy'].forEach(action => this.buildMethod(action, path, options))
           break
         default:
           break
       }
-      return entry
     }
   }
 
