@@ -21,8 +21,9 @@
     <a-menu
       theme="dark"
       mode="inline"
+      :selected-keys="selectedKeys"
     >
-      <a-menu-item key="0">
+      <a-menu-item :key="0">
         <nuxt-link to="/">
           <font-awesome-icon
             icon="home"
@@ -83,6 +84,22 @@ export default {
 
     menu() {
       return get(this, '$auth.user.menus', [])
+    },
+
+    selectedKeys() {
+      const selectedKeys = []
+      const deepFind = menu => {
+        menu.forEach(item => {
+          if (item.link === this.$route.path) {
+            selectedKeys.push(item.id)
+          }
+          if (item.menus) {
+            deepFind(item.menus)
+          }
+        })
+      }
+      deepFind(this.menu)
+      return selectedKeys
     }
   },
 

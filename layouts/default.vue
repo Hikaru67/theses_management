@@ -1,5 +1,5 @@
 <template>
-  <a-config-provider :locale="currentLocale">
+  <a-config-provider :locale="locale">
     <a-layout class="default-layout">
       <Sidebar />
       <!-- end sidebar menu -->
@@ -40,10 +40,6 @@
 </style>
 
 <script>
-import enUS from 'ant-design-vue/es/locale-provider/en_US'
-import jaJP from 'ant-design-vue/es/locale-provider/ja_JP'
-import viVN from 'ant-design-vue/es/locale-provider/vi_VN'
-
 import Footer from '~/components/layouts/Footer'
 import Header from '~/components/layouts/Header'
 import Sidebar from '~/components/layouts/Sidebar'
@@ -59,21 +55,12 @@ export default {
 
   middleware: ['auth'],
 
-  data() {
-    return {
-      locales: {
-        enUS,
-        jaJP,
-        viVN
-      }
-    }
-  },
-
   computed: {
-    currentLocale() {
-      const currentLocale = this.$i18n.locales.find(item => item.code === this.$i18n.locale)
-      const localePath = currentLocale ? currentLocale.iso : 'en-US'
-      return this.locales[`${localePath.replace('-', '')}`]
+    locale() {
+      const locale = this.$i18n.locales.find(item => item.code === this.$i18n.locale)
+      const localeISO = locale ? locale.iso : 'en-US'
+      const provider = require(`ant-design-vue/es/locale-provider/${localeISO.replace('-', '_')}`)
+      return provider.default
     }
   }
 }
