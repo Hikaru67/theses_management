@@ -23,16 +23,6 @@
       mode="inline"
       :selected-keys="selectedKeys"
     >
-      <a-menu-item :key="0">
-        <nuxt-link to="/">
-          <font-awesome-icon
-            icon="home"
-            class="anticon"
-          />
-          <span>{{ $t('common.home') }}</span>
-        </nuxt-link>
-      </a-menu-item>
-
       <template v-for="item in menu">
         <a-menu-item
           v-if="!item.menus.length"
@@ -83,7 +73,21 @@ export default {
     },
 
     menu() {
-      return get(this, '$auth.user.menus', [])
+      const staticMenu = [
+        {
+          icon: 'home',
+          id: 0,
+          link: '/',
+          menus: [],
+          parent_id: 0,
+          position: 0,
+          title: 'common.home'
+        }
+      ]
+      const dynamicMenu = get(this, '$auth.user.menus', [])
+      const menu = [...staticMenu, ...dynamicMenu]
+      menu.sort((a, b) => a.position - b.position)
+      return menu
     },
 
     selectedKeys() {
