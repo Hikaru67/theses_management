@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { debounce, get } from 'lodash'
+import { debounce, get, trim } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import SubMenu from '~/components/organisms/SubMenu'
 import MenuItem from '~/components/molecules/MenuItem'
@@ -90,7 +90,7 @@ export default {
       const selectedKeys = []
       const deepFind = menu => {
         menu.forEach(item => {
-          if (item.link === this.$route.path) {
+          if (trim(item.link, '/') === trim(this.$route.path, '/')) {
             selectedKeys.push(item.id)
           }
           if (item.menus) {
