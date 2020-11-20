@@ -19,27 +19,14 @@ export default {
         { to: '/', text: this.$t('common.home') }
       ]
 
-      this.$route.matched.map((item, i, { length }) => {
-        const crumb = {}
-
-        crumb.to = item.path
-        crumb.text = item.path.replace(/\//, '')
-
-        // is last item?
-        if (i === length - 1) {
-          // is param route? .../.../:id
-          if (item.regex.keys.length > 0) {
-            crumbs.push({
-              to: item.path.replace(/\/:[^/:]*$/, ''),
-              text: item.name.replace(/-[^-]*$/, '')
-            })
-            crumb.to = this.$route.path
-            crumb.text = this.$route.path.match(/[^/]*$/)[0]
-          }
+      this.$route.path.split('/').filter(item => item).reduce((previous, current) => {
+        const crumb = {
+          to: `${previous}/${current}`,
+          text: this.$t(current)
         }
-
         crumbs.push(crumb)
-      })
+        return crumb.to
+      }, '')
 
       return crumbs
     }
