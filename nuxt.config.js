@@ -122,10 +122,11 @@ export default {
       { code: 'ja', iso: 'ja-JP' },
       { code: 'vi', iso: 'vi-VN' }
     ],
-    defaultLocale: 'en',
+    defaultLocale: 'ja',
     strategy: 'no_prefix',
+    detectBrowserLanguage: false,
     vueI18n: {
-      fallbackLocale: 'en',
+      fallbackLocale: 'ja',
       messages: {
         ja: require('./locales/ja.json'),
         en: require('./locales/en.json'),

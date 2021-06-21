@@ -3,29 +3,35 @@
     ref="refForm"
     :model="this"
     :rules="formRules"
+    :hide-required-mark="true"
     class="main-form"
     @submit.prevent="handleSubmit"
   >
     <a-spin :spinning="loading">
       <div class="box-wrapper">
-        <div class="box-img">
-          <div class="img-user">
-            <font-awesome-icon
-              icon="user-tie"
-              class="ic"
+        <div class="box-form-inner p-4">
+          <div class="text-center logo">
+            <img
+              :src="require(`~/assets/images/logo.png`)"
+              width="50"
             />
           </div>
-        </div>
 
-        <div class="box-form-inner p-4">
-          <div class="txt-title-top text-center mb-3">
-            {{ $t('common.login') }}
-          </div>
+          <h2 class="txt-title-top text-center mb-3">
+            つながレツ卜(仮)
+          </h2>
 
-          <a-form-model-item prop="email">
+          <h4 class="txt-title-top text-center mb-3">
+            譲定NPO人 レ)ト窪俣鰐烹攫縫縄
+          </h4>
+
+          <a-form-model-item
+            prop="email"
+            label="メ一ルアドレス"
+          >
             <a-input
               v-model="email"
-              :placeholder="$t('user.email')"
+              :placeholder="'入カ してく ださい'"
             >
               <font-awesome-icon
                 slot="prefix"
@@ -36,10 +42,13 @@
             </a-input>
           </a-form-model-item>
 
-          <a-form-model-item prop="password">
-            <a-input
+          <a-form-model-item
+            prop="password"
+            label="バスワ一ド"
+          >
+            <a-input-password
               v-model="password"
-              type="password"
+              type="'入力してください'"
               :placeholder="$t('user.password')"
             >
               <font-awesome-icon
@@ -48,24 +57,31 @@
                 class="width-1x"
                 style="color:rgba(0,0,0,.25)"
               />
-            </a-input>
+            </a-input-password>
           </a-form-model-item>
 
           <div
             v-if="message"
             class="ant-form-item has-error"
           >
+            <font-awesome-icon
+              slot="prefix"
+              icon="info-circle"
+              class="width-1x"
+              style="color: #f00"
+            />
             <span class="ant-form-explain">{{ message }}</span>
           </div>
 
           <div class="text-center">
             <a-button
               html-type="submit"
-              type="primary"
               size="large"
               class="min-w-120"
+              shape="round"
+              block
             >
-              {{ $t('common.login') }}
+              口グイン
             </a-button>
           </div>
         </div>
@@ -79,51 +95,23 @@
   /deep/ {
     width: 100%;
     max-width: 400px;
-    background: #fff;
+    background: #fffef6;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
     margin: 30px 0;
-    .box-wrapper {
-      padding-bottom: 30px;
-      .box-img {
-        text-align: center;
-        background: $primary-color;
-        padding: 30px 0 80px;
-      }
-      .img-user {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 80px;
-        line-height: 1;
-        border-radius: 50%;
-        margin: auto;
-      }
+    .logo {
+      padding: 20px;
     }
-    .box-form-inner {
-      position: relative;
-      top: -40px;
-      width: 80%;
-      box-shadow: 2px 5px 16px 2px rgba(16, 16, 16, 0.18);
-      background: #fff;
-      border-radius: 6px;
-      margin: auto;
-      z-index: 2;
-    }
-    .txt-title-top {
-      font-size: 24px;
-      color: #4e4d4d;
+    button {
+      background: #f5d528 !important;
+      &:hover,
+      &:focus,
+      .active {
+        border-color: #f5d528 !important;
+        color: #000 !important;
+      }
     }
     .ant-form-item {
-      margin-bottom: 15px;
-    }
-    .btn-forgot {
-      a {
-        color: #4e4d4d;
-        text-decoration: none;
-        &:hover {
-          color: $primary-color;
-        }
-      }
+      margin: 30px 0;
     }
   }
 }
@@ -190,7 +178,7 @@ export default {
               this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
             }
           } catch (_) {
-            this.message = this.$t('validation.not_match', { field1: this.$t('user.email'), field2: this.$t('user.password') })
+            this.message = 'メ一ルア ド レスとバスワ一 ドが一軟し ません'
           } finally {
             this.$store.dispatch('setLoading', false)
           }

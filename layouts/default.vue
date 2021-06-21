@@ -1,9 +1,6 @@
 <template>
-  <a-config-provider :locale="locale">
+  <a-config-provider :locale="jaJP">
     <a-layout class="default-layout">
-      <Sidebar />
-      <!-- end sidebar menu -->
-
       <a-layout>
         <Header />
         <!-- end main header -->
@@ -40,27 +37,23 @@
 </style>
 
 <script>
+import jaJP from 'ant-design-vue/es/locale-provider/ja_JP'
 import Footer from '~/components/layouts/Footer'
 import Header from '~/components/layouts/Header'
-import Sidebar from '~/components/layouts/Sidebar'
 import Breadcrumb from '~/components/layouts/Breadcrumb'
 
 export default {
   components: {
     Footer,
     Header,
-    Sidebar,
     Breadcrumb
   },
 
   middleware: ['auth'],
 
-  computed: {
-    locale() {
-      const locale = this.$i18n.locales.find(item => item.code === this.$i18n.locale)
-      const localeISO = locale ? locale.iso : 'en-US'
-      const provider = require(`ant-design-vue/es/locale-provider/${localeISO.replace('-', '_')}`)
-      return provider.default
+  data() {
+    return {
+      jaJP
     }
   }
 }
