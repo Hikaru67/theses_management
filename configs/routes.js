@@ -7,6 +7,14 @@ export default {
   user: {
     resource: {}
   },
+  news: {
+    resource: {}
+  },
+  '/news/city': {
+    get: {
+      name: 'getCity'
+    }
+  },
   role: {
     resource: {}
   },

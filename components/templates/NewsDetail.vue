@@ -6,7 +6,7 @@
         :gutter="30"
       >
         <a-col :sm="24">
-          {{ model.area }}
+          {{ model.city }}
         </a-col>
         <a-col :sm="24">
           {{ model.title }}
@@ -37,7 +37,7 @@ export default {
   mixins: [DataForm],
 
   data: () => ({
-    resource: 'user'
+    resource: 'news'
   })
 }
 </script>

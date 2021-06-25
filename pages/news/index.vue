@@ -43,12 +43,24 @@
       <a-table
         :columns="columns"
         :row-key="record => record.id"
-        :data-source="DATA"
+        :data-source="data"
         :pagination="pagination"
         :loading="loading"
         class="main-table"
         @change="handleTableChange"
       >
+        <template
+          slot="number"
+          slot-scope="text, record, index"
+        >
+          {{ index + 1 }}
+        </template>
+        <template
+          slot="news_created_on"
+          slot-scope="text, record"
+        >
+          {{ record.news_created_on ? $moment(record.news_created_on * 1000).format('Y.MM.DD') : null }}
+        </template>
         <template
           slot="action"
           slot-scope="text, record"
@@ -137,14 +149,6 @@ import NewsForm from '~/components/templates/NewsForm'
 import NewsDetail from '~/components/templates/NewsDetail'
 import ActionDialog from '~/components/molecules/ActionDialog'
 import DataTable from '~/mixins/data-table'
-const DATA = [
-  {
-    id: 1,
-    date: 123456,
-    title: 'sample',
-    area: 'sample'
-  }
-]
 
 export default {
   components: {
@@ -165,15 +169,14 @@ export default {
       dialogVisible: false,
       currentId: 0,
       filters: {
-        date: this.$route.query.date || '',
-        title: this.$route.query.title || '',
-        area: this.$route.query.area || ''
+        news_date: this.$route.query.news_date || '',
+        news_title: this.$route.query.news_title || '',
+        news_city: this.$route.query.news_city || ''
       },
       pagination: {
         showSizeChanger: true,
         showTotal: () => false
-      },
-      DATA
+      }
     }
   },
   computed: {
@@ -186,23 +189,25 @@ export default {
       const columns = [
         {
           title: 'No',
-          dataIndex: 'id',
+          dataIndex: 'number',
+          scopedSlots: { customRender: 'number' },
           width: 60
         },
         {
           title: '配信日時',
-          dataIndex: 'date',
+          dataIndex: 'news_created_on',
+          scopedSlots: { customRender: 'news_created_on' },
           sorter: true
         },
         {
           title: 'タイトル',
           sorter: true,
-          dataIndex: 'title'
+          dataIndex: 'news_title'
         },
         {
           title: 'エリア',
           sorter: true,
-          dataIndex: 'area'
+          dataIndex: 'news_city'
         },
         {
           title: this.$t('common.action'),
@@ -292,9 +297,9 @@ export default {
      */
     reset() {
       this.filters = {
-        date: '',
-        title: '',
-        area: ''
+        news_created_on: '',
+        news_title: '',
+        news_city: ''
       }
     },
 

@@ -173,7 +173,7 @@ export default {
               email: this.email,
               password: this.password
             }
-            const { data } = await this.$auth.login({ data: credential })
+            const { data: { data } } = await this.$auth.login({ data: credential })
             if (data.refresh_token) {
               this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
             }
