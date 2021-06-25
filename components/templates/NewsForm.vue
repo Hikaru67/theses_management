@@ -33,19 +33,19 @@
               :sm="24"
             >
               <a-form-model-item
-                :label="$t('news.area')"
-                prop="area"
+                :label="$t('news.city')"
+                prop="city"
               >
                 <a-select
-                  v-model="model.area"
+                  v-model="model.city"
                   placeholder="Please select"
                   class="w-100"
                 >
                   <a-select-option
-                    v-for="item in area"
+                    v-for="item in cities"
                     :key="item.id"
                   >
-                    {{ item.name }}
+                    {{ item.city_name }}
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
@@ -66,7 +66,7 @@
           </template>
           <template v-else>
             <a-col :sm="24">
-              {{ currentDate }} {{ model.area }}
+              {{ currentDate }} {{ model.city }}
             </a-col>
             <a-col :sm="24">
               {{ model.title }}
@@ -106,13 +106,24 @@ import DataForm from '~/mixins/data-form'
 export default {
   mixins: [DataForm],
 
+  async fetch() {
+    this.$store.dispatch('setLoading', true)
+    try {
+      const { data: { data } } = await this.$api.getCity()
+      this.cities = data
+    } catch (_) {
+      this.$notification.error({
+        message: this.$t('text.something_wrong')
+      })
+    } finally {
+      this.$store.dispatch('setLoading', false)
+    }
+  },
+
   data: () => ({
-    resource: 'user',
+    resource: 'news',
     isDraft: true,
-    area: [{
-      id: 1,
-      name: 'test'
-    }]
+    cities: []
   }),
 
   computed: {
@@ -125,10 +136,10 @@ export default {
             trigger: ['change', 'blur']
           }
         ],
-        area: [
+        city: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('news.area') }),
+            message: this.$t('validation.required', { field: this.$t('news.city') }),
             trigger: ['change', 'blur']
           }
         ],

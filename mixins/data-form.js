@@ -3,11 +3,12 @@
  * Email: tech@digidinos.com.
  */
 import { mapGetters } from 'vuex'
+import { cloneDeep } from 'lodash'
 
 export default {
   props: {
     id: {
-      type: Number,
+      type: [Number, String],
       default: 0
     }
   },
@@ -47,7 +48,8 @@ export default {
           this.$refs.form.clearValidate()
         }
         const action = `${this.resource}/getModel`
-        this.model = await this.$store.dispatch(action, { id })
+        await this.$store.dispatch(action, { id })
+        this.model = cloneDeep(this.$store.getters[`${this.resource}/model`])
       } catch (_) {
         this.$notification.error({
           message: this.$t('text.something_wrong')

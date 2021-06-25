@@ -17,7 +17,7 @@ export default ({ $axios, $cookies, app }, inject) => {
         const refreshToken = $cookies.get(REFRESH_TOKEN)
         if (statusCode === 401 && refreshToken) {
           try {
-            const { data } = await $axios.post('/refresh', { refresh_token: refreshToken })
+            const { data: { data } } = await $axios.post('/token/refresh', { refreshToken })
             $cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
             if (app.$auth) {
               app.$auth.setUserToken(data.access_token)
