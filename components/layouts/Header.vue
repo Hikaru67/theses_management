@@ -5,7 +5,7 @@
         :src="require(`~/assets/images/logo.png`)"
         width="50"
       />
-      <div class="page-title">
+      <div class="header__title">
         <h4>認定N鮑濠人</h4>
         <h3>レツ 卜症候群支援機構</h3>
       </div>
@@ -13,18 +13,27 @@
 
     <div class="box-right pr-3">
       <a
-        href="#"
-        class="logout"
-        @click="logout()"
+        href="javascript:void(0)"
+        class="logout__link"
+        @click="showDialog"
       >
         {{ $t('common.logout') }}
       </a>
     </div>
+
+    <action-dialog
+      v-model="visible"
+      title="口グアウトしますか"
+      cancel-text="戻る"
+      ok-text="ログアウト"
+      @ok="logout"
+      @cancel="hideDialog"
+    />
   </a-layout-header>
 </template>
 
 <style scoped lang="scss">
-.page-title {
+.header__title {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -39,16 +48,21 @@
     margin-bottom: 0;
   }
 }
-.logout {
+.logout__link {
   border-left: 2px solid #fff;
   padding-left: 20px;
 }
 </style>
 
 <script>
+import ActionDialog from '~/components/molecules/ActionDialog.vue'
 import { REFRESH_TOKEN } from '~/constants/cookies'
 
 export default {
+  components: {
+    ActionDialog
+  },
+
   data() {
     return {
       style: {
@@ -56,11 +70,26 @@ export default {
         zIndex: 1,
         width: '100%',
         background: '#f5d528'
-      }
+      },
+      visible: false
     }
   },
 
   methods: {
+    /**
+     * Show modal
+     */
+    showDialog() {
+      this.visible = true
+    },
+
+    /**
+     * Hide modal
+     */
+    hideDialog() {
+      this.visible = false
+    },
+
     /**
      * Logout user
      */
