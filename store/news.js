@@ -3,9 +3,11 @@ import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
 
 class News {
   constructor(props) {
+    this.id = get(props, 'id', '')
     this.title = get(props, 'news_title', '')
     this.content = get(props, 'news_content', '')
-    this.city = get(props, 'news_city', null)
+    this.city_id = get(props, 'news_city', 0)
+    this.city = get(props, 'city', {})
   }
 }
 
@@ -70,7 +72,8 @@ export const actions = {
    * @return {Object} news detail
    */
   async saveModel({ commit }, payload) {
-    const form = this.$util.getFormData(payload, ['id', 'title', 'content', 'city'])
+    const form = this.$util.getFormData(payload, ['id', 'title', 'content'])
+    form.city = payload.city_id ? payload.city_id : null
 
     const { data } = payload.id ? await this.$api.updateNews(form) : await this.$api.storeNews(form)
     const model = data.data

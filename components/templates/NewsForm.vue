@@ -18,12 +18,12 @@
               :sm="24"
             >
               <a-form-model-item
-                :label="$t('news.title')"
+                label="タイトル"
                 prop="title"
               >
                 <a-input
                   v-model="model.title"
-                  :placeholder="$t('news.title')"
+                  placeholder="タイトル"
                 />
               </a-form-model-item>
             </a-col>
@@ -33,12 +33,12 @@
               :sm="24"
             >
               <a-form-model-item
-                :label="$t('news.city')"
+                label="都道府県"
                 prop="city"
               >
                 <a-select
-                  v-model="model.city"
-                  placeholder="Please select"
+                  v-model="model.city_id"
+                  placeholder="都道府県"
                   class="w-100"
                 >
                   <a-select-option
@@ -53,32 +53,42 @@
 
             <a-col :sm="24">
               <a-form-model-item
-                :label="$t('news.content')"
+                label="本文"
                 prop="content"
               >
                 <a-textarea
                   v-model="model.content"
-                  placeholder="Basic usage"
-                  :rows="4"
+                  placeholder="本文"
+                  :rows="16"
                 />
               </a-form-model-item>
             </a-col>
           </template>
           <template v-else>
             <a-col :sm="24">
-              {{ currentDate }} {{ model.city }}
+              <div class="modal__title">
+                <span>
+                  {{ currentDate }}
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  都道府県: {{ model.city ? model.city.name : '' }}
+                </span>
+                <h1>{{ model.title }}</h1>
+              </div>
             </a-col>
+
             <a-col :sm="24">
-              {{ model.title }}
-            </a-col>
-            <a-col :sm="24">
-              {{ model.content }}
+              <div class="modal__content">
+                {{ model.content }}
+              </div>
             </a-col>
           </template>
         </a-row>
       </div>
 
-      <div class="box-form-footer text-center bt-1 p-3">
+      <div class="box-form-footer text-center p-3">
         <a-button
           html-type="button"
           type="default"
@@ -110,7 +120,13 @@ export default {
     this.$store.dispatch('setLoading', true)
     try {
       const { data: { data } } = await this.$api.getCity()
-      this.cities = data
+      this.cities = [
+        {
+          id: 0,
+          city_name: 'すべて'
+        },
+        ...data
+      ]
     } catch (_) {
       this.$notification.error({
         message: this.$t('text.something_wrong')
@@ -132,21 +148,14 @@ export default {
         title: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('news.title') }),
-            trigger: ['change', 'blur']
-          }
-        ],
-        city: [
-          {
-            required: true,
-            message: this.$t('validation.required', { field: this.$t('news.city') }),
+            message: this.$t('validation.required', { field: 'タイトル' }),
             trigger: ['change', 'blur']
           }
         ],
         content: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('news.content') }),
+            message: this.$t('validation.required', { field: '本文' }),
             trigger: ['change', 'blur']
           }
         ]
@@ -155,6 +164,11 @@ export default {
 
     currentDate() {
       return this.$moment().format('Y/m/d')
+    },
+
+    curentCity() {
+      const city = this.cities.find(item => item.id === this.model.city_id)
+      return city.city_name || ''
     }
   },
   methods: {
@@ -199,3 +213,21 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+/deep/ {
+  .modal__title {
+    margin-top: 40px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .modal__content {
+    overflow-y: scroll;
+    max-height: 400px;
+    margin: 40px 0;
+    padding-right: 20px;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+}
+</style>

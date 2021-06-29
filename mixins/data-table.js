@@ -12,10 +12,10 @@ export default {
       const params = this.$route.query
       this.$store.dispatch('setLoading', true)
       const action = `${this.resource}/getList`
-      const { data, meta } = await this.$store.dispatch(action, { params })
+      const { data, total_count: totalCount } = await this.$store.dispatch(action, { params })
       this.pagination = {
         ...this.pagination,
-        total: meta ? meta.total : data.length,
+        total: totalCount,
         current: +params.page,
         pageSize: +params.limit
       }
