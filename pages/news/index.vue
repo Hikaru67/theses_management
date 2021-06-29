@@ -10,6 +10,7 @@
       </a-col>
       <a-col :span="12">
         <a-input-search
+          v-model="filters.searchContent"
           placeholder="input search text"
           size="large"
           @search="search"
@@ -103,7 +104,7 @@
       @cancel="closeForm(false)"
     >
       <template slot="title">
-        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.news') }}
+        新着情報
       </template>
 
       <a-spin :spinning="loading">
@@ -118,19 +119,16 @@
     <a-modal
       ref="detail"
       :visible="detailVisible"
-      :width="1300"
+      :width="1200"
       :footer="null"
       class="modal-detail"
       @cancel="closeDetail(false)"
     >
-      <template slot="title">
-        {{ currentId ? $t('common.edit') : $t('common.create') }} {{ $t('module.news') }}
-      </template>
-
       <a-spin :spinning="loading">
         <news-detail
           :id="currentId"
           @cancel="closeDetail(false)"
+          @save="closeDetail(true)"
         />
       </a-spin>
     </a-modal>
@@ -169,9 +167,7 @@ export default {
       dialogVisible: false,
       currentId: 0,
       filters: {
-        news_date: this.$route.query.news_date || '',
-        news_title: this.$route.query.news_title || '',
-        news_city: this.$route.query.news_city || ''
+        searchContent: this.$route.query.searchContent || ''
       },
       pagination: {
         showSizeChanger: true,
@@ -297,9 +293,7 @@ export default {
      */
     reset() {
       this.filters = {
-        news_created_on: '',
-        news_title: '',
-        news_city: ''
+        searchContent: ''
       }
     },
 
