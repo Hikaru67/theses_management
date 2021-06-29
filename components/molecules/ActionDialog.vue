@@ -16,7 +16,7 @@
         justify="center"
       >
         <a-col
-          :span="okText ? 24 : 12"
+          :span="!okText ? 24 : 12"
           class="confirm__col confirm__col--cancel"
         >
           <a-button
@@ -30,7 +30,7 @@
           </a-button>
         </a-col>
         <a-col
-          :span="cancelText ? 24 : 12"
+          :span="!cancelText ? 24 : 12"
           class="confirm__col confirm__col--ok"
         >
           <a-button
