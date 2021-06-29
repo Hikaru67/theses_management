@@ -4,13 +4,15 @@
     <a-row
       type="flex"
       justify="center"
+      align="middle"
+      class="search-form__row"
     >
       <a-col :span="2">
-        新着惰報一覧
+        新着情報一覧
       </a-col>
       <a-col :span="12">
         <a-input-search
-          v-model="filters.searchContent"
+          v-model="filters.searchString"
           placeholder="input search text"
           size="large"
           @search="search"
@@ -18,26 +20,41 @@
           <a-button
             slot="enterButton"
             icon="search"
+            size="large"
+            class="search-form__btn--primary"
           >
-            蒙橙
+            検索
           </a-button>
         </a-input-search>
       </a-col>
       <a-col :span="10">
-        <a-button @click="showForm(0)">
-          <font-awesome-icon
-            icon="plus-circle"
-            class="width-1x mr-1"
-          />
-          覇規作威
-        </a-button>
-        <a-button>
-          <font-awesome-icon
-            icon="user"
-            class="width-1x mr-1"
-          />
-          ユ-ザ-一寶
-        </a-button>
+        <a-row
+          type="flex"
+          justify="end"
+        >
+          <a-button
+            size="large"
+            class="search-form__btn search-form__btn--primary"
+            @click="showForm(0)"
+          >
+            <font-awesome-icon
+              icon="plus-circle"
+              class="width-1x mr-1"
+            />
+            新規作成
+          </a-button>
+          <a-button
+            size="large"
+            class="search-form__btn"
+            @click="gotoUserPage()"
+          >
+            <font-awesome-icon
+              icon="user"
+              class="width-1x mr-1"
+            />
+            ユーザー一覧
+          </a-button>
+        </a-row>
       </a-col>
     </a-row>
     <a-row>
@@ -167,7 +184,7 @@ export default {
       dialogVisible: false,
       currentId: 0,
       filters: {
-        searchContent: this.$route.query.searchContent || ''
+        searchString: this.$route.query.searchString || ''
       },
       pagination: {
         showSizeChanger: true,
@@ -203,7 +220,7 @@ export default {
         {
           title: 'エリア',
           sorter: true,
-          dataIndex: 'news_city'
+          dataIndex: 'city.name'
         },
         {
           title: this.$t('common.action'),
@@ -293,7 +310,7 @@ export default {
      */
     reset() {
       this.filters = {
-        searchContent: ''
+        searchString: ''
       }
     },
 
@@ -302,6 +319,13 @@ export default {
      */
     search() {
       this.replaceQuery(this.filters)
+    },
+
+    /**
+     * Go to user page
+     */
+    gotoUserPage() {
+      this.$router.push('/user')
     }
   }
 }
@@ -309,6 +333,15 @@ export default {
 
 <style scoped lang="scss">
 /deep/ {
+  .search-form__row {
+    padding: 20px 0;
+  }
+  .search-form__btn {
+    margin-left: 20px;
+  }
+  .search-form__btn--primary {
+    background: #f5d528;
+  }
   .ant-table-pagination {
     width: 100%;
     text-align: center;

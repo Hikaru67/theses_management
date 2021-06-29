@@ -33,12 +33,12 @@
               :sm="24"
             >
               <a-form-model-item
-                label="都道府県"
+                label="配信エリア"
                 prop="city"
               >
                 <a-select
                   v-model="model.city_id"
-                  placeholder="都道府県"
+                  placeholder="配信エリア"
                   class="w-100"
                 >
                   <a-select-option
