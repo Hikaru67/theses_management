@@ -41,7 +41,7 @@ export const actions = {
   async getList({ commit }, payload) {
     const params = cloneDeep(payload.params)
     params.page = params.page || 1
-    params.pageSize = params.limit || 10
+    params.pageSize = params.pageSize || 10
     const { data } = await this.$api.indexNews({ params })
     commit(SET_LIST, data.data)
     return data
@@ -65,12 +65,12 @@ export const actions = {
   },
 
   /**
-   * Create/Update news
-   *
-   * @param {Function} commit
-   * @param {Object} payload
-   * @return {Object} news detail
-   */
+     * Create/Update news
+     *
+     * @param {Function} commit
+     * @param {Object} payload
+     * @return {Object} news detail
+     */
   async saveModel({ commit }, payload) {
     const form = this.$util.getFormData(payload, ['id', 'title', 'content'])
     form.city = payload.city_id ? payload.city_id : null

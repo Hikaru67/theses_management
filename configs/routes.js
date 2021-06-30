@@ -1,9 +1,4 @@
 export default {
-  me: {
-    post: {
-      name: 'updateProfile'
-    }
-  },
   user: {
     resource: {}
   },
@@ -14,12 +9,6 @@ export default {
     get: {
       name: 'getCity'
     }
-  },
-  role: {
-    resource: {}
-  },
-  permission: {
-    get: {}
   },
   menu: {
     resource: {}
