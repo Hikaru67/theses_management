@@ -17,7 +17,7 @@ export default {
         ...this.pagination,
         total: totalCount,
         current: +params.page,
-        pageSize: +params.limit
+        pageSize: +params.pageSize
       }
       this.data = data
     } catch (_) {
@@ -62,10 +62,10 @@ export default {
      */
     handleTableChange(pagination, filters, sorter) {
       const query = {
-        limit: pagination.pageSize,
+        pageSize: pagination.pageSize,
         page: pagination.current,
-        sortOrder: sorter.order,
-        sortField: sorter.field
+        isAsc: sorter.order ? sorter.order === 'ascend' : null,
+        fieldName: sorter.field
       }
       this.replaceQuery(query)
     },
@@ -89,7 +89,7 @@ export default {
       if (JSON.stringify(query) === JSON.stringify(this.$route.query)) {
         this.$fetch()
       } else {
-        this.$router.replace({ query })
+        this.$router.push({ query })
       }
     },
 
