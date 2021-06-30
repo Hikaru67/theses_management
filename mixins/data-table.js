@@ -65,7 +65,7 @@ export default {
         pageSize: pagination.pageSize,
         page: pagination.current,
         isAsc: sorter.order ? sorter.order === 'ascend' : null,
-        fieldName: sorter.field
+        fieldName: sorter.order ? sorter.field : null
       }
       this.replaceQuery(query)
     },

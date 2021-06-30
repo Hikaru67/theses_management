@@ -233,6 +233,8 @@ export default {
       columns.forEach(item => {
         if (this.$route.query.fieldName === item.dataIndex && this.$route.query.isAsc) {
           item.sortOrder = this.$route.query.isAsc === 'true' ? 'ascend' : 'descend'
+        } else {
+          item.sortOrder = null
         }
       })
 
