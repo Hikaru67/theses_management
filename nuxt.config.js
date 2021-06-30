@@ -159,7 +159,7 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/',
+      home: '/users',
       user: '/profile'
     },
     strategies: {

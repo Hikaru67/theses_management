@@ -327,7 +327,7 @@ export default {
      * Go to user page
      */
     gotoUserPage() {
-      this.$router.push('/user')
+      this.$router.push('/users')
     }
   }
 }

@@ -29,12 +29,12 @@
   "text.confirm_to_delete": "このアイテムを削除してもよろしいですか？",
   "text.something_wrong": "問題が発生しました",
   "text.successfully": "正常に",
-  "user.email": "メール",
+  "user.email": "メールアドレス",
   "user.name": "名前",
   "user.password_confirm": "パスワード確認",
   "user.password": "パスワード",
   "user.roles": "役割",
   "validation.min": "{field}は少なくとも{min}文字である必要があります",
   "validation.not_match": "{field1}と{field2}が一致しません",
-  "validation.required": "{field}が必要です"
+  "validation.required": "{field}必須項目です"
 }

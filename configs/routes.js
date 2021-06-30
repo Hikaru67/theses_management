@@ -1,5 +1,5 @@
 export default {
-  user: {
+  users: {
     resource: {}
   },
   news: {

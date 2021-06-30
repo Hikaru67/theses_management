@@ -2,7 +2,6 @@
   <a-form-model
     ref="form"
     :model="model"
-    :rules="formRules"
     :label-col="{ sm: 6 }"
     :wrapper-col="{ sm: 18 }"
     class="main-form"
@@ -10,143 +9,189 @@
   >
     <a-spin :spinning="loading">
       <div class="box-form-inner p-4">
-        <a-row
-          type="flex"
-          :gutter="30"
+        <table
+          class="table table-bordered"
         >
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.name')"
-              prop="name"
-            >
-              <a-input
-                v-model="model.name"
-                :placeholder="$t('user.name')"
+          <tr>
+            <th rowspan="4">
+              <div
+                class="center"
+                style="height: 565px;"
               >
-                <font-awesome-icon
-                  slot="prefix"
-                  icon="heading"
-                  class="width-1x"
-                  style="color:rgba(0,0,0,.25)"
-                />
-              </a-input>
-            </a-form-model-item>
-          </a-col>
-
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.email')"
-              prop="email"
-            >
-              <a-input
-                v-model="model.email"
-                :placeholder="$t('user.email')"
-              >
-                <font-awesome-icon
-                  slot="prefix"
-                  icon="envelope"
-                  class="width-1x"
-                  style="color:rgba(0,0,0,.25)"
-                />
-              </a-input>
-            </a-form-model-item>
-          </a-col>
-
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.password')"
-              prop="password"
-            >
-              <a-input
-                v-model="model.password"
-                type="password"
-                :placeholder="$t('user.password')"
-              >
-                <font-awesome-icon
-                  slot="prefix"
-                  icon="lock"
-                  class="width-1x"
-                  style="color:rgba(0,0,0,.25)"
-                />
-              </a-input>
-            </a-form-model-item>
-          </a-col>
-
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.password_confirm')"
-              prop="password_confirm"
-            >
-              <a-input
-                v-model="model.password_confirm"
-                type="password"
-                :placeholder="$t('user.password_confirm')"
-              >
-                <font-awesome-icon
-                  slot="prefix"
-                  icon="lock"
-                  class="width-1x"
-                  style="color:rgba(0,0,0,.25)"
-                />
-              </a-input>
-            </a-form-model-item>
-          </a-col>
-
-          <a-col
-            :span="24"
-            :md="12"
-          >
-            <a-form-model-item
-              :label="$t('user.roles')"
-              prop="roles"
-            >
-              <a-select
-                v-model="model.roleIds"
-                mode="multiple"
-                placeholder="Please select"
-                class="w-100"
-              >
-                <a-select-option
-                  v-for="role in roles"
-                  :key="role.id"
+                ユーザー情報
+              </div>
+            </th>
+            <td style="width: 120px;">
+              <div class="row ml-1">
+                <div
+                  class="center"
+                  style="height: 110px;"
                 >
-                  {{ role.name }}
-                </a-select-option>
-              </a-select>
-            </a-form-model-item>
-          </a-col>
-        </a-row>
+                  お名前
+                  &nbsp;
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row mx-4">
+                <a-col span="12">
+                  <span>姓</span>
+                  <p>{{ model.user_kanji_surname }}</p>
+                </a-col>
+                <a-col span="12">
+                  <span>名</span>
+                  <p>{{ model.user_kanji_name }}</p>
+                </a-col>
+              </div>
+              <div class="row mx-4">
+                <a-col span="12">
+                  <span>セイ</span>
+                  <p>{{ model.user_katakana_surname }}</p>
+                </a-col>
+                <a-col span="12">
+                  <span>メイ</span>
+                  <p>{{ model.user_katakana_name }}</p>
+                </a-col>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row ml-1">
+                <div
+                  class="center"
+                  style="height: 40px;"
+                >
+                  生年月日
+                  &nbsp;
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row mx-4">
+                <div
+                  class="center"
+                  style="height: 40px;"
+                >
+                  {{ toDate(model.user_birthday) }}
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row ml-1">
+                <div
+                  class="center"
+                  style="height: 225px;"
+                >
+                  住所
+                  &nbsp;
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="mx-4">
+                <span>郵便番号</span>
+                <p>{{ model.user_postal_code }}</p>
+              </div>
+              <div class="mx-4">
+                <span>都道府県</span>
+                <p>{{ model.town }}</p>
+              </div>
+              <div class="mx-4">
+                <span>市区町村</span>
+                <p>{{ model.city }}</p>
+              </div>
+              <div class="mx-4">
+                <span>番地以降</span>
+                <p>{{ model.district }}</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row ml-1">
+                <div
+                  class="center mx-0"
+                  style="height: 110px;"
+                >
+                  連絡先
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="mx-4">
+                <span>電話番号</span>
+                <p>{{ model.user_phone_number }}</p>
+              </div>
+              <div class="mx-4">
+                <span>メールアドレス</span>
+                <p>{{ model.user_mail_address }}</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div
+                class="center"
+                style="height: 350px;"
+              >
+                プロフィール
+              </div>
+            </th>
+            <td
+              class="profile"
+              colspan="2"
+            >
+              <div class="row">
+                <a-col span="5" />
+                <a-col span="15">
+                  <div class="ctn-avt">
+                    <div class="avt">
+                      <img
+                        class="avatar"
+                        :src="model.user_avatar"
+                        alt="Avatar"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <span>ニックネーム</span>
+                    <p>{{ model.user_nick_name }}</p>
+                  </div>
+                  <div>
+                    <span>症状を選択</span>
+                    <div class="row mx-0">
+                      <a-col
+                        v-for="symptom in model.symptoms"
+                        :key="symptom.id"
+                        span="6"
+                      >
+                        <p>{{ symptom.name }}</p>
+                      </a-col>
+                    </div>
+                  </div>
+                  <div>
+                    <span>紹介文</span>
+                    <p>{{ model.user_bio }}</p>
+                  </div>
+                </a-col>
+                <a-col span="5" />
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
 
       <div class="box-form-footer text-center bt-1 p-3">
-        <a-button
-          html-type="submit"
-          type="primary"
-          class="min-w-100"
-        >
-          {{ id ? $t('common.update') : $t('common.create') }}
-        </a-button>
-
-        &nbsp;
         <a-button
           html-type="button"
           type="default"
           class="min-w-100"
           @click="$emit('cancel')"
         >
-          {{ $t('common.cancel') }}
+          戻る
         </a-button>
       </div>
     </a-spin>
@@ -156,92 +201,131 @@
 <script>
 import DataForm from '~/mixins/data-form'
 
+const DEFAULT_AVATAR = require('~/assets/images/avatar_default.png')
+
 export default {
   mixins: [DataForm],
 
-  async fetch() {
-    this.$store.dispatch('setLoading', true)
-    try {
-      const { data } = await this.$api.indexRole()
-      this.roles = data.data
-    } catch (_) {
-      this.$notification.error({
-        message: this.$t('text.something_wrong')
-      })
-    } finally {
-      this.$store.dispatch('setLoading', false)
+  data: () => ({
+    resource: 'users'
+  }),
+
+  watch: {
+    model() {
+      this.model.user_avatar = this.model.user_avatar ?? DEFAULT_AVATAR
     }
   },
 
-  data: () => ({
-    resource: 'user',
-    roles: []
-  }),
-
-  computed: {
-    formRules() {
-      return {
-        name: [
-          {
-            required: true,
-            message: this.$t('validation.required', { field: this.$t('user.name') }),
-            trigger: ['change', 'blur']
-          }
-        ],
-        email: [
-          {
-            required: true,
-            message: this.$t('validation.required', { field: this.$t('user.email') }),
-            trigger: ['change', 'blur']
-          },
-          {
-            type: 'email',
-            trigger: ['change', 'blur']
-          }
-        ],
-        password: [
-          {
-            required: !this.id || this.model.password_confirm,
-            message: this.$t('validation.required', { field: this.$t('user.password') }),
-            trigger: ['change', 'blur']
-          },
-          {
-            min: 8,
-            message: this.$t('validation.min', { field: this.$t('user.password'), min: 8 }),
-            trigger: ['change', 'blur']
-          }
-        ],
-        password_confirm: [
-          {
-            required: !this.id || this.model.password,
-            message: this.$t('validation.required', { field: this.$t('user.password_confirm') }),
-            trigger: ['change', 'blur']
-          },
-          {
-            min: 8,
-            message: this.$t('validation.min', { field: this.$t('user.password_confirm'), min: 8 }),
-            trigger: ['change', 'blur']
-          },
-          {
-            validator: (rule, value, callback) => {
-              if (!value || !this.model.password) {
-                return callback()
-              } else if (value !== this.model.password) {
-                return callback(
-                  new Error(
-                    this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password_confirm') })
-                  )
-                )
-              } else {
-                callback()
-              }
-            },
-            message: this.$t('validation.not_match', { field1: this.$t('user.password'), field2: this.$t('user.password_confirm') }),
-            trigger: ['change', 'blur']
-          }
-        ]
+  methods: {
+    /**
+     * Convert unixTime to date
+     *
+     * @param nunber - unixTime
+     * @returns string
+    */
+    toDate(unixTime) {
+      if (!unixTime) {
+        return ''
       }
+      const date = new Date(unixTime * 1000)
+      return date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日'
     }
   }
 }
 </script>
+
+<style scoped lang="scss">
+/deep/ {
+  .ant-modal-title {
+    color: #362F0A !important;
+  }
+}
+
+th {
+  background: #f2f1e7;
+  text-align: center;
+}
+span {
+  color: #867d50;
+}
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.ctn-avt {
+  .avt {
+    max-width: 200px;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    .avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      width: 100%;
+    }
+    .btn-upload {
+      background: white !important;
+      color: black;
+      border: 1px solid;
+      border-radius: 50%;
+      position: absolute;
+      top: 80%;
+      left: 70%;
+    }
+  }
+}
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  td,
+  th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  tbody + tbody {
+    border-top: 2px solid #dee2e6;
+  }
+  .table {
+    background-color: #fff;
+  }
+  td .column-2 {
+    max-width: 100px !important;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.table-bordered {
+  border: 1px solid #dee2e6;
+  td,
+  th {
+    border: 1px solid #dee2e6;
+  }
+  thead td,
+  thead th {
+    border-bottom-width: 2px;
+  }
+}
+
+.rectangle {
+  width: 44px;
+  height: 21px;
+  color: white;
+  background: red;
+}
+
+</style>
