@@ -7,6 +7,7 @@ export default {
     'faBook',
     'faBorderAll',
     'faBoxes',
+    'faBullhorn',
     'faCalendarAlt',
     'faCaretDown',
     'faChevronDown',

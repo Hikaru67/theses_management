@@ -6,7 +6,7 @@
         width="50"
       />
       <div class="header__title">
-        <h4>認定N鮑濠人</h4>
+        <h4>認定NPO法人</h4>
         <h3>レツ 卜症候群支援機構</h3>
       </div>
     </div>
@@ -42,7 +42,7 @@
     font-size: 12px;
   }
   h3 {
-    font-size: 14px;
+    font-size: 18px;
   }
   * {
     margin-bottom: 0;

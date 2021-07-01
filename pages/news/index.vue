@@ -1,62 +1,70 @@
 
 <template>
-  <div>
-    <a-row
-      type="flex"
-      justify="center"
-      align="middle"
-      class="search-form__row"
+  <a-card>
+    <template
+      slot="title"
+      class="header"
     >
-      <a-col :span="2">
-        新着情報一覧
-      </a-col>
-      <a-col :span="12">
-        <a-input-search
-          v-model="filters.searchString"
-          placeholder="input search text"
-          size="large"
-          @search="search"
+      <a-row
+        type="flex"
+        justify="center"
+        align="middle"
+        class="search-form__row"
+      >
+        <a-col
+          :span="2"
+          class="title"
         >
-          <a-button
-            slot="enterButton"
-            icon="search"
+          新着情報一覧
+        </a-col>
+        <a-col :span="12">
+          <a-input-search
+            v-model="filters.searchString"
+            placeholder="キーワードを入力"
             size="large"
-            class="search-form__btn--primary"
+            @search="search"
           >
-            検索
-          </a-button>
-        </a-input-search>
-      </a-col>
-      <a-col :span="10">
-        <a-row
-          type="flex"
-          justify="end"
-        >
-          <a-button
-            size="large"
-            class="search-form__btn search-form__btn--primary"
-            @click="showForm(0)"
+            <a-button
+              slot="enterButton"
+              icon="search"
+              size="large"
+              class="search-form__btn--primary"
+            >
+              検索
+            </a-button>
+          </a-input-search>
+        </a-col>
+        <a-col :span="10">
+          <a-row
+            type="flex"
+            justify="end"
           >
-            <font-awesome-icon
-              icon="plus-circle"
-              class="width-1x mr-1"
-            />
-            新規作成
-          </a-button>
-          <a-button
-            size="large"
-            class="search-form__btn"
-            @click="gotoUserPage()"
-          >
-            <font-awesome-icon
-              icon="user"
-              class="width-1x mr-1"
-            />
-            ユーザー一覧
-          </a-button>
-        </a-row>
-      </a-col>
-    </a-row>
+            <a-button
+              size="large"
+              class="search-form__btn search-form__btn--primary"
+              @click="showForm(0)"
+            >
+              <font-awesome-icon
+                icon="plus-circle"
+                class="width-1x mr-1"
+              />
+              新規作成
+            </a-button>
+            <a-button
+              size="large"
+              class="search-form__btn"
+              @click="gotoUserPage()"
+            >
+              <font-awesome-icon
+                icon="user"
+                class="width-1x mr-1"
+              />
+              ユーザー一覧
+            </a-button>
+          </a-row>
+        </a-col>
+      </a-row>
+    </template>
     <a-row>
       <a-table
         :columns="columns"
@@ -65,6 +73,7 @@
         :pagination="pagination"
         :loading="loading"
         class="main-table"
+        bordered
         @change="handleTableChange"
       >
         <template
@@ -85,8 +94,8 @@
         >
           <a-button
             html-type="button"
-            type="primary"
-            size="small"
+            type="link"
+            size="large"
             :disabled="loading"
             @click="showDetail(record.id)"
           >
@@ -98,9 +107,10 @@
 
           <a-button
             html-type="button"
-            type="danger"
-            size="small"
+            type="link"
+            size="large"
             :disabled="loading"
+            style="color: red"
             @click="confirmToDelete(record.id)"
           >
             <font-awesome-icon
@@ -156,7 +166,7 @@
       cancel-text="ログアウト"
       @cancel="hideDialog"
     />
-  </div>
+  </a-card>
 </template>
 
 <script>
@@ -201,7 +211,7 @@ export default {
     columns() {
       const columns = [
         {
-          title: 'No',
+          title: 'No.',
           dataIndex: 'number',
           scopedSlots: { customRender: 'number' },
           width: 60
@@ -327,7 +337,7 @@ export default {
      * Go to user page
      */
     gotoUserPage() {
-      this.$router.push('/user')
+      this.$router.push('/users')
     }
   }
 }
@@ -368,6 +378,19 @@ export default {
     .ant-pagination-options {
       float: right;
     }
+  }
+  .ant-table-thead > tr > th {
+    background-color: #4c472b;
+    color: white;
+    font-weight: bold;
+  }
+  .title {
+    color: #796f3b;
+    font-size: large;
+    font-weight: bold;
+  }
+  .mb-3.ant-breadcrumb {
+    margin-bottom: 0 !important;
   }
 }
 </style>
