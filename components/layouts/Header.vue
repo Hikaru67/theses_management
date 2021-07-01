@@ -1,6 +1,9 @@
 <template>
   <a-layout-header :style="style">
-    <div class="box-left pl-3">
+    <nuxt-link
+      to="/users"
+      class="box-left pl-3"
+    >
       <img
         :src="require(`~/assets/images/logo.png`)"
         width="50"
@@ -9,7 +12,7 @@
         <h4>認定NPO法人</h4>
         <h3>レツ 卜症候群支援機構</h3>
       </div>
-    </div>
+    </nuxt-link>
 
     <div class="box-right pr-3">
       <a

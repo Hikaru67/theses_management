@@ -9,9 +9,7 @@
   >
     <a-spin :spinning="loading">
       <div class="box-form-inner p-4">
-        <table
-          class="table table-bordered"
-        >
+        <table class="table table-bordered">
           <tr>
             <th rowspan="4">
               <div
@@ -73,7 +71,7 @@
                   class="center"
                   style="height: 40px;"
                 >
-                  {{ toDate(model.user_birthday) }}
+                  {{ (+model.user_birthday * 1000) | date('YYYY年MM月DD日') }}
                 </div>
               </div>
             </td>
@@ -201,8 +199,6 @@
 <script>
 import DataForm from '~/mixins/data-form'
 
-const DEFAULT_AVATAR = require('~/assets/images/avatar_default.png')
-
 export default {
   mixins: [DataForm],
 
@@ -210,26 +206,7 @@ export default {
     resource: 'users'
   }),
 
-  watch: {
-    model() {
-      this.model.user_avatar = this.model.user_avatar ?? DEFAULT_AVATAR
-    }
-  },
-
   methods: {
-    /**
-     * Convert unixTime to date
-     *
-     * @param nunber - unixTime
-     * @returns string
-    */
-    toDate(unixTime) {
-      if (!unixTime) {
-        return ''
-      }
-      const date = new Date(unixTime * 1000)
-      return date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日'
-    }
   }
 }
 </script>
@@ -237,7 +214,7 @@ export default {
 <style scoped lang="scss">
 /deep/ {
   .ant-modal-title {
-    color: #362F0A !important;
+    color: #362f0a !important;
   }
 }
 
@@ -327,5 +304,4 @@ span {
   color: white;
   background: red;
 }
-
 </style>

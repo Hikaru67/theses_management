@@ -13,90 +13,100 @@
           class="main-search"
           @submit.prevent="search"
         >
-          <a-row :gutter="24">
+          <a-row
+            :gutter="24"
+            type="flex"
+            align="middle"
+          >
             <a-col
-              :md="6"
-              :xl="4"
-              :xxl="3"
-              class="title mt-2"
+              :md="2"
+              :xs="24"
+              class="search-form__col"
             >
-              ユーザー一覧
-            </a-col>
-            <a-col
-              :sm="8"
-              :md="5"
-              :lg="4"
-              :xxl="3"
-            >
-              <a-form-model-item prop="age">
-                年齢
-                <a-select
-                  v-model="filters.minAge"
-                  show-search
-                  placeholder="asd"
-                  size="large"
-                  style="width: 90px"
-                >
-                  <a-select-option
-                    v-for="number in 120"
-                    :key="number"
-                    :value="number"
-                  >
-                    {{ number }}
-                  </a-select-option>
-                </a-select>
-                歳
-              </a-form-model-item>
+              <span>ユーザー一覧</span>
             </a-col>
             <a-col
               :md="6"
-              :lg="4"
-              :xxl="3"
+              :xs="24"
+              class="search-form__col"
             >
-              <a-form-model-item prop="age">
-                ～
-                &nbsp;
-                &nbsp;
-                <a-select
-                  v-model="filters.maxAge"
-                  show-search
-                  placeholder="Select a person"
-                  size="large"
-                  style="width: 90px"
+              <a-row
+                type="flex"
+                align="middle"
+              >
+                <a-col
+                  :md="10"
+                  :xs="11"
                 >
-                  <a-select-option
-                    v-for="number in 100"
-                    :key="number"
+                  年齢
+                  <a-select
+                    v-model="filters.minAge"
+                    show-search
+                    placeholder="asd"
+                    size="large"
+                    class="search-form__select"
                   >
-                    {{ number }}
-                  </a-select-option>
-                </a-select>
-                歳
-              </a-form-model-item>
+                    <a-select-option
+                      v-for="item in ageList"
+                      :key="item.age"
+                      :value="item.age"
+                    >
+                      {{ item.name }}
+                    </a-select-option>
+                  </a-select>
+                  歳
+                </a-col>
+                <a-col
+                  :md="4"
+                  :xs="2"
+                  class="text-center"
+                >
+                  ~
+                </a-col>
+                <a-col
+                  :md="10"
+                  :xs="11"
+                >
+                  <a-select
+                    v-model="filters.maxAge"
+                    show-search
+                    placeholder="Select a person"
+                    size="large"
+                    class="search-form__select"
+                  >
+                    <a-select-option
+                      v-for="item in ageList"
+                      :key="item.age"
+                      :value="item.age"
+                    >
+                      {{ item.name }}
+                    </a-select-option>
+                  </a-select>
+                  歳
+                </a-col>
+              </a-row>
             </a-col>
             <a-col
               :md="14"
-              :xl="8"
+              :xs="24"
+              class="search-form__col"
             >
-              <div class="row">
+              <a-row type="flex">
                 <a-col
-                  :md="16"
-                  :xl="16"
-                  class="form-search__input"
+                  :md="20"
+                  :xs="16"
+                  class="search-form__input--left"
                 >
-                  <a-form-model-item prop="keyword">
-                    <a-input
-                      v-model="filters.searchContent"
-                      placeholder="キーワードを入力"
-                      style="width: 100%"
-                      size="large"
-                      :disabled="loading"
-                    />
-                  </a-form-model-item>
+                  <a-input
+                    v-model="filters.searchContent"
+                    placeholder="キーワードを入力"
+                    size="large"
+                    :disabled="loading"
+                  />
                 </a-col>
                 <a-col
-                  :md="8"
-                  :xl="8"
+                  :md="4"
+                  :xs="8"
                 >
                   <a-button
                     html-type="submit"
@@ -112,41 +122,32 @@
                     {{ $t('common.search') }}
                   </a-button>
                 </a-col>
-              </div>
+              </a-row>
             </a-col>
             <a-col
-              :md="8"
-              :lg="10"
-              :xl="4"
-              :xxl="7"
+              :md="2"
+              :xs="24"
+              class="search-form__col"
             >
-              <div class="row">
-                <a-col :md="12" />
-                <a-col :md="12">
-                  <a-button
-                    html-type="button"
-                    type="primary"
-                    class="mt-1"
-                    ghost
-                    style="float: right"
-                    size="large"
-                    @click="gotoNewsPage()"
-                  >
-                    <font-awesome-icon
-                      icon="bullhorn"
-                      class="width-1x mr-1"
-                    />
-                    新着情報
-                  </a-button>
-                </a-col>
-              </div>
+              <a-button
+                html-type="button"
+                type="primary"
+                ghost
+                size="large"
+                @click="gotoNewsPage()"
+              >
+                <font-awesome-icon
+                  icon="bullhorn"
+                  class="width-1x mr-1"
+                />
+                新着情報
+              </a-button>
             </a-col>
           </a-row>
         </a-form-model>
       </template>
 
       <!-- end main-search -->
-      <!-- {{ data }} :pagination="pagination"-->
       <a-table
         :columns="columns"
         :row-key="record => record.id"
@@ -198,10 +199,10 @@
 
           <a-button
             html-type="button"
-            type="link"
             size="large"
+            type="link"
             :disabled="loading"
-            style="color: red"
+            class="action__btn-danger"
             @click="confirmToDelete(record.id, record.name)"
           >
             <font-awesome-icon
@@ -346,24 +347,26 @@ export default {
       ]
 
       columns.forEach(item => {
-        if (this.$route.query.sortField === item.dataIndex) {
-          item.sortOrder = this.$route.query.sortOrder
+        if (this.$route.query.fieldName === item.dataIndex && this.$route.query.isAsc) {
+          item.sortOrder = this.$route.query.isAsc === 'true' ? 'ascend' : 'descend'
+        } else {
+          item.sortOrder = null
         }
       })
 
       return columns
     },
 
-    /**
-    * Get pagination query
-    *
-    * @param {Object} Pagination query
-    */
-    paginationQuery() {
-      return {
-        pageSize: this.pageSize,
-        page: this.page
+    ageList() {
+      const defaultOption = {
+        name: '--',
+        age: ''
       }
+      const ageList = [...Array(100).keys()].map(item => ({
+        name: item + 1,
+        age: item + 1
+      }))
+      return [defaultOption, ...ageList]
     }
   },
 
@@ -388,7 +391,7 @@ export default {
         okText: '削除',
         okType: 'danger',
         cancelText: '戻る',
-        onOk: () => this.deleteRecord(id)
+        onOk: () => this.deleteRecord(id).then(_ => this.closeDialog(true))
       })
     },
 
@@ -399,7 +402,7 @@ export default {
      * @return {string} symptoms
      */
     getSymptoms(symptoms) {
-      return symptoms.map(item => item.name).join('　')
+      return symptoms.map(item => item.name).join(', ')
     },
 
     /**
@@ -427,17 +430,6 @@ export default {
     },
 
     /**
-     * Clear form search
-     */
-    reset() {
-      this.filters = {
-        searchContent: '',
-        minAge: '',
-        maxAge: ''
-      }
-    },
-
-    /**
      * Search data
      */
     search() {
@@ -449,10 +441,20 @@ export default {
 
 <style scoped lang="scss">
 /deep/ {
-  .form-search__input {
-    .ant-form-item-control-wrapper {
-      width: 100% !important;
-    }
+  .search-form__col {
+    margin: 20px 0;
+  }
+
+  .action__btn-danger {
+    color: #ff4d4f;
+  }
+
+  .search-form__input--left {
+    padding-right: 20px;
+  }
+
+  .search-form__select {
+    width: 120px;
   }
 
   .ant-table-pagination {
