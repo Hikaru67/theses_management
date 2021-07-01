@@ -209,10 +209,6 @@ export default {
       currentId: 0,
       filters: {
         searchString: this.$route.query.searchString || ''
-      },
-      pagination: {
-        showSizeChanger: true,
-        showTotal: () => false
       }
     }
   },

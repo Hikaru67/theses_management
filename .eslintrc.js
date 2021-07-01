@@ -16,7 +16,11 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-console': 0,
-    'space-before-function-paren': ['error', 'never'],
+    'space-before-function-paren': ['error', {
+      anonymous: 'always',
+      named: 'never',
+      asyncArrow: 'never'
+    }],
     'arrow-parens': ['error', 'as-needed'],
     'vue/html-self-closing': ['error', {
       html: {
