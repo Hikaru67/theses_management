@@ -12,12 +12,17 @@
         class="search-form__row"
       >
         <a-col
-          :span="2"
-          class="title"
+          :md="2"
+          :xs="24"
+          class="search-form__col"
         >
           新着情報一覧
         </a-col>
-        <a-col :span="12">
+        <a-col
+          :md="12"
+          :xs="24"
+          class="search-form__col"
+        >
           <a-input-search
             v-model="filters.searchString"
             placeholder="キーワードを入力"
@@ -34,33 +39,41 @@
             </a-button>
           </a-input-search>
         </a-col>
-        <a-col :span="10">
+        <a-col
+          :md="10"
+          :xs="24"
+          class="search-form__col"
+        >
           <a-row
             type="flex"
             justify="end"
           >
-            <a-button
-              size="large"
-              class="search-form__btn search-form__btn--primary"
-              @click="showForm(0)"
-            >
-              <font-awesome-icon
-                icon="plus-circle"
-                class="width-1x mr-1"
-              />
-              新規作成
-            </a-button>
-            <a-button
-              size="large"
-              class="search-form__btn"
-              @click="gotoUserPage()"
-            >
-              <font-awesome-icon
-                icon="user"
-                class="width-1x mr-1"
-              />
-              ユーザー一覧
-            </a-button>
+            <a-col :md="6">
+              <a-button
+                size="large"
+                class="search-form__btn search-form__btn--primary"
+                @click="showForm(0)"
+              >
+                <font-awesome-icon
+                  icon="plus-circle"
+                  class="width-1x mr-1"
+                />
+                新規作成
+              </a-button>
+            </a-col>
+            <a-col :md="6">
+              <a-button
+                size="large"
+                class="search-form__btn"
+                @click="gotoUserPage()"
+              >
+                <font-awesome-icon
+                  icon="user"
+                  class="width-1x mr-1"
+                />
+                ユーザー一覧
+              </a-button>
+            </a-col>
           </a-row>
         </a-col>
       </a-row>
@@ -74,6 +87,7 @@
         :loading="loading"
         class="main-table"
         bordered
+        :scroll="{ x: 1300 }"
         @change="handleTableChange"
       >
         <template
@@ -214,7 +228,8 @@ export default {
           title: 'No.',
           dataIndex: 'number',
           scopedSlots: { customRender: 'number' },
-          width: 60
+          width: 60,
+          fixed: 'left'
         },
         {
           title: '配信日時',
@@ -345,14 +360,15 @@ export default {
 
 <style scoped lang="scss">
 /deep/ {
-  .search-form__row {
-    padding: 20px 0;
+  .search-form__col {
+    margin: 20px 0;
   }
   .search-form__btn {
     margin-left: 20px;
   }
   .search-form__btn--primary {
     background: #f5d528;
+    float: right;
   }
   .ant-table-pagination {
     width: 100%;

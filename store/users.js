@@ -12,10 +12,10 @@ class User {
     this.user_kanji_name = get(props, 'user_kanji_name', '')
     this.user_katakana_surname = get(props, 'user_katakana_surname', '')
     this.user_katakana_name = get(props, 'user_katakana_name', '')
-    this.user_birthday = get(props, 'user_birthday', '')
+    this.user_birthday = get(props, 'user_birthday', '').replace(/^\s+|\s+$/g, '')
     this.user_phone_number = get(props, 'user_phone_number', '')
     this.user_mail_address = get(props, 'user_mail_address', '')
-    this.user_avatar = get(props, 'user_avatar', '')
+    this.user_avatar = get(props, 'user_avatar', require('~/assets/images/avatar_default.png'))
     this.user_nick_name = get(props, 'user_nick_name', '')
     this.user_postal_code = get(props, 'user_postal_code', '')
     this.town = get(props, 'town', '')
@@ -56,7 +56,7 @@ export const actions = {
   async getList({ commit }, payload) {
     const params = cloneDeep(payload.params)
     params.page = params.page || 1
-    params.pageSize = params.limit || 10
+    params.pageSize = params.pageSize || 10
     const { data } = await this.$api.indexUsers({ params })
     commit(SET_LIST, data.data)
     return data

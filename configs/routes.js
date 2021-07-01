@@ -9,13 +9,5 @@ export default {
     get: {
       name: 'getCity'
     }
-  },
-  menu: {
-    resource: {}
-  },
-  'menu/move': {
-    post: {
-      name: 'moveMenu'
-    }
   }
 }
