@@ -18,7 +18,7 @@
               :md="6"
               :xl="4"
               :xxl="3"
-              class="title mt-1"
+              class="title mt-2"
             >
               ユーザー一覧
             </a-col>
@@ -34,6 +34,7 @@
                   v-model="filters.minAge"
                   show-search
                   placeholder="asd"
+                  size="large"
                   style="width: 90px"
                 >
                   <a-select-option
@@ -53,13 +54,14 @@
               :xxl="3"
             >
               <a-form-model-item prop="age">
-                ~
+                ～
                 &nbsp;
                 &nbsp;
                 <a-select
                   v-model="filters.maxAge"
                   show-search
                   placeholder="Select a person"
+                  size="large"
                   style="width: 90px"
                 >
                   <a-select-option
@@ -87,6 +89,7 @@
                       v-model="filters.searchContent"
                       placeholder="キーワードを入力"
                       style="width: 100%"
+                      size="large"
                       :disabled="loading"
                     />
                   </a-form-model-item>
@@ -98,7 +101,8 @@
                   <a-button
                     html-type="submit"
                     type="primary"
-                    class="min-w-100 mt-1 btn-search"
+                    class="min-w-100 btn-search"
+                    size="large"
                     :disabled="loading"
                   >
                     <font-awesome-icon
@@ -125,6 +129,7 @@
                     class="mt-1"
                     ghost
                     style="float: right"
+                    size="large"
                     @click="gotoNewsPage()"
                   >
                     <font-awesome-icon
@@ -252,7 +257,6 @@
 <script>
 import UserForm from '~/components/templates/UserForm'
 import DataTable from '~/mixins/data-table'
-// import Paginator from '~/mixins/paginator'
 
 export default {
   components: {
@@ -260,7 +264,6 @@ export default {
   },
 
   mixins: [
-    // Paginator,
     DataTable
   ],
 

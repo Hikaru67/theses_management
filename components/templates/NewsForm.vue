@@ -23,7 +23,7 @@
               >
                 <a-input
                   v-model="model.title"
-                  placeholder="タイトル"
+                  placeholder="入力してください"
                 />
               </a-form-model-item>
             </a-col>
@@ -58,7 +58,7 @@
               >
                 <a-textarea
                   v-model="model.content"
-                  placeholder="本文"
+                  placeholder="入力してください"
                   :rows="16"
                 />
               </a-form-model-item>
