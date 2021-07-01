@@ -1,9 +1,10 @@
 <template>
-  <div class="box-overview">
-    Home
-  </div>
+  <a-spin :spinning="true" />
 </template>
 
-<style lang="scss" scoped>
-@import "~/assets/scss/components/overview.scss";
-</style>
+<script>
+
+export default {
+  middleware: ['guest']
+}
+</script>

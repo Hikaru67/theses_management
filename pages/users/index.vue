@@ -233,6 +233,7 @@
           class="mr-4"
           style="float: right"
           :disabled="loading"
+          ghost
           @click="confirmToDelete(currentId, currentName)"
         >
           <font-awesome-icon
@@ -278,10 +279,6 @@ export default {
         searchContent: this.$route.query.searchContent || '',
         minAge: this.$route.query.minAge || '',
         maxAge: this.$route.query.maxAge || ''
-      },
-      pagination: {
-        showSizeChanger: true,
-        showTotal: () => false
       }
     }
   },
