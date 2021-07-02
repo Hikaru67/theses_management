@@ -149,8 +149,7 @@ export default {
    ** Active router link
    */
   router: {
-    linkActiveClass: 'active-link',
-    trailingSlash: false
+    linkActiveClass: 'active-link'
   },
 
   /**
