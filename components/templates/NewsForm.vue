@@ -199,7 +199,7 @@ export default {
             await this.$store.dispatch(action, this.model)
 
             this.isDraft = true
-            this.$emit('save')
+            this.$emit('save', this.model.title)
           } catch (_) {
             this.$notification.error({
               message: this.$t('text.something_wrong')

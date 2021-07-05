@@ -94,7 +94,7 @@ export default {
   margin: 20px 0;
 }
 .confirm__actions {
-  margin-top: 60px;
+  margin-top: 40px;
   .confirm__col {
     display: flex;
     justify-content: center;

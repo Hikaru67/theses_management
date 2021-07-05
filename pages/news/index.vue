@@ -125,7 +125,7 @@
             size="large"
             :disabled="loading"
             style="color: red"
-            @click="confirmToDelete(record.id)"
+            @click="confirmToDelete(record.id, record.news_title)"
           >
             <font-awesome-icon
               icon="trash-alt"
@@ -174,10 +174,10 @@
       </a-spin>
     </a-modal>
 
-    <action-dialog
+    <finish-dialog
       v-model="dialogVisible"
-      title="口グアウトしますか"
-      cancel-text="ログアウト"
+      :title="currentTitle"
+      :cancel-text="this.$t('common.cancel')"
       @cancel="hideDialog"
     />
   </a-card>
@@ -186,14 +186,14 @@
 <script>
 import NewsForm from '~/components/templates/NewsForm'
 import NewsDetail from '~/components/templates/NewsDetail'
-import ActionDialog from '~/components/molecules/ActionDialog'
+import FinishDialog from '~/components/molecules/FinishDialog'
 import DataTable from '~/mixins/data-table'
 
 export default {
   components: {
     NewsForm,
     NewsDetail,
-    ActionDialog
+    FinishDialog
   },
 
   mixins: [
@@ -206,6 +206,7 @@ export default {
       formVisible: false,
       detailVisible: false,
       dialogVisible: false,
+      currentTitle: '',
       currentId: 0,
       filters: {
         searchString: this.$route.query.searchString || ''
@@ -264,10 +265,13 @@ export default {
   },
 
   methods: {
-    /*
+    /**
      * Hide modal
+     *
+     * @param {String} currentTitle
      */
-    showDialog() {
+    showDialog(currentTitle) {
+      this.currentTitle = currentTitle
       this.dialogVisible = true
     },
     /*
@@ -323,9 +327,30 @@ export default {
       }
     },
 
-    closeFormAndShowDialog() {
+    /**
+     * Close form and show diaglog
+     *
+     * @param {String} currentTitle
+     */
+    closeFormAndShowDialog(currentTitle) {
       this.closeForm(true)
-      this.showDialog()
+      this.showDialog(currentTitle)
+    },
+
+    /**
+     * Confirm to delete
+     *
+     * @param {Number} id
+     * @param {String} title
+     */
+    confirmToDelete(id, title) {
+      this.$confirm({
+        title: title + this.$t('text.confirm_to_delete'),
+        okText: this.$t('common.delete'),
+        okType: 'danger',
+        cancelText: this.$t('common.cancel'),
+        onOk: () => this.deleteRecord(id)
+      })
     },
 
     /**
