@@ -301,8 +301,6 @@ button,
   @include mq(max_xs) {
     text-align: center;
   }
-  .col-left {
-  }
   .col-right {
     text-align: right;
     @include mq(max_xs) {
