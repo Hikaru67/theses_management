@@ -114,6 +114,9 @@
     .ant-form-item {
       margin: 30px 0;
     }
+    .ant-input-suffix {
+      cursor: pointer;
+    }
   }
 }
 </style>
