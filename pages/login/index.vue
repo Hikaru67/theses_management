@@ -32,32 +32,19 @@
             <a-input
               v-model="email"
               :placeholder="'入力してください'"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="envelope"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
+            />
           </a-form-model-item>
 
           <a-form-model-item
             prop="password"
+            visibility-toggle="false"
             label="バスワ一ド"
           >
             <a-input-password
               v-model="password"
               type="'入力してください'"
               placeholder="入力してください"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="lock"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input-password>
+            />
           </a-form-model-item>
 
           <div
