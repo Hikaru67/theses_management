@@ -174,9 +174,10 @@
       </a-spin>
     </a-modal>
 
-    <finish-dialog
+    <action-dialog
       v-model="dialogVisible"
-      :title="currentTitle"
+      :content="currentTitle"
+      title="が配信されました"
       :cancel-text="this.$t('common.cancel')"
       @cancel="hideDialog"
     />
@@ -186,14 +187,14 @@
 <script>
 import NewsForm from '~/components/templates/NewsForm'
 import NewsDetail from '~/components/templates/NewsDetail'
-import FinishDialog from '~/components/molecules/FinishDialog'
+import ActionDialog from '~/components/molecules/ActionDialog'
 import DataTable from '~/mixins/data-table'
 
 export default {
   components: {
     NewsForm,
     NewsDetail,
-    FinishDialog
+    ActionDialog
   },
 
   mixins: [
