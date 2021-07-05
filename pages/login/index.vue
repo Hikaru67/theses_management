@@ -37,14 +37,28 @@
 
           <a-form-model-item
             prop="password"
-            visibility-toggle="false"
             label="バスワ一ド"
           >
-            <a-input-password
+            <a-input
               v-model="password"
-              type="'入力してください'"
-              placeholder="入力してください"
-            />
+              :type="visibility"
+              :placeholder="'入力してください'"
+            >
+              <font-awesome-icon
+                v-if="visibility === 'password'"
+                slot="suffix"
+                icon="eye"
+                class="width-1x mr-1"
+                @click="showPassword()"
+              />
+              <font-awesome-icon
+                v-else-if="visibility === 'text'"
+                slot="suffix"
+                icon="eye-slash"
+                class="width-1x mr-1"
+                @click="hidePassword()"
+              />
+            </a-input>
           </a-form-model-item>
 
           <div
@@ -117,7 +131,8 @@ export default {
     return {
       email: '',
       password: '',
-      message: ''
+      message: '',
+      visibility: 'password'
     }
   },
 
@@ -171,6 +186,20 @@ export default {
           }
         }
       })
+    },
+
+    /**
+     * show password
+     */
+    showPassword() {
+      this.visibility = 'text'
+    },
+
+    /**
+     * hidden password
+     */
+    hidePassword() {
+      this.visibility = 'password'
     }
   }
 }

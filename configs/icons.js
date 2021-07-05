@@ -17,6 +17,7 @@ export default {
     'faEnvelope',
     'faEraser',
     'faEye',
+    'faEyeSlash',
     'faFileAlt',
     'faGlobeAmericas',
     'faHandPointDown',
