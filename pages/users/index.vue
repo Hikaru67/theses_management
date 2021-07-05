@@ -21,7 +21,7 @@
             <a-col
               :md="2"
               :xs="24"
-              class="search-form__col"
+              class="search-form__col title"
             >
               <span>ユーザー一覧</span>
             </a-col>
@@ -336,7 +336,7 @@ export default {
           scopedSlots: { customRender: 'symptoms' }
         },
         {
-          title: 'アクション',
+          title: this.$t('common.action'),
           dataIndex: 'action',
           scopedSlots: { customRender: 'action' },
           width: 140

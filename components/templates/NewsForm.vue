@@ -73,7 +73,7 @@
                   &nbsp;
                   &nbsp;
                   &nbsp;
-                  都道府県: {{ model.city ? model.city.name : '' }}
+                  配信エリア: {{ model.city ? model.city.name : '' }}
                 </span>
                 <h1>{{ model.title }}</h1>
               </div>
@@ -100,7 +100,7 @@
         &nbsp;
         <a-button
           html-type="submit"
-          type="primary"
+          type="primary btn-create"
           class="min-w-100"
         >
           {{ id ? $t('common.update') : $t('common.create') }}
@@ -148,14 +148,14 @@ export default {
         title: [
           {
             required: true,
-            message: this.$t('validation.required', { field: 'タイトル' }),
+            message: this.$t('validation.just_required'),
             trigger: ['change', 'blur']
           }
         ],
         content: [
           {
             required: true,
-            message: this.$t('validation.required', { field: '本文' }),
+            message: this.$t('validation.just_required'),
             trigger: ['change', 'blur']
           }
         ]
@@ -229,5 +229,10 @@ export default {
       width: 0;
     }
   }
+}
+.btn-create {
+  border: none;
+  background-color: #f5d528 !important;
+  color: black;
 }
 </style>

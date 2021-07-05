@@ -14,7 +14,7 @@
         <a-col
           :md="2"
           :xs="24"
-          class="search-form__col"
+          class="search-form__col title"
         >
           新着情報一覧
         </a-col>
@@ -145,7 +145,7 @@
       @cancel="closeForm(false)"
     >
       <template slot="title">
-        新着情報
+        新着情報&nbsp;&nbsp;新規作成
       </template>
 
       <a-spin :spinning="loading">
