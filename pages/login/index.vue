@@ -31,7 +31,7 @@
           >
             <a-input
               v-model="email"
-              :placeholder="'入カ してく ださい'"
+              :placeholder="'入力してください'"
             >
               <font-awesome-icon
                 slot="prefix"
@@ -49,7 +49,7 @@
             <a-input-password
               v-model="password"
               type="'入力してください'"
-              :placeholder="$t('user.password')"
+              placeholder="入力してください"
             >
               <font-awesome-icon
                 slot="prefix"
