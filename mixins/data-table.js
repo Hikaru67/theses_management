@@ -106,7 +106,7 @@ export default {
      *
      * @param {Number} id
      */
-    goToDetail(id) {
+    gotoDetail(id) {
       this.$router.push(`/${this.resource}/${id}`)
     },
 

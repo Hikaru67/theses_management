@@ -168,7 +168,7 @@ export default {
         endpoints: {
           login: { url: '/user/login', method: 'post', propertyName: 'data.accessToken' },
           user: { url: '/users/me', method: 'get', propertyName: false },
-          logout: { url: '/logout', method: 'post' }
+          logout: { url: '/users/logout', method: 'get' }
         }
       }
     },
