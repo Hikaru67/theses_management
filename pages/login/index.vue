@@ -52,7 +52,7 @@
                 @click="showPassword()"
               />
               <font-awesome-icon
-                v-else-if="visibility === 'text'"
+                v-else
                 slot="suffix"
                 icon="eye-slash"
                 class="width-1x mr-1"
