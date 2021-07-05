@@ -26,7 +26,7 @@
 
     <action-dialog
       v-model="visible"
-      title="口グアウトしますか"
+      title="口グアウトしますか？"
       cancel-text="戻る"
       ok-text="ログアウト"
       @ok="logout"

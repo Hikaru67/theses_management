@@ -1,8 +1,8 @@
 {
-  "common.action": "アクション",
-  "common.cancel": "キャンセル",
+  "common.action": "",
+  "common.cancel": "戻る",
   "common.clear": "クリア",
-  "common.create": "作成",
+  "common.create": "確認",
   "common.delete": "削除",
   "common.download": "ダウンロード",
   "common.edit": "編集",
@@ -36,5 +36,6 @@
   "user.roles": "役割",
   "validation.min": "{field}は少なくとも{min}文字である必要があります",
   "validation.not_match": "{field1}と{field2}が一致しません",
-  "validation.required": "{field}必須項目です"
+  "validation.required": "{field}必須項目です",
+  "validation.just_required": "入力してください"
 }

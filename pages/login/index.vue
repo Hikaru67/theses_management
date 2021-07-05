@@ -22,7 +22,7 @@
           </h2>
 
           <h4 class="txt-title-top text-center mb-3">
-            譲定NPO人 レ)ト窪俣鰐烹攫縫縄
+            認定NPO法人 レット症候群支援機構
           </h4>
 
           <a-form-model-item
@@ -31,7 +31,7 @@
           >
             <a-input
               v-model="email"
-              :placeholder="'入カ してく ださい'"
+              :placeholder="'入力してください'"
             >
               <font-awesome-icon
                 slot="prefix"
@@ -49,7 +49,7 @@
             <a-input-password
               v-model="password"
               type="'入力してください'"
-              :placeholder="$t('user.password')"
+              placeholder="入力してください"
             >
               <font-awesome-icon
                 slot="prefix"
@@ -178,7 +178,7 @@ export default {
               this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
             }
           } catch (_) {
-            this.message = 'メ一ルア ド レスとバスワ一 ドが一軟し ません'
+            this.message = 'メールアドレスとパスワードが一致しません'
           } finally {
             this.$store.dispatch('setLoading', false)
           }
