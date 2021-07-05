@@ -16,9 +16,15 @@
 /* -----------------------------------------------------------
   common
   ----------------------------------------------------------- */
-div {
-  font-family: Source Han Sans JP;
+@font-face {
+  font-family: "Source Han Sans JP";
+  src: require('~/assets/fonts/SourceHanSansJP-Regular.otf');
 }
+
+body {
+  font-family: "Source Han Sans JP" !important;
+}
+
 ul {
   list-style: none;
   padding: 0;
