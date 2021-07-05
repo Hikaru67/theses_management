@@ -18,7 +18,7 @@
               type="danger"
               class="min-w-100"
               ghost
-              @click.stop="confirmToDelete(model.id)"
+              @click.stop="confirmToDelete(model.id, model.title)"
             >
               <font-awesome-icon
                 icon="trash-alt"
@@ -86,13 +86,14 @@ export default {
      * Confirm to delete
      *
      * @param {Number} id
+     * @param {String} title
      */
-    confirmToDelete(id) {
+    confirmToDelete(id, title) {
       this.$confirm({
-        title: this.$t('text.confirm_to_delete'),
-        okText: this.$t('common.yes'),
+        title: title + this.$t('text.confirm_to_delete'),
+        okText: this.$t('common.delete'),
         okType: 'danger',
-        cancelText: this.$t('common.no'),
+        cancelText: this.$t('common.cancel'),
         onOk: () => this.deleteRecord(id)
       })
     },

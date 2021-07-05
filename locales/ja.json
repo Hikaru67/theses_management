@@ -26,7 +26,7 @@
   "pagination.total": "合計{total}アイテム",
   "role.name": "名前",
   "role.permissions": "権限",
-  "text.confirm_to_delete": "このアイテムを削除してもよろしいですか？",
+  "text.confirm_to_delete": "を削除します。よろしいですか？",
   "text.something_wrong": "問題が発生しました",
   "text.successfully": "正常に",
   "user.email": "メールアドレス",

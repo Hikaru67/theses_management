@@ -8,6 +8,12 @@
   >
     <a-spin :spinning="loading">
       <h4 class="confirm__title text-center">
+        <div
+          v-if="content"
+          class="confirm__content"
+        >
+          {{ content }}
+        </div>
         {{ title }}
       </h4>
       <a-row
@@ -16,7 +22,7 @@
         justify="center"
       >
         <a-col
-          :span="!okText ? 24 : 12"
+          :span="!okText ? 8 : 12"
           class="confirm__col confirm__col--cancel"
         >
           <a-button
@@ -30,6 +36,7 @@
           </a-button>
         </a-col>
         <a-col
+          v-if="okText"
           :span="!cancelText ? 24 : 12"
           class="confirm__col confirm__col--ok"
         >
@@ -57,6 +64,11 @@ export default {
       type: String,
       default: '',
       required: true
+    },
+
+    content: {
+      type: String,
+      default: ''
     },
 
     okText: {
@@ -93,8 +105,11 @@ export default {
 .confirm__title {
   margin: 20px 0;
 }
+.confirm__content {
+  color: #004bb1;
+}
 .confirm__actions {
-  margin-top: 60px;
+  margin-top: 40px;
   .confirm__col {
     display: flex;
     justify-content: center;

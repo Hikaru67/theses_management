@@ -32,32 +32,33 @@
             <a-input
               v-model="email"
               :placeholder="'入力してください'"
-            >
-              <font-awesome-icon
-                slot="prefix"
-                icon="envelope"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
-              />
-            </a-input>
+            />
           </a-form-model-item>
 
           <a-form-model-item
             prop="password"
             label="バスワ一ド"
           >
-            <a-input-password
+            <a-input
               v-model="password"
-              type="'入力してください'"
-              placeholder="入力してください"
+              :type="visibility"
+              :placeholder="'入力してください'"
             >
               <font-awesome-icon
-                slot="prefix"
-                icon="lock"
-                class="width-1x"
-                style="color:rgba(0,0,0,.25)"
+                v-if="visibility === 'password'"
+                slot="suffix"
+                icon="eye"
+                class="width-1x mr-1"
+                @click="showPassword()"
               />
-            </a-input-password>
+              <font-awesome-icon
+                v-else
+                slot="suffix"
+                icon="eye-slash"
+                class="width-1x mr-1"
+                @click="hidePassword()"
+              />
+            </a-input>
           </a-form-model-item>
 
           <div
@@ -113,6 +114,9 @@
     .ant-form-item {
       margin: 30px 0;
     }
+    .ant-input-suffix {
+      cursor: pointer;
+    }
   }
 }
 </style>
@@ -130,7 +134,8 @@ export default {
     return {
       email: '',
       password: '',
-      message: ''
+      message: '',
+      visibility: 'password'
     }
   },
 
@@ -144,14 +149,14 @@ export default {
         email: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('user.email') }),
+            message: this.$t('validation.required', { field: '' }),
             trigger: ['change', 'blur']
           }
         ],
         password: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('user.password') }),
+            message: this.$t('validation.required', { field: '' }),
             trigger: ['change', 'blur']
           }
         ]
@@ -184,6 +189,20 @@ export default {
           }
         }
       })
+    },
+
+    /**
+     * show password
+     */
+    showPassword() {
+      this.visibility = 'text'
+    },
+
+    /**
+     * hidden password
+     */
+    hidePassword() {
+      this.visibility = 'password'
     }
   }
 }

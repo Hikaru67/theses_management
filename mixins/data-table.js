@@ -118,9 +118,9 @@ export default {
     confirmToDelete(id) {
       this.$confirm({
         title: this.$t('text.confirm_to_delete'),
-        okText: this.$t('common.yes'),
+        okText: this.$t('common.delete'),
         okType: 'danger',
-        cancelText: this.$t('common.no'),
+        cancelText: this.$t('common.cancel'),
         onOk: () => this.deleteRecord(id)
       })
     },
