@@ -44,6 +44,9 @@ button,
     opacity: 0.7;
   }
 }
+label::after {
+  content: '' !important;
+}
 .bt-0 {
   border-top: 0 !important;
 }
