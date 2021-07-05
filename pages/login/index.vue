@@ -131,14 +131,14 @@ export default {
         email: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('user.email') }),
+            message: this.$t('validation.required', { field: '' }),
             trigger: ['change', 'blur']
           }
         ],
         password: [
           {
             required: true,
-            message: this.$t('validation.required', { field: this.$t('user.password') }),
+            message: this.$t('validation.required', { field: '' }),
             trigger: ['change', 'blur']
           }
         ]
