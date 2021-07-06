@@ -73,7 +73,7 @@
                   &nbsp;
                   &nbsp;
                   &nbsp;
-                  配信エリア: {{ model.city ? model.city.name : '' }}
+                  配信エリア: {{ model.city_id ? curentCity : '' }}
                 </span>
                 <h1>{{ model.title }}</h1>
               </div>
@@ -163,7 +163,7 @@ export default {
     },
 
     currentDate() {
-      return this.$moment().format('Y/m/d')
+      return this.$moment().format('YYYY.MM.DD')
     },
 
     curentCity() {
@@ -200,6 +200,7 @@ export default {
 
             this.isDraft = true
             this.$emit('save', this.model.title)
+            this.model = {}
           } catch (_) {
             this.$notification.error({
               message: this.$t('text.something_wrong')
