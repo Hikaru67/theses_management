@@ -24,6 +24,7 @@
     "nuxt-i18n": "^6.13.1"
   },
   "devDependencies": {
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",

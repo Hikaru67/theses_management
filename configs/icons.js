@@ -55,5 +55,9 @@ export default {
     'faUsers',
     'faUserTie',
     'faWineBottle'
+  ],
+  regular: [
+    'faFileAlt',
+    'faTrashAlt'
   ]
 }
