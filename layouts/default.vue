@@ -7,7 +7,7 @@
 
         <a-layout-content class="pt-4">
           <transition name="fade">
-            <div class="container-fluid">
+            <div>
               <Breadcrumb />
               <!-- end breadcrumb -->
 
