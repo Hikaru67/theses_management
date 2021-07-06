@@ -20,6 +20,7 @@ import {
   Layout,
   Menu,
   Modal,
+  Popover,
   Row,
   Select,
   Spin,
@@ -43,6 +44,7 @@ Vue.use(Input)
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Modal)
+Vue.use(Popover)
 Vue.use(Row)
 Vue.use(Select)
 Vue.use(Spin)
