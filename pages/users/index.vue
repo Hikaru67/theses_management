@@ -171,7 +171,12 @@
           slot-scope="text, record"
           class="nick-name"
         >
-          {{ record.nickName }}
+          <a-popover placement="top">
+            <template slot="content">
+              {{ record.nickName }}
+            </template>
+            {{ record.nickName }}
+          </a-popover>
         </template>
 
         <template
@@ -306,6 +311,7 @@ export default {
         {
           title: 'ニックネーム',
           dataIndex: 'nickName',
+          scopedSlots: { customRender: 'nickName' },
           sorter: true
         },
         {
@@ -360,8 +366,8 @@ export default {
         age: ''
       }
       const ageList = [...Array(100).keys()].map(item => ({
-        name: item + 1,
-        age: item + 1
+        name: item,
+        age: item
       }))
       return [defaultOption, ...ageList]
     }
@@ -385,10 +391,11 @@ export default {
         title: title + `のアカウントを
           強制削除します。よろしいですか？`,
         content: '※本操作により、リストのデータも削除されます',
-        okText: '削除',
+        okText: this.$t('common.delete'),
         okType: 'danger',
-        cancelText: '戻る',
-        onOk: () => this.deleteRecord(id).then(_ => this.closeDialog(true))
+        cancelText: this.$t('common.cancel'),
+        onOk: () => this.deleteRecord(id).then(_ => this.closeDialog(true)),
+        closable: true
       })
     },
 

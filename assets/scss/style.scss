@@ -516,3 +516,41 @@ label::after {
     padding: 0;
   }
 }
+.ant-modal-close {
+  display: block !important;
+}
+.ant-modal-confirm-body {
+  margin: 20px 0 !important;
+  i {
+    display: none !important;
+  }
+  .ant-modal-confirm-title {
+    color: #2a69be;
+    text-align: center;
+  }
+  .ant-modal-confirm-content {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+}
+.ant-modal-confirm-btns {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  .ant-btn {
+    width: 40%;
+    border-radius: 20px;
+  }
+}
+
+.ant-pagination-options {
+  &::before {
+    content: '表示件数';
+    display: inline-block;
+    margin-right: 10px;
+  }
+  &::after {
+    content: '頁';
+    display: inline-block;
+  }
+}

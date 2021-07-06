@@ -214,6 +214,7 @@ export default {
       }
     }
   },
+
   computed: {
     /**
      * Columns
@@ -342,15 +343,16 @@ export default {
      * Confirm to delete
      *
      * @param {Number} id
-     * @param {String} title
      */
-    confirmToDelete(id, title) {
+    confirmToDelete(id) {
       this.$confirm({
-        title: title + this.$t('text.confirm_to_delete'),
+        title: 'タイ 卜ルが入り ます夕イ トルが入り ますタ',
+        content: 'を削除します。 よろ しいですか ?',
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
-        onOk: () => this.deleteRecord(id)
+        onOk: () => this.deleteRecord(id),
+        closable: true
       })
     },
 

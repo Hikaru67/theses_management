@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
 import DataForm from '~/mixins/data-form'
 
 export default {
@@ -200,7 +201,7 @@ export default {
 
             this.isDraft = true
             this.$emit('save', this.model.title)
-            this.model = {}
+            this.model = cloneDeep(this.$store.getters[`${this.resource}/model`])
           } catch (_) {
             this.$notification.error({
               message: this.$t('text.something_wrong')
