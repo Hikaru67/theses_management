@@ -114,7 +114,7 @@
             @click="showDetail(record.id)"
           >
             <font-awesome-icon
-              icon="file-alt"
+              :icon="['far', 'file-alt']"
               class="width-1x"
             />
           </a-button>
@@ -128,7 +128,7 @@
             @click="confirmToDelete(record.id, record.news_title)"
           >
             <font-awesome-icon
-              icon="trash-alt"
+              :icon="['far', 'trash-alt']"
               class="width-1x"
             />
           </a-button>
