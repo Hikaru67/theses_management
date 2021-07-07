@@ -437,6 +437,9 @@ export default {
      * Search data
      */
     search() {
+      if (!this.filters.searchString && !this.filters.minAge && !this.filters.maxAge) {
+        this.filters.page = 1
+      }
       this.replaceQuery(this.filters)
     }
   }

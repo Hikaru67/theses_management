@@ -369,6 +369,9 @@ export default {
      * Search data
      */
     search() {
+      if (!this.filters.searchString) {
+        this.filters.page = 1
+      }
       this.replaceQuery(this.filters)
     },
 
