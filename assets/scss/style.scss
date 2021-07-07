@@ -386,6 +386,14 @@ label::after {
     border-right: 1px solid #d2cfc0;
   }
 }
+
+.ant-table-tbody{
+  tr.ant-table-row-hover {
+    td {
+      background: unset !important;
+    }
+  }
+}
 /* -----------------------------------------------------------
   Spacing
 ----------------------------------------------------------- */
