@@ -103,6 +103,12 @@
           {{ record.news_created_on ? $moment(record.news_created_on * 1000).format('Y.MM.DD') : null }}
         </template>
         <template
+          slot="city"
+          slot-scope="text, record"
+        >
+          {{ record.city.name ? record.city.name : 'すべて' }}
+        </template>
+        <template
           slot="action"
           slot-scope="text, record"
         >
@@ -244,7 +250,8 @@ export default {
         {
           title: 'エリア',
           sorter: true,
-          dataIndex: 'city.name'
+          dataIndex: 'city',
+          scopedSlots: { customRender: 'city' }
         },
         {
           title: this.$t('common.action'),
