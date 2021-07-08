@@ -63,7 +63,7 @@
 
           <div
             v-if="message"
-            class="ant-form-item has-error error-center"
+            class="ant-form-item has-error text-center"
           >
             <font-awesome-icon
               slot="prefix"
@@ -116,9 +116,6 @@
     }
     .ant-input-suffix {
       cursor: pointer;
-    }
-    .error-center {
-      text-align: center;
     }
   }
 }

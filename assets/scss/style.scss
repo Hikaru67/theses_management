@@ -167,7 +167,6 @@ label::after {
 ----------------------------------------------------------- */
 .default-layout {
   min-height: 100vh;
-  max-height: 1010px;
 }
 .container-fluid {
   width: 100%;
@@ -387,7 +386,7 @@ label::after {
     border-right: 1px solid #d2cfc0;
   }
 }
-.ant-table-tbody{
+.ant-table-tbody {
   tr.ant-table-row-hover {
     td {
       background: unset !important;
@@ -425,7 +424,7 @@ label::after {
 /* -----------------------------------------------------------
   Form
 ----------------------------------------------------------- */
-.ant-form-explain{
+.ant-form-explain {
   font-size: 12px !important;
 }
 .ant-form-item-label {

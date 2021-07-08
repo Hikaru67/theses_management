@@ -1,6 +1,6 @@
 <template>
   <div class="main-list">
-    <a-card class="mb-4">
+    <a-card>
       <template
         slot="title"
         class="header"
