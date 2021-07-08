@@ -63,7 +63,7 @@
 
           <div
             v-if="message"
-            class="ant-form-item has-error"
+            class="ant-form-item has-error text-center"
           >
             <font-awesome-icon
               slot="prefix"

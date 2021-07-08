@@ -16,9 +16,6 @@
             </div>
           </transition>
         </a-layout-content>
-
-        <Footer />
-        <!-- end main footer -->
       </a-layout>
       <!-- end main sidebar -->
     </a-layout>
@@ -38,13 +35,11 @@
 
 <script>
 import jaJP from 'ant-design-vue/es/locale-provider/ja_JP'
-import Footer from '~/components/layouts/Footer'
 import Header from '~/components/layouts/Header'
 import Breadcrumb from '~/components/layouts/Breadcrumb'
 
 export default {
   components: {
-    Footer,
     Header,
     Breadcrumb
   },
