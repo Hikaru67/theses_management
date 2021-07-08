@@ -180,7 +180,7 @@ export default {
             }
             const { data: { data } } = await this.$auth.login({ data: credential })
             if (data.refresh_token) {
-              this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
+              this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE, path: '/' })
             }
           } catch (_) {
             this.message = 'メールアドレスとパスワードが一致しません'
