@@ -101,7 +101,7 @@ export default {
 
       try {
         await this.$auth.logout()
-        this.$cookies.remove(REFRESH_TOKEN)
+        this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
       } catch (_) {
         this.$notification.error({
           message: this.$t('text.something_wrong')
