@@ -18,7 +18,7 @@ export default ({ $axios, $cookies, app }, inject) => {
         if (statusCode === 401 && refreshToken) {
           try {
             const { data: { data } } = await $axios.post('/token/refresh', { refreshToken })
-            $cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE })
+            $cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE, path: '/' })
             if (app.$auth) {
               app.$auth.setUserToken(data.access_token)
             }
@@ -26,7 +26,7 @@ export default ({ $axios, $cookies, app }, inject) => {
             originalRequest.headers.Authorization = 'Bearer ' + data.access_token
             return $axios(originalRequest)
           } catch (e) {
-            $cookies.remove(REFRESH_TOKEN)
+            $cookies.remove(REFRESH_TOKEN, { path: '/' })
             return Promise.reject(e)
           }
         }
