@@ -73,7 +73,7 @@
                   &nbsp;
                   &nbsp;
                   &nbsp;
-                  配信エリア: {{ model.city_id ? curentCity : '' }}
+                  配信エリア: {{ model.city_id ? curentCity : 'すべて' }}
                 </span>
                 <h1>{{ model.title }}</h1>
               </div>
