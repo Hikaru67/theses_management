@@ -80,9 +80,13 @@
             </a-col>
 
             <a-col :sm="24">
-              <div class="modal__content">
-                {{ model.content }}
-              </div>
+              <a-textarea
+                v-model="model.content"
+                class="text-content"
+                placeholder=""
+                :rows="16"
+                disabled
+              />
             </a-col>
           </template>
         </a-row>
@@ -236,5 +240,12 @@ export default {
   border: none;
   background-color: #f5d528 !important;
   color: black;
+}
+.text-content {
+  cursor: default;
+  background: white;
+  color: black;
+  border: none;
+  resize: none;
 }
 </style>

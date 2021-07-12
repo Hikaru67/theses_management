@@ -44,9 +44,13 @@
         </a-col>
 
         <a-col :sm="24">
-          <div class="modal__content">
-            {{ model.content }}
-          </div>
+          <a-textarea
+            v-model="model.content"
+            class="text-content"
+            placeholder=""
+            :rows="16"
+            disabled
+          />
         </a-col>
 
         <a-col
@@ -90,7 +94,8 @@ export default {
      */
     confirmToDelete(id, title) {
       this.$confirm({
-        title: title + this.$t('text.confirm_to_delete'),
+        title,
+        content: this.$t('text.confirm_to_delete'),
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
@@ -143,5 +148,12 @@ export default {
       width: 0;
     }
   }
+}
+.text-content {
+  cursor: default;
+  background: white;
+  color: black;
+  border: none;
+  resize: none;
 }
 </style>

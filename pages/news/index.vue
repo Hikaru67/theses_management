@@ -350,11 +350,12 @@ export default {
      * Confirm to delete
      *
      * @param {Number} id
+     * @param {String} title
      */
-    confirmToDelete(id) {
+    confirmToDelete(id, title) {
       this.$confirm({
-        title: 'タイ 卜ルが入り ます夕イ トルが入り ますタ',
-        content: 'を削除します。 よろ しいですか ?',
+        title,
+        content: this.$t('text.confirm_to_delete'),
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
