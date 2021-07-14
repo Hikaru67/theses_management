@@ -1,7 +1,7 @@
 import { get, cloneDeep } from 'lodash'
 import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
 
-class News {
+export class News {
   constructor(props) {
     this.id = get(props, 'id', '')
     this.title = get(props, 'news_title', '')

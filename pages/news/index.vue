@@ -250,7 +250,7 @@ export default {
         {
           title: 'エリア',
           sorter: true,
-          dataIndex: 'city',
+          dataIndex: 'city.name',
           scopedSlots: { customRender: 'city' }
         },
         {
