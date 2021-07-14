@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import { cloneDeep } from 'lodash'
+import { News } from '~/store/news'
 import DataForm from '~/mixins/data-form'
 
 export default {
@@ -155,11 +155,21 @@ export default {
             required: true,
             message: this.$t('validation.just_required'),
             trigger: ['change', 'blur']
+          },
+          {
+            whitespace: true,
+            message: this.$t('validation.just_required'),
+            trigger: ['change', 'blur']
           }
         ],
         content: [
           {
             required: true,
+            message: this.$t('validation.just_required'),
+            trigger: ['change', 'blur']
+          },
+          {
+            whitespace: true,
             message: this.$t('validation.just_required'),
             trigger: ['change', 'blur']
           }
@@ -205,7 +215,7 @@ export default {
 
             this.isDraft = true
             this.$emit('save', this.model.title)
-            this.model = cloneDeep(this.$store.getters[`${this.resource}/model`])
+            this.model = new News({})
           } catch (_) {
             this.$notification.error({
               message: this.$t('text.something_wrong')
