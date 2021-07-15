@@ -388,8 +388,12 @@ export default {
      */
     confirmToDelete(id, title) {
       this.$confirm({
-        title: title + `のアカウントを
-          強制削除します。よろしいですか？`,
+        title: <div>
+          <span style="color: #2a69be">{title}</span>
+          のアカウントを
+          <br />
+          強制削除します。よろしいですか？
+        </div>,
         content: '※本操作により、リストのデータも削除されます',
         okText: this.$t('common.delete'),
         okType: 'danger',
