@@ -31,11 +31,14 @@
           >
             <a-button
               slot="enterButton"
-              icon="search"
               size="large"
               class="search-form__btn--primary"
             >
               検索
+              <font-awesome-icon
+                icon="search"
+                class="width-1x ml-1"
+              />
             </a-button>
           </a-input-search>
         </a-col>
@@ -55,7 +58,7 @@
                 @click="showForm(0)"
               >
                 <font-awesome-icon
-                  icon="plus-circle"
+                  icon="plus"
                   class="width-1x mr-1"
                 />
                 新規作成
@@ -68,7 +71,7 @@
                 @click="gotoUserPage()"
               >
                 <font-awesome-icon
-                  icon="user"
+                  :icon="['far', 'user']"
                   class="width-1x mr-1"
                 />
                 ユーザー一覧
@@ -157,6 +160,7 @@
       <a-spin :spinning="loading">
         <news-form
           :id="currentId"
+          :visible="formVisible"
           @save="closeFormAndShowDialog"
           @cancel="closeForm(false)"
         />

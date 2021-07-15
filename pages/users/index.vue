@@ -115,11 +115,11 @@
                     size="large"
                     :disabled="loading"
                   >
+                    {{ $t('common.search') }}
                     <font-awesome-icon
                       icon="search"
-                      class="width-1x mr-1"
+                      class="width-1x ml-1"
                     />
-                    {{ $t('common.search') }}
                   </a-button>
                 </a-col>
               </a-row>
@@ -242,7 +242,7 @@
           @click="confirmToDelete(currentId, currentName)"
         >
           <font-awesome-icon
-            icon="trash-alt"
+            :icon="['far', 'trash-alt']"
             class="width-1x"
           />
           削除

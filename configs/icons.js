@@ -58,6 +58,7 @@ export default {
   ],
   regular: [
     'faFileAlt',
-    'faTrashAlt'
+    'faTrashAlt',
+    'faUser'
   ]
 }
