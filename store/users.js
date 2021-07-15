@@ -56,7 +56,7 @@ export const actions = {
   async getList({ commit }, payload) {
     const params = cloneDeep(payload.params)
     params.page = params.page || 1
-    params.pageSize = params.pageSize || 10
+    params.pageSize = params.pageSize || 20
     const { data } = await this.$api.indexUsers({ params })
     commit(SET_LIST, data.data)
     return data
