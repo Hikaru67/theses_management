@@ -141,6 +141,13 @@ export default {
     }
   },
 
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   data: () => ({
     resource: 'news',
     isDraft: true,
@@ -186,6 +193,15 @@ export default {
       return city.city_name || ''
     }
   },
+
+  watch: {
+    visible(val) {
+      if (!val) {
+        this.model = new News({})
+      }
+    }
+  },
+
   methods: {
     /**
      * Handle on cancel

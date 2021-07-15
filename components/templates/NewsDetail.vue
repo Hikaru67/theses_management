@@ -21,7 +21,7 @@
               @click.stop="confirmToDelete(model.id, model.title)"
             >
               <font-awesome-icon
-                icon="trash-alt"
+                :icon="['far', 'trash-alt']"
                 class="width-1x"
               />
               削除
