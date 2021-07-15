@@ -17,7 +17,7 @@ export default {
         ...this.pagination,
         total: totalCount,
         current: +params.page,
-        pageSize: +params.pageSize
+        pageSize: params.pageSize ? +params.pageSize : 20
       }
       this.data = data
     } catch (_) {
@@ -36,7 +36,7 @@ export default {
         showSizeChanger: true,
         showLessItems: true,
         showTotal: () => false,
-        pageSizeOptions: ['10', '20', '50', '100', '200', '500', '1000'],
+        pageSizeOptions: ['20', '50', '100'],
         buildOptionText: ({ value }) => this.$createElement('span', [value])
       }
     }

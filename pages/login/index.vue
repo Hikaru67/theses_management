@@ -37,7 +37,7 @@
 
           <a-form-model-item
             prop="password"
-            label="バスワ一ド"
+            label="パスワード"
           >
             <a-input
               v-model="password"
