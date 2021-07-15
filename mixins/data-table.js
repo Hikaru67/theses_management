@@ -16,7 +16,7 @@ export default {
       this.pagination = {
         ...this.pagination,
         total: totalCount,
-        current: +params.page,
+        current: params.page ? +params.page : 1,
         pageSize: params.pageSize ? +params.pageSize : 20
       }
       this.data = data

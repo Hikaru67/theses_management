@@ -241,6 +241,7 @@ span {
     width: 100%;
     margin: auto;
     .avatar {
+      object-fit: cover;
       width: 200px;
       height: 200px;
       border-radius: 50%;
