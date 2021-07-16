@@ -439,6 +439,7 @@ export default {
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
+        width: 400,
         onOk: () => this.deleteRecord(id, title).then(_ => this.closeDialog(true)),
         closable: true
       })
@@ -514,7 +515,7 @@ export default {
   }
 
   .action__btn-danger {
-    color: #ff4d4f;
+    color: #e42d35;
   }
 
   .search-form__input--left {

@@ -17,8 +17,8 @@
               :md="20"
               :sm="24"
             >
+              タイトル<span class="label-required ml-2">必須</span>
               <a-form-model-item prop="title">
-                タイトル<span class="label-required ml-2">必須</span>
                 <a-input
                   v-model="model.title"
                   placeholder="入力してください"
@@ -30,8 +30,8 @@
               :md="4"
               :sm="24"
             >
+              配信エリア
               <a-form-model-item prop="city">
-                配信エリア
                 <a-select
                   v-model="model.city_id"
                   placeholder="配信エリア"
@@ -48,8 +48,11 @@
             </a-col>
 
             <a-col :sm="24">
-              <a-form-model-item prop="content">
-                本文<span class="label-required ml-2">必須</span>
+              本文<span class="label-required ml-2">必須</span>
+              <a-form-model-item
+                prop="content"
+                class="mt-1"
+              >
                 <a-textarea
                   v-model="model.content"
                   placeholder="入力してください"
@@ -156,24 +159,52 @@ export default {
         title: [
           {
             required: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           },
           {
             whitespace: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           }
         ],
         content: [
           {
             required: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           },
           {
             whitespace: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           }
         ]
@@ -273,7 +304,7 @@ export default {
 }
 .label-required {
   background-color: red;
-  padding: 2px 7px 1px 7px;
+  padding: 0px 7px 1px 6px;
   color: white;
 }
 </style>

@@ -22,7 +22,7 @@
         justify="center"
       >
         <a-col
-          :span="!okText ? 8 : 12"
+          :span="!okText ? 12 : 12"
           class="confirm__col confirm__col--cancel"
         >
           <a-button
@@ -123,6 +123,13 @@ export default {
   }
   .confirm__btn--ok {
     background: #f5d528;
+  }
+}
+
+/deep/ {
+  .ant-modal-content {
+    width: 400px;
+    min-height: 182px;
   }
 }
 </style>
