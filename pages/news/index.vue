@@ -94,12 +94,6 @@
         @change="handleTableChange"
       >
         <template
-          slot="number"
-          slot-scope="text, record, index"
-        >
-          {{ index + 1 }}
-        </template>
-        <template
           slot="news_created_on"
           slot-scope="text, record"
         >
@@ -235,8 +229,7 @@ export default {
       const columns = [
         {
           title: 'No.',
-          dataIndex: 'number',
-          scopedSlots: { customRender: 'number' },
+          dataIndex: 'sequence',
           width: 60,
           fixed: 'left'
         },
@@ -363,7 +356,8 @@ export default {
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
-        onOk: () => this.deleteRecord(id),
+        width: 400,
+        onOk: () => this.deleteRecord(id, title),
         closable: true
       })
     },

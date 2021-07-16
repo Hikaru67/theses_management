@@ -12,7 +12,7 @@
       >
         <img
           src="~/assets/images/logo.png"
-          alt="DigiDinos"
+          alt="hoichaohanh"
         />
       </nuxt-link>
     </div>

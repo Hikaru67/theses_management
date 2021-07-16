@@ -4,6 +4,7 @@ import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
 class User {
   constructor(props) {
     this.id = get(props, 'id', 0)
+    this.sequence = get(props, 'sequence', '')
     this.user_guardian_name_kanji = get(props, 'user_guardian_name_kanji', '')
     this.user_guardian_surname_kanji = get(props, 'user_guardian_surname_kanji', '')
     this.user_guardian_name_katakana = get(props, 'user_guardian_name_katakana', '')

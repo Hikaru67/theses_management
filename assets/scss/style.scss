@@ -1,6 +1,6 @@
 /*
- * Copyright 2020 Digi Dinos JSC. All rights reserved.
- * Email: tech@digidinos.com.
+ * Copyright 2020 HOI CHAO HANH JSC. All rights reserved.
+ * Email: tech@hoichaohanh.com.
  */
 
 /**
@@ -538,6 +538,7 @@ label::after {
     display: none !important;
   }
   .ant-modal-confirm-title {
+    color: #2a69be;
     text-align: center;
   }
   .ant-modal-confirm-content {
@@ -552,6 +553,10 @@ label::after {
   .ant-btn {
     width: 40%;
     border-radius: 20px;
+  }
+  .ant-btn-danger {
+    background-color: #e42d35;
+    border-color: #e42d35;
   }
 }
 

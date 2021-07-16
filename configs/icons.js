@@ -16,6 +16,7 @@ export default {
     'faDownload',
     'faEnvelope',
     'faEraser',
+    'faExclamationCircle',
     'faEye',
     'faEyeSlash',
     'faFileAlt',

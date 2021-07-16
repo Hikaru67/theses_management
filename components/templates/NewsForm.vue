@@ -17,10 +17,8 @@
               :md="20"
               :sm="24"
             >
-              <a-form-model-item
-                label="タイトル"
-                prop="title"
-              >
+              タイトル<span class="label-required ml-2">必須</span>
+              <a-form-model-item prop="title">
                 <a-input
                   v-model="model.title"
                   placeholder="入力してください"
@@ -32,10 +30,8 @@
               :md="4"
               :sm="24"
             >
-              <a-form-model-item
-                label="配信エリア"
-                prop="city"
-              >
+              配信エリア
+              <a-form-model-item prop="city">
                 <a-select
                   v-model="model.city_id"
                   placeholder="配信エリア"
@@ -52,9 +48,10 @@
             </a-col>
 
             <a-col :sm="24">
+              本文<span class="label-required ml-2">必須</span>
               <a-form-model-item
-                label="本文"
                 prop="content"
+                class="mt-1"
               >
                 <a-textarea
                   v-model="model.content"
@@ -97,6 +94,7 @@
           html-type="button"
           type="default"
           class="min-w-100"
+          shape="round"
           @click="onCancel"
         >
           {{ $t('common.cancel') }}
@@ -106,6 +104,7 @@
           html-type="submit"
           type="primary btn-create"
           class="min-w-100"
+          shape="round"
         >
           {{ id ? $t('common.update') : $t('common.create') }}
         </a-button>
@@ -160,24 +159,52 @@ export default {
         title: [
           {
             required: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           },
           {
             whitespace: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           }
         ],
         content: [
           {
             required: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           },
           {
             whitespace: true,
-            message: this.$t('validation.just_required'),
+            message: <div>
+              <font-awesome-icon
+                icon="exclamation-circle"
+                class="width-1x"
+                style="color: #f00"
+              />
+              {this.$t('validation.just_required')}
+            </div>,
             trigger: ['change', 'blur']
           }
         ]
@@ -198,6 +225,7 @@ export default {
     visible(val) {
       if (!val) {
         this.model = new News({})
+        this.$refs.form.clearValidate()
       }
     }
   },
@@ -273,5 +301,10 @@ export default {
   color: black;
   border: none;
   resize: none;
+}
+.label-required {
+  background-color: red;
+  padding: 0px 7px 1px 6px;
+  color: white;
 }
 </style>

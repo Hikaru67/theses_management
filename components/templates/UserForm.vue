@@ -187,6 +187,7 @@
           html-type="button"
           type="default"
           class="min-w-100"
+          shape="round"
           @click="$emit('cancel')"
         >
           戻る
