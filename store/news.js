@@ -4,6 +4,7 @@ import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
 export class News {
   constructor(props) {
     this.id = get(props, 'id', '')
+    this.sequence = get(props, 'sequence', '')
     this.title = get(props, 'news_title', '')
     this.content = get(props, 'news_content', '')
     this.city_id = get(props, 'news_city', 0)
