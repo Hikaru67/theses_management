@@ -389,16 +389,18 @@ export default {
     confirmToDelete(id, title) {
       this.$confirm({
         title: <div>
-          <span style="color: #2a69be">{title}</span>
-          のアカウントを
+          {title}
+          <span style="color: black">
+            のアカウントを
           <br />
-          強制削除します。よろしいですか？
+            強制削除します。よろしいですか？
+          </span>
         </div>,
         content: '※本操作により、リストのデータも削除されます',
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
-        onOk: () => this.deleteRecord(id).then(_ => this.closeDialog(true)),
+        onOk: () => this.deleteRecord(id, title).then(_ => this.closeDialog(true)),
         closable: true
       })
     },

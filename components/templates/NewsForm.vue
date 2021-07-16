@@ -17,10 +17,8 @@
               :md="20"
               :sm="24"
             >
-              <a-form-model-item
-                label="タイトル"
-                prop="title"
-              >
+              <a-form-model-item prop="title">
+                タイトル<span class="label-required ml-2">必須</span>
                 <a-input
                   v-model="model.title"
                   placeholder="入力してください"
@@ -32,10 +30,8 @@
               :md="4"
               :sm="24"
             >
-              <a-form-model-item
-                label="配信エリア"
-                prop="city"
-              >
+              <a-form-model-item prop="city">
+                配信エリア
                 <a-select
                   v-model="model.city_id"
                   placeholder="配信エリア"
@@ -52,10 +48,8 @@
             </a-col>
 
             <a-col :sm="24">
-              <a-form-model-item
-                label="本文"
-                prop="content"
-              >
+              <a-form-model-item prop="content">
+                本文<span class="label-required ml-2">必須</span>
                 <a-textarea
                   v-model="model.content"
                   placeholder="入力してください"
@@ -97,6 +91,7 @@
           html-type="button"
           type="default"
           class="min-w-100"
+          shape="round"
           @click="onCancel"
         >
           {{ $t('common.cancel') }}
@@ -106,6 +101,7 @@
           html-type="submit"
           type="primary btn-create"
           class="min-w-100"
+          shape="round"
         >
           {{ id ? $t('common.update') : $t('common.create') }}
         </a-button>
@@ -273,5 +269,10 @@ export default {
   color: black;
   border: none;
   resize: none;
+}
+.label-required {
+  background-color: red;
+  padding: 2px 7px 1px 7px;
+  color: white;
 }
 </style>

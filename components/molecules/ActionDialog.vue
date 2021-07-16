@@ -29,6 +29,7 @@
             v-if="cancelText"
             size="large"
             class="confirm__btn confirm__btn--cancel"
+            shape="round"
             block
             @click="$emit('cancel')"
           >
@@ -44,6 +45,7 @@
             v-if="okText"
             size="large"
             class="confirm__btn confirm__btn--ok"
+            shape="round"
             block
             @click="$emit('ok')"
           >
