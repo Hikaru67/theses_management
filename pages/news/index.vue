@@ -94,12 +94,6 @@
         @change="handleTableChange"
       >
         <template
-          slot="number"
-          slot-scope="text, record, index"
-        >
-          {{ index + 1 }}
-        </template>
-        <template
           slot="news_created_on"
           slot-scope="text, record"
         >
@@ -235,8 +229,7 @@ export default {
       const columns = [
         {
           title: 'No.',
-          dataIndex: 'number',
-          scopedSlots: { customRender: 'number' },
+          dataIndex: 'sequence',
           width: 60,
           fixed: 'left'
         },

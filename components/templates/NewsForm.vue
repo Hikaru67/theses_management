@@ -194,6 +194,7 @@ export default {
     visible(val) {
       if (!val) {
         this.model = new News({})
+        this.$refs.form.clearValidate()
       }
     }
   },
