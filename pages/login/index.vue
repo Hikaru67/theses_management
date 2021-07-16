@@ -67,7 +67,7 @@
           >
             <font-awesome-icon
               slot="prefix"
-              icon="info-circle"
+              icon="exclamation-circle"
               class="width-1x"
               style="color: #f00"
             />

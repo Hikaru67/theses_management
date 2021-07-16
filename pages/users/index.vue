@@ -514,7 +514,7 @@ export default {
   }
 
   .action__btn-danger {
-    color: #ff4d4f;
+    color: #e42d35;
   }
 
   .search-form__input--left {
