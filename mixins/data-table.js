@@ -1,6 +1,6 @@
 /*
- * Copyright 2020 Digi Dinos JSC. All rights reserved.
- * Email: tech@digidinos.com.
+ * Copyright 2020 HOI CHAO HANH JSC. All rights reserved.
+ * Email: tech@hoichaohanh.com.
  */
 
 import { camelCase } from 'lodash'

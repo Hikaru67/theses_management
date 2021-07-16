@@ -123,7 +123,7 @@ export default {
       { code: 'ja', iso: 'ja-JP' },
       { code: 'vi', iso: 'vi-VN' }
     ],
-    defaultLocale: 'ja',
+    defaultLocale: 'vi',
     strategy: 'no_prefix',
     detectBrowserLanguage: false,
     vueI18n: {
