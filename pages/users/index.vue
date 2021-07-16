@@ -8,6 +8,7 @@
         <a-form-model
           ref="form"
           :model="filters"
+          :rules="formRules"
           :label-col="{ span: 6 }"
           :wrapper-col="{ span: 12 }"
           class="main-search"
@@ -37,23 +38,25 @@
                 <a-col
                   :md="10"
                   :xs="11"
+                  class="search-form__col--flex"
                 >
                   年齢
-                  <a-select
-                    v-model="filters.minAge"
-                    show-search
-                    placeholder="asd"
-                    size="large"
-                    class="search-form__select"
-                  >
-                    <a-select-option
-                      v-for="item in ageList"
-                      :key="item.age"
-                      :value="item.age"
+                  <a-form-model-item prop="minAge">
+                    <a-select
+                      v-model="filters.minAge"
+                      show-search
+                      size="large"
+                      class="search-form__select"
                     >
-                      {{ item.name }}
-                    </a-select-option>
-                  </a-select>
+                      <a-select-option
+                        v-for="item in ageList"
+                        :key="item.age"
+                        :value="item.age"
+                      >
+                        {{ item.name }}
+                      </a-select-option>
+                    </a-select>
+                  </a-form-model-item>
                   歳
                 </a-col>
                 <a-col
@@ -66,22 +69,24 @@
                 <a-col
                   :md="10"
                   :xs="11"
+                  class="search-form__col--flex"
                 >
-                  <a-select
-                    v-model="filters.maxAge"
-                    show-search
-                    placeholder="Select a person"
-                    size="large"
-                    class="search-form__select"
-                  >
-                    <a-select-option
-                      v-for="item in ageList"
-                      :key="item.age"
-                      :value="item.age"
+                  <a-form-model-item prop="maxAge">
+                    <a-select
+                      v-model="filters.maxAge"
+                      show-search
+                      size="large"
+                      class="search-form__select"
                     >
-                      {{ item.name }}
-                    </a-select-option>
-                  </a-select>
+                      <a-select-option
+                        v-for="item in ageList"
+                        :key="item.age"
+                        :value="item.age"
+                      >
+                        {{ item.name }}
+                      </a-select-option>
+                    </a-select>
+                  </a-form-model-item>
                   歳
                 </a-col>
               </a-row>
@@ -360,6 +365,48 @@ export default {
       return columns
     },
 
+    formRules() {
+      return {
+        minAge: [
+          {
+            validator: (rule, value, callback) => {
+              if (value === '' || this.filters.maxAge === '') {
+                return callback()
+              } else if (value > this.filters.maxAge) {
+                return callback(
+                  new Error('Wrong date range')
+                )
+              } else {
+                this.$refs.form.clearValidate()
+                callback()
+              }
+            },
+            message: 'Wrong date range',
+            trigger: ['change', 'blur']
+          }
+        ],
+        maxAge: [
+          {
+            validator: (rule, value, callback) => {
+              if (value === '' || this.filters.minAge === '') {
+                return callback()
+              } else if (value < this.filters.minAge) {
+                return callback(
+                  new Error('Wrong date range')
+                )
+              } else {
+                this.$refs.form.clearValidate()
+                callback()
+              }
+            },
+            message: 'Wrong date range',
+            trigger: ['change', 'blur']
+          }
+        ]
+
+      }
+    },
+
     ageList() {
       const defaultOption = {
         name: '--',
@@ -441,10 +488,14 @@ export default {
      * Search data
      */
     search() {
-      if (!this.filters.searchString && !this.filters.minAge && !this.filters.maxAge) {
-        this.filters.page = 1
-      }
-      this.replaceQuery(this.filters)
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          if (!this.filters.searchString && !this.filters.minAge && !this.filters.maxAge) {
+            this.filters.page = 1
+          }
+          this.replaceQuery(this.filters)
+        }
+      })
     }
   }
 }
@@ -452,6 +503,18 @@ export default {
 
 <style scoped lang="scss">
 /deep/ {
+  .search-form__col--flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .ant-form-item {
+      margin-bottom: 0 !important;
+      .ant-form-explain {
+        display: none;
+      }
+    }
+  }
+
   .search-form__col {
     margin: 20px 0;
   }
