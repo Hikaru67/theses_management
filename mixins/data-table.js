@@ -127,6 +127,7 @@ export default {
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
+        width: 400,
         onOk: () => this.deleteRecord(id),
         closable: true
       })
