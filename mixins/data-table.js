@@ -64,6 +64,10 @@ export default {
      * @param {Object} Sorter
      */
     handleTableChange(pagination, filters, sorter) {
+      const params = this.$route.query
+      if (params.pageSize && parseInt(params.pageSize) !== pagination.pageSize) {
+        pagination.current = 1
+      }
       const query = {
         pageSize: pagination.pageSize,
         page: pagination.current,
@@ -132,15 +136,30 @@ export default {
      * Delete record
      *
      * @param {Number} id
+     * @param {String} title
      */
-    async deleteRecord(id) {
+    async deleteRecord(id, title) {
       try {
         this.$store.dispatch('setLoading', true)
         const action = camelCase(`destroy-${this.resource}`)
         await this.$api[action]({ id })
 
         this.$notification.success({
-          message: this.$t('text.successfully')
+          message: this.resource === 'users'
+            ? <div>
+              <span style="color: #2a69be">
+                {title}
+              </span>
+              {this.$t('text.delete_user_success')}
+            </div>
+            : this.resource === 'news'
+              ? <div>
+                <span style="color: #2a69be">
+                  {title}
+                </span>
+                {this.$t('text.delete_new_success')}
+              </div>
+              : this.$t('text.successfully')
         })
         this.$fetch()
       } catch (_) {

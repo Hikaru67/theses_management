@@ -29,6 +29,8 @@
   "text.confirm_to_delete": "を削除します。よろしいですか？",
   "text.something_wrong": "問題が発生しました",
   "text.successfully": "正常に",
+  "text.delete_user_success": "のアカウントを削除しました",
+  "text.delete_new_success": "を削除しました",
   "user.email": "メールアドレス",
   "user.name": "名前",
   "user.password_confirm": "パスワード確認",

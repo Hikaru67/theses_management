@@ -17,6 +17,7 @@
               html-type="button"
               type="danger"
               class="min-w-100"
+              shape="round"
               ghost
               @click.stop="confirmToDelete(model.id, model.title)"
             >
@@ -61,6 +62,7 @@
             html-type="button"
             type="default"
             class="min-w-100"
+            shape="round"
             @click="$emit('cancel')"
           >
             戻る
@@ -99,7 +101,7 @@ export default {
         okText: this.$t('common.delete'),
         okType: 'danger',
         cancelText: this.$t('common.cancel'),
-        onOk: () => this.deleteRecord(id)
+        onOk: () => this.deleteRecord(id, title)
       })
     },
 
@@ -107,14 +109,20 @@ export default {
      * Delete record
      *
      * @param {Number} id
+     * @param {String} title
      */
-    async deleteRecord(id) {
+    async deleteRecord(id, title) {
       try {
         this.$store.dispatch('setLoading', true)
         await this.$api.destroyNews({ id })
 
         this.$notification.success({
-          message: this.$t('text.successfully')
+          message: <div>
+            <span style="color: #2a69be">
+              {title}
+            </span>
+            {this.$t('text.delete_new_success')}
+          </div>
         })
       } catch (_) {
         console.warn(_)
