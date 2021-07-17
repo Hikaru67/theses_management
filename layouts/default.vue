@@ -54,7 +54,7 @@ export default {
     Breadcrumb
   },
 
-  // middleware: ['auth'],
+  middleware: ['auth'],
 
   data() {
     return {

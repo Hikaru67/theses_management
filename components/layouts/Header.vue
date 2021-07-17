@@ -61,15 +61,6 @@
           >
             {{ $auth.user ? $auth.user.email : '' }}
           </a-menu-item>
-          <a-menu-item key="1">
-            <nuxt-link to="/profile">
-              <font-awesome-icon
-                icon="user"
-                class="width-1x"
-              />&nbsp;
-              {{ $t('common.profile') }}
-            </nuxt-link>
-          </a-menu-item>
           <a-menu-item key="2">
             <a
               href="#"
@@ -113,7 +104,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 // import ActionDialog from '~/components/molecules/ActionDialog.vue'
-// import { REFRESH_TOKEN } from '~/constants/cookies'
+import { REFRESH_TOKEN } from '~/constants/cookies'
 
 export default {
   components: {
@@ -169,21 +160,21 @@ export default {
     /**
      * Logout user
      */
-    logout() {
-      this.$notification.info({ message: 'This future is comming !' })
-      // this.$store.dispatch('setLoading', true)
+    async logout() {
+      // this.$notification.info({ message: 'This future is comming !' })
+      this.$store.dispatch('setLoading', true)
 
-      // try {
-      //   this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
-      //   await this.$auth.logout()
-      // } catch (_) {
-      //   this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
-      //   this.$notification.error({
-      //     message: this.$t('text.something_wrong')
-      //   })
-      // } finally {
-      //   this.$store.dispatch('setLoading', false)
-      // }
+      try {
+        this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
+        await this.$auth.logout()
+      } catch (_) {
+        this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
+        this.$notification.error({
+          message: this.$t('text.something_wrong')
+        })
+      } finally {
+        this.$store.dispatch('setLoading', false)
+      }
     }
   }
 }

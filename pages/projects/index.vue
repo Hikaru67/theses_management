@@ -380,8 +380,8 @@ export default {
      * @param {boolean} fetch - fetch status
      */
     closeForm(fetch) {
-      this.currentId = 0
       this.formVisible = false
+      this.currentId = 0
 
       if (fetch) {
         this.$fetch()

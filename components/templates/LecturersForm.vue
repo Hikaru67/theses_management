@@ -253,10 +253,6 @@ export default {
       this.$refs.form.validate(async valid => {
         if (valid) {
           try {
-            // if (this.isDraft) {
-            //   this.isDraft = false
-            //   return
-            // }
             this.$store.dispatch('setLoading', true)
             const action = `${this.resource}/saveModel`
             await this.$store.dispatch(action, this.model)

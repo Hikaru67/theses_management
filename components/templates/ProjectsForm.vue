@@ -54,7 +54,7 @@
             <a-col :md="6">
               <a-upload
                 name="file"
-                accept=".*"
+                accept="*.*"
                 :multiple="false"
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 :headers="headers"
@@ -143,7 +143,8 @@ export default {
     },
     resource: 'projects',
     isDraft: true,
-    lecturers: []
+    lecturers: [],
+    isUpdateFile: false
   }),
 
   computed: {
@@ -244,6 +245,7 @@ export default {
       }
       if (info.file.status === 'done') {
         this.model.dinh_kem = info.file.originFileObj
+        this.isUpdateFile = true
       }
     },
 
@@ -256,6 +258,9 @@ export default {
           try {
             this.$store.dispatch('setLoading', true)
             const action = `${this.resource}/saveModel`
+            if (!this.isUpdateFile) {
+              this.model.dinh_kem = ''
+            }
             await this.$store.dispatch(action, this.model)
 
             this.isDraft = true

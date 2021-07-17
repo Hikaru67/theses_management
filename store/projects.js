@@ -79,7 +79,9 @@ export const actions = {
     bodyFormData.append('ID', payload.id)
     bodyFormData.append('TenDA', payload.ten_da)
     bodyFormData.append('IDGV', payload.IDGV)
-    bodyFormData.append('files', payload.dinh_kem)
+    if (payload.dinh_kem) {
+      bodyFormData.append('files', payload.dinh_kem)
+    }
     bodyFormData.append('MoTa', payload.mo_ta)
 
     const res = !payload.id
@@ -92,7 +94,7 @@ export const actions = {
         method: 'post',
         url: '/projects',
         data: bodyFormData,
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
     const model = res.data
     commit(SET_MODEL, model)
