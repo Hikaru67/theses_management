@@ -292,7 +292,7 @@ export default {
 }
 .btn-create {
   border: none;
-  background-color: #f5d528 !important;
+  background-color: #ababb3 !important;
   color: black;
 }
 .text-content {

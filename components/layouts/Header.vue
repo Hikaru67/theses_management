@@ -85,40 +85,6 @@
         </a-menu>
       </a-dropdown>
     </div>
-
-    <!-- <a-layout-header :style="style">
-    <nuxt-link
-      to="/projects"
-      class="box-left pl-3"
-    >
-      <img
-        :src="require(`~/assets/images/logo.png`)"
-        width="50"
-      />
-      <div class="header__title">
-        <h4>CHAOHANHVN</h4>
-        <h3>PROJECTS MANAGEMENT</h3>
-      </div>
-    </nuxt-link> -->
-
-    <!-- <div class="box-right pr-3">
-      <a
-        href="javascript:void(0)"
-        class="logout__link"
-        @click="showDialog"
-      >
-        {{ $t('common.logout') }}
-      </a>
-    </div>
-
-    <action-dialog
-      v-model="visible"
-      title="Do you want to logout？"
-      cancel-text="Cancel"
-      ok-text="Ok"
-      @ok="logout"
-      @cancel="hideDialog"
-    /> -->
   </a-layout-header>
 </template>
 
@@ -147,24 +113,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 // import ActionDialog from '~/components/molecules/ActionDialog.vue'
-import { REFRESH_TOKEN } from '~/constants/cookies'
+// import { REFRESH_TOKEN } from '~/constants/cookies'
 
 export default {
   components: {
     // ActionDialog
   },
-
-  // data() {
-  //   return {
-  //     style: {
-  //       position: 'fixed',
-  //       zIndex: 1,
-  //       width: '100%',
-  //       background: 'hsl(125deg 21% 49%)'
-  //     },
-  //     visible: false
-  //   }
-  // },
 
   computed: {
     ...mapGetters({
@@ -215,20 +169,21 @@ export default {
     /**
      * Logout user
      */
-    async logout() {
-      this.$store.dispatch('setLoading', true)
+    logout() {
+      this.$notification.info({ message: 'This future is comming !' })
+      // this.$store.dispatch('setLoading', true)
 
-      try {
-        this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
-        await this.$auth.logout()
-      } catch (_) {
-        this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
-        this.$notification.error({
-          message: this.$t('text.something_wrong')
-        })
-      } finally {
-        this.$store.dispatch('setLoading', false)
-      }
+      // try {
+      //   this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
+      //   await this.$auth.logout()
+      // } catch (_) {
+      //   this.$cookies.remove(REFRESH_TOKEN, { path: '/' })
+      //   this.$notification.error({
+      //     message: this.$t('text.something_wrong')
+      //   })
+      // } finally {
+      //   this.$store.dispatch('setLoading', false)
+      // }
     }
   }
 }

@@ -11,6 +11,11 @@ export default {
   lecturers: {
     resource: {}
   },
+  '/lecturers': {
+    get: {
+      name: 'getLecturers'
+    }
+  },
   '/news/city': {
     get: {
       name: 'getCity'

@@ -15,9 +15,9 @@ export default {
       const { data } = await this.$store.dispatch(action, { params })
       this.pagination = {
         ...this.pagination,
-        // total: totalCount ?? 50,
+        total: data.limit * data.page,
         current: params.page ? +params.page : 1,
-        limit: params.limit ? +params.limit : 20
+        limit: params.limit ? +params.limit : 10
       }
       this.data = data.items
     } catch (_) {
@@ -36,7 +36,7 @@ export default {
         showSizeChanger: true,
         showLessItems: true,
         showTotal: () => false,
-        limitOptions: ['20', '50', '100'],
+        limitOptions: ['10', '20', '50', '100'],
         buildOptionText: ({ value }) => this.$createElement('span', [value])
       }
     }
@@ -65,11 +65,11 @@ export default {
      */
     handleTableChange(pagination, filters, sorter) {
       const params = this.$route.query
-      if (params.limit && parseInt(params.limit) !== pagination.limit) {
+      if (params.limit && parseInt(params.limit) !== pagination.pageSize) {
         pagination.current = 1
       }
       const query = {
-        limit: pagination.limit,
+        limit: pagination.pageSize,
         page: pagination.current,
         isAsc: sorter.order ? sorter.order === 'ascend' : null,
         fieldName: sorter.order ? sorter.field : null

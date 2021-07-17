@@ -1,20 +1,19 @@
 import { get, cloneDeep } from 'lodash'
 import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
 
-export class Projects {
+export class Lecturers {
   constructor(props) {
     this.id = get(props, 'id', '')
-    this.info_gv = get(props, 'info_gv', [])
-    this.IDGV = get(props, 'IDGV', '')
-    this.ten_da = get(props, 'ten_da', '')
-    this.mo_ta = get(props, 'mo_ta', '')
-    this.dinh_kem = get(props, 'dinh_kem', '')
+    this.ten_gv = get(props, 'ten_gv', [])
+    this.dia_chi = get(props, 'dia_chi', '')
+    this.sdt = get(props, 'sdt', '')
+    this.khoa = get(props, 'khoa', '')
     this.create_date = get(props, 'ceate_date', '')
   }
 }
 
 export const state = () => ({
-  model: new Projects({}),
+  model: new Lecturers({}),
   list: []
 })
 
@@ -25,42 +24,41 @@ export const getters = {
 
 export const mutations = {
   [SET_LIST]: (state, payload) => {
-    state.list = payload.map(item => new Projects(item))
+    state.list = payload.map(item => new Lecturers(item))
   },
   [SET_MODEL]: (state, payload) => {
-    state.model = new Projects(payload)
+    state.model = new Lecturers(payload)
   }
 }
 
 export const actions = {
   /**
-   * Get list projects
+   * Get list lecturers
    *
    * @param {Function} commit
    * @param {Array} payload
-   * @return {Array} projects list
+   * @return {Array} lecturers list
    */
   async getList({ commit }, payload) {
     const params = cloneDeep(payload.params)
     params.page = params.page || 1
     params.limit = params.limit || 20
-    const { data } = await this.$api.indexProjects({ params })
+    const { data } = await this.$api.indexLecturers({ params })
     commit(SET_LIST, data.data.items)
     return data
   },
 
   /**
-   * Get projects detail
+   * Get lecturers detail
    *
    * @param {Function} commit
    * @param {Object} payload
-   * @return {Object} projects detail
+   * @return {Object} lecturers detail
    */
   async getModel({ commit }, { id }) {
     let model = {}
     if (id) {
-      const { data } = await this.$api.showProjects({ id })
-      data.data[0].IDGV = data.data[0].info_gv.id
+      const { data } = await this.$api.showLecturers({ id })
       model = data.data[0]
     }
     commit(SET_MODEL, model)
@@ -68,29 +66,29 @@ export const actions = {
   },
 
   /**
-     * Create/Update projects
+     * Create/Update lecturers
      *
      * @param {Function} commit
      * @param {Object} payload
-     * @return {Object} projects detail
+     * @return {Object} lecturers detail
      */
   async saveModel({ commit }, payload) {
     const bodyFormData = new FormData()
     bodyFormData.append('ID', payload.id)
-    bodyFormData.append('TenDA', payload.ten_da)
-    bodyFormData.append('IDGV', payload.IDGV)
-    bodyFormData.append('files', payload.dinh_kem)
-    bodyFormData.append('MoTa', payload.mo_ta)
+    bodyFormData.append('TenGV', payload.ten_gv)
+    bodyFormData.append('DiaChi', payload.dia_chi)
+    bodyFormData.append('SDT', payload.sdt)
+    bodyFormData.append('Khoa', payload.khoa)
 
     const res = !payload.id
       ? await this.$axios({
         method: 'post',
-        url: '/projects',
+        url: '/lecturers',
         data: bodyFormData,
         headers: { 'Content-Type': 'multipart/form-data' }
       }) : await this.$axios({
         method: 'post',
-        url: '/projects',
+        url: '/lecturers',
         data: bodyFormData,
         headers: { 'Content-Type': 'multipart/form-data' }
       })

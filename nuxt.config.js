@@ -120,16 +120,14 @@ export default {
   i18n: {
     locales: [
       { code: 'en', iso: 'en-US' },
-      { code: 'ja', iso: 'ja-JP' },
       { code: 'vi', iso: 'vi-VN' }
     ],
     defaultLocale: 'en',
     strategy: 'no_prefix',
     detectBrowserLanguage: false,
     vueI18n: {
-      fallbackLocale: 'ja',
+      fallbackLocale: 'en',
       messages: {
-        ja: require('./locales/ja.json'),
         en: require('./locales/en.json'),
         vi: require('./locales/vi.json')
       },
@@ -166,9 +164,9 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/user/login', method: 'post', propertyName: 'data.accessToken' },
+          login: { url: '/login', method: 'post', propertyName: 'data.accessToken' },
           user: { url: '/users/me', method: 'get', propertyName: false },
-          logout: { url: '/users/logout', method: 'get' }
+          logout: { url: '/logout', method: 'get' }
         }
       }
     },
