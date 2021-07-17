@@ -106,6 +106,7 @@ export default {
 <style scoped lang="scss">
 .confirm__title {
   margin: 20px 0;
+  font-size: 20px;
 }
 .confirm__content {
   color: #004bb1;
@@ -122,7 +123,7 @@ export default {
     min-width: 50px;
   }
   .confirm__btn--ok {
-    background: #f5d528;
+    background: #287af5;
   }
 }
 

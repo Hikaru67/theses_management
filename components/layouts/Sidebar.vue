@@ -77,11 +77,29 @@ export default {
         {
           icon: 'home',
           id: 0,
-          link: '/',
+          link: '/projects',
           menus: [],
           parent_id: 0,
           position: 0,
           title: 'common.home'
+        },
+        {
+          icon: 'book',
+          id: 1,
+          link: '/projects',
+          menus: [],
+          parent_id: 0,
+          position: 1,
+          title: 'common.projects_management'
+        },
+        {
+          icon: 'user-tie',
+          id: 2,
+          link: '/lecturers',
+          menus: [],
+          parent_id: 0,
+          position: 2,
+          title: 'common.lecturers_management'
         }
       ]
       const dynamicMenu = get(this, '$auth.user.menus', [])

@@ -1,7 +1,94 @@
 <template>
-  <a-layout-header :style="style">
+  <a-layout-header>
+    <div class="box-left">
+      <a
+        href="#"
+        class="btn-trigger"
+        @click="toggleIsCollapsed"
+      >
+        <a-icon :type="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+      </a>
+    </div>
+
+    <div class="box-right pr-4">
+      <a-dropdown
+        overlay-class-name="dropdown-language"
+        :trigger="['click']"
+      >
+        <a
+          class="ant-dropdown-link"
+          @click="e => e.preventDefault()"
+        >
+          <img
+            :src="require(`~/assets/images/ic_flag_${currentLocaleISO}.png`)"
+            width="28"
+          />
+          <font-awesome-icon icon="caret-down" />
+        </a>
+
+        <a-menu slot="overlay">
+          <a-menu-item
+            v-for="locale in $i18n.locales"
+            :key="locale.code"
+          >
+            <a
+              href="javascript:void(0)"
+              @click="$i18n.setLocale(locale.code)"
+            >
+              <img :src="require(`~/assets/images/ic_flag_${locale.iso}.png`)" />
+            </a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+      <a-dropdown
+        overlay-class-name="dropdown-account"
+        :trigger="['click']"
+      >
+        <a
+          class="ant-dropdown-link"
+          @click.prevent
+        >
+          <font-awesome-icon
+            icon="user-cog"
+            class="ic-large"
+          />
+        </a>
+
+        <a-menu slot="overlay">
+          <a-menu-item
+            key="0"
+            class="txt-name"
+          >
+            {{ $auth.user ? $auth.user.email : '' }}
+          </a-menu-item>
+          <a-menu-item key="1">
+            <nuxt-link to="/profile">
+              <font-awesome-icon
+                icon="user"
+                class="width-1x"
+              />&nbsp;
+              {{ $t('common.profile') }}
+            </nuxt-link>
+          </a-menu-item>
+          <a-menu-item key="2">
+            <a
+              href="#"
+              @click="logout()"
+            >
+              <font-awesome-icon
+                icon="sign-out-alt"
+                class="width-1x"
+              />&nbsp;
+              {{ $t('common.logout') }}
+            </a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+    </div>
+
+    <!-- <a-layout-header :style="style">
     <nuxt-link
-      to="/users"
+      to="/projects"
       class="box-left pl-3"
     >
       <img
@@ -9,12 +96,12 @@
         width="50"
       />
       <div class="header__title">
-        <h4>認定NPO法人</h4>
-        <h3>レツ 卜症候群支援機構</h3>
+        <h4>CHAOHANHVN</h4>
+        <h3>PROJECTS MANAGEMENT</h3>
       </div>
-    </nuxt-link>
+    </nuxt-link> -->
 
-    <div class="box-right pr-3">
+    <!-- <div class="box-right pr-3">
       <a
         href="javascript:void(0)"
         class="logout__link"
@@ -26,12 +113,12 @@
 
     <action-dialog
       v-model="visible"
-      title="口グアウトしますか？"
-      cancel-text="戻る"
-      ok-text="ログアウト"
+      title="Do you want to logout？"
+      cancel-text="Cancel"
+      ok-text="Ok"
       @ok="logout"
       @cancel="hideDialog"
-    />
+    /> -->
   </a-layout-header>
 </template>
 
@@ -58,32 +145,64 @@
 </style>
 
 <script>
-import ActionDialog from '~/components/molecules/ActionDialog.vue'
+import { mapGetters, mapActions } from 'vuex'
+// import ActionDialog from '~/components/molecules/ActionDialog.vue'
 import { REFRESH_TOKEN } from '~/constants/cookies'
 
 export default {
   components: {
-    ActionDialog
+    // ActionDialog
   },
 
-  data() {
-    return {
-      style: {
-        position: 'fixed',
-        zIndex: 1,
-        width: '100%',
-        background: '#f5d528'
+  // data() {
+  //   return {
+  //     style: {
+  //       position: 'fixed',
+  //       zIndex: 1,
+  //       width: '100%',
+  //       background: 'hsl(125deg 21% 49%)'
+  //     },
+  //     visible: false
+  //   }
+  // },
+
+  computed: {
+    ...mapGetters({
+      isActiveSidebar: 'isActiveSidebar'
+    }),
+
+    isCollapsed: {
+      get() {
+        return this.isActiveSidebar
       },
-      visible: false
+      set(value) {
+        this.setIsActiveSidebar(value)
+      }
+    },
+
+    currentLocaleISO() {
+      const locale = this.$i18n.locales.find(item => item.code === this.$i18n.locale)
+      return locale ? locale.iso : 'en-US'
     }
   },
 
   methods: {
+    ...mapActions({
+      setIsActiveSidebar: 'setIsActiveSidebar'
+    }),
+
     /**
      * Show modal
      */
     showDialog() {
       this.visible = true
+    },
+
+    /**
+     * Toggle collapsed status
+     */
+    toggleIsCollapsed() {
+      this.isCollapsed = !this.isCollapsed
     },
 
     /**

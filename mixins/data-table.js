@@ -12,14 +12,14 @@ export default {
       const params = this.$route.query
       this.$store.dispatch('setLoading', true)
       const action = `${this.resource}/getList`
-      const { data, total_count: totalCount } = await this.$store.dispatch(action, { params })
+      const { data } = await this.$store.dispatch(action, { params })
       this.pagination = {
         ...this.pagination,
-        total: totalCount,
+        // total: totalCount ?? 50,
         current: params.page ? +params.page : 1,
-        pageSize: params.pageSize ? +params.pageSize : 20
+        limit: params.limit ? +params.limit : 20
       }
-      this.data = data
+      this.data = data.items
     } catch (_) {
       this.$notification.error({
         message: this.$t('text.something_wrong')
@@ -36,7 +36,7 @@ export default {
         showSizeChanger: true,
         showLessItems: true,
         showTotal: () => false,
-        pageSizeOptions: ['20', '50', '100'],
+        limitOptions: ['20', '50', '100'],
         buildOptionText: ({ value }) => this.$createElement('span', [value])
       }
     }
@@ -65,11 +65,11 @@ export default {
      */
     handleTableChange(pagination, filters, sorter) {
       const params = this.$route.query
-      if (params.pageSize && parseInt(params.pageSize) !== pagination.pageSize) {
+      if (params.limit && parseInt(params.limit) !== pagination.limit) {
         pagination.current = 1
       }
       const query = {
-        pageSize: pagination.pageSize,
+        limit: pagination.limit,
         page: pagination.current,
         isAsc: sorter.order ? sorter.order === 'ascend' : null,
         fieldName: sorter.order ? sorter.field : null

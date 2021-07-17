@@ -21,7 +21,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: 'NPO Rett',
+    title: 'PS MAN',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -123,7 +123,7 @@ export default {
       { code: 'ja', iso: 'ja-JP' },
       { code: 'vi', iso: 'vi-VN' }
     ],
-    defaultLocale: 'vi',
+    defaultLocale: 'en',
     strategy: 'no_prefix',
     detectBrowserLanguage: false,
     vueI18n: {
@@ -160,7 +160,7 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/users',
+      home: '/projects',
       user: '/profile'
     },
     strategies: {

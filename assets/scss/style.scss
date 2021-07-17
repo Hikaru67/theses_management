@@ -562,12 +562,12 @@ label::after {
 
 .ant-pagination-options {
   &::before {
-    content: '表示件数';
+    content: 'Page size';
     display: inline-block;
     margin-right: 10px;
   }
   &::after {
-    content: '件';
+    content: 'Page';
     display: inline-block;
   }
 }

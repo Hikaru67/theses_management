@@ -430,8 +430,7 @@ export default {
         title: <div>
           {title}
           <span style="color: black">
-            のアカウントを
-          <br />
+            のアカウントを<br />
             強制削除します。よろしいですか？
           </span>
         </div>,

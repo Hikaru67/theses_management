@@ -8,6 +8,9 @@ export default {
   projects: {
     resource: {}
   },
+  lecturers: {
+    resource: {}
+  },
   '/news/city': {
     get: {
       name: 'getCity'
