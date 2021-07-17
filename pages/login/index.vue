@@ -18,31 +18,31 @@
           </div>
 
           <h2 class="txt-title-top text-center mb-3">
-            つながレツ卜(仮)
+            HOICHAOHANH
           </h2>
 
           <h4 class="txt-title-top text-center mb-3">
-            認定NPO法人 レット症候群支援機構
+            {{ $t('common.projects_management') }}
           </h4>
 
           <a-form-model-item
-            prop="email"
-            label="メ一ルアドレス"
+            prop="username"
+            label="Username"
           >
             <a-input
-              v-model="email"
-              :placeholder="'入力してください'"
+              v-model="username"
+              :placeholder="'username'"
             />
           </a-form-model-item>
 
           <a-form-model-item
             prop="password"
-            label="パスワード"
+            label="Password"
           >
             <a-input
               v-model="password"
               :type="visibility"
-              :placeholder="'入力してください'"
+              :placeholder="'password'"
             >
               <font-awesome-icon
                 v-if="visibility === 'password'"
@@ -82,7 +82,7 @@
               shape="round"
               block
             >
-              口グイン
+              Login
             </a-button>
           </div>
         </div>
@@ -103,11 +103,11 @@
       padding: 20px;
     }
     button {
-      background: #f5d528 !important;
+      background: #ababb3 !important;
       &:hover,
       &:focus,
       .active {
-        border-color: #f5d528 !important;
+        border-color: #ababb3 !important;
         color: #000 !important;
       }
     }
@@ -132,7 +132,7 @@ export default {
 
   data() {
     return {
-      email: '',
+      username: '',
       password: '',
       message: '',
       visibility: 'password'
@@ -146,7 +146,7 @@ export default {
 
     formRules() {
       return {
-        email: [
+        username: [
           {
             required: true,
             message: this.$t('validation.required', { field: '' }),
@@ -174,16 +174,16 @@ export default {
           this.$store.dispatch('setLoading', true)
 
           try {
-            const credential = {
-              email: this.email,
-              password: this.password
-            }
+            const credential = new FormData()
+            credential.append('username', this.username)
+            credential.append('password', this.password)
+
             const { data: { data } } = await this.$auth.login({ data: credential })
             if (data.refresh_token) {
               this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE, path: '/' })
             }
           } catch (_) {
-            this.message = 'メールアドレスとパスワードが一致しません'
+            this.message = 'Username or password is incorrect'
           } finally {
             this.$store.dispatch('setLoading', false)
           }

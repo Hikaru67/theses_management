@@ -40,7 +40,11 @@
   "project.attachment": "Attachments",
   "project.description": "Description",
   "lecturer.name": "Lecturer name",
+  "lecturer.specialized": "Specialized",
+  "lecturer.address": "Address",
+  "lecturer.phone": "Phone number",
   "validation.min": "{field} must be at least {min} characters",
   "validation.not_match": "{field1} and {field2} do not match",
-  "validation.required": "{field} is required"
+  "validation.required": "{field} is required",
+  "validation.just_required": "This field is required"
 }
