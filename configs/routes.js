@@ -1,10 +1,4 @@
 export default {
-  users: {
-    resource: {}
-  },
-  news: {
-    resource: {}
-  },
   projects: {
     resource: {}
   },
@@ -14,11 +8,6 @@ export default {
   '/lecturers': {
     get: {
       name: 'getLecturers'
-    }
-  },
-  '/news/city': {
-    get: {
-      name: 'getCity'
     }
   }
 }

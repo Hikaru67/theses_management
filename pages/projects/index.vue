@@ -380,6 +380,7 @@ export default {
      * @param {boolean} fetch - fetch status
      */
     closeForm(fetch) {
+      this.currentId = 0
       this.formVisible = false
 
       if (fetch) {
@@ -393,6 +394,7 @@ export default {
      * @param {boolean} fetch - fetch status
      */
     closeDetail(fetch) {
+      this.currentId = 0
       this.detailVisible = false
 
       if (fetch) {

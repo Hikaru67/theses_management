@@ -26,7 +26,8 @@ import {
   Spin,
   Table,
   Tree,
-  notification
+  notification,
+  Upload
 } from 'ant-design-vue'
 
 // Vue.use(Antd)
@@ -50,6 +51,7 @@ Vue.use(Select)
 Vue.use(Spin)
 Vue.use(Table)
 Vue.use(Tree)
+Vue.use(Upload)
 
 Vue.prototype.$notification = notification
 Vue.prototype.$confirm = Modal.confirm

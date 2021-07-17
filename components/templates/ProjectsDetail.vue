@@ -9,7 +9,6 @@
           :sm="24"
           class="action__col--fluid"
         >
-          {{ model }}
           <a-row
             type="flex"
             justify="end"
