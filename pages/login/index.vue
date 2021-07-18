@@ -149,14 +149,14 @@ export default {
         username: [
           {
             required: true,
-            message: this.$t('validation.required', { field: '' }),
+            message: this.$t('validation.just_required'),
             trigger: ['change', 'blur']
           }
         ],
         password: [
           {
             required: true,
-            message: this.$t('validation.required', { field: '' }),
+            message: this.$t('validation.just_required'),
             trigger: ['change', 'blur']
           }
         ]

@@ -172,7 +172,7 @@
     <a-modal
       ref="form"
       :visible="formVisible"
-      :width="1300"
+      :width="1000"
       :footer="null"
       class="modal-form"
       @cancel="closeForm(false)"
