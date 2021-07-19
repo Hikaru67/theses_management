@@ -452,7 +452,7 @@ export default {
      * Search data
      */
     search() {
-      this.$notification.info({ message: 'This future is comming !' })
+      this.$notification.info({ message: 'This future is in comming !' })
     }
   }
 }

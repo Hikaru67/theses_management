@@ -161,7 +161,7 @@ export default {
      * Logout user
      */
     async logout() {
-      // this.$notification.info({ message: 'This future is comming !' })
+      // this.$notification.info({ message: 'This future is in comming !' })
       this.$store.dispatch('setLoading', true)
 
       try {
