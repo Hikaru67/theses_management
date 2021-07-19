@@ -18,12 +18,12 @@
               :sm="24"
             >
               <a-form-model-item
-                :label="$t('project.name')"
+                :label="$t('themis.name')"
                 prop="ten_da"
               >
                 <a-input
                   v-model="model.ten_da"
-                  :placeholder="$t('project.name')"
+                  :placeholder="$t('themis.name')"
                 />
               </a-form-model-item>
             </a-col>
@@ -45,7 +45,7 @@
                     v-for="item in lecturers"
                     :key="item.id"
                   >
-                    {{ item.ten_gv }}
+                    {{ item.name }}
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
@@ -68,13 +68,13 @@
 
             <a-col :sm="24">
               <a-form-model-item
-                :label="$t('project.description')"
+                :label="$t('themis.description')"
                 prop="mo_ta"
                 class="mt-1"
               >
                 <a-textarea
                   v-model="model.mo_ta"
-                  :placeholder="$t('project.description')"
+                  :placeholder="$t('themis.description')"
                   :rows="16"
                 />
               </a-form-model-item>
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { Projects } from '~/store/projects'
+import { Theses } from '~/store/theses'
 import DataForm from '~/mixins/data-form'
 
 export default {
@@ -141,7 +141,7 @@ export default {
     headers: {
       authorization: 'authorization-text'
     },
-    resource: 'projects',
+    resource: 'theses',
     isDraft: true,
     lecturers: [],
     isUpdateFile: false
@@ -211,14 +211,14 @@ export default {
 
     curentLecturer() {
       const gv = this.lecturers.find(item => item.id === this.model.gv_id)
-      return gv.ten_gv || ''
+      return gv.name || ''
     }
   },
 
   watch: {
     visible(val) {
       if (!val) {
-        this.model = new Projects({})
+        this.model = new Theses({})
         this.$refs.form.clearValidate()
       }
     }
@@ -265,7 +265,7 @@ export default {
 
             this.isDraft = true
             this.$emit('save', this.model.ten_da)
-            this.model = new Projects({})
+            this.model = new Theses({})
           } catch (_) {
             this.$notification.error({
               message: this.$t('text.something_wrong')

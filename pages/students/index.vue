@@ -23,7 +23,7 @@
               :xs="24"
               class="search-form__col title"
             >
-              <span>{{ $t('common.projects_management') }}</span>
+              <span>{{ $t('common.students_management') }}</span>
             </a-col>
             <a-col
               :md="10"
@@ -38,7 +38,7 @@
                 >
                   <a-input
                     v-model="filters.searchContent"
-                    placeholder="Project name"
+                    placeholder="Student name"
                     size="large"
                     :disabled="loading"
                   />
@@ -94,13 +94,13 @@
                     type="primary"
                     ghost
                     size="large"
-                    @click="gotoLecturersPage()"
+                    @click="gotoProjectsPage()"
                   >
                     <font-awesome-icon
                       icon="bullhorn"
                       class="width-1x mr-1"
                     />
-                    {{ $t('common.lecturers_management') }}
+                    {{ $t('common.theses_management') }}
                   </a-button>
                 </a-col>
               </a-row>
@@ -118,9 +118,16 @@
         :pagination="pagination"
         class="main-table"
         bordered
-        :scroll="{ x: 1300 }"
+        :scroll="{ x: 900 }"
         @change="handleTableChange"
       >
+        <template
+          slot="specialized"
+          slot-scope="text, record"
+        >
+          {{ getSpecialized(record.specialized) }}
+        </template>
+
         <template
           slot="action"
           slot-scope="text, record"
@@ -182,7 +189,7 @@
       </template>
 
       <a-spin :spinning="loading">
-        <projects-form
+        <students-form
           :id="currentId"
           :visible="formVisible"
           @save="closeFormAndShowDialog"
@@ -194,13 +201,13 @@
     <a-modal
       ref="detail"
       :visible="detailVisible"
-      :width="800"
+      :width="1000"
       :footer="null"
       class="modal-detail"
       @cancel="closeDetail(false)"
     >
       <a-spin :spinning="loading">
-        <projects-detail
+        <students-detail
           :id="currentId"
           @cancel="closeDetail(false)"
           @save="closeDetail(true)"
@@ -220,15 +227,21 @@
 </template>
 
 <script>
-import ProjectsDetail from '~/components/templates/ProjectsDetail'
-import ProjectsForm from '~/components/templates/ProjectsForm'
+import StudentsDetail from '~/components/templates/StudentsDetail'
+import StudentsForm from '~/components/templates/StudentsForm'
 import ActionDialog from '~/components/molecules/ActionDialog'
 import DataTable from '~/mixins/data-table'
 
+const SPECIALIZED = [
+  'ATTT',
+  'CNTT',
+  'DTVT'
+]
+
 export default {
   components: {
-    ProjectsDetail,
-    ProjectsForm,
+    StudentsDetail,
+    StudentsForm,
     ActionDialog
   },
 
@@ -238,7 +251,7 @@ export default {
 
   data() {
     return {
-      resource: 'projects',
+      resource: 'students',
       visible: false,
       formVisible: false,
       detailVisible: false,
@@ -265,27 +278,30 @@ export default {
           fixed: 'left'
         },
         {
-          title: this.$t('project.name'),
-          dataIndex: 'ten_da',
+          title: this.$t('student.name'),
+          dataIndex: 'name',
           width: 200
         },
         {
-          title: this.$t('lecturer.name'),
-          dataIndex: 'info_gv.ten_gv'
+          title: this.$t('student.specialized'),
+          dataIndex: 'specialized',
+          scopedSlots: { customRender: 'specialized' },
+          width: 100
         },
         {
-          title: this.$t('project.description'),
-          dataIndex: 'mo_ta'
+          title: this.$t('student.address'),
+          dataIndex: 'address'
         },
         {
-          title: this.$t('project.attachment'),
-          dataIndex: 'dinh_kem'
+          title: this.$t('student.phone'),
+          dataIndex: 'phone'
         },
         {
           title: this.$t('common.action'),
           dataIndex: 'action',
           scopedSlots: { customRender: 'action' },
-          width: 180
+          width: 180,
+          fixed: 'right'
         }
       ]
 
@@ -302,6 +318,13 @@ export default {
   },
 
   methods: {
+    /**
+     * get specialized
+     */
+    getSpecialized(specialized) {
+      return SPECIALIZED[specialized]
+    },
+
     /**
      * Hide modal
      *
@@ -320,10 +343,10 @@ export default {
     },
 
     /**
-     * Go to page lecturers
+     * Go to page theses
      */
-    gotoLecturersPage() {
-      this.$router.push('/lecturers')
+    gotoProjectsPage() {
+      this.$router.push('/theses')
     },
 
     /**

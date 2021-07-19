@@ -16,7 +16,7 @@ export default {
   computed: {
     crumbs() {
       const crumbs = [
-        { to: '/projects', text: this.$t('common.home') }
+        { to: '/theses', text: this.$t('common.home') }
       ]
 
       this.$route.path.split('/').filter(item => item).reduce((previous, current) => {

@@ -1,8 +1,11 @@
 export default {
-  projects: {
+  lecturers: {
     resource: {}
   },
-  lecturers: {
+  students: {
+    resource: {}
+  },
+  theses: {
     resource: {}
   },
   '/lecturers': {

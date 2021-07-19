@@ -1,7 +1,7 @@
 import { get, cloneDeep } from 'lodash'
 import { SET_MODEL, SET_LIST } from '~/constants/mutation-types'
 
-export class Lecturers {
+export class Students {
   constructor(props) {
     this.id = get(props, 'id', '')
     this.name = get(props, 'name', '')
@@ -13,7 +13,7 @@ export class Lecturers {
 }
 
 export const state = () => ({
-  model: new Lecturers({}),
+  model: new Students({}),
   list: []
 })
 
@@ -24,41 +24,41 @@ export const getters = {
 
 export const mutations = {
   [SET_LIST]: (state, payload) => {
-    state.list = payload.map(item => new Lecturers(item))
+    state.list = payload.map(item => new Students(item))
   },
   [SET_MODEL]: (state, payload) => {
-    state.model = new Lecturers(payload)
+    state.model = new Students(payload)
   }
 }
 
 export const actions = {
   /**
-   * Get list lecturers
+   * Get list students
    *
    * @param {Function} commit
    * @param {Array} payload
-   * @return {Array} lecturers list
+   * @return {Array} students list
    */
   async getList({ commit }, payload) {
     const params = cloneDeep(payload.params)
     params.page = params.page || 1
     params.limit = params.limit || 10
-    const { data } = await this.$api.indexLecturers({ params })
+    const { data } = await this.$api.indexStudents({ params })
     commit(SET_LIST, data.data)
     return data
   },
 
   /**
-   * Get lecturers detail
+   * Get students detail
    *
    * @param {Function} commit
    * @param {Object} payload
-   * @return {Object} lecturers detail
+   * @return {Object} students detail
    */
   async getModel({ commit }, { id }) {
     let model = {}
     if (id) {
-      const { data } = await this.$api.showLecturers({ id })
+      const { data } = await this.$api.showStudents({ id })
       model = data.data
     }
     commit(SET_MODEL, model)
@@ -66,16 +66,16 @@ export const actions = {
   },
 
   /**
-     * Create/Update lecturers
+     * Create/Update students
      *
      * @param {Function} commit
      * @param {Object} payload
-     * @return {Object} lecturers detail
+     * @return {Object} students detail
      */
   async saveModel({ commit }, payload) {
     const form = this.$util.getFormData(payload, ['id', 'name', 'address', 'phone', 'specialized'])
 
-    const { data } = payload.id ? await this.$api.updateLecturers(form) : await this.$api.storeLecturers(form)
+    const { data } = payload.id ? await this.$api.updateStudents(form) : await this.$api.storeStudents(form)
     const model = data.data
     commit(SET_MODEL, model)
     return model

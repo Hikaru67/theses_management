@@ -19,7 +19,7 @@
               class="min-w-100"
               shape="round"
               ghost
-              @click.stop="confirmToDelete(model.id, model.name)"
+              @click.stop="confirmToDelete(model.id, model.ten_da)"
             >
               <font-awesome-icon
                 :icon="['far', 'trash-alt']"
@@ -32,15 +32,15 @@
         <a-col :sm="24">
           <div class="modal__title">
             <span>
-              {{ createdDate(model.created_at) }}
+              {{ createdDate(model.createdDate) }}
             </span>
             <h1>
-              {{ $t('lecturer.name') }}
+              {{ $t('themis.name') }}
               &nbsp;
               &nbsp;
               &nbsp;
               &nbsp;
-              {{ model.name }}
+              {{ model.ten_da }}
             </h1>
           </div>
         </a-col>
@@ -48,27 +48,37 @@
         <a-col :sm="24">
           <a-form-model-item
             class="mb-0"
-            :label="$t('lecturer.specialized')"
+            :label="$t('lecturer.name')"
           >
-            {{ getSpecialized(model.specialized) }}
+            <a-input
+              v-model="lecturerName"
+              class="text-content pl-0"
+              disabled
+            />
           </a-form-model-item>
         </a-col>
 
         <a-col :sm="24">
           <a-form-model-item
             class="mb-0"
-            :label="$t('lecturer.address')"
+            :label="$t('themis.attachment')"
           >
-            {{ model.address }}
+            <a-input
+              v-model="model.dinh_kem"
+              class="text-content pl-0"
+              disabled
+            />
           </a-form-model-item>
         </a-col>
 
         <a-col :sm="24">
-          <a-form-model-item
-            class="mb-0"
-            :label="$t('lecturer.phone')"
-          >
-            {{ model.phone }}
+          <a-form-model-item :label="$t('themis.description')">
+            <a-textarea
+              v-model="model.mo_ta"
+              class="text-content pl-0"
+              :rows="10"
+              disabled
+            />
           </a-form-model-item>
         </a-col>
 
@@ -94,27 +104,20 @@
 <script>
 import DataForm from '~/mixins/data-form'
 
-const SPECIALIZED = [
-  'ATTT',
-  'CNTT',
-  'DTVT'
-]
-
 export default {
   mixins: [DataForm],
 
   data: () => ({
-    resource: 'lecturers'
+    resource: 'theses'
   }),
 
-  methods: {
-    /**
-     * get specialized
-     */
-    getSpecialized(specialized) {
-      return SPECIALIZED[specialized]
-    },
+  computed: {
+    lecturerName() {
+      return this.model.info_gv ? this.model.info_gv.name : ''
+    }
+  },
 
+  methods: {
     createdDate(val) {
       return this.$moment(val).format('YYYY.MM.DD')
     },
@@ -146,7 +149,7 @@ export default {
     async deleteRecord(id, title) {
       try {
         this.$store.dispatch('setLoading', true)
-        await this.$api.destroyLecturers({ id })
+        await this.$api.destroyTheses({ id })
 
         this.$notification.success({
           message: <div>

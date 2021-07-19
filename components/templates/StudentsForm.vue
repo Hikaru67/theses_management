@@ -18,12 +18,12 @@
               :sm="24"
             >
               <a-form-model-item
-                :label="$t('lecturer.name')"
+                :label="$t('student.name')"
                 prop="name"
               >
                 <a-input
                   v-model="model.name"
-                  :placeholder="$t('lecturer.name')"
+                  :placeholder="$t('student.name')"
                 />
               </a-form-model-item>
             </a-col>
@@ -33,13 +33,12 @@
               :sm="24"
             >
               <a-form-model-item
-                :label="$t('lecturer.specialized')"
+                :label="$t('student.specialized')"
                 prop="specialized"
               >
                 <a-select
                   v-model="model.specialized"
-                  default-value="0"
-                  :placeholder="$t('lecturer.specialized')"
+                  :placeholder="$t('student.specialized')"
                   class="w-100"
                 >
                   <a-select-option
@@ -54,24 +53,24 @@
 
             <a-col :md="24">
               <a-form-model-item
-                :label="$t('lecturer.address')"
+                :label="$t('student.address')"
                 prop="address"
               >
                 <a-input
                   v-model="model.address"
-                  :placeholder="$t('lecturer.address')"
+                  :placeholder="$t('student.address')"
                 />
               </a-form-model-item>
             </a-col>
 
             <a-col :md="24">
               <a-form-model-item
-                :label="$t('lecturer.phone')"
+                :label="$t('student.phone')"
                 prop="phone"
               >
                 <a-input
                   v-model="model.phone"
-                  :placeholder="$t('lecturer.phone')"
+                  :placeholder="$t('student.phone')"
                 />
               </a-form-model-item>
             </a-col>
@@ -104,7 +103,7 @@
 </template>
 
 <script>
-import { Lecturers } from '~/store/lecturers'
+import { Students } from '~/store/students'
 import DataForm from '~/mixins/data-form'
 
 const LIST_SPECIALIZED = [
@@ -133,7 +132,7 @@ export default {
   },
 
   data: () => ({
-    resource: 'lecturers',
+    resource: 'students',
     isDraft: true,
     LIST_SPECIALIZED
   }),
@@ -240,7 +239,7 @@ export default {
   watch: {
     visible(val) {
       if (!val) {
-        this.model = new Lecturers({})
+        this.model = new Students({})
         this.$refs.form.clearValidate()
       }
     }
@@ -271,7 +270,7 @@ export default {
 
             this.isDraft = true
             this.$emit('save', this.model.name)
-            this.model = new Lecturers({})
+            this.model = new Students({})
           } catch (_) {
             this.$notification.error({
               message: this.$t('text.something_wrong')

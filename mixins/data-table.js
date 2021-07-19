@@ -12,14 +12,14 @@ export default {
       const params = this.$route.query
       this.$store.dispatch('setLoading', true)
       const action = `${this.resource}/getList`
-      const { data } = await this.$store.dispatch(action, { params })
+      const { data, meta } = await this.$store.dispatch(action, { params })
       this.pagination = {
         ...this.pagination,
-        total: data.limit * data.page,
+        total: meta.total,
         current: params.page ? +params.page : 1,
         limit: params.limit ? +params.limit : 10
       }
-      this.data = data.items
+      this.data = data
     } catch (_) {
       this.$notification.error({
         message: this.$t('text.something_wrong')

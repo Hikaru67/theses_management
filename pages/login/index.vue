@@ -22,16 +22,16 @@
           </h2>
 
           <h4 class="txt-title-top text-center mb-3">
-            {{ $t('common.projects_management') }}
+            {{ $t('common.theses_management') }}
           </h4>
 
           <a-form-model-item
-            prop="username"
+            prop="email"
             label="Username"
           >
             <a-input
-              v-model="username"
-              :placeholder="'username'"
+              v-model="email"
+              :placeholder="'email'"
             />
           </a-form-model-item>
 
@@ -132,7 +132,7 @@ export default {
 
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       message: '',
       visibility: 'password'
@@ -146,7 +146,7 @@ export default {
 
     formRules() {
       return {
-        username: [
+        email: [
           {
             required: true,
             message: this.$t('validation.just_required'),
@@ -174,16 +174,21 @@ export default {
           this.$store.dispatch('setLoading', true)
 
           try {
-            const credential = new FormData()
-            credential.append('username', this.username)
-            credential.append('password', this.password)
+            const credential = {
+              email: this.email,
+              password: this.password
+            }
 
             const { data: { data } } = await this.$auth.login({ data: credential })
+            console.log('data :>> ', data)
+            if (data.access_tokent) {
+              this.$cookies.set('access_token', data.access_token)
+            }
             if (data.refresh_token) {
               this.$cookies.set(REFRESH_TOKEN, data.refresh_token, { maxAge: REFRESH_TOKEN_MAX_AGE, path: '/' })
             }
           } catch (_) {
-            this.message = 'Username or password is incorrect'
+            this.message = 'Email or password is incorrect'
           } finally {
             this.$store.dispatch('setLoading', false)
           }

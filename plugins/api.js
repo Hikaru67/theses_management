@@ -32,10 +32,6 @@ export default ({ $axios, $cookies, app }, inject) => {
         }
         return Promise.reject(error)
       })
-      $axios.interceptors.request.use(config => {
-        config.headers = {}
-        return config
-      })
 
       this.axios = $axios
 

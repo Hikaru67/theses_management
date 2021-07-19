@@ -77,7 +77,7 @@ export default {
         {
           icon: 'home',
           id: 0,
-          link: '/projects',
+          link: '/theses',
           menus: [],
           parent_id: 0,
           position: 0,
@@ -86,11 +86,11 @@ export default {
         {
           icon: 'book',
           id: 1,
-          link: '/projects',
+          link: '/theses',
           menus: [],
           parent_id: 0,
           position: 1,
-          title: 'common.projects_management'
+          title: 'common.theses_management'
         },
         {
           icon: 'user-tie',
@@ -100,6 +100,15 @@ export default {
           parent_id: 0,
           position: 2,
           title: 'common.lecturers_management'
+        },
+        {
+          icon: 'user-friends',
+          id: 3,
+          link: '/students',
+          menus: [],
+          parent_id: 0,
+          position: 2,
+          title: 'common.students_management'
         }
       ]
       const dynamicMenu = get(this, '$auth.user.menus', [])
@@ -155,3 +164,6 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+</style>

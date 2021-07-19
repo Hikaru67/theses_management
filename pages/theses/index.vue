@@ -23,7 +23,7 @@
               :xs="24"
               class="search-form__col title"
             >
-              <span>{{ $t('common.lecturers_management') }}</span>
+              <span>{{ $t('common.theses_management') }}</span>
             </a-col>
             <a-col
               :md="10"
@@ -38,7 +38,7 @@
                 >
                   <a-input
                     v-model="filters.searchContent"
-                    placeholder="Lecturer name"
+                    placeholder="Thesis name"
                     size="large"
                     :disabled="loading"
                   />
@@ -94,13 +94,13 @@
                     type="primary"
                     ghost
                     size="large"
-                    @click="gotoProjectsPage()"
+                    @click="gotoLecturersPage()"
                   >
                     <font-awesome-icon
                       icon="bullhorn"
                       class="width-1x mr-1"
                     />
-                    {{ $t('common.theses_management') }}
+                    {{ $t('common.lecturers_management') }}
                   </a-button>
                 </a-col>
               </a-row>
@@ -118,16 +118,9 @@
         :pagination="pagination"
         class="main-table"
         bordered
-        :scroll="{ x: 900 }"
+        :scroll="{ x: 1300 }"
         @change="handleTableChange"
       >
-        <template
-          slot="specialized"
-          slot-scope="text, record"
-        >
-          {{ getSpecialized(record.specialized) }}
-        </template>
-
         <template
           slot="action"
           slot-scope="text, record"
@@ -189,7 +182,7 @@
       </template>
 
       <a-spin :spinning="loading">
-        <lecturers-form
+        <theses-form
           :id="currentId"
           :visible="formVisible"
           @save="closeFormAndShowDialog"
@@ -201,13 +194,13 @@
     <a-modal
       ref="detail"
       :visible="detailVisible"
-      :width="1000"
+      :width="1100"
       :footer="null"
       class="modal-detail"
       @cancel="closeDetail(false)"
     >
       <a-spin :spinning="loading">
-        <lecturers-detail
+        <theses-detail
           :id="currentId"
           @cancel="closeDetail(false)"
           @save="closeDetail(true)"
@@ -227,21 +220,15 @@
 </template>
 
 <script>
-import LecturersDetail from '~/components/templates/LecturersDetail'
-import LecturersForm from '~/components/templates/LecturersForm'
+import ThesesDetail from '~/components/templates/ThesesDetail'
+import ThesesForm from '~/components/templates/ThesesForm'
 import ActionDialog from '~/components/molecules/ActionDialog'
 import DataTable from '~/mixins/data-table'
 
-const SPECIALIZED = [
-  'ATTT',
-  'CNTT',
-  'DTVT'
-]
-
 export default {
   components: {
-    LecturersDetail,
-    LecturersForm,
+    ThesesDetail,
+    ThesesForm,
     ActionDialog
   },
 
@@ -251,7 +238,7 @@ export default {
 
   data() {
     return {
-      resource: 'lecturers',
+      resource: 'theses',
       visible: false,
       formVisible: false,
       detailVisible: false,
@@ -278,23 +265,28 @@ export default {
           fixed: 'left'
         },
         {
-          title: this.$t('lecturer.name'),
+          title: this.$t('themis.name'),
           dataIndex: 'name',
           width: 200
         },
         {
-          title: this.$t('lecturer.specialized'),
-          dataIndex: 'specialized',
-          scopedSlots: { customRender: 'specialized' },
-          width: 100
+          title: this.$t('lecturer.name'),
+          dataIndex: 'lecturer.name',
+          width: 160
         },
         {
-          title: this.$t('lecturer.address'),
-          dataIndex: 'address'
+          title: this.$t('student.name'),
+          dataIndex: 'student.name',
+          width: 160
         },
         {
-          title: this.$t('lecturer.phone'),
-          dataIndex: 'phone'
+          title: this.$t('themis.description'),
+          dataIndex: 'description',
+          width: 300
+        },
+        {
+          title: this.$t('themis.attachment'),
+          dataIndex: 'attaches'
         },
         {
           title: this.$t('common.action'),
@@ -319,13 +311,6 @@ export default {
 
   methods: {
     /**
-     * get specialized
-     */
-    getSpecialized(specialized) {
-      return SPECIALIZED[specialized]
-    },
-
-    /**
      * Hide modal
      *
      * @param {String} currentTitle
@@ -343,10 +328,10 @@ export default {
     },
 
     /**
-     * Go to page theses
+     * Go to page lecturers
      */
-    gotoProjectsPage() {
-      this.$router.push('/theses')
+    gotoLecturersPage() {
+      this.$router.push('/lecturers')
     },
 
     /**

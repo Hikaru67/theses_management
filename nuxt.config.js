@@ -158,14 +158,14 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/projects',
+      home: '/theses',
       user: '/profile'
     },
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/login', method: 'post', propertyName: 'data.accessToken' },
-          user: { url: '/users/me', method: 'get', propertyName: false },
+          login: { url: '/login', method: 'post', propertyName: 'access_token' },
+          user: { url: '/me', method: 'get', propertyName: false },
           logout: { url: '/logout', method: 'get' }
         }
       }

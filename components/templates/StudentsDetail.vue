@@ -19,7 +19,7 @@
               class="min-w-100"
               shape="round"
               ghost
-              @click.stop="confirmToDelete(model.id, model.ten_da)"
+              @click.stop="confirmToDelete(model.id, model.name)"
             >
               <font-awesome-icon
                 :icon="['far', 'trash-alt']"
@@ -32,15 +32,15 @@
         <a-col :sm="24">
           <div class="modal__title">
             <span>
-              {{ createdDate(model.createdDate) }}
+              {{ createdDate(model.created_at) }}
             </span>
             <h1>
-              {{ $t('project.name') }}
+              {{ $t('student.name') }}
               &nbsp;
               &nbsp;
               &nbsp;
               &nbsp;
-              {{ model.ten_da }}
+              {{ model.name }}
             </h1>
           </div>
         </a-col>
@@ -48,37 +48,27 @@
         <a-col :sm="24">
           <a-form-model-item
             class="mb-0"
-            :label="$t('lecturer.name')"
+            :label="$t('student.specialized')"
           >
-            <a-input
-              v-model="lecturerName"
-              class="text-content pl-0"
-              disabled
-            />
+            {{ getSpecialized(model.specialized) }}
           </a-form-model-item>
         </a-col>
 
         <a-col :sm="24">
           <a-form-model-item
             class="mb-0"
-            :label="$t('project.attachment')"
+            :label="$t('student.address')"
           >
-            <a-input
-              v-model="model.dinh_kem"
-              class="text-content pl-0"
-              disabled
-            />
+            {{ model.address }}
           </a-form-model-item>
         </a-col>
 
         <a-col :sm="24">
-          <a-form-model-item :label="$t('project.description')">
-            <a-textarea
-              v-model="model.mo_ta"
-              class="text-content pl-0"
-              :rows="10"
-              disabled
-            />
+          <a-form-model-item
+            class="mb-0"
+            :label="$t('student.phone')"
+          >
+            {{ model.phone }}
           </a-form-model-item>
         </a-col>
 
@@ -104,20 +94,27 @@
 <script>
 import DataForm from '~/mixins/data-form'
 
+const SPECIALIZED = [
+  'ATTT',
+  'CNTT',
+  'DTVT'
+]
+
 export default {
   mixins: [DataForm],
 
   data: () => ({
-    resource: 'projects'
+    resource: 'students'
   }),
 
-  computed: {
-    lecturerName() {
-      return this.model.info_gv ? this.model.info_gv.ten_gv : ''
-    }
-  },
-
   methods: {
+    /**
+     * get specialized
+     */
+    getSpecialized(specialized) {
+      return SPECIALIZED[specialized]
+    },
+
     createdDate(val) {
       return this.$moment(val).format('YYYY.MM.DD')
     },
@@ -149,7 +146,7 @@ export default {
     async deleteRecord(id, title) {
       try {
         this.$store.dispatch('setLoading', true)
-        await this.$api.destroyProjects({ id })
+        await this.$api.destroyStudents({ id })
 
         this.$notification.success({
           message: <div>
