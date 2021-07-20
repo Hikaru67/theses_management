@@ -8,9 +8,14 @@ export default {
   theses: {
     resource: {}
   },
-  '/lecturers': {
+  '/list-lecturers': {
     get: {
-      name: 'getLecturers'
+      name: 'getListLecturers'
+    }
+  },
+  '/list-students': {
+    get: {
+      name: 'getListStudents'
     }
   }
 }

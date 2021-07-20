@@ -14,17 +14,41 @@
         >
           <template v-if="isDraft">
             <a-col
-              :md="20"
+              :md="16"
               :sm="24"
             >
               <a-form-model-item
                 :label="$t('themis.name')"
-                prop="ten_da"
+                prop="name"
               >
                 <a-input
-                  v-model="model.ten_da"
+                  v-model="model.name"
                   :placeholder="$t('themis.name')"
                 />
+              </a-form-model-item>
+            </a-col>
+
+            <a-col
+              :md="4"
+              :sm="24"
+            >
+              {{ model.student_id }}
+              <a-form-model-item
+                :label="$t('student.name')"
+                prop="student"
+              >
+                <a-select
+                  v-model="model.student_id"
+                  show-search
+                  class="w-100"
+                >
+                  <a-select-option
+                    v-for="item in students"
+                    :key="item.id"
+                  >
+                    {{ item.name }}
+                  </a-select-option>
+                </a-select>
               </a-form-model-item>
             </a-col>
 
@@ -37,8 +61,8 @@
                 prop="lecturer"
               >
                 <a-select
-                  v-model="model.IDGV"
-                  :placeholder="$t('lecturer.name')"
+                  v-model="model.lecturer_id"
+                  :default-value="lecturers[0]"
                   class="w-100"
                 >
                   <a-select-option
@@ -54,9 +78,7 @@
             <a-col :md="6">
               <a-upload
                 name="file"
-                accept="*.*"
-                :multiple="false"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                :multiple="true"
                 :headers="headers"
                 @change="handleChange"
               >
@@ -69,11 +91,11 @@
             <a-col :sm="24">
               <a-form-model-item
                 :label="$t('themis.description')"
-                prop="mo_ta"
+                prop="description"
                 class="mt-1"
               >
                 <a-textarea
-                  v-model="model.mo_ta"
+                  v-model="model.description"
                   :placeholder="$t('themis.description')"
                   :rows="16"
                 />
@@ -117,9 +139,13 @@ export default {
   async fetch() {
     this.$store.dispatch('setLoading', true)
     try {
-      const { data } = await this.$api.getLecturers()
+      let { data } = await this.$api.getListLecturers()
       this.lecturers = [
-        ...data.data.items
+        ...data
+      ]
+      data = await this.$api.getListStudents()
+      this.students = [
+        ...data.data
       ]
     } catch (_) {
       this.$notification.error({
@@ -144,13 +170,14 @@ export default {
     resource: 'theses',
     isDraft: true,
     lecturers: [],
+    students: [],
     isUpdateFile: false
   }),
 
   computed: {
     formRules() {
       return {
-        ten_da: [
+        name: [
           {
             required: true,
             message: <div>
@@ -176,7 +203,7 @@ export default {
             trigger: ['change', 'blur']
           }
         ],
-        mo_ta: [
+        description: [
           {
             required: true,
             message: <div>
@@ -210,7 +237,7 @@ export default {
     },
 
     curentLecturer() {
-      const gv = this.lecturers.find(item => item.id === this.model.gv_id)
+      const gv = this.lecturers.find(item => item.id === this.model.lecturer_id)
       return gv.name || ''
     }
   },
@@ -240,11 +267,8 @@ export default {
      * Handle on upload file
      */
     handleChange(info) {
-      if (info.file.status !== 'uploading') {
-        // console.log(info.file, info.fileList)
-      }
-      if (info.file.status === 'done') {
-        this.model.dinh_kem = info.file.originFileObj
+      this.model.attaches = info.fileList
+      if (info.fileList.length > 0) {
         this.isUpdateFile = true
       }
     },
@@ -259,12 +283,12 @@ export default {
             this.$store.dispatch('setLoading', true)
             const action = `${this.resource}/saveModel`
             if (!this.isUpdateFile) {
-              this.model.dinh_kem = ''
+              this.model.attaches = ''
             }
             await this.$store.dispatch(action, this.model)
 
             this.isDraft = true
-            this.$emit('save', this.model.ten_da)
+            this.$emit('save', this.model.name)
             this.model = new Theses({})
           } catch (_) {
             this.$notification.error({
